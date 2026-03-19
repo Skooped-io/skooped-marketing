@@ -153,10 +153,10 @@ const Plans = () => {
       <section className="pb-20 px-6">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl items-stretch">
           <PlanCard
-            name="Starter"
+            name="Single Skoop"
             tagline="Get online and look legit."
             price="$49"
-            scoops={["hsl(340 60% 57%)"]}
+            tierImage={tier1Img}
             features={[
               "Custom-built website (not a template)",
               "Mobile-responsive design",
@@ -169,12 +169,12 @@ const Plans = () => {
             delay={0}
           />
           <PlanCard
-            name="Growth"
+            name="Double Skoop"
             tagline="Start showing up and standing out."
             price="$99"
-            scoops={["hsl(40 60% 70%)", "hsl(340 60% 57%)"]}
+            tierImage={tier2Img}
             features={[
-              "Everything in Starter, plus:",
+              "Everything in Single Skoop, plus:",
               "Ongoing SEO monitoring & optimization",
               "Google Search Console management",
               "Monthly content updates",
@@ -187,12 +187,12 @@ const Plans = () => {
             delay={0.1}
           />
           <PlanCard
-            name="Premium"
+            name="Triple Skoop"
             tagline="The full operation. We run it all."
             price="$149"
-            scoops={["hsl(22 55% 28%)", "hsl(40 60% 70%)", "hsl(340 60% 57%)"]}
+            tierImage={tier3Img}
             features={[
-              "Everything in Growth, plus:",
+              "Everything in Double Skoop, plus:",
               "Google Local Service Ads management",
               "Advanced SEO pages (service + city targeting)",
               "Advanced analytics & conversion tracking",
