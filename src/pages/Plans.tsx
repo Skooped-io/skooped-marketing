@@ -7,33 +7,23 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 import usePageSeo from "@/hooks/use-page-seo";
-
-/* ───── Ice-cream scoop component ───── */
-const Scoop = ({ color, size = 56, style }: { color: string; size?: number; style?: React.CSSProperties }) => (
-  <motion.div
-    className="rounded-full shrink-0"
-    style={{ width: size, height: size, backgroundColor: color, ...style }}
-    whileHover={{ rotate: [-2, 2, -2], transition: { duration: 0.3, repeat: Infinity } }}
-  />
-);
-
-const ConeShape = () => (
-  <div className="w-0 h-0 mx-auto" style={{ borderLeft: "18px solid transparent", borderRight: "18px solid transparent", borderTop: "32px solid hsl(32 38% 70%)" }} />
-);
+import tier1Img from "@/assets/skooped-tier-1.png";
+import tier2Img from "@/assets/skooped-tier-2.png";
+import tier3Img from "@/assets/skooped-tier-3.png";
 
 /* ───── Pricing card ───── */
 interface PlanCardProps {
   name: string;
   tagline: string;
   price: string;
-  scoops: string[];
+  tierImage: string;
   features: string[];
   whoFor: string;
   popular?: boolean;
   delay: number;
 }
 
-const PlanCard = ({ name, tagline, price, scoops, features, whoFor, popular, delay }: PlanCardProps) => (
+const PlanCard = ({ name, tagline, price, tierImage, features, whoFor, popular, delay }: PlanCardProps) => (
   <ScrollReveal delay={delay}>
     <motion.div
       className={`relative rounded-2xl p-8 flex flex-col h-full transition-shadow duration-300 ${
@@ -54,14 +44,15 @@ const PlanCard = ({ name, tagline, price, scoops, features, whoFor, popular, del
         </span>
       )}
 
-      {/* Scoops */}
-      <div className="flex flex-col items-center gap-[-4px] mb-4">
-        <div className="flex flex-col-reverse items-center" style={{ gap: "-8px" }}>
-          {scoops.map((c, i) => (
-            <Scoop key={i} color={c} size={44 - i * 2} style={{ marginBottom: i < scoops.length - 1 ? -8 : 0 }} />
-          ))}
-        </div>
-        <ConeShape />
+      {/* Tier image */}
+      <div className="flex justify-center mb-4">
+        <motion.img
+          src={tierImage}
+          alt={`${name} plan`}
+          className="w-24 h-auto drop-shadow-lg"
+          whileHover={{ scale: 1.08, rotate: [0, -3, 3, 0] }}
+          transition={{ duration: 0.4 }}
+        />
       </div>
 
       <h3 className="font-heading text-2xl font-extrabold text-foreground text-center">{name}</h3>
@@ -162,10 +153,10 @@ const Plans = () => {
       <section className="pb-20 px-6">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl items-stretch">
           <PlanCard
-            name="Starter"
+            name="Single Skoop"
             tagline="Get online and look legit."
             price="$49"
-            scoops={["hsl(340 60% 57%)"]}
+            tierImage={tier1Img}
             features={[
               "Custom-built website (not a template)",
               "Mobile-responsive design",
@@ -178,12 +169,12 @@ const Plans = () => {
             delay={0}
           />
           <PlanCard
-            name="Growth"
+            name="Double Skoop"
             tagline="Start showing up and standing out."
             price="$99"
-            scoops={["hsl(40 60% 70%)", "hsl(340 60% 57%)"]}
+            tierImage={tier2Img}
             features={[
-              "Everything in Starter, plus:",
+              "Everything in Single Skoop, plus:",
               "Ongoing SEO monitoring & optimization",
               "Google Search Console management",
               "Monthly content updates",
@@ -196,12 +187,12 @@ const Plans = () => {
             delay={0.1}
           />
           <PlanCard
-            name="Premium"
+            name="Triple Skoop"
             tagline="The full operation. We run it all."
             price="$149"
-            scoops={["hsl(22 55% 28%)", "hsl(40 60% 70%)", "hsl(340 60% 57%)"]}
+            tierImage={tier3Img}
             features={[
-              "Everything in Growth, plus:",
+              "Everything in Double Skoop, plus:",
               "Google Local Service Ads management",
               "Advanced SEO pages (service + city targeting)",
               "Advanced analytics & conversion tracking",
