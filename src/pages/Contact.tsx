@@ -41,6 +41,7 @@ const FloatingInput = ({ label, name, type = "text", required = false, ...props 
 };
 
 const Contact = () => {
+  usePageSeo({ title: "Contact Skooped | Free Marketing Consultation | Franklin TN", description: "Ready to grow your local business? Contact Skooped for a free consultation. AI-powered marketing, custom websites & SEO. Call 615-856-3871." });
   const [submitted, setSubmitted] = useState(false);
   const [service, setService] = useState("");
   const [message, setMessage] = useState("");
