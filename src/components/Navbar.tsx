@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -30,27 +31,27 @@ const Navbar = () => {
         }`}
       >
         <div className="container mx-auto flex items-center justify-between h-16 px-6">
-          <a href="#" className="font-heading font-extrabold text-2xl text-primary">
+          <Link to="/" className="font-heading font-extrabold text-2xl text-primary">
             Skooped
-          </a>
+          </Link>
 
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
-                href={link.href}
+                to={link.href}
                 className="font-body text-sm font-medium text-foreground/80 hover:text-primary transition-colors relative group"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-              </a>
+              </Link>
             ))}
           </div>
 
           <div className="hidden md:block">
-            <Button variant="hero" size="sm">
-              Get Started
-            </Button>
+            <Link to="/contact">
+              <Button variant="hero" size="sm">Get Started</Button>
+            </Link>
           </div>
 
           <button
@@ -79,18 +80,18 @@ const Navbar = () => {
               <X size={28} />
             </button>
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
-                href={link.href}
+                to={link.href}
                 onClick={() => setMobileOpen(false)}
                 className="font-heading text-2xl font-bold text-primary-foreground hover:text-primary transition-colors"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
-            <Button variant="hero" size="lg" onClick={() => setMobileOpen(false)}>
-              Get Started
-            </Button>
+            <Link to="/contact" onClick={() => setMobileOpen(false)}>
+              <Button variant="hero" size="lg">Get Started</Button>
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>
