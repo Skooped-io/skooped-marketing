@@ -169,7 +169,7 @@ const Plans = () => {
             delay={0}
           />
           <PlanCard
-            name="Double Skoop"
+            name="Double"
             tagline="Start showing up and standing out."
             price="$99"
             tierImage={tier2Img}
