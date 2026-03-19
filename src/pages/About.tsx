@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
+import usePageSeo from "@/hooks/use-page-seo";
 
 const agents = [
   { name: "Cooper", title: "Operations Lead", bio: "Cooper runs the day-to-day. Client communication, quality control, SEO oversight, website QA — if it has Skooped's name on it, Cooper made sure it's right. Think of him as your dedicated account manager who happens to be available 24/7.", gradient: "from-primary to-accent" },
