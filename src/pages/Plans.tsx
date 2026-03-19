@@ -174,7 +174,7 @@ const Plans = () => {
             price="$99"
             tierImage={tier2Img}
             features={[
-              "Everything in Single Skoop, plus:",
+              "Everything in Single, plus:",
               "Ongoing SEO monitoring & optimization",
               "Google Search Console management",
               "Monthly content updates",
