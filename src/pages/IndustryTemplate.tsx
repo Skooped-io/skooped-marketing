@@ -90,10 +90,9 @@ const IndustryTemplate = () => {
   const data = slug ? industryTemplates[slug] : undefined;
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  if (!data) return <Navigate to="/templates" replace />;
+  usePageSeo(data?.seo ?? { title: "Templates | Skooped", description: "" });
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  usePageSeo(data.seo);
+  if (!data) return <Navigate to="/templates" replace />;
 
   return (
     <>
