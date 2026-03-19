@@ -40,7 +40,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="w-64 md:w-80 mx-auto mb-8"
+          className="w-80 md:w-[420px] mx-auto mb-8"
         />
 
         <h1 className="text-4xl md:text-[56px] md:leading-tight font-extrabold text-foreground mb-6">
