@@ -10,18 +10,18 @@ import ScrollReveal from "@/components/ScrollReveal";
 import usePageSeo from "@/hooks/use-page-seo";
 
 const industries = [
-  { name: "Roofing", icon: Hammer, tagline: "Get on top of local search", href: "/templates/roofing", live: true },
-  { name: "Landscaping", icon: TreePine, tagline: "Grow your online presence", href: "/contact", live: false },
-  { name: "Fencing", icon: Grid3X3, tagline: "Build your digital boundary", href: "/contact", live: false },
-  { name: "Construction", icon: HardHat, tagline: "Construct your online empire", href: "/contact", live: false },
-  { name: "Therapy & Counseling", icon: Heart, tagline: "Connect with clients who need you", href: "/contact", live: false },
-  { name: "Life Coaching", icon: Compass, tagline: "Guide more people to find you", href: "/contact", live: false },
-  { name: "Auto Repair", icon: Wrench, tagline: "Drive more customers to your shop", href: "/contact", live: false },
-  { name: "Real Estate Services", icon: Home, tagline: "List your business, not just properties", href: "/contact", live: false },
-  { name: "Personal Training", icon: Dumbbell, tagline: "Flex your online presence", href: "/contact", live: false },
-  { name: "Salon & Barbershop", icon: Scissors, tagline: "Cut through the competition", href: "/contact", live: false },
-  { name: "Plumbing", icon: Droplets, tagline: "Stop leaking leads", href: "/contact", live: false },
-  { name: "Electrical", icon: Zap, tagline: "Power up your marketing", href: "/contact", live: false },
+  { name: "Roofing", icon: Hammer, tagline: "Get on top of local search", href: "/templates/roofing" },
+  { name: "Landscaping", icon: TreePine, tagline: "Grow your online presence", href: "/templates/landscaping" },
+  { name: "Fencing", icon: Grid3X3, tagline: "Build your digital boundary", href: "/templates/fencing" },
+  { name: "Construction", icon: HardHat, tagline: "Construct your online empire", href: "/templates/construction" },
+  { name: "Therapy & Counseling", icon: Heart, tagline: "Connect with clients who need you", href: "/templates/therapy-counseling" },
+  { name: "Life Coaching", icon: Compass, tagline: "Guide more people to find you", href: "/templates/life-coaching" },
+  { name: "Auto Repair", icon: Wrench, tagline: "Drive more customers to your shop", href: "/templates/auto-repair" },
+  { name: "Real Estate Services", icon: Home, tagline: "List your business, not just properties", href: "/templates/real-estate" },
+  { name: "Personal Training", icon: Dumbbell, tagline: "Flex your online presence", href: "/templates/personal-training" },
+  { name: "Salon & Barbershop", icon: Scissors, tagline: "Cut through the competition", href: "/templates/salon-barbershop" },
+  { name: "Plumbing", icon: Droplets, tagline: "Stop leaking leads", href: "/templates/plumbing" },
+  { name: "Electrical", icon: Zap, tagline: "Power up your marketing", href: "/templates/electrical" },
 ];
 
 const Templates = () => {
@@ -69,18 +69,13 @@ const Templates = () => {
                     to={ind.href}
                     className="group relative block rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:border-primary hover:-translate-y-1 h-full"
                   >
-                    {!ind.live && (
-                      <span className="absolute top-4 right-4 bg-secondary/20 text-secondary-foreground text-[10px] font-bold px-2.5 py-0.5 rounded-full">
-                        Coming Soon
-                      </span>
-                    )}
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                       <Icon size={22} className="text-primary" />
                     </div>
                     <h3 className="font-heading font-bold text-lg text-foreground mb-1">{ind.name}</h3>
                     <p className="text-sm text-muted-foreground mb-4">{ind.tagline}</p>
                     <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all">
-                      {ind.live ? "View Template" : "Learn More"} <ArrowRight size={14} />
+                      View Template <ArrowRight size={14} />
                     </span>
                   </Link>
                 </ScrollReveal>
