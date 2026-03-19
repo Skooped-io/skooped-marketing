@@ -290,7 +290,9 @@ const Plans = () => {
             <Phone size={24} /> 615-856-3871
           </a>
           <div>
-            <Button variant="hero" size="xl">Get Started</Button>
+            <Link to="/contact">
+              <Button variant="hero" size="xl">Get Started</Button>
+            </Link>
           </div>
         </ScrollReveal>
       </section>
