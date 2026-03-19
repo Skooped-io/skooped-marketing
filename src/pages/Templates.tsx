@@ -69,18 +69,13 @@ const Templates = () => {
                     to={ind.href}
                     className="group relative block rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:border-primary hover:-translate-y-1 h-full"
                   >
-                    {!ind.live && (
-                      <span className="absolute top-4 right-4 bg-secondary/20 text-secondary-foreground text-[10px] font-bold px-2.5 py-0.5 rounded-full">
-                        Coming Soon
-                      </span>
-                    )}
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                       <Icon size={22} className="text-primary" />
                     </div>
                     <h3 className="font-heading font-bold text-lg text-foreground mb-1">{ind.name}</h3>
                     <p className="text-sm text-muted-foreground mb-4">{ind.tagline}</p>
                     <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all">
-                      {ind.live ? "View Template" : "Learn More"} <ArrowRight size={14} />
+                      View Template <ArrowRight size={14} />
                     </span>
                   </Link>
                 </ScrollReveal>
