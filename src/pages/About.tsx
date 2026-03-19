@@ -107,6 +107,7 @@ const About = () => {
 
     <Footer />
   </>
-);
+  );
+};
 
 export default About;
