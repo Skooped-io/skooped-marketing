@@ -187,7 +187,7 @@ const Plans = () => {
             delay={0.1}
           />
           <PlanCard
-            name="Triple Skoop"
+            name="Triple"
             tagline="The full operation. We run it all."
             price="$149"
             tierImage={tier3Img}
