@@ -10,18 +10,18 @@ import ScrollReveal from "@/components/ScrollReveal";
 import usePageSeo from "@/hooks/use-page-seo";
 
 const industries = [
-  { name: "Roofing", icon: Hammer, tagline: "Get on top of local search", href: "/templates/roofing", live: true },
-  { name: "Landscaping", icon: TreePine, tagline: "Grow your online presence", href: "/contact", live: false },
-  { name: "Fencing", icon: Grid3X3, tagline: "Build your digital boundary", href: "/contact", live: false },
-  { name: "Construction", icon: HardHat, tagline: "Construct your online empire", href: "/contact", live: false },
-  { name: "Therapy & Counseling", icon: Heart, tagline: "Connect with clients who need you", href: "/contact", live: false },
-  { name: "Life Coaching", icon: Compass, tagline: "Guide more people to find you", href: "/contact", live: false },
-  { name: "Auto Repair", icon: Wrench, tagline: "Drive more customers to your shop", href: "/contact", live: false },
-  { name: "Real Estate Services", icon: Home, tagline: "List your business, not just properties", href: "/contact", live: false },
-  { name: "Personal Training", icon: Dumbbell, tagline: "Flex your online presence", href: "/contact", live: false },
-  { name: "Salon & Barbershop", icon: Scissors, tagline: "Cut through the competition", href: "/contact", live: false },
-  { name: "Plumbing", icon: Droplets, tagline: "Stop leaking leads", href: "/contact", live: false },
-  { name: "Electrical", icon: Zap, tagline: "Power up your marketing", href: "/contact", live: false },
+  { name: "Roofing", icon: Hammer, tagline: "Get on top of local search", href: "/templates/roofing" },
+  { name: "Landscaping", icon: TreePine, tagline: "Grow your online presence", href: "/templates/landscaping" },
+  { name: "Fencing", icon: Grid3X3, tagline: "Build your digital boundary", href: "/templates/fencing" },
+  { name: "Construction", icon: HardHat, tagline: "Construct your online empire", href: "/templates/construction" },
+  { name: "Therapy & Counseling", icon: Heart, tagline: "Connect with clients who need you", href: "/templates/therapy-counseling" },
+  { name: "Life Coaching", icon: Compass, tagline: "Guide more people to find you", href: "/templates/life-coaching" },
+  { name: "Auto Repair", icon: Wrench, tagline: "Drive more customers to your shop", href: "/templates/auto-repair" },
+  { name: "Real Estate Services", icon: Home, tagline: "List your business, not just properties", href: "/templates/real-estate" },
+  { name: "Personal Training", icon: Dumbbell, tagline: "Flex your online presence", href: "/templates/personal-training" },
+  { name: "Salon & Barbershop", icon: Scissors, tagline: "Cut through the competition", href: "/templates/salon-barbershop" },
+  { name: "Plumbing", icon: Droplets, tagline: "Stop leaking leads", href: "/templates/plumbing" },
+  { name: "Electrical", icon: Zap, tagline: "Power up your marketing", href: "/templates/electrical" },
 ];
 
 const Templates = () => {
