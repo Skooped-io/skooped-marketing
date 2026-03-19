@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
+import usePageSeo from "@/hooks/use-page-seo";
 
 const serviceOptions = ["Website", "SEO", "Social Media", "Google Ads", "Everything", "Not Sure"];
 
@@ -40,6 +41,7 @@ const FloatingInput = ({ label, name, type = "text", required = false, ...props 
 };
 
 const Contact = () => {
+  usePageSeo({ title: "Contact Skooped | Free Marketing Consultation | Franklin TN", description: "Ready to grow your local business? Contact Skooped for a free consultation. AI-powered marketing, custom websites & SEO. Call 615-856-3871." });
   const [submitted, setSubmitted] = useState(false);
   const [service, setService] = useState("");
   const [message, setMessage] = useState("");

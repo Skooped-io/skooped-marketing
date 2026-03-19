@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { Check, X, ChevronDown, Phone } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
+import usePageSeo from "@/hooks/use-page-seo";
 
 /* ───── Ice-cream scoop component ───── */
 const Scoop = ({ color, size = 56, style }: { color: string; size?: number; style?: React.CSSProperties }) => (
@@ -80,9 +82,9 @@ const PlanCard = ({ name, tagline, price, scoops, features, whoFor, popular, del
 
       <p className="text-xs text-muted-foreground italic mb-6 border-t border-border pt-4">{whoFor}</p>
 
-      <Button variant="hero" size="lg" className="w-full">
-        Get Started
-      </Button>
+      <Link to="/contact">
+        <Button variant="hero" size="lg" className="w-full">Get Started</Button>
+      </Link>
     </motion.div>
   </ScrollReveal>
 );
@@ -132,6 +134,7 @@ const compRows = [
 
 /* ───── Page ───── */
 const Plans = () => {
+  usePageSeo({ title: "Marketing & Website Pricing | Plans from $49/mo | Skooped Franklin TN", description: "Transparent pricing for custom websites, SEO, Google Ads & social media. Website builds under $1,000. Monthly plans from $49. No contracts." });
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
@@ -287,7 +290,9 @@ const Plans = () => {
             <Phone size={24} /> 615-856-3871
           </a>
           <div>
-            <Button variant="hero" size="xl">Get Started</Button>
+            <Link to="/contact">
+              <Button variant="hero" size="xl">Get Started</Button>
+            </Link>
           </div>
         </ScrollReveal>
       </section>
