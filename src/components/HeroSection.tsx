@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import skoopedLogo from "@/assets/skooped-logo.png";
 
 const Sparkle = ({ className }: { className?: string }) => (
   <motion.svg
@@ -33,6 +34,15 @@ const HeroSection = () => {
       <Sparkle className="absolute bottom-40 left-[30%] text-accent" />
 
       <div className="relative container mx-auto px-6 text-center max-w-3xl py-24">
+        <motion.img
+          src={skoopedLogo}
+          alt="Skooped Media & Marketing"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="w-64 md:w-80 mx-auto mb-8"
+        />
+
         <h1 className="text-4xl md:text-[56px] md:leading-tight font-extrabold text-foreground mb-6">
           {headlineWords.map((word, i) => (
             <motion.span
