@@ -192,7 +192,7 @@ const Plans = () => {
             price="$149"
             tierImage={tier3Img}
             features={[
-              "Everything in Double Skoop, plus:",
+              "Everything in Double, plus:",
               "Google Local Service Ads management",
               "Advanced SEO pages (service + city targeting)",
               "Advanced analytics & conversion tracking",
