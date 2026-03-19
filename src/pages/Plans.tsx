@@ -153,7 +153,7 @@ const Plans = () => {
       <section className="pb-20 px-6">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl items-stretch">
           <PlanCard
-            name="Single Skoop"
+            name="Single"
             tagline="Get online and look legit."
             price="$49"
             tierImage={tier1Img}
