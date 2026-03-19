@@ -82,9 +82,9 @@ const PlanCard = ({ name, tagline, price, scoops, features, whoFor, popular, del
 
       <p className="text-xs text-muted-foreground italic mb-6 border-t border-border pt-4">{whoFor}</p>
 
-      <Button variant="hero" size="lg" className="w-full">
-        Get Started
-      </Button>
+      <Link to="/contact">
+        <Button variant="hero" size="lg" className="w-full">Get Started</Button>
+      </Link>
     </motion.div>
   </ScrollReveal>
 );
