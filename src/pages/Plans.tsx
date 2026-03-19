@@ -134,6 +134,7 @@ const compRows = [
 
 /* ───── Page ───── */
 const Plans = () => {
+  usePageSeo({ title: "Marketing & Website Pricing | Plans from $49/mo | Skooped Franklin TN", description: "Transparent pricing for custom websites, SEO, Google Ads & social media. Website builds under $1,000. Monthly plans from $49. No contracts." });
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
