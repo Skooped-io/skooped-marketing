@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
+import usePageSeo from "@/hooks/use-page-seo";
 
 const serviceOptions = ["Website", "SEO", "Social Media", "Google Ads", "Everything", "Not Sure"];
 
