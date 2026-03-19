@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { Check, X, ChevronDown, Phone } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
+import usePageSeo from "@/hooks/use-page-seo";
 
 /* ───── Ice-cream scoop component ───── */
 const Scoop = ({ color, size = 56, style }: { color: string; size?: number; style?: React.CSSProperties }) => (
