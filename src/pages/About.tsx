@@ -16,7 +16,9 @@ const agents = [
   { name: "Sandra", title: "Resource Intelligence", bio: "Sandra watches the budget so you don't have to. Every dollar spent on your marketing is tracked and optimized. No wasted spend, no surprises.", gradient: "from-secondary to-accent" },
 ];
 
-const About = () => (
+const About = () => {
+  usePageSeo({ title: "About Skooped | AI-First Marketing Team | Franklin, Tennessee", description: "Meet the AI team behind Skooped — 24/7 marketing operations for local businesses. SEO, web dev, content, analytics, and security. Franklin, TN." });
+  return (
   <>
     <Navbar />
 
