@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 import AgentShowcase from "@/components/AgentShowcase";
 import usePageSeo from "@/hooks/use-page-seo";
+import jakePhoto from "@/assets/jake.jpg";
 
 const About = () => {
   usePageSeo({ title: "About Skooped | AI-First Marketing Team | Franklin, Tennessee", description: "Meet the AI team behind Skooped — 24/7 marketing operations for local businesses. SEO, web dev, content, analytics, and security. Franklin, TN." });
@@ -35,14 +36,14 @@ const About = () => {
         <div className="container mx-auto max-w-4xl">
           <ScrollReveal>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-              <div className="aspect-[4/5] rounded-xl border-2 border-border bg-card flex items-center justify-center">
-                <span className="text-muted-foreground text-sm">Photo coming soon</span>
+              <div className="aspect-[4/5] rounded-xl border-2 border-border bg-card overflow-hidden">
+                <img src={jakePhoto} alt="Jake Anderson — Founder of Skooped" className="w-full h-full object-cover" />
               </div>
               <div>
                 <h2 className="font-heading text-3xl font-extrabold text-foreground mb-2">Jake Anderson</h2>
-                <p className="text-muted-foreground font-medium mb-6">Founder & Builder</p>
+                <p className="text-muted-foreground font-medium mb-6">Founder</p>
                 <blockquote className="border-l-4 border-primary pl-5 text-foreground leading-relaxed">
-                  "Jake built Skooped because he kept getting the same question from local business owners: 'Can you help me get online?' A self-taught software engineer from Franklin, TN, Jake built the entire Skooped platform and AI team from scratch. His vision: every local business deserves a marketing team, not just the ones with big budgets."
+                  "I kept getting the same question from local business owners — 'can you help me get online?' So I built an entire AI team to do it. Self-taught engineer, Franklin TN born and raised, and yeah that's blood on my face from jiu jitsu. I bring the same energy to your business that I bring to the mat — Skooped exists because every local business deserves a marketing team that works as hard as they do. Not just the ones with big budgets."
                 </blockquote>
               </div>
             </div>
