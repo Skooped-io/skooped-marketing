@@ -12,6 +12,13 @@ import {
 import ScrollReveal from "@/components/ScrollReveal";
 import { type LucideIcon } from "lucide-react";
 
+import scoutAvatar from "@/assets/agents/scout.png";
+import bobAvatar from "@/assets/agents/bob.png";
+import sierraAvatar from "@/assets/agents/sierra.png";
+import rileyAvatar from "@/assets/agents/riley.png";
+import markAvatar from "@/assets/agents/mark.png";
+import sandraAvatar from "@/assets/agents/sandra.png";
+
 interface AgentData {
   name: string;
   title: string;
@@ -22,6 +29,7 @@ interface AgentData {
   automations: { icon: LucideIcon; text: string }[];
   stat: string;
   capabilityIcons: LucideIcon[];
+  avatar?: string;
 }
 
 const agents: AgentData[] = [
@@ -56,6 +64,7 @@ const agents: AgentData[] = [
       { icon: Eye, text: "Competitor movement alerts — tracks rival rankings" },
     ],
     stat: "Monitoring 24/7",
+    avatar: scoutAvatar,
   },
   {
     name: "Bob",
@@ -72,6 +81,7 @@ const agents: AgentData[] = [
       { icon: Lock, text: "SSL certificate monitoring — alerts 30 days before expiry" },
     ],
     stat: "847 deploys this month",
+    avatar: bobAvatar,
   },
   {
     name: "Sierra",
@@ -88,6 +98,7 @@ const agents: AgentData[] = [
       { icon: Bell, text: "Engagement alerts — flags comments that need responses" },
     ],
     stat: "312 posts scheduled",
+    avatar: sierraAvatar,
   },
   {
     name: "Riley",
@@ -104,6 +115,7 @@ const agents: AgentData[] = [
       { icon: Target, text: "Goal tracking — monitors conversion targets in real-time" },
     ],
     stat: "98 reports generated",
+    avatar: rileyAvatar,
   },
   {
     name: "Mark",
@@ -120,6 +132,7 @@ const agents: AgentData[] = [
       { icon: Lock, text: "SSL & certificate monitoring — never let security lapse" },
     ],
     stat: "0 breaches. Ever.",
+    avatar: markAvatar,
   },
   {
     name: "Sandra",
@@ -136,6 +149,7 @@ const agents: AgentData[] = [
       { icon: Cpu, text: "Model usage optimization — always uses the cheapest effective AI" },
     ],
     stat: "$0 wasted this month",
+    avatar: sandraAvatar,
   },
 ];
 
@@ -164,8 +178,37 @@ const Marquee = () => (
   </div>
 );
 
+/* ─── Avatar or Gradient Fallback ─── */
+const AgentAvatar = ({ agent, size = "lg" }: { agent: AgentData; size?: "lg" | "sm" | "xs" }) => {
+  const sizeClasses = size === "lg" ? "w-48 h-48" : size === "sm" ? "w-14 h-14" : "w-14 h-14";
+  const textSize = size === "lg" ? "text-6xl" : "text-xl";
+
+  if (agent.avatar) {
+    return (
+      <div
+        className={`${sizeClasses} rounded-full overflow-hidden relative z-10`}
+        style={{ boxShadow: `0 0 60px ${agent.gradientFrom}40` }}
+      >
+        <img src={agent.avatar} alt={agent.name} className="w-full h-full object-cover" />
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={`${sizeClasses} rounded-full flex items-center justify-center relative z-10`}
+      style={{
+        background: `linear-gradient(135deg, ${agent.gradientFrom}, ${agent.gradientTo})`,
+        boxShadow: `0 0 60px ${agent.gradientFrom}40`,
+      }}
+    >
+      <span className={`${textSize} font-heading font-extrabold text-white/90`}>{agent.name[0]}</span>
+    </div>
+  );
+};
+
 /* ─── Desktop Agent Section ─── */
-const AgentSection = ({ agent, index }: { agent: AgentData; index: number }) => {
+const AgentSection = ({ agent }: { agent: AgentData; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "-20% 0px" });
 
@@ -191,15 +234,7 @@ const AgentSection = ({ agent, index }: { agent: AgentData; index: number }) => 
           >
             {agent.name[0]}
           </span>
-          <div
-            className="w-48 h-48 rounded-full flex items-center justify-center relative z-10"
-            style={{
-              background: `linear-gradient(135deg, ${agent.gradientFrom}, ${agent.gradientTo})`,
-              boxShadow: `0 0 60px ${agent.gradientFrom}40`,
-            }}
-          >
-            <span className="text-6xl font-heading font-extrabold text-white/90">{agent.name[0]}</span>
-          </div>
+          <AgentAvatar agent={agent} size="lg" />
           <h3 className="font-heading text-2xl font-extrabold text-foreground mt-6">{agent.name}</h3>
           <p className="text-muted-foreground text-sm">{agent.title}</p>
         </motion.div>
@@ -218,7 +253,6 @@ const AgentSection = ({ agent, index }: { agent: AgentData; index: number }) => 
           <p className="text-muted-foreground mb-4">{agent.title}</p>
           <p className="text-foreground leading-relaxed mb-6">{agent.bio}</p>
 
-          {/* Capabilities */}
           <div className="mb-6">
             <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">What I Do</p>
             <div className="flex flex-wrap gap-2">
@@ -233,7 +267,6 @@ const AgentSection = ({ agent, index }: { agent: AgentData; index: number }) => 
             </div>
           </div>
 
-          {/* Automations */}
           <div className="mb-6">
             <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Automations I Run</p>
             <div className="space-y-2">
@@ -249,7 +282,6 @@ const AgentSection = ({ agent, index }: { agent: AgentData; index: number }) => 
             </div>
           </div>
 
-          {/* Stat */}
           <div
             className="inline-block text-xs font-bold px-4 py-2 rounded-full"
             style={{
@@ -278,12 +310,7 @@ const MobileAgentCard = ({ agent }: { agent: AgentData }) => {
         className="w-full p-5 flex items-center gap-4 text-left"
         onClick={() => setExpanded(!expanded)}
       >
-        <div
-          className="w-14 h-14 rounded-full flex items-center justify-center shrink-0"
-          style={{ background: `linear-gradient(135deg, ${agent.gradientFrom}, ${agent.gradientTo})` }}
-        >
-          <span className="text-xl font-heading font-extrabold text-white/90">{agent.name[0]}</span>
-        </div>
+        <AgentAvatar agent={agent} size="sm" />
         <div className="flex-1 min-w-0">
           <h3 className="font-heading font-bold text-foreground">{agent.name}</h3>
           <p className="text-sm text-muted-foreground">{agent.title}</p>
@@ -352,7 +379,6 @@ const MobileAgentCard = ({ agent }: { agent: AgentData }) => {
 /* ─── Main Export ─── */
 const AgentShowcase = () => (
   <section className="pb-20">
-    {/* Header */}
     <div className="container mx-auto px-6 text-center max-w-3xl pt-20 pb-8">
       <ScrollReveal>
         <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-foreground mb-3">
@@ -365,21 +391,18 @@ const AgentShowcase = () => (
       <Marquee />
     </div>
 
-    {/* Desktop: full-viewport sections */}
     <div className="hidden md:block">
       {agents.map((agent, i) => (
         <AgentSection key={agent.name} agent={agent} index={i} />
       ))}
     </div>
 
-    {/* Mobile: expandable cards */}
     <div className="md:hidden px-6 space-y-3">
       {agents.map((agent) => (
         <MobileAgentCard key={agent.name} agent={agent} />
       ))}
     </div>
 
-    {/* Summary */}
     <div className="container mx-auto px-6 max-w-3xl text-center pt-20">
       <ScrollReveal>
         <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-foreground mb-8">
