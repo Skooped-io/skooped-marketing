@@ -16,7 +16,9 @@ const About = () => {
 
       {/* Header */}
       <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-background" style={{ backgroundImage: "radial-gradient(ellipse at 40% 30%, hsl(340 60% 57% / 0.06), transparent 50%)" }} />
+        <div className="absolute inset-0 bg-background" style={{ backgroundImage: "radial-gradient(ellipse at 30% 20%, hsl(340 60% 57% / 0.12), transparent 50%), radial-gradient(ellipse at 70% 70%, hsl(35 56% 50% / 0.08), transparent 50%)" }} />
+        <div className="absolute top-20 -left-20 w-80 h-80 rounded-full bg-primary/10 blur-3xl animate-float" />
+        <div className="absolute bottom-10 -right-20 w-96 h-96 rounded-full bg-accent/10 blur-3xl animate-float-delayed" />
         <div className="relative container mx-auto px-6 text-center max-w-3xl">
           <ScrollReveal>
             <h1 className="text-4xl md:text-[52px] md:leading-tight font-extrabold text-foreground mb-4">
