@@ -72,7 +72,7 @@ const PlanCard = ({ name, tagline, price, tierImage, features, whoFor, popular, 
 
       <p className="text-xs text-muted-foreground italic mb-6 border-t border-border pt-4">{whoFor}</p>
 
-      <Link to="/contact">
+      <Link to="/signup">
         <Button variant="hero" size="lg" className="w-full">Try {name} Free</Button>
       </Link>
       <p className="text-xs text-muted-foreground text-center mt-2">14 days free, then {price}/mo</p>
