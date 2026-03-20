@@ -217,7 +217,7 @@ const AgentSection = ({ agent }: { agent: AgentData; index: number }) => {
   return (
     <div
       ref={ref}
-      className="min-h-screen hidden md:flex items-center py-20 px-6"
+      className="min-h-[70vh] hidden md:flex items-center py-12 px-6"
       style={{
         background: `linear-gradient(135deg, ${agent.gradientFrom}10, transparent 40%, ${agent.gradientTo}08)`,
       }}
