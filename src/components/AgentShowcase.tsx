@@ -405,7 +405,7 @@ const AgentShowcase = () => (
       ))}
     </div>
 
-    <div className="container mx-auto px-6 max-w-3xl text-center pt-20">
+    <div className="container mx-auto px-6 max-w-3xl text-center pt-12">
       <ScrollReveal>
         <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-foreground mb-8">
           That's your team. All 7 of them. Working right now.
