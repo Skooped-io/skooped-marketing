@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { useState } from "react";
-import { ChevronDown, Phone } from "lucide-react";
+import { ChevronDown, Phone, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -89,6 +89,7 @@ const IndustryTemplate = () => {
   const { slug } = useParams<{ slug: string }>();
   const data = slug ? industryTemplates[slug] : undefined;
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const previewUrl = slug ? `https://skooped-io.github.io/template-${slug}/` : undefined;
 
   usePageSeo(data?.seo ?? { title: "Templates | Skooped", description: "" });
 
@@ -118,6 +119,13 @@ const IndustryTemplate = () => {
               <div className="flex flex-wrap gap-3 mb-3">
                 <Link to={`/signup?template=${slug}`}><Button variant="hero" size="lg">Try This Template Free — Live in 60 Seconds</Button></Link>
                 <Link to="/plans"><Button variant="outline" size="lg">See Plans</Button></Link>
+                {previewUrl && (
+                  <a href={previewUrl} target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" size="lg">
+                      Open Live Demo <ExternalLink size={16} className="ml-1" />
+                    </Button>
+                  </a>
+                )}
               </div>
               <p className="text-xs text-muted-foreground">14 days free. No credit card required.</p>
             </ScrollReveal>

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import {
   Hammer, TreePine, Grid3X3, HardHat, Heart, Compass,
-  Wrench, Home, Dumbbell, Scissors, Droplets, Zap, ArrowRight, Sparkles,
+  Wrench, Home, Dumbbell, Scissors, Droplets, Zap, ArrowRight, Sparkles, ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -15,21 +15,22 @@ interface Industry {
   tagline: string;
   href: string;
   available: boolean;
+  previewSlug?: string;
 }
 
 const industries: Industry[] = [
-  { name: "Roofing", icon: Hammer, tagline: "Get on top of local search", href: "/templates/roofing", available: true },
-  { name: "Landscaping", icon: TreePine, tagline: "Grow your online presence", href: "/templates/landscaping", available: true },
-  { name: "Therapy & Counseling", icon: Heart, tagline: "Connect with clients who need you", href: "/templates/therapy-counseling", available: true },
-  { name: "Salon & Barbershop", icon: Scissors, tagline: "Cut through the competition", href: "/templates/salon-barbershop", available: true },
-  { name: "Plumbing", icon: Droplets, tagline: "Stop leaking leads", href: "/templates/plumbing", available: true },
-  { name: "Fencing", icon: Grid3X3, tagline: "Build your digital boundary", href: "/contact", available: false },
+  { name: "Roofing", icon: Hammer, tagline: "Get on top of local search", href: "/templates/roofing", available: true, previewSlug: "roofing" },
+  { name: "Landscaping", icon: TreePine, tagline: "Grow your online presence", href: "/templates/landscaping", available: true, previewSlug: "landscaping" },
+  { name: "Therapy & Counseling", icon: Heart, tagline: "Connect with clients who need you", href: "/templates/therapy-counseling", available: true, previewSlug: "therapy-counseling" },
+  { name: "Salon & Barbershop", icon: Scissors, tagline: "Cut through the competition", href: "/templates/salon-barbershop", available: true, previewSlug: "salon-barbershop" },
+  { name: "Plumbing", icon: Droplets, tagline: "Stop leaking leads", href: "/templates/plumbing", available: true, previewSlug: "plumbing" },
+  { name: "Fencing", icon: Grid3X3, tagline: "Build your digital boundary", href: "/contact", available: false, previewSlug: "fencing" },
   { name: "Construction", icon: HardHat, tagline: "Construct your online empire", href: "/contact", available: false },
   { name: "Life Coaching", icon: Compass, tagline: "Guide more people to find you", href: "/contact", available: false },
   { name: "Auto Repair", icon: Wrench, tagline: "Drive more customers to your shop", href: "/contact", available: false },
   { name: "Real Estate Services", icon: Home, tagline: "List your business, not just properties", href: "/contact", available: false },
   { name: "Personal Training", icon: Dumbbell, tagline: "Flex your online presence", href: "/contact", available: false },
-  { name: "Electrical", icon: Zap, tagline: "Power up your marketing", href: "/contact", available: false },
+  { name: "Electrical", icon: Zap, tagline: "Power up your marketing", href: "/contact", available: false, previewSlug: "electrical" },
 ];
 
 const availableIndustries = industries.filter((i) => i.available);
@@ -82,24 +83,42 @@ const Templates = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {availableIndustries.map((ind, i) => {
               const Icon = ind.icon;
+              const previewUrl = ind.previewSlug
+                ? `https://skooped-io.github.io/template-${ind.previewSlug}/`
+                : undefined;
               return (
                 <ScrollReveal key={ind.name} delay={i * 0.05}>
-                  <Link
-                    to={ind.href}
-                    className="group relative block rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:border-primary hover:-translate-y-1 h-full"
-                  >
-                    <span className="absolute top-4 right-4 text-[10px] font-bold bg-primary/10 text-primary px-2.5 py-1 rounded-full">
-                      Live in 60 seconds
-                    </span>
+                  <div className="group relative block rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:border-primary hover:-translate-y-1 h-full flex flex-col">
+                    <div className="flex items-center gap-2 absolute top-4 right-4">
+                      {previewUrl && (
+                        <span className="text-[10px] font-bold bg-accent/15 text-accent px-2.5 py-1 rounded-full">
+                          Live Preview
+                        </span>
+                      )}
+                      <span className="text-[10px] font-bold bg-primary/10 text-primary px-2.5 py-1 rounded-full">
+                        Live in 60 seconds
+                      </span>
+                    </div>
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                       <Icon size={22} className="text-primary" />
                     </div>
                     <h3 className="font-heading font-bold text-lg text-foreground mb-1">{ind.name}</h3>
                     <p className="text-sm text-muted-foreground mb-4">{ind.tagline}</p>
-                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all">
-                      Try This Template Free <ArrowRight size={14} />
-                    </span>
-                  </Link>
+                    <div className="mt-auto flex flex-col gap-2">
+                      <Link to={ind.href}>
+                        <Button variant="hero" size="sm" className="w-full">
+                          Try This Template Free <ArrowRight size={14} />
+                        </Button>
+                      </Link>
+                      {previewUrl && (
+                        <a href={previewUrl} target="_blank" rel="noopener noreferrer">
+                          <Button variant="outline" size="sm" className="w-full">
+                            View Live Demo <ExternalLink size={14} />
+                          </Button>
+                        </a>
+                      )}
+                    </div>
+                  </div>
                 </ScrollReveal>
               );
             })}

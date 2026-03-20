@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -15,6 +15,12 @@ const navLinks = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
+
+  const isActive = (href: string) => {
+    if (href === "/") return location.pathname === "/";
+    return location.pathname.startsWith(href);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -41,10 +47,16 @@ const Navbar = () => {
               <Link
                 key={link.label}
                 to={link.href}
-                className="font-body text-sm font-medium text-foreground/80 hover:text-primary transition-colors relative group"
+                className={`font-body text-sm font-medium transition-colors relative group ${
+                  isActive(link.href)
+                    ? "text-primary"
+                    : "text-foreground/80 hover:text-primary"
+                }`}
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${
+                  isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"
+                }`} />
               </Link>
             ))}
           </div>
@@ -91,7 +103,11 @@ const Navbar = () => {
                 key={link.label}
                 to={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="font-heading text-2xl font-bold text-primary-foreground hover:text-primary transition-colors"
+                className={`font-heading text-2xl font-bold transition-colors ${
+                  isActive(link.href)
+                    ? "text-primary"
+                    : "text-primary-foreground hover:text-primary"
+                }`}
               >
                 {link.label}
               </Link>
