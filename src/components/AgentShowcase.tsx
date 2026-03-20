@@ -380,8 +380,8 @@ const MobileAgentCard = ({ agent }: { agent: AgentData }) => {
 
 /* ─── Main Export ─── */
 const AgentShowcase = () => (
-  <section className="pb-20">
-    <div className="container mx-auto px-6 text-center max-w-3xl pt-20 pb-8">
+  <section className="relative">
+    <div className="container mx-auto px-6 text-center max-w-3xl pt-10 pb-4">
       <ScrollReveal>
         <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-foreground mb-3">
           Meet Your AI Team
