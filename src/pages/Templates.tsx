@@ -15,6 +15,7 @@ interface Industry {
   tagline: string;
   href: string;
   available: boolean;
+  previewSlug?: string;
 }
 
 const industries: Industry[] = [
