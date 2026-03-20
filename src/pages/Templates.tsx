@@ -19,18 +19,18 @@ interface Industry {
 }
 
 const industries: Industry[] = [
-  { name: "Roofing", icon: Hammer, tagline: "Get on top of local search", href: "/templates/roofing", available: true },
-  { name: "Landscaping", icon: TreePine, tagline: "Grow your online presence", href: "/templates/landscaping", available: true },
-  { name: "Therapy & Counseling", icon: Heart, tagline: "Connect with clients who need you", href: "/templates/therapy-counseling", available: true },
-  { name: "Salon & Barbershop", icon: Scissors, tagline: "Cut through the competition", href: "/templates/salon-barbershop", available: true },
-  { name: "Plumbing", icon: Droplets, tagline: "Stop leaking leads", href: "/templates/plumbing", available: true },
-  { name: "Fencing", icon: Grid3X3, tagline: "Build your digital boundary", href: "/contact", available: false },
+  { name: "Roofing", icon: Hammer, tagline: "Get on top of local search", href: "/templates/roofing", available: true, previewSlug: "roofing" },
+  { name: "Landscaping", icon: TreePine, tagline: "Grow your online presence", href: "/templates/landscaping", available: true, previewSlug: "landscaping" },
+  { name: "Therapy & Counseling", icon: Heart, tagline: "Connect with clients who need you", href: "/templates/therapy-counseling", available: true, previewSlug: "therapy-counseling" },
+  { name: "Salon & Barbershop", icon: Scissors, tagline: "Cut through the competition", href: "/templates/salon-barbershop", available: true, previewSlug: "salon-barbershop" },
+  { name: "Plumbing", icon: Droplets, tagline: "Stop leaking leads", href: "/templates/plumbing", available: true, previewSlug: "plumbing" },
+  { name: "Fencing", icon: Grid3X3, tagline: "Build your digital boundary", href: "/contact", available: false, previewSlug: "fencing" },
   { name: "Construction", icon: HardHat, tagline: "Construct your online empire", href: "/contact", available: false },
   { name: "Life Coaching", icon: Compass, tagline: "Guide more people to find you", href: "/contact", available: false },
   { name: "Auto Repair", icon: Wrench, tagline: "Drive more customers to your shop", href: "/contact", available: false },
   { name: "Real Estate Services", icon: Home, tagline: "List your business, not just properties", href: "/contact", available: false },
   { name: "Personal Training", icon: Dumbbell, tagline: "Flex your online presence", href: "/contact", available: false },
-  { name: "Electrical", icon: Zap, tagline: "Power up your marketing", href: "/contact", available: false },
+  { name: "Electrical", icon: Zap, tagline: "Power up your marketing", href: "/contact", available: false, previewSlug: "electrical" },
 ];
 
 const availableIndustries = industries.filter((i) => i.available);
