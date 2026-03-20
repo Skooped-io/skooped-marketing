@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
-import AgentShowcase from "@/components/AgentShowcase";
+import AgentShowcase, { Marquee } from "@/components/AgentShowcase";
 import usePageSeo from "@/hooks/use-page-seo";
 import jakePhoto from "@/assets/jake.jpg";
 
@@ -32,6 +32,7 @@ const About = () => {
                 Skooped isn't your typical marketing agency. We're an AI-first team built from the ground up to give local businesses a full marketing operation that runs 24/7, at a price that makes sense.
               </p>
             </ScrollReveal>
+            <Marquee />
           </div>
         </section>
 
