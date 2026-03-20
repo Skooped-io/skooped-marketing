@@ -65,6 +65,11 @@ const Templates = () => {
               Every template comes with a custom website, SEO, social media, and your own AI marketing team. 14 days free — no credit card required.
             </p>
           </ScrollReveal>
+          <ScrollReveal delay={0.25}>
+            <p className="mt-4 text-sm font-semibold text-primary">
+              ⚡ Every template goes live in 60 seconds after signup. No waiting.
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -83,6 +88,9 @@ const Templates = () => {
                     to={ind.href}
                     className="group relative block rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:border-primary hover:-translate-y-1 h-full"
                   >
+                    <span className="absolute top-4 right-4 text-[10px] font-bold bg-primary/10 text-primary px-2.5 py-1 rounded-full">
+                      Live in 60 seconds
+                    </span>
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                       <Icon size={22} className="text-primary" />
                     </div>
@@ -113,19 +121,23 @@ const Templates = () => {
                 </div>
                 <div className="flex-1 text-center md:text-left">
                   <h3 className="font-heading text-2xl md:text-3xl font-extrabold mb-2">
-                    Don't see your industry? We'll build it custom.
+                    Want something completely custom?
                   </h3>
                   <p className="text-primary-foreground/80 leading-relaxed max-w-xl">
-                    Tell us about your business and our AI team will design a website from scratch — tailored to your industry, your brand, and your customers. Same platform, same AI team, same price.
+                    Our expert team designs a one-of-a-kind website tailored to your exact vision. Same platform, same AI team.
                   </p>
+                  <div className="flex flex-wrap gap-3 mt-3">
+                    <span className="bg-primary-foreground/20 text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">$499 one-time</span>
+                    <span className="bg-primary-foreground/20 text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">Delivered in 24-48 hours</span>
+                  </div>
                 </div>
                 <div className="shrink-0 text-center">
-                  <Link to="/contact">
+                  <Link to="/signup?template=custom">
                     <Button variant="secondary" size="xl" className="bg-primary-foreground text-foreground hover:bg-primary-foreground/90 font-extrabold">
-                      Start Custom Build — Free Trial
+                      Start Custom Build
                     </Button>
                   </Link>
-                  <p className="text-primary-foreground/60 text-xs mt-2">14 days free. No credit card required. Custom sites delivered in 5–7 business days.</p>
+                  <p className="text-primary-foreground/60 text-xs mt-2">Includes 14-day free trial of your AI marketing team</p>
                 </div>
               </div>
             </div>

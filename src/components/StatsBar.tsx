@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "./ScrollReveal";
 
 const stats = [
+  { value: "60 seconds", label: "From signup to live website" },
   { value: "8,000+", label: "Google impressions in 3 months" },
   { value: "24/7", label: "AI-powered management" },
   { value: "$49", label: "Custom sites from $49/mo" },
-  { value: "Franklin, TN", label: "Built local. Built different." },
 ];
 
 const AnimatedNumber = ({ value }: { value: string }) => {

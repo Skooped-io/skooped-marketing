@@ -44,7 +44,6 @@ const PlanCard = ({ name, tagline, price, tierImage, features, whoFor, popular, 
         </span>
       )}
 
-      {/* Tier image */}
       <div className="flex justify-center mb-4">
         <motion.img
           src={tierImage}
@@ -83,21 +82,20 @@ const PlanCard = ({ name, tagline, price, tierImage, features, whoFor, popular, 
 
 /* ───── FAQ accordion ───── */
 const faqData = [
-  { q: "Is the free trial really free?", a: "Yes. No credit card, no hidden fees, no tricks. You get 14 full days with your custom website and AI team. If you love it, add a payment method and keep going. If not, no hard feelings." },
-  { q: "What happens after the trial ends?", a: "If you add a payment method, your plan starts automatically. If you don't, your site goes to sleep — not deleted. You can come back and reactivate anytime. Your data, your content, and your website are always yours." },
+  { q: "Is the free trial really free?", a: "Yes. No credit card, no hidden fees. Pick a template, sign up, and your website is live in 60 seconds. You get 14 full days with your AI team." },
+  { q: "What happens after the trial?", a: "Add a payment method and your plan starts. Don't add one? Your site goes to sleep — not deleted. Come back and reactivate anytime." },
   { q: "Can I switch plans during the trial?", a: "Absolutely. Start with any plan and upgrade or downgrade at any time. You won't be charged until the trial ends." },
   { q: "Do I need to know anything about websites or marketing?", a: "Nope. That's literally why we exist. We handle everything — you just keep running your business." },
   { q: "How is this different from Wix or Squarespace?", a: "Those platforms give you a template and say 'good luck.' We build your site from scratch, optimize it for Google, manage your social media, and run your ads. You get an entire marketing team — not a DIY tool." },
   { q: "Do I own my website?", a: "Yes. Your website, your content, your data. Always." },
-  { q: "How long does it take to get my website up?", a: "Most sites are live within 1-2 weeks. We move fast because we know your business can't wait." },
   { q: "Is there a contract or setup fee?", a: "No long-term contracts. No hidden fees. We earn your business every month." },
   { q: "How long does SEO take to work?", a: "You'll start seeing movement within 30-60 days. One client went from 200 to 8,000+ Google impressions in three months." },
   { q: "Will my phone actually ring more?", a: "That's the goal and the standard. If our work isn't driving real leads, we adjust." },
   { q: "Wait — your team is AI?", a: "Yes, and that's what makes us different. Our AI team works 24/7, never takes a day off, and costs a fraction of a traditional agency. But don't confuse AI with generic — every strategy is built specifically for your business." },
   { q: "Who do I talk to if I have a question?", a: "Cooper is your main point of contact. You can also call or text us at 615-856-3871." },
   { q: "What if I already have a website?", a: "We can work with it or rebuild from scratch — whatever makes sense. We'll do a free review and give you an honest recommendation." },
-  { q: "Is a custom website more expensive?", a: "Nope. Same price, same plans. Whether you pick a template or go custom, you get the same AI team, the same platform, and the same monthly price. The only difference is custom sites take 5-7 business days instead of a few days." },
-  { q: "What if I don't know what I want my website to look like?", a: "That's totally fine. During signup, we'll ask a few simple questions about your business and your style preferences. Our team handles the rest. You'll get a custom design to review, and you can tweak anything." },
+  { q: "Is a custom website more expensive?", a: "Custom builds are a one-time $499 fee. After that, you pick a monthly plan just like everyone else — starting at $49/mo. Same AI team, same platform." },
+  { q: "What if I don't know what I want?", a: "Pick a template — you can always customize later in your dashboard editor. Or go custom and we'll ask a few simple questions about your style and preferences." },
 ];
 
 const FaqItem = ({ q, a, open, toggle }: { q: string; a: string; open: boolean; toggle: () => void }) => (
@@ -121,7 +119,8 @@ const FaqItem = ({ q, a, open, toggle }: { q: string; a: string; open: boolean; 
 
 /* ───── Comparison table ───── */
 const compRows = [
-  { label: "Website build", trad: "$3,000 – $8,000", skoop: "Under $1,000" },
+  { label: "Website delivery", trad: "4-8 weeks", skoop: "60 seconds (templates) / 24-48 hrs (custom)" },
+  { label: "Website build", trad: "$3,000 – $8,000", skoop: "$0 (templates) / $499 (custom)" },
   { label: "Monthly retainer", trad: "$100 – $800/mo", skoop: "$49 – $149/mo" },
   { label: "Available", trad: "Business hours", skoop: "24/7" },
   { label: "Free trial", trad: false, skoop: "✅ 14 days free" },
@@ -133,7 +132,7 @@ const compRows = [
 /* ───── How trial works steps ───── */
 const trialSteps = [
   { icon: CreditCard, title: "Pick a template & plan", desc: "Browse our industry templates, choose one, and select the plan that fits your business. You won't be charged anything today." },
-  { icon: Rocket, title: "Your AI team builds your site", desc: "Within days, your custom website is live. Your 7-person AI team starts working — SEO, social media, analytics, everything." },
+  { icon: Rocket, title: "Your AI team builds your site", desc: "Your website goes live in 60 seconds. Your 7-person AI team starts working — SEO, social media, analytics, everything." },
   { icon: Heart, title: "Decide if it's for you", desc: "After 14 days, add a payment method to keep your team working. No card on file? Your site goes to sleep (not deleted) — come back and reactivate anytime." },
 ];
 
@@ -183,6 +182,7 @@ const Plans = () => {
             price="$49"
             tierImage={tier1Img}
             features={[
+              "✅ Instant website — live in 60 seconds",
               "Custom-built website (not a template)",
               "Mobile-responsive design",
               "Basic SEO setup",
@@ -199,6 +199,7 @@ const Plans = () => {
             price="$99"
             tierImage={tier2Img}
             features={[
+              "✅ Instant website — live in 60 seconds",
               "Everything in Single, plus:",
               "Ongoing SEO monitoring & optimization",
               "Google Search Console management",
@@ -217,6 +218,7 @@ const Plans = () => {
             price="$149"
             tierImage={tier3Img}
             features={[
+              "✅ Instant website — live in 60 seconds",
               "Everything in Double, plus:",
               "Google Local Service Ads management",
               "Advanced SEO pages (service + city targeting)",
@@ -236,9 +238,9 @@ const Plans = () => {
       <section className="pb-16 px-6 text-center">
         <ScrollReveal>
           <p className="font-heading font-extrabold text-xl text-foreground mb-1">
-            Website builds start under $1,000 — or $0 down with any monthly plan.
+            Templates: $0 to go live. Custom builds: $499 one-time.
           </p>
-          <p className="text-muted-foreground">Every site is custom-built. Choose a template or let us design from scratch. No extra charge for custom builds.</p>
+          <p className="text-muted-foreground">Pick a template, add your details, live instantly. Or get a one-of-a-kind design delivered in 24-48 hours. Pair with any plan.</p>
         </ScrollReveal>
       </section>
 
