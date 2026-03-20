@@ -16,10 +16,8 @@ const About = () => {
 
       {/* Page-wide gradient background */}
       <div className="relative">
-        <div className="absolute inset-0 bg-background" style={{ backgroundImage: "radial-gradient(ellipse at 30% 10%, hsl(340 60% 57% / 0.12), transparent 40%), radial-gradient(ellipse at 80% 30%, hsl(35 56% 50% / 0.08), transparent 40%), radial-gradient(ellipse at 20% 60%, hsl(35 56% 50% / 0.06), transparent 40%), radial-gradient(ellipse at 70% 80%, hsl(340 60% 57% / 0.08), transparent 40%)" }} />
         <div className="absolute top-20 -left-20 w-80 h-80 rounded-full bg-primary/10 blur-3xl animate-float" />
         <div className="absolute top-[40%] -right-20 w-96 h-96 rounded-full bg-accent/10 blur-3xl animate-float-delayed" />
-        <div className="absolute bottom-[20%] left-[10%] w-72 h-72 rounded-full bg-primary/5 blur-3xl animate-float-delayed" />
 
         {/* Header */}
         <section className="relative pt-32 pb-10">
