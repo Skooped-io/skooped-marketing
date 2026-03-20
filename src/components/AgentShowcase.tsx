@@ -162,7 +162,7 @@ const tickerItems = [
   "Keyword Research", "Performance Reports", "Threat Detection", "Budget Tracking",
 ];
 
-const Marquee = () => (
+export const Marquee = () => (
   <div className="relative overflow-hidden py-4 mt-6">
     <motion.div
       className="flex gap-8 whitespace-nowrap"
