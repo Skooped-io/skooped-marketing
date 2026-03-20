@@ -379,17 +379,6 @@ const MobileAgentCard = ({ agent }: { agent: AgentData }) => {
 /* ─── Main Export ─── */
 const AgentShowcase = () => (
   <section className="relative">
-    <div className="container mx-auto px-6 text-center max-w-3xl pt-10 pb-4">
-      <ScrollReveal>
-        <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-foreground mb-3">
-          Meet Your AI Team
-        </h2>
-        <p className="text-lg text-muted-foreground">
-          7 specialists. 24/7. Working for your business.
-        </p>
-      </ScrollReveal>
-      <Marquee />
-    </div>
 
     <div className="hidden md:block">
       {agents.map((agent, i) => (
