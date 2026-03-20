@@ -68,8 +68,8 @@ const AutomationFeed = () => {
             This happens every day. For every client. Automatically.
           </p>
           <div className="text-center">
-            <Link to="/plans">
-              <Button variant="hero" size="xl">Get Your Team</Button>
+            <Link to="/templates">
+              <Button variant="hero" size="xl">Try It Free for 14 Days</Button>
             </Link>
           </div>
         </ScrollReveal>

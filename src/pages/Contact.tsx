@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, MapPin, Instagram, Clock, Lock, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -66,8 +67,12 @@ const Contact = () => {
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={0.15}>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-4">
               No sales pitch — just a real conversation about what your business needs.
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Want to skip the form and just try it?{" "}
+              <Link to="/templates" className="text-primary font-semibold hover:underline">Start your free trial →</Link>
             </p>
           </ScrollReveal>
         </div>

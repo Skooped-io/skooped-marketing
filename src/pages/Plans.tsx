@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Check, X, ChevronDown, Phone } from "lucide-react";
+import { Check, X, ChevronDown, Phone, CreditCard, Rocket, Heart } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -74,14 +74,18 @@ const PlanCard = ({ name, tagline, price, tierImage, features, whoFor, popular, 
       <p className="text-xs text-muted-foreground italic mb-6 border-t border-border pt-4">{whoFor}</p>
 
       <Link to="/contact">
-        <Button variant="hero" size="lg" className="w-full">Get Started</Button>
+        <Button variant="hero" size="lg" className="w-full">Try {name} Free</Button>
       </Link>
+      <p className="text-xs text-muted-foreground text-center mt-2">14 days free, then {price}/mo</p>
     </motion.div>
   </ScrollReveal>
 );
 
 /* ───── FAQ accordion ───── */
 const faqData = [
+  { q: "Is the free trial really free?", a: "Yes. No credit card, no hidden fees, no tricks. You get 14 full days with your custom website and AI team. If you love it, add a payment method and keep going. If not, no hard feelings." },
+  { q: "What happens after the trial ends?", a: "If you add a payment method, your plan starts automatically. If you don't, your site goes to sleep — not deleted. You can come back and reactivate anytime. Your data, your content, and your website are always yours." },
+  { q: "Can I switch plans during the trial?", a: "Absolutely. Start with any plan and upgrade or downgrade at any time. You won't be charged until the trial ends." },
   { q: "Do I need to know anything about websites or marketing?", a: "Nope. That's literally why we exist. We handle everything — you just keep running your business." },
   { q: "How is this different from Wix or Squarespace?", a: "Those platforms give you a template and say 'good luck.' We build your site from scratch, optimize it for Google, manage your social media, and run your ads. You get an entire marketing team — not a DIY tool." },
   { q: "Do I own my website?", a: "Yes. Your website, your content, your data. Always." },
@@ -118,14 +122,22 @@ const compRows = [
   { label: "Website build", trad: "$3,000 – $8,000", skoop: "Under $1,000" },
   { label: "Monthly retainer", trad: "$100 – $800/mo", skoop: "$49 – $149/mo" },
   { label: "Available", trad: "Business hours", skoop: "24/7" },
+  { label: "Free trial", trad: false, skoop: "✅ 14 days free" },
   { label: "Your dashboard", trad: false, skoop: true },
   { label: "AI-powered", trad: false, skoop: true },
   { label: "Contracts", trad: "6–12 months", skoop: "None" },
 ];
 
+/* ───── How trial works steps ───── */
+const trialSteps = [
+  { icon: CreditCard, title: "Pick a template & plan", desc: "Browse our industry templates, choose one, and select the plan that fits your business. You won't be charged anything today." },
+  { icon: Rocket, title: "Your AI team builds your site", desc: "Within days, your custom website is live. Your 7-person AI team starts working — SEO, social media, analytics, everything." },
+  { icon: Heart, title: "Decide if it's for you", desc: "After 14 days, add a payment method to keep your team working. No card on file? Your site goes to sleep (not deleted) — come back and reactivate anytime." },
+];
+
 /* ───── Page ───── */
 const Plans = () => {
-  usePageSeo({ title: "Marketing & Website Pricing | Plans from $49/mo | Skooped Franklin TN", description: "Transparent pricing for custom websites, SEO, Google Ads & social media. Website builds under $1,000. Monthly plans from $49. No contracts." });
+  usePageSeo({ title: "Marketing & Website Pricing | Plans from $49/mo | Skooped Franklin TN", description: "Transparent pricing for custom websites, SEO, Google Ads & social media. Try any plan free for 14 days. No credit card required." });
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
@@ -146,6 +158,17 @@ const Plans = () => {
               Every plan comes with a custom-built website, real SEO, and a team that works 24/7. No contracts. No hidden fees. Just results.
             </p>
           </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── Trial banner ── */}
+      <section className="px-6 -mt-8 mb-8">
+        <div className="container mx-auto max-w-5xl">
+          <div className="bg-primary rounded-2xl py-4 px-6 text-center">
+            <p className="font-heading font-extrabold text-primary-foreground text-lg">
+              🎉 Try any plan free for 14 days. No credit card required.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -217,6 +240,33 @@ const Plans = () => {
         </ScrollReveal>
       </section>
 
+      {/* ── How the free trial works ── */}
+      <section className="pb-20 px-6">
+        <div className="container mx-auto max-w-4xl">
+          <ScrollReveal>
+            <h2 className="font-heading text-3xl font-extrabold text-foreground text-center mb-10">How the free trial works</h2>
+          </ScrollReveal>
+          <div className="grid md:grid-cols-3 gap-8 mb-10">
+            {trialSteps.map((s, i) => (
+              <ScrollReveal key={i} delay={i * 0.1}>
+                <div className="text-center">
+                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                    <s.icon size={24} className="text-primary" />
+                  </div>
+                  <h3 className="font-heading font-bold text-foreground mb-2">{s.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
+            <span>🔒 No credit card required to start</span>
+            <span>❌ Cancel anytime during or after the trial</span>
+            <span>✅ Your website and data are always yours</span>
+          </div>
+        </div>
+      </section>
+
       {/* ── Comparison table ── */}
       <section className="pb-20 px-6">
         <div className="container mx-auto max-w-3xl">
@@ -281,9 +331,10 @@ const Plans = () => {
             <Phone size={24} /> 615-856-3871
           </a>
           <div>
-            <Link to="/contact">
-              <Button variant="hero" size="xl">Get Started</Button>
+            <Link to="/templates">
+              <Button variant="hero" size="xl">Start Your Free Trial</Button>
             </Link>
+            <p className="text-sm text-muted-foreground mt-3">14 days free. No credit card required.</p>
           </div>
         </ScrollReveal>
       </section>

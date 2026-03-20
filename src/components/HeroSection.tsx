@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import skoopedLogo from "@/assets/skooped-logo.png";
 
@@ -63,7 +64,7 @@ const HeroSection = () => {
           transition={{ delay: 0.6, duration: 0.5 }}
           className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Skooped is an AI-first marketing platform built for local service businesses. Custom websites, SEO, ads, social media, and analytics — all managed by our AI team, starting at $49/mo.
+          Pick your industry. Customize your website. Your AI team handles the rest — SEO, social media, Google Ads, and analytics. Try it free for 14 days.
         </motion.p>
 
         <motion.div
@@ -72,13 +73,25 @@ const HeroSection = () => {
           transition={{ delay: 0.9, duration: 0.4 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <Button variant="hero" size="xl">
-            Get Your Free Website Review
-          </Button>
-          <Button variant="hero-outline" size="xl">
-            See Our Plans
-          </Button>
+          <Link to="/templates">
+            <Button variant="hero" size="xl">
+              Start Your Free Trial
+            </Button>
+          </Link>
+          <Link to="/plans">
+            <Button variant="hero-outline" size="xl">
+              See How It Works
+            </Button>
+          </Link>
         </motion.div>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.1, duration: 0.4 }}
+          className="text-sm text-muted-foreground mt-4"
+        >
+          14 days free. No credit card required. Cancel anytime.
+        </motion.p>
       </div>
     </section>
   );

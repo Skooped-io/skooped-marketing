@@ -38,7 +38,7 @@ const requestIndustries = industries.filter((i) => !i.available);
 const Templates = () => {
   usePageSeo({
     title: "Website Templates by Industry | Skooped — AI Marketing Platform",
-    description: "Browse Skooped's industry-specific website templates. Roofing, landscaping, construction, therapy, coaching & more. Pick your template and be online in minutes.",
+    description: "Browse Skooped's industry-specific website templates. Roofing, landscaping, construction, therapy, coaching & more. Try any template free for 14 days.",
   });
 
   return (
@@ -57,12 +57,12 @@ const Templates = () => {
         <div className="relative container mx-auto px-6 text-center max-w-3xl">
           <ScrollReveal>
             <h1 className="text-4xl md:text-[52px] md:leading-tight font-extrabold text-foreground mb-4">
-              Pick your industry. Get your website.
+              Pick your industry. Try it free.
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={0.15}>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Every template comes with a custom website, SEO, social media, and your own AI marketing team. Choose your industry and be online in minutes.
+              Every template comes with a custom website, SEO, social media, and your own AI marketing team. 14 days free — no credit card required.
             </p>
           </ScrollReveal>
         </div>
@@ -89,7 +89,7 @@ const Templates = () => {
                     <h3 className="font-heading font-bold text-lg text-foreground mb-1">{ind.name}</h3>
                     <p className="text-sm text-muted-foreground mb-4">{ind.tagline}</p>
                     <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all">
-                      View Template <ArrowRight size={14} />
+                      Try This Template Free <ArrowRight size={14} />
                     </span>
                   </Link>
                 </ScrollReveal>
