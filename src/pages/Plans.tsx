@@ -96,6 +96,8 @@ const faqData = [
   { q: "Wait — your team is AI?", a: "Yes, and that's what makes us different. Our AI team works 24/7, never takes a day off, and costs a fraction of a traditional agency. But don't confuse AI with generic — every strategy is built specifically for your business." },
   { q: "Who do I talk to if I have a question?", a: "Cooper is your main point of contact. You can also call or text us at 615-856-3871." },
   { q: "What if I already have a website?", a: "We can work with it or rebuild from scratch — whatever makes sense. We'll do a free review and give you an honest recommendation." },
+  { q: "Is a custom website more expensive?", a: "Nope. Same price, same plans. Whether you pick a template or go custom, you get the same AI team, the same platform, and the same monthly price. The only difference is custom sites take 5-7 business days instead of a few days." },
+  { q: "What if I don't know what I want my website to look like?", a: "That's totally fine. During signup, we'll ask a few simple questions about your business and your style preferences. Our team handles the rest. You'll get a custom design to review, and you can tweak anything." },
 ];
 
 const FaqItem = ({ q, a, open, toggle }: { q: string; a: string; open: boolean; toggle: () => void }) => (
