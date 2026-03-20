@@ -12,6 +12,7 @@ import {
 import ScrollReveal from "@/components/ScrollReveal";
 import { type LucideIcon } from "lucide-react";
 
+import cooperAvatar from "@/assets/agents/cooper.png";
 import scoutAvatar from "@/assets/agents/scout.png";
 import bobAvatar from "@/assets/agents/bob.png";
 import sierraAvatar from "@/assets/agents/sierra.png";
