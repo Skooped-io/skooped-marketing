@@ -89,6 +89,7 @@ const IndustryTemplate = () => {
   const { slug } = useParams<{ slug: string }>();
   const data = slug ? industryTemplates[slug] : undefined;
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const previewUrl = slug ? `https://skooped-io.github.io/template-${slug}/` : undefined;
 
   usePageSeo(data?.seo ?? { title: "Templates | Skooped", description: "" });
 
