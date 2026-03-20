@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import {
   Hammer, TreePine, Grid3X3, HardHat, Heart, Compass,
-  Wrench, Home, Dumbbell, Scissors, Droplets, Zap, ArrowRight, Sparkles,
+  Wrench, Home, Dumbbell, Scissors, Droplets, Zap, ArrowRight, Sparkles, ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
