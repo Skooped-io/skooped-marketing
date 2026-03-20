@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { useState } from "react";
-import { ChevronDown, Phone } from "lucide-react";
+import { ChevronDown, Phone, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
