@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
-import AgentShowcase from "@/components/AgentShowcase";
+import AgentShowcase, { Marquee } from "@/components/AgentShowcase";
 import usePageSeo from "@/hooks/use-page-seo";
 import jakePhoto from "@/assets/jake.jpg";
 
