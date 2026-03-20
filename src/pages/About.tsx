@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 import AgentShowcase from "@/components/AgentShowcase";
 import usePageSeo from "@/hooks/use-page-seo";
+import jakePhoto from "@/assets/jake.jpg";
 
 const About = () => {
   usePageSeo({ title: "About Skooped | AI-First Marketing Team | Franklin, Tennessee", description: "Meet the AI team behind Skooped — 24/7 marketing operations for local businesses. SEO, web dev, content, analytics, and security. Franklin, TN." });
