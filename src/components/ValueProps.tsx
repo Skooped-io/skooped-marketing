@@ -6,8 +6,8 @@ import ScrollReveal from "./ScrollReveal";
 const cards = [
   {
     icon: Monitor,
-    heading: "No templates. No drag-and-drop headaches.",
-    text: "Every Skooped site is built from scratch to match your business. Not a cookie-cutter template — a real website designed to convert visitors into customers.",
+    heading: "Custom-built websites. Every single one.",
+    text: "Every Skooped site is built from scratch — whether you pick an industry template or go fully custom. Not a cookie-cutter template. A real website designed to convert visitors into customers.",
   },
   {
     icon: TrendingUp,

@@ -65,9 +65,9 @@ const About = () => {
             <ScrollReveal>
               <div className="bg-card rounded-2xl p-10 text-center">
                 <p className="font-heading text-2xl font-extrabold text-foreground mb-2">
-                  Meet your team in action — free for 14 days.
+                  Every business is different. That's why we build custom.
                 </p>
-                <p className="text-muted-foreground mb-6">A full team. 24/7. No days off. No credit card required.</p>
+                <p className="text-muted-foreground mb-6">From industry templates or from scratch — your AI team is ready. Free for 14 days.</p>
                 <Link to="/templates">
                   <Button variant="hero" size="xl">Start Your Free Trial</Button>
                 </Link>
