@@ -50,8 +50,8 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:block">
-            <Link to="/contact">
-              <Button variant="hero" size="sm">Get Started</Button>
+            <Link to="/templates">
+              <Button variant="hero" size="sm">Try Free</Button>
             </Link>
           </div>
 
@@ -90,8 +90,8 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
-            <Link to="/contact" onClick={() => setMobileOpen(false)}>
-              <Button variant="hero" size="lg">Get Started</Button>
+            <Link to="/templates" onClick={() => setMobileOpen(false)}>
+              <Button variant="hero" size="lg">Try Free</Button>
             </Link>
           </motion.div>
         )}

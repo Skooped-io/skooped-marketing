@@ -1,4 +1,6 @@
 import { ClipboardList, Rocket, PhoneIncoming } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import ScrollReveal from "./ScrollReveal";
 
 const steps = [
@@ -11,8 +13,8 @@ const steps = [
   {
     num: "02",
     icon: Rocket,
-    heading: "We build your online presence",
-    text: "Custom website, SEO setup, social media, ads — everything your business needs to get found.",
+    heading: "Start your free trial",
+    text: "Sign up with just your email. No credit card, no commitment. You get 14 days to experience your full AI marketing team in action.",
   },
   {
     num: "03",
@@ -50,6 +52,15 @@ const HowItWorks = () => (
           </ScrollReveal>
         ))}
       </div>
+
+      <ScrollReveal delay={0.5}>
+        <div className="text-center mt-12">
+          <Link to="/templates">
+            <Button variant="hero" size="xl">Start Your Free Trial</Button>
+          </Link>
+          <p className="text-sm text-muted-foreground mt-3">14 days free. No credit card required.</p>
+        </div>
+      </ScrollReveal>
     </div>
   </section>
 );

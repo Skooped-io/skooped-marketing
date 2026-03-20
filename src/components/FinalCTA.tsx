@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "./ScrollReveal";
 
@@ -9,20 +10,23 @@ const FinalCTA = () => (
     <div className="relative container mx-auto text-center max-w-2xl">
       <ScrollReveal>
         <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary-foreground mb-4">
-          Ready to get skooped?
+          Pick your template. Try it free for 14 days.
         </h2>
         <p className="text-primary-foreground/80 text-lg mb-8 leading-relaxed">
-          Your competitors are already showing up on Google. Let's make sure you do too.
+          Your website, your SEO, your social media — all managed by 7 AI specialists. No credit card required to start.
         </p>
-        <Button variant="hero" size="xl" className="mb-4">
-          Get Started — It's Free to Talk
-        </Button>
+        <Link to="/templates">
+          <Button variant="hero" size="xl" className="mb-4">
+            Start Your Free Trial
+          </Button>
+        </Link>
+        <p className="text-sm text-primary-foreground/60 mb-4">14 days free. No credit card required.</p>
         <div>
           <a
             href="tel:6158563871"
             className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm"
           >
-            Or text us: 615-856-3871
+            Questions? Call us: 615-856-3871
           </a>
         </div>
       </ScrollReveal>

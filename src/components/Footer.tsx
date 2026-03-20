@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 const Footer = () => (
   <footer className="bg-card py-16 px-6">
     <div className="container mx-auto">
+      {/* Trial banner */}
+      <div className="text-center mb-10">
+        <Link to="/templates" className="inline-block text-sm font-heading font-bold text-primary hover:underline transition-colors">
+          Start your 14-day free trial — no credit card required →
+        </Link>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
         <div>
           <Link to="/" className="font-heading font-extrabold text-2xl text-primary">

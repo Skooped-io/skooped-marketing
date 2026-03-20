@@ -1,4 +1,6 @@
 import { Monitor, TrendingUp, Share2, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import ScrollReveal from "./ScrollReveal";
 
 const cards = [
@@ -46,6 +48,14 @@ const ValueProps = () => (
           </ScrollReveal>
         ))}
       </div>
+      <ScrollReveal delay={0.5}>
+        <div className="text-center mt-12">
+          <Link to="/templates">
+            <Button variant="hero" size="xl">Start Your Free Trial</Button>
+          </Link>
+          <p className="text-sm text-muted-foreground mt-3">14 days free. No credit card required.</p>
+        </div>
+      </ScrollReveal>
     </div>
   </section>
 );
