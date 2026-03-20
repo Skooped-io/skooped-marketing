@@ -83,24 +83,42 @@ const Templates = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {availableIndustries.map((ind, i) => {
               const Icon = ind.icon;
+              const previewUrl = ind.previewSlug
+                ? `https://skooped-io.github.io/template-${ind.previewSlug}/`
+                : undefined;
               return (
                 <ScrollReveal key={ind.name} delay={i * 0.05}>
-                  <Link
-                    to={ind.href}
-                    className="group relative block rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:border-primary hover:-translate-y-1 h-full"
-                  >
-                    <span className="absolute top-4 right-4 text-[10px] font-bold bg-primary/10 text-primary px-2.5 py-1 rounded-full">
-                      Live in 60 seconds
-                    </span>
+                  <div className="group relative block rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:border-primary hover:-translate-y-1 h-full flex flex-col">
+                    <div className="flex items-center gap-2 absolute top-4 right-4">
+                      {previewUrl && (
+                        <span className="text-[10px] font-bold bg-accent/15 text-accent px-2.5 py-1 rounded-full">
+                          Live Preview
+                        </span>
+                      )}
+                      <span className="text-[10px] font-bold bg-primary/10 text-primary px-2.5 py-1 rounded-full">
+                        Live in 60 seconds
+                      </span>
+                    </div>
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                       <Icon size={22} className="text-primary" />
                     </div>
                     <h3 className="font-heading font-bold text-lg text-foreground mb-1">{ind.name}</h3>
                     <p className="text-sm text-muted-foreground mb-4">{ind.tagline}</p>
-                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all">
-                      Try This Template Free <ArrowRight size={14} />
-                    </span>
-                  </Link>
+                    <div className="mt-auto flex flex-col gap-2">
+                      <Link to={ind.href}>
+                        <Button variant="hero" size="sm" className="w-full">
+                          Try This Template Free <ArrowRight size={14} />
+                        </Button>
+                      </Link>
+                      {previewUrl && (
+                        <a href={previewUrl} target="_blank" rel="noopener noreferrer">
+                          <Button variant="outline" size="sm" className="w-full">
+                            View Live Demo <ExternalLink size={14} />
+                          </Button>
+                        </a>
+                      )}
+                    </div>
+                  </div>
                 </ScrollReveal>
               );
             })}
