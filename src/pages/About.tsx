@@ -64,11 +64,12 @@ const About = () => {
           <div className="container mx-auto max-w-2xl">
             <ScrollReveal>
               <div className="bg-card rounded-2xl p-10 text-center">
-                <p className="font-heading text-2xl font-extrabold text-foreground mb-6">
-                  This is what $49/mo gets you. A full team. 24/7. No days off.
+                <p className="font-heading text-2xl font-extrabold text-foreground mb-2">
+                  Meet your team in action — free for 14 days.
                 </p>
-                <Link to="/plans">
-                  <Button variant="hero" size="xl">See Our Plans</Button>
+                <p className="text-muted-foreground mb-6">A full team. 24/7. No days off. No credit card required.</p>
+                <Link to="/templates">
+                  <Button variant="hero" size="xl">Start Your Free Trial</Button>
                 </Link>
               </div>
             </ScrollReveal>

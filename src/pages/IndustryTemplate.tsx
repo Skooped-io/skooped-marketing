@@ -79,7 +79,7 @@ const tiers = [
 
 /* ───── Steps (shared) ───── */
 const steps = [
-  { num: "1", title: "Pick This Template", desc: "Click 'Get This Template' and create your account. Takes 2 minutes." },
+  { num: "1", title: "Pick This Template", desc: "Click 'Try This Template Free' and create your account. Takes 2 minutes." },
   { num: "2", title: "Tell Us About Your Business", desc: "Add your company name, logo, service area, and services. We handle the rest." },
   { num: "3", title: "Start Getting Calls", desc: "Your site goes live, SEO kicks in, and your AI team starts working 24/7." },
 ];
@@ -116,10 +116,10 @@ const IndustryTemplate = () => {
             </ScrollReveal>
             <ScrollReveal delay={0.3}>
               <div className="flex flex-wrap gap-3 mb-3">
-                <Link to="/contact"><Button variant="hero" size="lg">Get This Template — $49/mo</Button></Link>
+                <Link to="/contact"><Button variant="hero" size="lg">Try This Template Free</Button></Link>
                 <Link to="/plans"><Button variant="outline" size="lg">See Plans</Button></Link>
               </div>
-              <p className="text-xs text-muted-foreground">No contracts. No setup fee. Cancel anytime.</p>
+              <p className="text-xs text-muted-foreground">14 days free. No credit card required. Cancel anytime.</p>
             </ScrollReveal>
           </div>
           <ScrollReveal delay={0.2}>
@@ -208,6 +208,9 @@ const IndustryTemplate = () => {
       {/* Pricing */}
       <section className="py-20 px-6">
         <div className="container mx-auto max-w-4xl">
+          <ScrollReveal>
+            <p className="text-center text-sm text-muted-foreground mb-6">Start with any plan — your first 14 days are on us.</p>
+          </ScrollReveal>
           <div className="grid sm:grid-cols-3 gap-6 mb-8">
             {tiers.map((t, i) => (
               <ScrollReveal key={i} delay={i * 0.1}>
@@ -215,7 +218,10 @@ const IndustryTemplate = () => {
                   {t.popular && <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-accent-foreground text-[10px] font-bold px-3 py-0.5 rounded-full">Most Popular</span>}
                   <p className="font-heading font-extrabold text-foreground text-lg mb-1">{t.name}</p>
                   <p className="font-heading text-3xl font-extrabold text-primary mb-2">{t.price}<span className="text-sm text-muted-foreground font-normal">/mo</span></p>
-                  <p className="text-sm text-muted-foreground">{t.desc}</p>
+                  <p className="text-sm text-muted-foreground mb-4">{t.desc}</p>
+                  <Link to="/contact">
+                    <Button variant={t.popular ? "hero" : "outline"} size="sm" className="w-full">Try Free</Button>
+                  </Link>
                 </div>
               </ScrollReveal>
             ))}
@@ -223,8 +229,9 @@ const IndustryTemplate = () => {
           <p className="text-center text-sm text-muted-foreground mb-6">All plans include a custom {data.name.toLowerCase()} website. No contracts.</p>
           <div className="text-center">
             <Link to="/contact">
-              <Button variant="hero" size="xl" className="w-full sm:w-auto">Get Started with {data.name} Template</Button>
+              <Button variant="hero" size="xl" className="w-full sm:w-auto">Start Your Free Trial</Button>
             </Link>
+            <p className="text-sm text-muted-foreground mt-3">14 days free. No credit card required.</p>
           </div>
         </div>
       </section>
@@ -247,7 +254,8 @@ const IndustryTemplate = () => {
           <ScrollReveal>
             <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-primary-foreground mb-4">{data.ctaHeadline}</h2>
             <p className="text-primary-foreground/70 text-lg mb-8">{data.ctaSub}</p>
-            <Link to="/contact"><Button variant="hero" size="xl">Get This Template — Start Free</Button></Link>
+            <Link to="/contact"><Button variant="hero" size="xl">Start Your Free Trial — No Card Needed</Button></Link>
+            <p className="text-sm text-primary-foreground/60 mt-3">14 days free. No credit card required.</p>
             <div className="mt-6">
               <a href="tel:6158563871" className="inline-flex items-center gap-2 text-primary-foreground/80 hover:text-primary transition-colors font-heading font-bold">
                 <Phone size={18} /> Or call us: 615-856-3871
