@@ -47,10 +47,16 @@ const Navbar = () => {
               <Link
                 key={link.label}
                 to={link.href}
-                className="font-body text-sm font-medium text-foreground/80 hover:text-primary transition-colors relative group"
+                className={`font-body text-sm font-medium transition-colors relative group ${
+                  isActive(link.href)
+                    ? "text-primary"
+                    : "text-foreground/80 hover:text-primary"
+                }`}
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${
+                  isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"
+                }`} />
               </Link>
             ))}
           </div>
