@@ -236,7 +236,7 @@ const Plans = () => {
           <p className="font-heading font-extrabold text-xl text-foreground mb-1">
             Website builds start under $1,000 — or $0 down with any monthly plan.
           </p>
-          <p className="text-muted-foreground">Every site is custom-built. No templates. No compromises.</p>
+          <p className="text-muted-foreground">Every site is custom-built. Choose a template or let us design from scratch. No extra charge for custom builds.</p>
         </ScrollReveal>
       </section>
 

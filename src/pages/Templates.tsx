@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import {
   Hammer, TreePine, Grid3X3, HardHat, Heart, Compass,
-  Wrench, Home, Dumbbell, Scissors, Droplets, Zap, ArrowRight,
+  Wrench, Home, Dumbbell, Scissors, Droplets, Zap, ArrowRight, Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -96,6 +96,40 @@ const Templates = () => {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* Custom Website Card */}
+      <section className="pb-12 px-6">
+        <div className="container mx-auto max-w-5xl">
+          <ScrollReveal>
+            <div className="relative rounded-2xl overflow-hidden p-8 md:p-10 bg-gradient-to-r from-primary to-accent text-primary-foreground">
+              <div className="absolute inset-0 opacity-10" style={{
+                backgroundImage: "radial-gradient(circle at 20% 50%, hsl(0 0% 100% / 0.15), transparent 50%), radial-gradient(circle at 80% 50%, hsl(0 0% 100% / 0.1), transparent 50%)",
+              }} />
+              <div className="relative flex flex-col md:flex-row items-center gap-6 md:gap-10">
+                <div className="w-16 h-16 rounded-2xl bg-primary-foreground/15 flex items-center justify-center shrink-0">
+                  <Sparkles size={32} className="text-primary-foreground" />
+                </div>
+                <div className="flex-1 text-center md:text-left">
+                  <h3 className="font-heading text-2xl md:text-3xl font-extrabold mb-2">
+                    Don't see your industry? We'll build it custom.
+                  </h3>
+                  <p className="text-primary-foreground/80 leading-relaxed max-w-xl">
+                    Tell us about your business and our AI team will design a website from scratch — tailored to your industry, your brand, and your customers. Same platform, same AI team, same price.
+                  </p>
+                </div>
+                <div className="shrink-0 text-center">
+                  <Link to="/contact">
+                    <Button variant="secondary" size="xl" className="bg-primary-foreground text-foreground hover:bg-primary-foreground/90 font-extrabold">
+                      Start Custom Build — Free Trial
+                    </Button>
+                  </Link>
+                  <p className="text-primary-foreground/60 text-xs mt-2">14 days free. No credit card required. Custom sites delivered in 5–7 business days.</p>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 

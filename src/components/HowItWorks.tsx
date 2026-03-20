@@ -7,8 +7,8 @@ const steps = [
   {
     num: "01",
     icon: ClipboardList,
-    heading: "Tell us about your business",
-    text: "We learn what you do, who you serve, and what success looks like.",
+    heading: "Pick a template — or go custom",
+    text: "Browse our template library and find the one built for your business. Don't see your industry? Choose 'Custom' and our AI team will design one from scratch. Same price, same platform, same 14-day free trial.",
   },
   {
     num: "02",
