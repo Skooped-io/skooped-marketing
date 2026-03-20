@@ -81,7 +81,7 @@ const tiers = [
 const steps = [
   { num: "1", title: "Pick This Template", desc: "Click 'Try This Template Free' and create your account. Takes 2 minutes." },
   { num: "2", title: "Tell Us About Your Business", desc: "Add your company name, logo, service area, and services. We handle the rest." },
-  { num: "3", title: "Start Getting Calls", desc: "Your site goes live, SEO kicks in, and your AI team starts working 24/7." },
+  { num: "3", title: "Your Site Is Live in 60 Seconds", desc: "Your website goes live instantly. Your AI team starts SEO, social media, and analytics 24/7." },
 ];
 
 /* ═══════════════════ PAGE ═══════════════════ */
@@ -116,10 +116,10 @@ const IndustryTemplate = () => {
             </ScrollReveal>
             <ScrollReveal delay={0.3}>
               <div className="flex flex-wrap gap-3 mb-3">
-                <Link to="/contact"><Button variant="hero" size="lg">Try This Template Free</Button></Link>
+                <Link to={`/signup?template=${slug}`}><Button variant="hero" size="lg">Try This Template Free — Live in 60 Seconds</Button></Link>
                 <Link to="/plans"><Button variant="outline" size="lg">See Plans</Button></Link>
               </div>
-              <p className="text-xs text-muted-foreground">14 days free. No credit card required. Cancel anytime.</p>
+              <p className="text-xs text-muted-foreground">14 days free. No credit card required.</p>
             </ScrollReveal>
           </div>
           <ScrollReveal delay={0.2}>
@@ -166,9 +166,15 @@ const IndustryTemplate = () => {
           <ScrollReveal>
             <h2 className="font-heading text-3xl font-extrabold text-foreground text-center mb-12">{data.statsHeading}</h2>
           </ScrollReveal>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-12">
+            <ScrollReveal delay={0}>
+              <div className="text-center bg-card border border-border rounded-2xl p-8">
+                <p className="font-heading text-4xl font-extrabold text-primary mb-2">60 sec</p>
+                <p className="text-sm text-muted-foreground">From signup to live website</p>
+              </div>
+            </ScrollReveal>
             {data.stats.map((s, i) => (
-              <ScrollReveal key={i} delay={i * 0.1}>
+              <ScrollReveal key={i} delay={(i + 1) * 0.1}>
                 <div className="text-center bg-card border border-border rounded-2xl p-8">
                   <p className="font-heading text-4xl font-extrabold text-primary mb-2">{s.value}</p>
                   <p className="text-sm text-muted-foreground">{s.label}</p>
@@ -219,7 +225,7 @@ const IndustryTemplate = () => {
                   <p className="font-heading font-extrabold text-foreground text-lg mb-1">{t.name}</p>
                   <p className="font-heading text-3xl font-extrabold text-primary mb-2">{t.price}<span className="text-sm text-muted-foreground font-normal">/mo</span></p>
                   <p className="text-sm text-muted-foreground mb-4">{t.desc}</p>
-                  <Link to="/contact">
+                  <Link to={`/signup?template=${slug}`}>
                     <Button variant={t.popular ? "hero" : "outline"} size="sm" className="w-full">Try Free</Button>
                   </Link>
                 </div>
@@ -228,7 +234,7 @@ const IndustryTemplate = () => {
           </div>
           <p className="text-center text-sm text-muted-foreground mb-6">All plans include a custom {data.name.toLowerCase()} website. No contracts.</p>
           <div className="text-center">
-            <Link to="/contact">
+            <Link to={`/signup?template=${slug}`}>
               <Button variant="hero" size="xl" className="w-full sm:w-auto">Start Your Free Trial</Button>
             </Link>
             <p className="text-sm text-muted-foreground mt-3">14 days free. No credit card required.</p>
@@ -254,7 +260,7 @@ const IndustryTemplate = () => {
           <ScrollReveal>
             <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-primary-foreground mb-4">{data.ctaHeadline}</h2>
             <p className="text-primary-foreground/70 text-lg mb-8">{data.ctaSub}</p>
-            <Link to="/contact"><Button variant="hero" size="xl">Start Your Free Trial — No Card Needed</Button></Link>
+            <Link to={`/signup?template=${slug}`}><Button variant="hero" size="xl">Start Your Free Trial — No Card Needed</Button></Link>
             <p className="text-sm text-primary-foreground/60 mt-3">14 days free. No credit card required.</p>
             <div className="mt-6">
               <a href="tel:6158563871" className="inline-flex items-center gap-2 text-primary-foreground/80 hover:text-primary transition-colors font-heading font-bold">

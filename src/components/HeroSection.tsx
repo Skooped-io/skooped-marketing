@@ -22,14 +22,11 @@ const headlineWords = "We build it. We run it. You answer the phone.".split(" ")
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      {/* Animated gradient background */}
       <div className="absolute inset-0 bg-background animate-gradient-shift" style={{ backgroundSize: "200% 200%", backgroundImage: "radial-gradient(ellipse at 30% 20%, hsl(340 60% 57% / 0.12), transparent 50%), radial-gradient(ellipse at 70% 80%, hsl(35 56% 50% / 0.08), transparent 50%)" }} />
 
-      {/* Floating blobs */}
       <div className="absolute top-20 -left-20 w-80 h-80 rounded-full bg-primary/10 blur-3xl animate-float" />
       <div className="absolute bottom-20 -right-20 w-96 h-96 rounded-full bg-accent/10 blur-3xl animate-float-delayed" />
 
-      {/* Sparkles */}
       <Sparkle className="absolute top-32 left-[20%] text-accent" />
       <Sparkle className="absolute top-48 right-[25%] text-accent" />
       <Sparkle className="absolute bottom-40 left-[30%] text-accent" />
@@ -64,7 +61,7 @@ const HeroSection = () => {
           transition={{ delay: 0.6, duration: 0.5 }}
           className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Pick your industry. Customize your website. Your AI team handles the rest — SEO, social media, Google Ads, and analytics. Try it free for 14 days.
+          Pick your industry. Add your brand. Your website is live in 60 seconds — then your AI team takes over. SEO, social media, Google Ads, analytics. Try it free for 14 days.
         </motion.p>
 
         <motion.div
