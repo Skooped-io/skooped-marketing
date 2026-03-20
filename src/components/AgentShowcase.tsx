@@ -164,8 +164,6 @@ const tickerItems = [
 
 const Marquee = () => (
   <div className="relative overflow-hidden py-4 mt-6">
-    <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-background to-transparent z-10" />
-    <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-background to-transparent z-10" />
     <motion.div
       className="flex gap-8 whitespace-nowrap"
       animate={{ x: ["0%", "-50%"] }}
