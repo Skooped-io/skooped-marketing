@@ -119,6 +119,13 @@ const IndustryTemplate = () => {
               <div className="flex flex-wrap gap-3 mb-3">
                 <Link to={`/signup?template=${slug}`}><Button variant="hero" size="lg">Try This Template Free — Live in 60 Seconds</Button></Link>
                 <Link to="/plans"><Button variant="outline" size="lg">See Plans</Button></Link>
+                {previewUrl && (
+                  <a href={previewUrl} target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" size="lg">
+                      Open Live Demo <ExternalLink size={16} className="ml-1" />
+                    </Button>
+                  </a>
+                )}
               </div>
               <p className="text-xs text-muted-foreground">14 days free. No credit card required.</p>
             </ScrollReveal>
