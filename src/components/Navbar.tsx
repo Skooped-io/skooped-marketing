@@ -103,7 +103,11 @@ const Navbar = () => {
                 key={link.label}
                 to={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="font-heading text-2xl font-bold text-primary-foreground hover:text-primary transition-colors"
+                className={`font-heading text-2xl font-bold transition-colors ${
+                  isActive(link.href)
+                    ? "text-primary"
+                    : "text-primary-foreground hover:text-primary"
+                }`}
               >
                 {link.label}
               </Link>
