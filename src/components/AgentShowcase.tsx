@@ -12,6 +12,7 @@ import {
 import ScrollReveal from "@/components/ScrollReveal";
 import { type LucideIcon } from "lucide-react";
 
+import cooperAvatar from "@/assets/agents/cooper.png";
 import scoutAvatar from "@/assets/agents/scout.png";
 import bobAvatar from "@/assets/agents/bob.png";
 import sierraAvatar from "@/assets/agents/sierra.png";
@@ -48,6 +49,7 @@ const agents: AgentData[] = [
       { icon: AlertTriangle, text: "Escalation alerts — flags urgent items to Jake instantly" },
     ],
     stat: "1,247 actions this month",
+    avatar: cooperAvatar,
   },
   {
     name: "Scout",
