@@ -1,8 +1,9 @@
 import ScrollReveal from "./ScrollReveal";
 
 const CaseStudy = () => (
-  <section className="py-24 px-6">
-    <div className="container mx-auto max-w-3xl">
+  <section className="py-24 px-6 relative overflow-hidden">
+    <div className="absolute -top-10 left-1/2 w-80 h-80 rounded-full bg-primary/8 blur-3xl pointer-events-none -translate-x-1/2" />
+    <div className="container mx-auto max-w-3xl relative">
       <ScrollReveal>
         <div className="border-l-4 border-primary bg-card rounded-lg p-8 md:p-12 relative overflow-hidden">
           <h2 className="font-heading font-bold text-2xl md:text-3xl text-chocolate mb-4">

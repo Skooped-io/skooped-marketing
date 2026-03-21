@@ -48,8 +48,10 @@ const AnimatedNumber = ({ value }: { value: string }) => {
 };
 
 const StatsBar = () => (
-  <section className="py-16 bg-card px-6">
-    <div className="container mx-auto">
+  <section className="py-16 bg-card px-6 relative overflow-hidden">
+    <div className="absolute top-0 right-10 w-40 h-40 rounded-full bg-primary/10 blur-2xl pointer-events-none" />
+    <div className="absolute bottom-0 left-20 w-32 h-32 rounded-full bg-primary/8 blur-2xl pointer-events-none" />
+    <div className="container mx-auto relative">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
         {stats.map((stat, i) => (
           <ScrollReveal key={i} delay={i * 0.1}>
