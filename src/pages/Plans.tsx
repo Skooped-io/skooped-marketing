@@ -210,6 +210,8 @@ const Plans = () => {
             popular
             delay={0.1}
             image={tier2Img}
+            expanded={allExpanded}
+            onToggleExpand={toggleExpand}
           />
           <PlanCard
             name="Triple"
