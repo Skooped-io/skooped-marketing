@@ -66,7 +66,7 @@ const PlanCard = ({ name, tagline, price, features, popular, delay, image, expan
 
         {features.length > 5 && (
           <button
-            onClick={() => setExpanded(!expanded)}
+            onClick={onToggleExpand}
             className="text-xs text-primary font-semibold mb-4 hover:underline flex items-center gap-1 mx-auto"
           >
             {expanded ? "Show less" : `See all ${features.length} features`}
