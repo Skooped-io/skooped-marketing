@@ -20,22 +20,19 @@ interface Industry {
 }
 
 const industries: Industry[] = [
-  { name: "Roofing", icon: Hammer, tagline: "Get on top of local search", href: "/templates/roofing", available: true, previewSlug: "roofing" },
-  { name: "Landscaping", icon: TreePine, tagline: "Grow your online presence", href: "/templates/landscaping", available: true, previewSlug: "landscaping" },
-  { name: "Therapy & Counseling", icon: Heart, tagline: "Connect with clients who need you", href: "/templates/therapy-counseling", available: true, previewSlug: "therapy" },
-  { name: "Salon & Barbershop", icon: Scissors, tagline: "Cut through the competition", href: "/templates/salon-barbershop", available: true, previewSlug: "salon" },
-  { name: "Plumbing", icon: Droplets, tagline: "Stop leaking leads", href: "/templates/plumbing", available: true, previewSlug: "plumbing" },
-  { name: "Fencing", icon: Grid3X3, tagline: "Build your digital boundary", href: "/contact", available: false, previewSlug: "fencing" },
-  { name: "Construction", icon: HardHat, tagline: "Construct your online empire", href: "/contact", available: false },
-  { name: "Life Coaching", icon: Compass, tagline: "Guide more people to find you", href: "/contact", available: false },
-  { name: "Auto Repair", icon: Wrench, tagline: "Drive more customers to your shop", href: "/contact", available: false },
-  { name: "Real Estate Services", icon: Home, tagline: "List your business, not just properties", href: "/contact", available: false },
-  { name: "Personal Training", icon: Dumbbell, tagline: "Flex your online presence", href: "/contact", available: false },
-  { name: "Electrical", icon: Zap, tagline: "Power up your marketing", href: "/contact", available: false, previewSlug: "electrical" },
+  { name: "Roofing", icon: Hammer, tagline: "Professional online presence for roofing contractors", href: "/templates/roofing", available: true, previewSlug: "roofing" },
+  { name: "Landscaping", icon: TreePine, tagline: "Grow your online presence and book more jobs", href: "/templates/landscaping", available: true, previewSlug: "landscaping" },
+  { name: "Fencing", icon: Grid3X3, tagline: "Build your digital boundary and attract local leads", href: "/templates/fencing", available: true, previewSlug: "fencing" },
+  { name: "Therapy & Counseling", icon: Heart, tagline: "Connect with clients who need you most", href: "/templates/therapy-counseling", available: true, previewSlug: "therapy" },
+  { name: "Construction", icon: HardHat, tagline: "Construct your online empire and win more bids", href: "/templates/construction", available: true, previewSlug: "construction" },
+  { name: "Auto Repair", icon: Wrench, tagline: "Drive more customers to your shop", href: "/templates/auto-repair", available: true, previewSlug: "auto-repair" },
+  { name: "Life Coaching", icon: Compass, tagline: "Guide more people to find you online", href: "/templates/life-coaching", available: true, previewSlug: "life-coaching" },
+  { name: "Real Estate Services", icon: Home, tagline: "List your business and generate quality leads", href: "/templates/real-estate", available: true, previewSlug: "real-estate-agent" },
+  { name: "Personal Training", icon: Dumbbell, tagline: "Flex your online presence and book more clients", href: "/templates/personal-training", available: true, previewSlug: "personal-training" },
+  { name: "Salon & Barbershop", icon: Scissors, tagline: "Cut through the competition with a stunning site", href: "/templates/salon-barbershop", available: true, previewSlug: "salon-barber-shop" },
+  { name: "Plumbing", icon: Droplets, tagline: "Stop leaking leads and get found locally", href: "/templates/plumbing", available: true, previewSlug: "plumbing" },
+  { name: "Electrical", icon: Zap, tagline: "Power up your marketing and win more jobs", href: "/templates/electrical", available: true, previewSlug: "electrical" },
 ];
-
-const availableIndustries = industries.filter((i) => i.available);
-const requestIndustries = industries.filter((i) => !i.available);
 
 const Templates = () => {
   usePageSeo({
@@ -79,13 +76,13 @@ const Templates = () => {
       <section className="pb-12 px-6">
         <div className="container mx-auto max-w-5xl">
           <ScrollReveal>
-            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-6">Available Now</h2>
+            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-6">Browse Templates</h2>
           </ScrollReveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {availableIndustries.map((ind, i) => {
+            {industries.map((ind, i) => {
               const Icon = ind.icon;
               const previewUrl = ind.previewSlug
-                ? `https://skooped-io.github.io/template-${ind.previewSlug}/`
+                ? `https://skooped-io.github.io/${ind.previewSlug}-template/`
                 : undefined;
               return (
                 <ScrollReveal key={ind.name} delay={i * 0.05}>
@@ -200,47 +197,13 @@ const Templates = () => {
         </div>
       </section>
 
-      {/* Available Upon Request */}
-      <section className="pb-20 px-6">
-        <div className="container mx-auto max-w-5xl">
-          <ScrollReveal>
-            <div className="border-t border-border pt-10 mb-6">
-              <h2 className="font-heading text-2xl font-extrabold text-foreground mb-1">Available Upon Request</h2>
-              <p className="text-sm text-muted-foreground">Contact us and we'll have your template ready fast.</p>
-            </div>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {requestIndustries.map((ind, i) => {
-              const Icon = ind.icon;
-              return (
-                <ScrollReveal key={ind.name} delay={i * 0.05}>
-                  <Link
-                    to={ind.href}
-                    className="relative block rounded-2xl border border-border bg-card p-6 opacity-70 h-full"
-                  >
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                      <Icon size={22} className="text-primary/60" />
-                    </div>
-                    <h3 className="font-heading font-bold text-lg text-foreground mb-1">{ind.name}</h3>
-                    <p className="text-sm text-muted-foreground mb-4">{ind.tagline}</p>
-                    <span className="inline-block text-[11px] font-bold bg-accent/15 text-accent px-3 py-1 rounded-full">
-                      Available Upon Request
-                    </span>
-                  </Link>
-                </ScrollReveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* Bottom CTA */}
       <section className="pb-24 px-6 text-center">
         <ScrollReveal>
-          <h2 className="font-heading text-2xl font-extrabold text-foreground mb-2">Need a template for a different industry?</h2>
-          <p className="text-muted-foreground mb-6">We build custom templates for any business. Tell us your industry and we'll have it ready for you.</p>
-          <Link to="/contact">
-            <Button variant="hero" size="xl">Contact Us</Button>
+          <h2 className="font-heading text-2xl font-extrabold text-foreground mb-2">Don't see your industry?</h2>
+          <p className="text-muted-foreground mb-6">No problem. Cooper can build a custom site tailored to any business.</p>
+          <Link to="/signup?template=custom">
+            <Button variant="hero" size="xl">Build Custom — $299</Button>
           </Link>
         </ScrollReveal>
       </section>

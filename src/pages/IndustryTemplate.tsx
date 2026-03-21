@@ -84,12 +84,28 @@ const steps = [
   { num: "3", title: "Your Site Is Live in 60 Seconds", desc: "Your website goes live instantly. Your AI team starts SEO, social media, and analytics 24/7." },
 ];
 
+const previewSlugs: Record<string, string> = {
+  roofing: "roofing",
+  landscaping: "landscaping",
+  fencing: "fencing",
+  "therapy-counseling": "therapy",
+  construction: "construction",
+  "auto-repair": "auto-repair",
+  "life-coaching": "life-coaching",
+  "real-estate": "real-estate-agent",
+  "personal-training": "personal-training",
+  "salon-barbershop": "salon-barber-shop",
+  plumbing: "plumbing",
+  electrical: "electrical",
+};
+
 /* ═══════════════════ PAGE ═══════════════════ */
 const IndustryTemplate = () => {
   const { slug } = useParams<{ slug: string }>();
   const data = slug ? industryTemplates[slug] : undefined;
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const previewUrl = slug ? `https://skooped-io.github.io/template-${slug}/` : undefined;
+  const ghSlug = slug ? previewSlugs[slug] : undefined;
+  const previewUrl = ghSlug ? `https://skooped-io.github.io/${ghSlug}-template/` : undefined;
 
   usePageSeo(data?.seo ?? { title: "Templates | Skooped", description: "" });
 
