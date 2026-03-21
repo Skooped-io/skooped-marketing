@@ -46,6 +46,7 @@ const PlanCard = ({ name, tagline, price, features, popular, delay, image }: Pla
           </span>
         )}
 
+        <img src={image} alt={`${name} plan`} className="w-24 h-24 object-contain mx-auto mb-2" />
         <h3 className="font-heading text-xl font-extrabold text-foreground text-center">{name}</h3>
         <p className="text-muted-foreground text-xs text-center mb-3">{tagline}</p>
         <p className="text-center mb-4">
