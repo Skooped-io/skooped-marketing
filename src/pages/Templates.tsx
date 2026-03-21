@@ -20,22 +20,19 @@ interface Industry {
 }
 
 const industries: Industry[] = [
-  { name: "Roofing", icon: Hammer, tagline: "Get on top of local search", href: "/templates/roofing", available: true, previewSlug: "roofing" },
-  { name: "Landscaping", icon: TreePine, tagline: "Grow your online presence", href: "/templates/landscaping", available: true, previewSlug: "landscaping" },
-  { name: "Therapy & Counseling", icon: Heart, tagline: "Connect with clients who need you", href: "/templates/therapy-counseling", available: true, previewSlug: "therapy" },
-  { name: "Salon & Barbershop", icon: Scissors, tagline: "Cut through the competition", href: "/templates/salon-barbershop", available: true, previewSlug: "salon" },
-  { name: "Plumbing", icon: Droplets, tagline: "Stop leaking leads", href: "/templates/plumbing", available: true, previewSlug: "plumbing" },
-  { name: "Fencing", icon: Grid3X3, tagline: "Build your digital boundary", href: "/contact", available: false, previewSlug: "fencing" },
-  { name: "Construction", icon: HardHat, tagline: "Construct your online empire", href: "/contact", available: false },
-  { name: "Life Coaching", icon: Compass, tagline: "Guide more people to find you", href: "/contact", available: false },
-  { name: "Auto Repair", icon: Wrench, tagline: "Drive more customers to your shop", href: "/contact", available: false },
-  { name: "Real Estate Services", icon: Home, tagline: "List your business, not just properties", href: "/contact", available: false },
-  { name: "Personal Training", icon: Dumbbell, tagline: "Flex your online presence", href: "/contact", available: false },
-  { name: "Electrical", icon: Zap, tagline: "Power up your marketing", href: "/contact", available: false, previewSlug: "electrical" },
+  { name: "Roofing", icon: Hammer, tagline: "Professional online presence for roofing contractors", href: "/templates/roofing", available: true, previewSlug: "roofing" },
+  { name: "Landscaping", icon: TreePine, tagline: "Grow your online presence and book more jobs", href: "/templates/landscaping", available: true, previewSlug: "landscaping" },
+  { name: "Fencing", icon: Grid3X3, tagline: "Build your digital boundary and attract local leads", href: "/templates/fencing", available: true, previewSlug: "fencing" },
+  { name: "Therapy & Counseling", icon: Heart, tagline: "Connect with clients who need you most", href: "/templates/therapy-counseling", available: true, previewSlug: "therapy" },
+  { name: "Construction", icon: HardHat, tagline: "Construct your online empire and win more bids", href: "/templates/construction", available: true, previewSlug: "construction" },
+  { name: "Auto Repair", icon: Wrench, tagline: "Drive more customers to your shop", href: "/templates/auto-repair", available: true, previewSlug: "auto-repair" },
+  { name: "Life Coaching", icon: Compass, tagline: "Guide more people to find you online", href: "/templates/life-coaching", available: true, previewSlug: "life-coaching" },
+  { name: "Real Estate Services", icon: Home, tagline: "List your business and generate quality leads", href: "/templates/real-estate", available: true, previewSlug: "real-estate-agent" },
+  { name: "Personal Training", icon: Dumbbell, tagline: "Flex your online presence and book more clients", href: "/templates/personal-training", available: true, previewSlug: "personal-training" },
+  { name: "Salon & Barbershop", icon: Scissors, tagline: "Cut through the competition with a stunning site", href: "/templates/salon-barbershop", available: true, previewSlug: "salon-barber-shop" },
+  { name: "Plumbing", icon: Droplets, tagline: "Stop leaking leads and get found locally", href: "/templates/plumbing", available: true, previewSlug: "plumbing" },
+  { name: "Electrical", icon: Zap, tagline: "Power up your marketing and win more jobs", href: "/templates/electrical", available: true, previewSlug: "electrical" },
 ];
-
-const availableIndustries = industries.filter((i) => i.available);
-const requestIndustries = industries.filter((i) => !i.available);
 
 const Templates = () => {
   usePageSeo({
