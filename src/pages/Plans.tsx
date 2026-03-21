@@ -202,6 +202,7 @@ const Plans = () => {
             ]}
             popular
             delay={0.1}
+            image={tier2Img}
           />
           <PlanCard
             name="Triple"
