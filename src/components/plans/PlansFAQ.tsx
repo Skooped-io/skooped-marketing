@@ -57,7 +57,7 @@ export default function PlansFAQ() {
         Frequently Asked Questions
       </h2>
 
-      <Accordion className="max-w-3xl mx-auto" multiple={false}>
+      <Accordion type="single" collapsible className="max-w-3xl mx-auto">
         {faqs.map((faq, i) => (
           <AccordionItem key={i} value={String(i)}>
             <AccordionTrigger className="font-medium text-[#361C24] text-left hover:no-underline">

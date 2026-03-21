@@ -1,6 +1,6 @@
 'use client'
 
-import ScrollReveal from '@/components/animations/ScrollReveal'
+import ScrollReveal from '@/components/ScrollReveal'
 
 const resultStats = [
   { value: '8,000+', label: 'Impressions' },

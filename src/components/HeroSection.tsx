@@ -17,7 +17,8 @@ const Sparkle = ({ className }: { className?: string }) => (
   </motion.svg>
 );
 
-const headlineWords = "We build it. We run it. You answer the phone.".split(" ");
+const headlineStart = "We build it. We run it. You".split(" ");
+const headlineEnd = "answer the phone.";
 
 const HeroSection = () => {
   return (
@@ -42,7 +43,7 @@ const HeroSection = () => {
         />
 
         <h1 className="text-4xl md:text-[56px] md:leading-tight font-extrabold text-foreground mb-6">
-          {headlineWords.map((word, i) => (
+          {headlineStart.map((word, i) => (
             <motion.span
               key={i}
               initial={{ opacity: 0, y: 20 }}
@@ -53,6 +54,14 @@ const HeroSection = () => {
               {word}
             </motion.span>
           ))}
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: headlineStart.length * 0.05, duration: 0.4, ease: "easeOut" }}
+            className="inline-block swoosh-underline text-primary"
+          >
+            {headlineEnd}
+          </motion.span>
         </h1>
 
         <motion.p
