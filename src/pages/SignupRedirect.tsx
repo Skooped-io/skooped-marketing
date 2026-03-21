@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
-const DASHBOARD_URL = "https://skooped-client-dashboard.vercel.app";
+const DASHBOARD_URL = "https://app.skooped.io";
 
 export default function SignupRedirect() {
   const [searchParams] = useSearchParams();
