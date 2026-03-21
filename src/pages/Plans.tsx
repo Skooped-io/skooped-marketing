@@ -229,6 +229,8 @@ const Plans = () => {
             ]}
             delay={0.2}
             image={tier3Img}
+            expanded={allExpanded}
+            onToggleExpand={toggleExpand}
           />
         </div>
       </section>
