@@ -196,6 +196,8 @@ const Plans = () => {
             onToggleExpand={toggleExpand}
             isMobile={isMobile}
           />
+          <PlanCard
+            name="Double"
             tagline="Start showing up and standing out."
             price="$99"
             features={[
