@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Check, X, ChevronDown, Phone, CreditCard, Rocket, Heart } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
