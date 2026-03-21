@@ -7,6 +7,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 import usePageSeo from "@/hooks/use-page-seo";
+import tier1Img from "@/assets/skooped-tier-1.png";
+import tier2Img from "@/assets/skooped-tier-2.png";
+import tier3Img from "@/assets/skooped-tier-3.png";
 
 /* ───── Pricing card (compact) ───── */
 interface PlanCardProps {
