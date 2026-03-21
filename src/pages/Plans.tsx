@@ -219,6 +219,7 @@ const Plans = () => {
               "Dedicated account management",
             ]}
             delay={0.2}
+            image={tier3Img}
           />
         </div>
       </section>
