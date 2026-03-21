@@ -45,7 +45,7 @@ const Templates = () => {
       <Navbar />
 
       {/* Header */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-32 pb-16 overflow-hidden">
         <div className="absolute top-16 -left-20 w-72 h-72 rounded-full bg-primary/12 blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 right-[-3rem] w-56 h-56 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
         <div className="relative container mx-auto px-6 text-center max-w-3xl">
@@ -67,47 +67,46 @@ const Templates = () => {
         </div>
       </section>
 
-      {/* Available Templates */}
+      {/* Compact Template Grid */}
       <section className="pb-12 px-6">
         <div className="container mx-auto max-w-5xl">
           <ScrollReveal>
             <h2 className="font-heading text-2xl font-extrabold text-foreground mb-6">Browse Templates</h2>
           </ScrollReveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {industries.map((ind, i) => {
               const Icon = ind.icon;
               const previewUrl = ind.previewSlug
                 ? `https://skooped-io.github.io/${ind.previewSlug}-template/`
                 : undefined;
               return (
-                <ScrollReveal key={ind.name} delay={i * 0.05}>
-                  <div className="group relative block rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:border-primary hover:-translate-y-1 h-full flex flex-col">
-                    <div className="flex items-center gap-2 absolute top-4 right-4">
-                      {previewUrl && (
-                        <span className="text-[10px] font-bold bg-accent/15 text-accent px-2.5 py-1 rounded-full">
-                          Live Preview
-                        </span>
-                      )}
-                      <span className="text-[10px] font-bold bg-primary/10 text-primary px-2.5 py-1 rounded-full">
-                        Live in 60 seconds
-                      </span>
+                <ScrollReveal key={ind.name} delay={i * 0.04}>
+                  <div className="group relative rounded-xl border border-border bg-card/60 backdrop-blur-sm px-5 py-4 transition-all duration-300 hover:shadow-md hover:border-primary hover:-translate-y-0.5 h-full flex flex-col">
+                    {/* Title row with icon inline */}
+                    <div className="flex items-center gap-3 mb-1.5">
+                      <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                        <Icon size={18} className="text-primary" />
+                      </div>
+                      <h3 className="font-heading font-bold text-foreground">{ind.name}</h3>
                     </div>
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                      <Icon size={22} className="text-primary" />
-                    </div>
-                    <h3 className="font-heading font-bold text-lg text-foreground mb-1">{ind.name}</h3>
-                    <p className="text-sm text-muted-foreground mb-4">{ind.tagline}</p>
-                    <div className="mt-auto flex flex-col gap-2">
-                      <Link to={ind.href}>
-                        <Button variant="hero" size="sm" className="w-full">
-                          Try This Template Free <ArrowRight size={14} />
+
+                    <p className="text-sm text-muted-foreground mb-4 leading-snug">{ind.tagline}</p>
+
+                    {/* Single CTA + hover demo link */}
+                    <div className="mt-auto flex items-center gap-3">
+                      <Link to={ind.href} className="flex-1">
+                        <Button variant="hero" size="sm" className="w-full text-sm py-2">
+                          Try Free <ArrowRight size={13} />
                         </Button>
                       </Link>
                       {previewUrl && (
-                        <a href={previewUrl} target="_blank" rel="noopener noreferrer">
-                          <Button variant="outline" size="sm" className="w-full">
-                            View Live Demo <ExternalLink size={14} />
-                          </Button>
+                        <a
+                          href={previewUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs font-semibold text-primary hover:underline opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0 flex items-center gap-1"
+                        >
+                          Demo <ExternalLink size={11} />
                         </a>
                       )}
                     </div>
