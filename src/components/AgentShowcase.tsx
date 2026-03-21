@@ -1,5 +1,5 @@
-import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import {
   MessageSquare, CheckCircle, FolderKanban, Users, ArrowDownUp,
   Search, BarChart3, Globe, FileText, Eye,
@@ -163,7 +163,7 @@ const tickerItems = [
 ];
 
 export const Marquee = () => (
-  <div className="relative overflow-hidden py-4 mt-6">
+  <div className="relative overflow-hidden py-4 mt-4">
     <motion.div
       className="flex gap-8 whitespace-nowrap"
       animate={{ x: ["0%", "-50%"] }}
@@ -178,16 +178,15 @@ export const Marquee = () => (
   </div>
 );
 
-/* ─── Avatar or Gradient Fallback ─── */
-const AgentAvatar = ({ agent, size = "lg" }: { agent: AgentData; size?: "lg" | "sm" | "xs" }) => {
-  const sizeClasses = size === "lg" ? "w-48 h-48" : size === "sm" ? "w-14 h-14" : "w-14 h-14";
-  const textSize = size === "lg" ? "text-6xl" : "text-xl";
+/* ─── Agent Avatar ─── */
+const AgentAvatar = ({ agent, size = "md" }: { agent: AgentData; size?: "md" | "sm" }) => {
+  const sizeClasses = size === "md" ? "w-20 h-20" : "w-10 h-10";
 
   if (agent.avatar) {
     return (
       <div
-        className={`${sizeClasses} rounded-full overflow-hidden relative z-10`}
-        style={{ boxShadow: `0 0 60px ${agent.gradientFrom}40` }}
+        className={`${sizeClasses} rounded-full overflow-hidden shrink-0`}
+        style={{ boxShadow: `0 0 20px ${agent.gradientFrom}30` }}
       >
         <img src={agent.avatar} alt={agent.name} className="w-full h-full object-cover" />
       </div>
@@ -196,225 +195,170 @@ const AgentAvatar = ({ agent, size = "lg" }: { agent: AgentData; size?: "lg" | "
 
   return (
     <div
-      className={`${sizeClasses} rounded-full flex items-center justify-center relative z-10`}
+      className={`${sizeClasses} rounded-full flex items-center justify-center shrink-0`}
       style={{
         background: `linear-gradient(135deg, ${agent.gradientFrom}, ${agent.gradientTo})`,
-        boxShadow: `0 0 60px ${agent.gradientFrom}40`,
+        boxShadow: `0 0 20px ${agent.gradientFrom}30`,
       }}
     >
-      <span className={`${textSize} font-heading font-extrabold text-white/90`}>{agent.name[0]}</span>
+      <span className={`${size === "md" ? "text-2xl" : "text-base"} font-heading font-extrabold text-white/90`}>
+        {agent.name[0]}
+      </span>
     </div>
   );
 };
 
-/* ─── Desktop Agent Section ─── */
-const AgentSection = ({ agent }: { agent: AgentData; index: number }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "-20% 0px" });
+/* ─── Tabbed Agent Showcase ─── */
+const AgentShowcase = () => {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const agent = agents[activeIdx];
 
   return (
-    <div
-      ref={ref}
-      className="min-h-[70vh] hidden md:flex items-center py-12 px-6"
-      style={{
-        background: `linear-gradient(135deg, ${agent.gradientFrom}10, transparent 40%, ${agent.gradientTo}08)`,
-      }}
-    >
-      <div className="container mx-auto max-w-6xl grid md:grid-cols-2 gap-16 items-center">
-        {/* Left — Visual */}
-        <motion.div
-          className="relative flex flex-col items-center justify-center"
-          initial={{ opacity: 0, x: -40 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
-          transition={{ duration: 0.6 }}
-        >
-          <span
-            className="absolute font-heading font-extrabold text-[180px] leading-none select-none pointer-events-none"
-            style={{ color: agent.gradientFrom, opacity: 0.08 }}
-          >
-            {agent.name[0]}
-          </span>
-          <AgentAvatar agent={agent} size="lg" />
-          <h3 className="font-heading text-2xl font-extrabold text-foreground mt-6">{agent.name}</h3>
-          <p className="text-muted-foreground text-sm">{agent.title}</p>
-        </motion.div>
-
-        {/* Right — Details */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-        >
-          <div className="flex items-center gap-2 mb-4">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-xs text-green-600 font-semibold">Active 24/7</span>
+    <section className="relative pb-12 px-6">
+      <div className="container mx-auto max-w-5xl">
+        {/* Agent selector pills */}
+        <ScrollReveal>
+          <div className="flex flex-wrap justify-center gap-2 mb-8">
+            {agents.map((a, i) => (
+              <button
+                key={a.name}
+                onClick={() => setActiveIdx(i)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 border ${
+                  i === activeIdx
+                    ? "bg-primary text-primary-foreground border-primary shadow-md"
+                    : "bg-card/60 text-foreground border-border hover:border-primary/40"
+                }`}
+              >
+                <div className="w-6 h-6 rounded-full overflow-hidden shrink-0">
+                  {a.avatar ? (
+                    <img src={a.avatar} alt={a.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <div
+                      className="w-full h-full flex items-center justify-center text-[10px] font-bold text-white"
+                      style={{ background: `linear-gradient(135deg, ${a.gradientFrom}, ${a.gradientTo})` }}
+                    >
+                      {a.name[0]}
+                    </div>
+                  )}
+                </div>
+                <span className="hidden sm:inline">{a.name}</span>
+                <span className="sm:hidden">{a.name}</span>
+              </button>
+            ))}
           </div>
-          <h3 className="font-heading text-3xl font-extrabold text-foreground mb-1">{agent.name}</h3>
-          <p className="text-muted-foreground mb-4">{agent.title}</p>
-          <p className="text-foreground leading-relaxed mb-6">{agent.bio}</p>
+        </ScrollReveal>
 
-          <div className="mb-6">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">What I Do</p>
-            <div className="flex flex-wrap gap-2">
-              {agent.capabilities.map((cap, j) => {
-                const CapIcon = agent.capabilityIcons[j];
-                return (
-                  <span key={cap} className="inline-flex items-center gap-1.5 text-xs font-medium bg-card border border-border rounded-full px-3 py-1.5 text-foreground">
-                    <CapIcon size={12} className="text-primary" /> {cap}
-                  </span>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="mb-6">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Automations I Run</p>
-            <div className="space-y-2">
-              {agent.automations.map((auto) => {
-                const AutoIcon = auto.icon;
-                return (
-                  <div key={auto.text} className="flex items-start gap-2 text-sm text-foreground">
-                    <AutoIcon size={14} className="text-primary mt-0.5 shrink-0" />
-                    <span>{auto.text}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          <div
-            className="inline-block text-xs font-bold px-4 py-2 rounded-full"
+        {/* Active agent detail */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={agent.name}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.3 }}
+            className="rounded-2xl border border-border bg-card/60 backdrop-blur-sm overflow-hidden"
             style={{
-              background: `linear-gradient(135deg, ${agent.gradientFrom}15, ${agent.gradientTo}15)`,
-              color: agent.gradientFrom,
+              background: `linear-gradient(135deg, ${agent.gradientFrom}08, transparent 50%, ${agent.gradientTo}05)`,
             }}
           >
-            {agent.stat}
-          </div>
-        </motion.div>
-      </div>
-    </div>
-  );
-};
-
-/* ─── Mobile Agent Card ─── */
-const MobileAgentCard = ({ agent }: { agent: AgentData }) => {
-  const [expanded, setExpanded] = useState(false);
-
-  return (
-    <motion.div
-      className="rounded-2xl border border-border bg-card overflow-hidden"
-      layout
-    >
-      <button
-        className="w-full p-5 flex items-center gap-4 text-left"
-        onClick={() => setExpanded(!expanded)}
-      >
-        <AgentAvatar agent={agent} size="sm" />
-        <div className="flex-1 min-w-0">
-          <h3 className="font-heading font-bold text-foreground">{agent.name}</h3>
-          <p className="text-sm text-muted-foreground">{agent.title}</p>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-          <motion.span
-            animate={{ rotate: expanded ? 180 : 0 }}
-            className="text-muted-foreground"
-          >
-            ▾
-          </motion.span>
-        </div>
-      </button>
-
-      <motion.div
-        initial={false}
-        animate={{ height: expanded ? "auto" : 0, opacity: expanded ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
-        className="overflow-hidden"
-      >
-        <div className="px-5 pb-5 space-y-4">
-          <p className="text-sm text-foreground leading-relaxed">{agent.bio}</p>
-
-          <div>
-            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">What I Do</p>
-            <div className="flex flex-wrap gap-1.5">
-              {agent.capabilities.map((cap) => (
-                <span key={cap} className="text-[11px] font-medium bg-background border border-border rounded-full px-2.5 py-1 text-foreground">
-                  {cap}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Automations I Run</p>
-            <div className="space-y-1.5">
-              {agent.automations.map((auto) => {
-                const AutoIcon = auto.icon;
-                return (
-                  <div key={auto.text} className="flex items-start gap-2 text-xs text-foreground">
-                    <AutoIcon size={12} className="text-primary mt-0.5 shrink-0" />
-                    <span>{auto.text}</span>
+            <div className="grid md:grid-cols-[auto_1fr] gap-6 p-6 md:p-8">
+              {/* Left: Avatar + identity */}
+              <div className="flex md:flex-col items-center md:items-center gap-4 md:gap-3 md:min-w-[120px]">
+                <AgentAvatar agent={agent} size="md" />
+                <div className="md:text-center">
+                  <div className="flex items-center gap-2 md:justify-center mb-0.5">
+                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                    <span className="text-[11px] text-green-600 font-semibold">Active 24/7</span>
                   </div>
-                );
-              })}
+                  <h3 className="font-heading text-xl font-extrabold text-foreground">{agent.name}</h3>
+                  <p className="text-sm text-muted-foreground">{agent.title}</p>
+                </div>
+                <div
+                  className="hidden md:inline-block text-[11px] font-bold px-3 py-1.5 rounded-full mt-2"
+                  style={{
+                    background: `linear-gradient(135deg, ${agent.gradientFrom}15, ${agent.gradientTo}15)`,
+                    color: agent.gradientFrom,
+                  }}
+                >
+                  {agent.stat}
+                </div>
+              </div>
+
+              {/* Right: Content */}
+              <div className="space-y-4">
+                <p className="text-foreground leading-relaxed text-sm">{agent.bio}</p>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {/* Capabilities */}
+                  <div>
+                    <p className="text-[11px] uppercase tracking-widest text-muted-foreground mb-2 font-semibold">What I Do</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {agent.capabilities.map((cap, j) => {
+                        const CapIcon = agent.capabilityIcons[j];
+                        return (
+                          <span key={cap} className="inline-flex items-center gap-1 text-[11px] font-medium bg-background/80 border border-border rounded-full px-2.5 py-1 text-foreground">
+                            <CapIcon size={10} className="text-primary" /> {cap}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Automations */}
+                  <div>
+                    <p className="text-[11px] uppercase tracking-widest text-muted-foreground mb-2 font-semibold">Automations I Run</p>
+                    <div className="space-y-1.5">
+                      {agent.automations.map((auto) => {
+                        const AutoIcon = auto.icon;
+                        return (
+                          <div key={auto.text} className="flex items-start gap-1.5 text-[12px] text-foreground">
+                            <AutoIcon size={11} className="text-primary mt-0.5 shrink-0" />
+                            <span>{auto.text}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Mobile stat badge */}
+                <div
+                  className="md:hidden inline-block text-[11px] font-bold px-3 py-1.5 rounded-full"
+                  style={{
+                    background: `linear-gradient(135deg, ${agent.gradientFrom}15, ${agent.gradientTo}15)`,
+                    color: agent.gradientFrom,
+                  }}
+                >
+                  {agent.stat}
+                </div>
+              </div>
             </div>
-          </div>
+          </motion.div>
+        </AnimatePresence>
 
-          <div
-            className="inline-block text-[11px] font-bold px-3 py-1.5 rounded-full"
-            style={{
-              background: `linear-gradient(135deg, ${agent.gradientFrom}15, ${agent.gradientTo}15)`,
-              color: agent.gradientFrom,
-            }}
-          >
-            {agent.stat}
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-};
-
-/* ─── Main Export ─── */
-const AgentShowcase = () => (
-  <section className="relative">
-
-    <div className="hidden md:block">
-      {agents.map((agent, i) => (
-        <AgentSection key={agent.name} agent={agent} index={i} />
-      ))}
-    </div>
-
-    <div className="md:hidden px-6 space-y-3">
-      {agents.map((agent) => (
-        <MobileAgentCard key={agent.name} agent={agent} />
-      ))}
-    </div>
-
-    <div className="container mx-auto px-6 max-w-3xl text-center pt-12">
-      <ScrollReveal>
-        <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-foreground mb-8">
-          That's your team. All 7 of them. Working right now.
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+        {/* Summary stats */}
+        <div className="grid grid-cols-3 gap-4 mt-8">
           {[
             { value: "5,000+", label: "actions per month" },
             { value: "24/7/365", label: "availability" },
             { value: "7 specialists", label: "1 goal" },
           ].map((s) => (
-            <div key={s.value} className="text-center bg-card border border-border rounded-2xl p-6">
-              <p className="font-heading text-3xl font-extrabold text-primary mb-1">{s.value}</p>
-              <p className="text-sm text-muted-foreground">{s.label}</p>
-            </div>
+            <ScrollReveal key={s.value}>
+              <div className="text-center bg-card/60 border border-border rounded-xl p-4">
+                <p className="font-heading text-2xl md:text-3xl font-extrabold text-primary mb-0.5">{s.value}</p>
+                <p className="text-xs text-muted-foreground">{s.label}</p>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
-        <p className="text-muted-foreground mb-8">
-          This is what $49/mo gets you. Not a chatbot. Not a template. A real team.
-        </p>
-      </ScrollReveal>
-    </div>
-  </section>
-);
+        <ScrollReveal>
+          <p className="text-muted-foreground text-center text-sm mt-4">
+            This is what $49/mo gets you. Not a chatbot. Not a template. A real team.
+          </p>
+        </ScrollReveal>
+      </div>
+    </section>
+  );
+};
 
 export default AgentShowcase;
