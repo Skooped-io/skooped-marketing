@@ -7,123 +7,112 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 import usePageSeo from "@/hooks/use-page-seo";
-import tier1Img from "@/assets/skooped-tier-1.png";
-import tier2Img from "@/assets/skooped-tier-2.png";
-import tier3Img from "@/assets/skooped-tier-3.png";
 
-/* ───── Pricing card ───── */
+/* ───── Pricing card (compact) ───── */
 interface PlanCardProps {
   name: string;
   tagline: string;
   price: string;
-  tierImage: string;
   features: string[];
-  whoFor: string;
   popular?: boolean;
   delay: number;
+  accentColor?: string;
 }
 
-const PlanCard = ({ name, tagline, price, tierImage, features, whoFor, popular, delay }: PlanCardProps) => (
-  <ScrollReveal delay={delay}>
-    <motion.div
-      className={`relative rounded-2xl p-8 flex flex-col h-full transition-shadow duration-300 ${
-        popular
-          ? "bg-card border-2 border-primary shadow-xl scale-[1.03] z-10"
-          : "bg-card border border-border shadow-md"
-      }`}
-      whileHover={{
-        perspective: 1000,
-        rotateY: 2,
-        boxShadow: "0 20px 40px -12px hsl(340 60% 57% / 0.15)",
-      }}
-      transition={{ duration: 0.3 }}
-    >
-      {popular && (
-        <span className="absolute -top-3 right-6 bg-accent text-accent-foreground text-xs font-bold px-4 py-1 rounded-full shadow">
-          Most Popular
-        </span>
-      )}
+const PlanCard = ({ name, tagline, price, features, popular, delay }: PlanCardProps) => {
+  const [expanded, setExpanded] = useState(false);
+  const visibleFeatures = expanded ? features : features.slice(0, 5);
 
-      <div className="flex justify-center mb-4">
-        <motion.img
-          src={tierImage}
-          alt={`${name} plan`}
-          className="w-24 h-auto drop-shadow-lg"
-          whileHover={{ scale: 1.08, rotate: [0, -3, 3, 0] }}
-          transition={{ duration: 0.4 }}
-        />
-      </div>
+  return (
+    <ScrollReveal delay={delay}>
+      <motion.div
+        className={`relative rounded-2xl p-6 flex flex-col h-full transition-shadow duration-300 ${
+          popular
+            ? "bg-card border-2 border-primary shadow-xl scale-[1.03] z-10"
+            : "bg-card/80 backdrop-blur-sm border border-border shadow-md"
+        }`}
+        whileHover={{
+          boxShadow: "0 20px 40px -12px hsl(340 60% 57% / 0.15)",
+        }}
+        transition={{ duration: 0.3 }}
+      >
+        {popular && (
+          <span className="absolute -top-3 right-6 bg-accent text-accent-foreground text-xs font-bold px-4 py-1 rounded-full shadow">
+            Most Popular
+          </span>
+        )}
 
-      <h3 className="font-heading text-2xl font-extrabold text-foreground text-center">{name}</h3>
-      <p className="text-muted-foreground text-sm text-center mb-4">{tagline}</p>
-      <p className="text-center mb-6">
-        <span className="font-heading text-4xl font-extrabold text-primary">{price}</span>
-        <span className="text-muted-foreground text-sm">/mo</span>
-      </p>
+        <h3 className="font-heading text-xl font-extrabold text-foreground text-center">{name}</h3>
+        <p className="text-muted-foreground text-xs text-center mb-3">{tagline}</p>
+        <p className="text-center mb-4">
+          <span className="font-heading text-4xl font-extrabold text-primary">{price}</span>
+          <span className="text-muted-foreground text-sm">/mo</span>
+        </p>
 
-      <ul className="space-y-3 mb-6 flex-1">
-        {features.map((f, i) => (
-          <li key={i} className="flex items-start gap-2 text-sm text-foreground">
-            <Check size={16} className="text-primary shrink-0 mt-0.5" />
-            <span>{f}</span>
-          </li>
-        ))}
-      </ul>
+        <ul className="space-y-2 mb-3 flex-1">
+          {visibleFeatures.map((f, i) => (
+            <li key={i} className="flex items-start gap-2 text-sm text-foreground">
+              <Check size={14} className="text-primary shrink-0 mt-0.5" />
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
 
-      <p className="text-xs text-muted-foreground italic mb-6 border-t border-border pt-4">{whoFor}</p>
+        {features.length > 5 && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="text-xs text-primary font-semibold mb-4 hover:underline flex items-center gap-1 mx-auto"
+          >
+            {expanded ? "Show less" : `See all ${features.length} features`}
+            <motion.span animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
+              <ChevronDown size={12} />
+            </motion.span>
+          </button>
+        )}
 
-      <Link to="/signup">
-        <Button variant="hero" size="lg" className="w-full">Try {name} Free</Button>
-      </Link>
-      <p className="text-xs text-muted-foreground text-center mt-2">14 days free, then {price}/mo</p>
-    </motion.div>
-  </ScrollReveal>
-);
+        <Link to="/signup">
+          <Button variant="hero" size="lg" className="w-full">Try Free — 14 Days</Button>
+        </Link>
+        <p className="text-[11px] text-muted-foreground text-center mt-1.5">No credit card required</p>
+      </motion.div>
+    </ScrollReveal>
+  );
+};
 
-/* ───── FAQ accordion ───── */
-const faqData = [
-  { q: "Is the free trial really free?", a: "Yes. No credit card, no hidden fees. Pick a template, sign up, and your website is live in 60 seconds. You get 14 full days with your AI team." },
-  { q: "What happens after the trial?", a: "Add a payment method and your plan starts. Don't add one? Your site goes to sleep — not deleted. Come back and reactivate anytime." },
-  { q: "Can I switch plans during the trial?", a: "Absolutely. Start with any plan and upgrade or downgrade at any time. You won't be charged until the trial ends." },
-  { q: "Do I need to know anything about websites or marketing?", a: "Nope. That's literally why we exist. We handle everything — you just keep running your business." },
-  { q: "How is this different from Wix or Squarespace?", a: "Those platforms give you a template and say 'good luck.' We build your site from scratch, optimize it for Google, manage your social media, and run your ads. You get an entire marketing team — not a DIY tool." },
-  { q: "Do I own my website?", a: "Yes. Your website, your content, your data. Always." },
-  { q: "Is there a contract or setup fee?", a: "No long-term contracts. No hidden fees. We earn your business every month." },
-  { q: "How long does SEO take to work?", a: "You'll start seeing movement within 30-60 days. One client went from 200 to 8,000+ Google impressions in three months." },
-  { q: "Will my phone actually ring more?", a: "That's the goal and the standard. If our work isn't driving real leads, we adjust." },
-  { q: "Wait — your team is AI?", a: "Yes, and that's what makes us different. Our AI team works 24/7, never takes a day off, and costs a fraction of a traditional agency. But don't confuse AI with generic — every strategy is built specifically for your business." },
-  { q: "Who do I talk to if I have a question?", a: "Cooper is your main point of contact. You can also call or text us at 615-856-3871." },
-  { q: "What if I already have a website?", a: "We can work with it or rebuild from scratch — whatever makes sense. We'll do a free review and give you an honest recommendation." },
-  { q: "Is a custom website more expensive?", a: "Custom builds are a one-time $299 fee. After that, you pick a monthly plan just like everyone else — starting at $49/mo. Same AI team, same platform." },
-  { q: "What if I don't know what I want?", a: "Pick a template — you can always customize later in your dashboard editor. Or go custom and we'll ask a few simple questions about your style and preferences." },
+/* ───── FAQ data (grouped, trimmed to 8) ───── */
+const faqGroups = [
+  {
+    title: "Getting Started",
+    items: [
+      { q: "Is the free trial really free?", a: "Yes. No credit card, no hidden fees. Pick a template, sign up, and your website is live in 60 seconds. You get 14 full days with your AI team." },
+      { q: "How is this different from Wix or Squarespace?", a: "Those platforms give you a template and say 'good luck.' We build your site, optimize it for Google, manage your social media, and run your ads. You get an entire marketing team — not a DIY tool." },
+      { q: "How long does SEO take to work?", a: "You'll start seeing movement within 30-60 days. One client went from 200 to 8,000+ Google impressions in three months." },
+    ],
+  },
+  {
+    title: "What's Included",
+    items: [
+      { q: "Do I own my website?", a: "Yes. Your website, your content, your data. Always." },
+      { q: "Will my phone actually ring more?", a: "That's the goal and the standard. If our work isn't driving real leads, we adjust." },
+      { q: "Wait — your team is AI?", a: "Yes, and that's what makes us different. Our AI team works 24/7, never takes a day off, and costs a fraction of a traditional agency. But every strategy is built specifically for your business." },
+    ],
+  },
+  {
+    title: "Billing & Contracts",
+    items: [
+      { q: "Is there a contract or setup fee?", a: "No long-term contracts. No hidden fees. We earn your business every month." },
+      { q: "What if I already have a website?", a: "We can work with it or rebuild from scratch — whatever makes sense. We'll do a free review and give you an honest recommendation." },
+    ],
+  },
 ];
-
-const FaqItem = ({ q, a, open, toggle }: { q: string; a: string; open: boolean; toggle: () => void }) => (
-  <div className="border-b border-border">
-    <button className="w-full flex items-center justify-between py-5 text-left group" onClick={toggle}>
-      <span className="font-heading font-bold text-foreground group-hover:text-primary transition-colors pr-4">{q}</span>
-      <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25 }}>
-        <ChevronDown size={20} className="text-muted-foreground shrink-0" />
-      </motion.span>
-    </button>
-    <motion.div
-      initial={false}
-      animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
-      transition={{ duration: 0.3 }}
-      className="overflow-hidden"
-    >
-      <p className="pb-5 text-sm text-muted-foreground leading-relaxed bg-card rounded-lg px-4 py-3 mb-4">{a}</p>
-    </motion.div>
-  </div>
-);
 
 /* ───── Comparison table ───── */
 const compRows = [
-  { label: "Website delivery", trad: "4-8 weeks", skoop: "60 seconds (templates) / 24-48 hrs (custom)" },
-  { label: "Website build", trad: "$3,000 – $8,000", skoop: "$0 (templates) / $299 (custom)" },
-  { label: "Monthly retainer", trad: "$100 – $800/mo", skoop: "$49 – $149/mo" },
-  { label: "Available", trad: "Business hours", skoop: "24/7" },
-  { label: "Free trial", trad: false, skoop: "✅ 14 days free" },
+  { label: "Setup fee", trad: "$3,000 – $8,000", skoop: "$0 (templates) / $299 (custom)" },
+  { label: "Website delivery", trad: "4-8 weeks", skoop: "60 seconds / 24-48 hrs" },
+  { label: "Monthly cost", trad: "$100 – $800/mo", skoop: "$49 – $149/mo" },
+  { label: "Availability", trad: "Business hours", skoop: "24/7" },
+  { label: "Free trial", trad: false, skoop: "14 days free" },
   { label: "Your dashboard", trad: false, skoop: true },
   { label: "AI-powered", trad: false, skoop: true },
   { label: "Contracts", trad: "6–12 months", skoop: "None" },
@@ -133,7 +122,7 @@ const compRows = [
 const trialSteps = [
   { icon: CreditCard, title: "Pick a template & plan", desc: "Browse our industry templates, choose one, and select the plan that fits your business. You won't be charged anything today." },
   { icon: Rocket, title: "Your AI team builds your site", desc: "Your website goes live in 60 seconds. Your 7-person AI team starts working — SEO, social media, analytics, everything." },
-  { icon: Heart, title: "Decide if it's for you", desc: "After 14 days, add a payment method to keep your team working. No card on file? Your site goes to sleep (not deleted) — come back and reactivate anytime." },
+  { icon: Heart, title: "Decide if it's for you", desc: "After 14 days, add a payment method to keep your team working. No card on file? Your site goes to sleep (not deleted) — come back anytime." },
 ];
 
 /* ───── Page ───── */
@@ -146,44 +135,43 @@ const Plans = () => {
       <Navbar />
 
       {/* ── Header ── */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-28 pb-12 overflow-hidden">
         <div className="absolute top-20 left-[-3rem] w-72 h-72 rounded-full bg-primary/12 blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 right-[-2rem] w-56 h-56 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
         <div className="relative container mx-auto px-6 text-center max-w-3xl">
           <ScrollReveal>
-            <h1 className="text-4xl md:text-[52px] md:leading-tight font-extrabold text-foreground mb-4">
+            <h1 className="text-4xl md:text-[48px] md:leading-tight font-extrabold text-foreground mb-3">
               Plans that grow with your business.
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={0.15}>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Every plan comes with a custom-built website, real SEO, and a team that works 24/7. No contracts. No hidden fees. Just results.
+            <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Every plan comes with a custom website, real SEO, and a team that works 24/7. No contracts. No hidden fees.
             </p>
           </ScrollReveal>
         </div>
       </section>
 
       {/* ── Trial banner ── */}
-      <section className="px-6 -mt-8 mb-8">
+      <section className="px-6 mb-6">
         <div className="container mx-auto max-w-5xl">
-          <div className="bg-primary rounded-2xl py-4 px-6 text-center">
-            <p className="font-heading font-extrabold text-primary-foreground text-lg">
-              🎉 Try any plan free for 14 days. No credit card required.
+          <div className="bg-primary rounded-xl py-3 px-6 text-center">
+            <p className="font-heading font-extrabold text-primary-foreground text-base">
+              🎉 Try any plan free for 14 days — no credit card required.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── Pricing cards ── */}
-      <section className="pb-20 px-6">
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl items-stretch">
+      {/* ── Pricing cards (compact) ── */}
+      <section className="pb-16 px-6">
+        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl items-stretch">
           <PlanCard
             name="Single"
             tagline="Get online and look legit."
             price="$49"
-            tierImage={tier1Img}
             features={[
-              "✅ Instant website — live in 60 seconds",
+              "Instant website — live in 60 seconds",
               "Custom-built website (not a template)",
               "Mobile-responsive design",
               "Basic SEO setup",
@@ -191,16 +179,13 @@ const Plans = () => {
               "Monthly performance check-in",
               "Hosting & maintenance included",
             ]}
-            whoFor="You're just getting started or running your business off a Facebook page. This gets you a real website for less than your phone bill."
             delay={0}
           />
           <PlanCard
             name="Double"
             tagline="Start showing up and standing out."
             price="$99"
-            tierImage={tier2Img}
             features={[
-              "✅ Instant website — live in 60 seconds",
               "Everything in Single, plus:",
               "Ongoing SEO monitoring & optimization",
               "Google Search Console management",
@@ -209,7 +194,6 @@ const Plans = () => {
               "Google Analytics setup",
               "Priority support",
             ]}
-            whoFor="You have a website but nobody can find you. This puts you on the map — literally."
             popular
             delay={0.1}
           />
@@ -217,41 +201,38 @@ const Plans = () => {
             name="Triple"
             tagline="The full operation. We run it all."
             price="$149"
-            tierImage={tier3Img}
             features={[
-              "✅ Instant website — live in 60 seconds",
               "Everything in Double, plus:",
               "Google Local Service Ads management",
-              "Advanced SEO pages (service + city targeting)",
+              "Advanced SEO pages (service + city)",
               "Advanced analytics & conversion tracking",
               "Call/text back system integration",
               "Scheduling integration",
               "Weekly performance reports",
               "Dedicated account management",
             ]}
-            whoFor="You're ready to dominate your market. Ads, SEO, analytics, scheduling — the works."
             delay={0.2}
           />
         </div>
       </section>
 
       {/* ── Build pricing note ── */}
-      <section className="pb-16 px-6 text-center">
+      <section className="pb-12 px-6 text-center">
         <ScrollReveal>
           <p className="font-heading font-extrabold text-xl text-foreground mb-1">
             Templates: $0 to go live. Custom builds: $299 one-time.
           </p>
-          <p className="text-muted-foreground">Pick a template, add your details, live instantly. Or get a one-of-a-kind design delivered in 24-48 hours. Pair with any plan.</p>
+          <p className="text-muted-foreground">Pick a template, add your details, live instantly. Or get a one-of-a-kind design in 24-48 hours.</p>
         </ScrollReveal>
       </section>
 
       {/* ── How the free trial works ── */}
-      <section className="pb-20 px-6">
+      <section className="pb-16 px-6">
         <div className="container mx-auto max-w-4xl">
           <ScrollReveal>
-            <h2 className="font-heading text-3xl font-extrabold text-foreground text-center mb-10">How the free trial works</h2>
+            <h2 className="font-heading text-3xl font-extrabold text-foreground text-center mb-8">How the free trial works</h2>
           </ScrollReveal>
-          <div className="grid md:grid-cols-3 gap-8 mb-10">
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
             {trialSteps.map((s, i) => (
               <ScrollReveal key={i} delay={i * 0.1}>
                 <div className="text-center">
@@ -265,39 +246,44 @@ const Plans = () => {
             ))}
           </div>
           <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-            <span>🔒 No credit card required to start</span>
-            <span>❌ Cancel anytime during or after the trial</span>
-            <span>✅ Your website and data are always yours</span>
+            <span>🔒 No credit card required</span>
+            <span>❌ Cancel anytime</span>
+            <span>✅ Your data is always yours</span>
           </div>
         </div>
       </section>
 
-      {/* ── Comparison table ── */}
-      <section className="pb-20 px-6">
+      {/* ── Comparison table (enhanced) ── */}
+      <section className="pb-16 px-6">
         <div className="container mx-auto max-w-3xl">
           <ScrollReveal>
+            <h2 className="font-heading text-3xl font-extrabold text-foreground text-center mb-8">Traditional Agency vs Skooped</h2>
             <div className="overflow-x-auto rounded-xl border border-border shadow-sm">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-card">
                     <th className="text-left py-4 px-5 font-heading font-bold text-foreground" />
-                    <th className="text-center py-4 px-5 font-heading font-bold text-foreground">Traditional Agency</th>
-                    <th className="text-center py-4 px-5 font-heading font-bold text-primary border-l-2 border-primary/30">Skooped</th>
+                    <th className="text-center py-4 px-5 font-heading font-bold text-muted-foreground">Traditional Agency</th>
+                    <th className="text-center py-4 px-5 font-heading text-lg font-extrabold text-primary bg-primary/5 border-l-2 border-primary/30">
+                      ✨ Skooped
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {compRows.map((row, i) => (
-                    <tr key={i} className={i % 2 === 0 ? "bg-background" : "bg-card"}>
+                    <tr key={i} className={i % 2 === 0 ? "bg-background" : "bg-card/50"}>
                       <td className="py-3.5 px-5 font-medium text-foreground">{row.label}</td>
                       <td className="py-3.5 px-5 text-center text-muted-foreground">
                         {typeof row.trad === "boolean" ? (
-                          row.trad ? <Check size={18} className="mx-auto text-green-600" /> : <X size={18} className="mx-auto text-muted-foreground/40" />
+                          row.trad ? <Check size={18} className="mx-auto text-green-600" /> : <X size={18} className="mx-auto text-destructive/50" />
                         ) : row.trad}
                       </td>
-                      <td className="py-3.5 px-5 text-center font-semibold text-foreground border-l-2 border-primary/30">
+                      <td className="py-3.5 px-5 text-center font-semibold text-foreground bg-primary/5 border-l-2 border-primary/30">
                         {typeof row.skoop === "boolean" ? (
-                          row.skoop ? <Check size={18} className="mx-auto text-green-600" /> : <X size={18} className="mx-auto text-muted-foreground/40" />
-                        ) : row.skoop}
+                          row.skoop ? <Check size={18} className="mx-auto text-primary" /> : <X size={18} className="mx-auto text-destructive/50" />
+                        ) : (
+                          <span className="text-primary font-bold">{row.skoop}</span>
+                        )}
                       </td>
                     </tr>
                   ))}
@@ -308,22 +294,50 @@ const Plans = () => {
         </div>
       </section>
 
-      {/* ── FAQ ── */}
+      {/* ── FAQ (grouped, 2-col, card style) ── */}
       <section className="pb-20 px-6">
-        <div className="container mx-auto max-w-2xl">
+        <div className="container mx-auto max-w-4xl">
           <ScrollReveal>
             <h2 className="font-heading text-3xl font-extrabold text-foreground text-center mb-10">
               Frequently Asked Questions
             </h2>
           </ScrollReveal>
-          {faqData.map((item, i) => (
-            <FaqItem
-              key={i}
-              q={item.q}
-              a={item.a}
-              open={openFaq === i}
-              toggle={() => setOpenFaq(openFaq === i ? null : i)}
-            />
+
+          {faqGroups.map((group, gi) => (
+            <div key={gi} className="mb-8">
+              <ScrollReveal delay={gi * 0.05}>
+                <h3 className="font-heading font-bold text-sm uppercase tracking-widest text-primary mb-4">{group.title}</h3>
+              </ScrollReveal>
+              <div className="grid md:grid-cols-2 gap-3">
+                {group.items.map((item, fi) => {
+                  const idx = faqGroups.slice(0, gi).reduce((acc, g) => acc + g.items.length, 0) + fi;
+                  const isOpen = openFaq === idx;
+                  return (
+                    <ScrollReveal key={fi} delay={fi * 0.05}>
+                      <div className="rounded-xl border border-border bg-card/60 backdrop-blur-sm overflow-hidden">
+                        <button
+                          className="w-full flex items-center justify-between p-4 text-left group"
+                          onClick={() => setOpenFaq(isOpen ? null : idx)}
+                        >
+                          <span className="font-heading font-bold text-sm text-foreground group-hover:text-primary transition-colors pr-3">{item.q}</span>
+                          <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                            <ChevronDown size={16} className="text-muted-foreground shrink-0" />
+                          </motion.span>
+                        </button>
+                        <motion.div
+                          initial={false}
+                          animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+                          transition={{ duration: 0.25 }}
+                          className="overflow-hidden"
+                        >
+                          <p className="px-4 pb-4 text-sm text-muted-foreground leading-relaxed">{item.a}</p>
+                        </motion.div>
+                      </div>
+                    </ScrollReveal>
+                  );
+                })}
+              </div>
+            </div>
           ))}
         </div>
       </section>
