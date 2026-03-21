@@ -65,7 +65,7 @@ const PlanCard = ({ name, tagline, price, features, popular, delay, image, expan
           ))}
         </ul>
 
-        {features.length > 5 && (
+        {features.length > 5 && !useIsMobile() && (
           <button
             onClick={onToggleExpand}
             className="text-xs text-primary font-semibold mb-4 hover:underline flex items-center gap-1 mx-auto"
