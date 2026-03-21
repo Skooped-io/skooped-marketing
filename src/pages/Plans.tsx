@@ -24,9 +24,10 @@ interface PlanCardProps {
   image: string;
   expanded: boolean;
   onToggleExpand: () => void;
+  isMobile: boolean;
 }
 
-const PlanCard = ({ name, tagline, price, features, popular, delay, image, expanded, onToggleExpand }: PlanCardProps) => {
+const PlanCard = ({ name, tagline, price, features, popular, delay, image, expanded, onToggleExpand, isMobile }: PlanCardProps) => {
   const visibleFeatures = expanded ? features : features.slice(0, 5);
 
   return (
