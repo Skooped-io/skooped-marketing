@@ -214,9 +214,8 @@ const Plans = () => {
             image={tier2Img}
             expanded={allExpanded}
             onToggleExpand={toggleExpand}
+            isMobile={isMobile}
           />
-          <PlanCard
-            name="Triple"
             tagline="The full operation. We run it all."
             price="$149"
             features={[
