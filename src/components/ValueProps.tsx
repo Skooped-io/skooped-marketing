@@ -27,8 +27,10 @@ const cards = [
 ];
 
 const ValueProps = () => (
-  <section className="py-24 px-6">
-    <div className="container mx-auto">
+  <section className="py-24 px-6 relative overflow-hidden">
+    <div className="absolute top-10 -left-32 w-72 h-72 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
+    <div className="absolute bottom-0 right-0 w-56 h-56 rounded-full bg-primary/8 blur-2xl pointer-events-none" />
+    <div className="container mx-auto relative">
       <ScrollReveal>
         <h2 className="text-3xl md:text-4xl font-bold text-chocolate text-center mb-16">
           Everything your business needs to{" "}

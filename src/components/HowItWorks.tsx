@@ -32,8 +32,10 @@ const steps = [
 ];
 
 const HowItWorks = () => (
-  <section className="py-24 px-6">
-    <div className="container mx-auto max-w-5xl">
+  <section className="py-24 px-6 relative overflow-hidden">
+    <div className="absolute top-20 right-[-5rem] w-64 h-64 rounded-full bg-primary/12 blur-3xl pointer-events-none" />
+    <div className="absolute bottom-10 left-[-4rem] w-48 h-48 rounded-full bg-accent/10 blur-2xl pointer-events-none" />
+    <div className="container mx-auto max-w-5xl relative">
       <ScrollReveal>
         <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-2">
           From signup to live website in <span className="text-primary">60 seconds.</span>
