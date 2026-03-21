@@ -135,6 +135,7 @@ const trialSteps = [
 
 /* ───── Page ───── */
 const Plans = () => {
+  usePageSeo({ title: "Marketing & Website Pricing | Plans from $49/mo | Skooped Franklin TN", description: "Transparent pricing for custom websites, SEO, Google Ads & social media. Try any plan free for 14 days. No credit card required." });
   const isMobile = useIsMobile();
   const [featuresExpanded, setFeaturesExpanded] = useState(false);
   const allExpanded = isMobile || featuresExpanded;
