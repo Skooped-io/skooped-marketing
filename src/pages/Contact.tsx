@@ -59,7 +59,8 @@ const Contact = () => {
 
       {/* Header */}
       <section className="relative pt-32 pb-16 overflow-hidden">
-        <div className="absolute inset-0 bg-background" style={{ backgroundImage: "radial-gradient(ellipse at 40% 30%, hsl(340 60% 57% / 0.06), transparent 50%)" }} />
+        <div className="absolute top-16 right-[-2rem] w-64 h-64 rounded-full bg-primary/12 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-[-3rem] w-48 h-48 rounded-full bg-primary/8 blur-2xl pointer-events-none" />
         <div className="relative container mx-auto px-6 text-center max-w-3xl">
           <ScrollReveal>
             <h1 className="text-4xl md:text-[52px] md:leading-tight font-extrabold text-foreground mb-4">
