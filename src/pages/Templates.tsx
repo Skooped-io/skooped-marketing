@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import {
   Hammer, TreePine, Grid3X3, HardHat, Heart, Compass,
   Wrench, Home, Dumbbell, Scissors, Droplets, Zap, ArrowRight, Sparkles, ExternalLink,
+  Crown, Check,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -21,8 +22,8 @@ interface Industry {
 const industries: Industry[] = [
   { name: "Roofing", icon: Hammer, tagline: "Get on top of local search", href: "/templates/roofing", available: true, previewSlug: "roofing" },
   { name: "Landscaping", icon: TreePine, tagline: "Grow your online presence", href: "/templates/landscaping", available: true, previewSlug: "landscaping" },
-  { name: "Therapy & Counseling", icon: Heart, tagline: "Connect with clients who need you", href: "/templates/therapy-counseling", available: true, previewSlug: "therapy-counseling" },
-  { name: "Salon & Barbershop", icon: Scissors, tagline: "Cut through the competition", href: "/templates/salon-barbershop", available: true, previewSlug: "salon-barbershop" },
+  { name: "Therapy & Counseling", icon: Heart, tagline: "Connect with clients who need you", href: "/templates/therapy-counseling", available: true, previewSlug: "therapy" },
+  { name: "Salon & Barbershop", icon: Scissors, tagline: "Cut through the competition", href: "/templates/salon-barbershop", available: true, previewSlug: "salon" },
   { name: "Plumbing", icon: Droplets, tagline: "Stop leaking leads", href: "/templates/plumbing", available: true, previewSlug: "plumbing" },
   { name: "Fencing", icon: Grid3X3, tagline: "Build your digital boundary", href: "/contact", available: false, previewSlug: "fencing" },
   { name: "Construction", icon: HardHat, tagline: "Construct your online empire", href: "/contact", available: false },
@@ -126,41 +127,76 @@ const Templates = () => {
         </div>
       </section>
 
-      {/* Custom Website Card */}
+      {/* Custom Website Cards */}
       <section className="pb-12 px-6">
         <div className="container mx-auto max-w-5xl">
           <ScrollReveal>
-            <div className="relative rounded-2xl overflow-hidden p-8 md:p-10 bg-gradient-to-r from-primary to-accent text-primary-foreground">
-              <div className="absolute inset-0 opacity-10" style={{
-                backgroundImage: "radial-gradient(circle at 20% 50%, hsl(0 0% 100% / 0.15), transparent 50%), radial-gradient(circle at 80% 50%, hsl(0 0% 100% / 0.1), transparent 50%)",
-              }} />
-              <div className="relative flex flex-col md:flex-row items-center gap-6 md:gap-10">
-                <div className="w-16 h-16 rounded-2xl bg-primary-foreground/15 flex items-center justify-center shrink-0">
-                  <Sparkles size={32} className="text-primary-foreground" />
-                </div>
-                <div className="flex-1 text-center md:text-left">
-                  <h3 className="font-heading text-2xl md:text-3xl font-extrabold mb-2">
-                    Want something completely custom?
-                  </h3>
-                  <p className="text-primary-foreground/80 leading-relaxed max-w-xl">
-                    Our expert team designs a one-of-a-kind website tailored to your exact vision. Same platform, same AI team.
+            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-6">Custom Builds</h2>
+          </ScrollReveal>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Standard Custom Build */}
+            <ScrollReveal>
+              <div className="relative rounded-2xl overflow-hidden p-8 bg-gradient-to-br from-primary to-accent text-primary-foreground h-full flex flex-col">
+                <div className="absolute inset-0 opacity-10" style={{
+                  backgroundImage: "radial-gradient(circle at 20% 50%, hsl(0 0% 100% / 0.15), transparent 50%)",
+                }} />
+                <div className="relative flex-1 flex flex-col">
+                  <div className="w-12 h-12 rounded-xl bg-primary-foreground/15 flex items-center justify-center mb-4">
+                    <Sparkles size={24} className="text-primary-foreground" />
+                  </div>
+                  <h3 className="font-heading text-xl font-extrabold mb-1">Custom Build with Cooper</h3>
+                  <p className="text-3xl font-extrabold mb-2">$299 <span className="text-sm font-semibold text-primary-foreground/70">one-time</span></p>
+                  <p className="text-primary-foreground/80 text-sm leading-relaxed mb-4">
+                    Cooper and the AI team design and build a completely custom website tailored to your brand and business.
                   </p>
-                  <div className="flex flex-wrap gap-3 mt-3">
-                    <span className="bg-primary-foreground/20 text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">$499 one-time</span>
-                    <span className="bg-primary-foreground/20 text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">Delivered in 24-48 hours</span>
+                  <ul className="space-y-2 mb-6 text-sm text-primary-foreground/80">
+                    <li className="flex items-start gap-2"><Check size={16} className="text-primary-foreground mt-0.5 shrink-0" /> Custom design & development</li>
+                    <li className="flex items-start gap-2"><Check size={16} className="text-primary-foreground mt-0.5 shrink-0" /> Delivered in 24-48 hours</li>
+                    <li className="flex items-start gap-2"><Check size={16} className="text-primary-foreground mt-0.5 shrink-0" /> Includes 14-day free trial</li>
+                  </ul>
+                  <div className="mt-auto">
+                    <Link to="/signup?template=custom">
+                      <Button variant="secondary" size="lg" className="w-full bg-primary-foreground text-foreground hover:bg-primary-foreground/90 font-extrabold">
+                        Get Started
+                      </Button>
+                    </Link>
                   </div>
                 </div>
-                <div className="shrink-0 text-center">
-                  <Link to="/signup?template=custom">
-                    <Button variant="secondary" size="xl" className="bg-primary-foreground text-foreground hover:bg-primary-foreground/90 font-extrabold">
-                      Start Custom Build
+              </div>
+            </ScrollReveal>
+
+            {/* Concierge / Premium Build */}
+            <ScrollReveal delay={0.1}>
+              <div className="relative rounded-2xl overflow-hidden p-8 border-2 border-accent bg-card h-full flex flex-col">
+                <div className="absolute top-4 right-4">
+                  <span className="inline-flex items-center gap-1 text-[10px] font-bold bg-accent/15 text-accent px-2.5 py-1 rounded-full">
+                    <Crown size={12} /> Concierge
+                  </span>
+                </div>
+                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
+                  <Crown size={24} className="text-accent" />
+                </div>
+                <h3 className="font-heading text-xl font-extrabold text-foreground mb-1">Build with Cooper + Jake</h3>
+                <p className="text-3xl font-extrabold text-foreground mb-2">Custom Pricing</p>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                  Want the founder involved? Get hands-on strategy, design, and development — personally built for businesses ready to scale fast.
+                </p>
+                <ul className="space-y-2 mb-6 text-sm text-muted-foreground">
+                  <li className="flex items-start gap-2"><Check size={16} className="text-accent mt-0.5 shrink-0" /> 1-on-1 strategy session with Jake</li>
+                  <li className="flex items-start gap-2"><Check size={16} className="text-accent mt-0.5 shrink-0" /> Custom design + development</li>
+                  <li className="flex items-start gap-2"><Check size={16} className="text-accent mt-0.5 shrink-0" /> Priority support & dedicated attention</li>
+                  <li className="flex items-start gap-2"><Check size={16} className="text-accent mt-0.5 shrink-0" /> Built for businesses ready to invest in growth</li>
+                </ul>
+                <div className="mt-auto">
+                  <Link to="/contact">
+                    <Button variant="outline" size="lg" className="w-full border-accent text-accent hover:bg-accent/10 font-extrabold">
+                      Schedule a Call
                     </Button>
                   </Link>
-                  <p className="text-primary-foreground/60 text-xs mt-2">Includes 14-day free trial of your AI marketing team</p>
                 </div>
               </div>
-            </div>
-          </ScrollReveal>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
