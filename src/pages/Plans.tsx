@@ -120,7 +120,7 @@ const FaqItem = ({ q, a, open, toggle }: { q: string; a: string; open: boolean; 
 /* ───── Comparison table ───── */
 const compRows = [
   { label: "Website delivery", trad: "4-8 weeks", skoop: "60 seconds (templates) / 24-48 hrs (custom)" },
-  { label: "Website build", trad: "$3,000 – $8,000", skoop: "$0 (templates) / $499 (custom)" },
+  { label: "Website build", trad: "$3,000 – $8,000", skoop: "$0 (templates) / $299 (custom)" },
   { label: "Monthly retainer", trad: "$100 – $800/mo", skoop: "$49 – $149/mo" },
   { label: "Available", trad: "Business hours", skoop: "24/7" },
   { label: "Free trial", trad: false, skoop: "✅ 14 days free" },
