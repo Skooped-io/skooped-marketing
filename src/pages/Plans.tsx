@@ -7,6 +7,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 import usePageSeo from "@/hooks/use-page-seo";
+import tier1Img from "@/assets/skooped-tier-1.png";
+import tier2Img from "@/assets/skooped-tier-2.png";
+import tier3Img from "@/assets/skooped-tier-3.png";
 
 /* ───── Pricing card (compact) ───── */
 interface PlanCardProps {
@@ -17,9 +20,10 @@ interface PlanCardProps {
   popular?: boolean;
   delay: number;
   accentColor?: string;
+  image: string;
 }
 
-const PlanCard = ({ name, tagline, price, features, popular, delay }: PlanCardProps) => {
+const PlanCard = ({ name, tagline, price, features, popular, delay, image }: PlanCardProps) => {
   const [expanded, setExpanded] = useState(false);
   const visibleFeatures = expanded ? features : features.slice(0, 5);
 
@@ -42,6 +46,7 @@ const PlanCard = ({ name, tagline, price, features, popular, delay }: PlanCardPr
           </span>
         )}
 
+        <img src={image} alt={`${name} plan`} className="w-24 h-24 object-contain mx-auto mb-2" />
         <h3 className="font-heading text-xl font-extrabold text-foreground text-center">{name}</h3>
         <p className="text-muted-foreground text-xs text-center mb-3">{tagline}</p>
         <p className="text-center mb-4">
@@ -180,6 +185,7 @@ const Plans = () => {
               "Hosting & maintenance included",
             ]}
             delay={0}
+            image={tier1Img}
           />
           <PlanCard
             name="Double"
@@ -196,6 +202,7 @@ const Plans = () => {
             ]}
             popular
             delay={0.1}
+            image={tier2Img}
           />
           <PlanCard
             name="Triple"
@@ -212,6 +219,7 @@ const Plans = () => {
               "Dedicated account management",
             ]}
             delay={0.2}
+            image={tier3Img}
           />
         </div>
       </section>
