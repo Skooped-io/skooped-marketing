@@ -76,7 +76,7 @@ const Templates = () => {
       <section className="pb-12 px-6">
         <div className="container mx-auto max-w-5xl">
           <ScrollReveal>
-            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-6">Available Now</h2>
+            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-6">Browse Templates</h2>
           </ScrollReveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {availableIndustries.map((ind, i) => {
