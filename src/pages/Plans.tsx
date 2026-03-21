@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Check, X, ChevronDown, Phone, CreditCard, Rocket, Heart } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -21,10 +22,12 @@ interface PlanCardProps {
   delay: number;
   accentColor?: string;
   image: string;
+  expanded: boolean;
+  onToggleExpand: () => void;
+  isMobile: boolean;
 }
 
-const PlanCard = ({ name, tagline, price, features, popular, delay, image }: PlanCardProps) => {
-  const [expanded, setExpanded] = useState(false);
+const PlanCard = ({ name, tagline, price, features, popular, delay, image, expanded, onToggleExpand, isMobile }: PlanCardProps) => {
   const visibleFeatures = expanded ? features : features.slice(0, 5);
 
   return (
@@ -63,9 +66,9 @@ const PlanCard = ({ name, tagline, price, features, popular, delay, image }: Pla
           ))}
         </ul>
 
-        {features.length > 5 && (
+        {features.length > 5 && !isMobile && (
           <button
-            onClick={() => setExpanded(!expanded)}
+            onClick={onToggleExpand}
             className="text-xs text-primary font-semibold mb-4 hover:underline flex items-center gap-1 mx-auto"
           >
             {expanded ? "Show less" : `See all ${features.length} features`}
@@ -133,6 +136,10 @@ const trialSteps = [
 /* ───── Page ───── */
 const Plans = () => {
   usePageSeo({ title: "Marketing & Website Pricing | Plans from $49/mo | Skooped Franklin TN", description: "Transparent pricing for custom websites, SEO, Google Ads & social media. Try any plan free for 14 days. No credit card required." });
+  const isMobile = useIsMobile();
+  const [featuresExpanded, setFeaturesExpanded] = useState(false);
+  const allExpanded = isMobile || featuresExpanded;
+  const toggleExpand = () => setFeaturesExpanded(prev => !prev);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
@@ -186,6 +193,9 @@ const Plans = () => {
             ]}
             delay={0}
             image={tier1Img}
+            expanded={allExpanded}
+            onToggleExpand={toggleExpand}
+            isMobile={isMobile}
           />
           <PlanCard
             name="Double"
@@ -203,6 +213,9 @@ const Plans = () => {
             popular
             delay={0.1}
             image={tier2Img}
+            expanded={allExpanded}
+            onToggleExpand={toggleExpand}
+            isMobile={isMobile}
           />
           <PlanCard
             name="Triple"
@@ -220,6 +233,9 @@ const Plans = () => {
             ]}
             delay={0.2}
             image={tier3Img}
+            expanded={allExpanded}
+            onToggleExpand={toggleExpand}
+            isMobile={isMobile}
           />
         </div>
       </section>
