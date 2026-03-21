@@ -20,9 +20,10 @@ interface PlanCardProps {
   popular?: boolean;
   delay: number;
   accentColor?: string;
+  image: string;
 }
 
-const PlanCard = ({ name, tagline, price, features, popular, delay }: PlanCardProps) => {
+const PlanCard = ({ name, tagline, price, features, popular, delay, image }: PlanCardProps) => {
   const [expanded, setExpanded] = useState(false);
   const visibleFeatures = expanded ? features : features.slice(0, 5);
 
