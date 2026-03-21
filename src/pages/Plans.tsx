@@ -21,10 +21,11 @@ interface PlanCardProps {
   delay: number;
   accentColor?: string;
   image: string;
+  expanded: boolean;
+  onToggleExpand: () => void;
 }
 
-const PlanCard = ({ name, tagline, price, features, popular, delay, image }: PlanCardProps) => {
-  const [expanded, setExpanded] = useState(false);
+const PlanCard = ({ name, tagline, price, features, popular, delay, image, expanded, onToggleExpand }: PlanCardProps) => {
   const visibleFeatures = expanded ? features : features.slice(0, 5);
 
   return (
