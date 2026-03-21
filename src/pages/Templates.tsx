@@ -79,10 +79,10 @@ const Templates = () => {
             <h2 className="font-heading text-2xl font-extrabold text-foreground mb-6">Browse Templates</h2>
           </ScrollReveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {availableIndustries.map((ind, i) => {
+            {industries.map((ind, i) => {
               const Icon = ind.icon;
               const previewUrl = ind.previewSlug
-                ? `https://skooped-io.github.io/template-${ind.previewSlug}/`
+                ? `https://skooped-io.github.io/${ind.previewSlug}-template/`
                 : undefined;
               return (
                 <ScrollReveal key={ind.name} delay={i * 0.05}>
