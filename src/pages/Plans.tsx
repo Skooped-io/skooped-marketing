@@ -191,6 +191,8 @@ const Plans = () => {
             ]}
             delay={0}
             image={tier1Img}
+            expanded={allExpanded}
+            onToggleExpand={toggleExpand}
           />
           <PlanCard
             name="Double"
