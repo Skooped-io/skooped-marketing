@@ -46,13 +46,8 @@ const Templates = () => {
 
       {/* Header */}
       <section className="relative pt-32 pb-20 overflow-hidden">
-        <div
-          className="absolute inset-0 bg-background"
-          style={{
-            backgroundImage:
-              "radial-gradient(ellipse at 40% 30%, hsl(340 72% 52% / 0.06), transparent 50%), radial-gradient(ellipse at 60% 70%, hsl(34 68% 48% / 0.05), transparent 50%)",
-          }}
-        />
+        <div className="absolute top-16 -left-20 w-72 h-72 rounded-full bg-primary/12 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 right-[-3rem] w-56 h-56 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
         <div className="relative container mx-auto px-6 text-center max-w-3xl">
           <ScrollReveal>
             <h1 className="text-4xl md:text-[52px] md:leading-tight font-extrabold text-foreground mb-4">
