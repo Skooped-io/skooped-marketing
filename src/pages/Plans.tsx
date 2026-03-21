@@ -94,7 +94,7 @@ const faqData = [
   { q: "Wait — your team is AI?", a: "Yes, and that's what makes us different. Our AI team works 24/7, never takes a day off, and costs a fraction of a traditional agency. But don't confuse AI with generic — every strategy is built specifically for your business." },
   { q: "Who do I talk to if I have a question?", a: "Cooper is your main point of contact. You can also call or text us at 615-856-3871." },
   { q: "What if I already have a website?", a: "We can work with it or rebuild from scratch — whatever makes sense. We'll do a free review and give you an honest recommendation." },
-  { q: "Is a custom website more expensive?", a: "Custom builds are a one-time $499 fee. After that, you pick a monthly plan just like everyone else — starting at $49/mo. Same AI team, same platform." },
+  { q: "Is a custom website more expensive?", a: "Custom builds are a one-time $299 fee. After that, you pick a monthly plan just like everyone else — starting at $49/mo. Same AI team, same platform." },
   { q: "What if I don't know what I want?", a: "Pick a template — you can always customize later in your dashboard editor. Or go custom and we'll ask a few simple questions about your style and preferences." },
 ];
 
