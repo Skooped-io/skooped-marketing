@@ -185,6 +185,7 @@ const Plans = () => {
               "Hosting & maintenance included",
             ]}
             delay={0}
+            image={tier1Img}
           />
           <PlanCard
             name="Double"
