@@ -238,7 +238,7 @@ const Plans = () => {
       <section className="pb-16 px-6 text-center">
         <ScrollReveal>
           <p className="font-heading font-extrabold text-xl text-foreground mb-1">
-            Templates: $0 to go live. Custom builds: $499 one-time.
+            Templates: $0 to go live. Custom builds: $299 one-time.
           </p>
           <p className="text-muted-foreground">Pick a template, add your details, live instantly. Or get a one-of-a-kind design delivered in 24-48 hours. Pair with any plan.</p>
         </ScrollReveal>

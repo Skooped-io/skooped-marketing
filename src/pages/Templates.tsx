@@ -146,7 +146,7 @@ const Templates = () => {
                     Our expert team designs a one-of-a-kind website tailored to your exact vision. Same platform, same AI team.
                   </p>
                   <div className="flex flex-wrap gap-3 mt-3">
-                    <span className="bg-primary-foreground/20 text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">$499 one-time</span>
+                    <span className="bg-primary-foreground/20 text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">$299 one-time</span>
                     <span className="bg-primary-foreground/20 text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">Delivered in 24-48 hours</span>
                   </div>
                 </div>

@@ -9,7 +9,7 @@ const CaseStudy = () => (
             From invisible to <span className="swoosh-underline">unstoppable</span>
           </h2>
           <blockquote className="text-foreground text-lg leading-relaxed mb-6">
-            "GunnsFencing went from 200 Google Search impressions to over 8,000 in just 3 months with Skooped. Now they're on track to hit $1M in annual revenue."
+            "One of our clients — a fencing contractor in Tennessee — went from 200 Google Search impressions to over 8,000 in just 3 months. More visibility means more calls, more jobs, more growth."
           </blockquote>
 
           {/* Simple trend line SVG */}
