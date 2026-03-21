@@ -21,8 +21,8 @@ interface Industry {
 const industries: Industry[] = [
   { name: "Roofing", icon: Hammer, tagline: "Get on top of local search", href: "/templates/roofing", available: true, previewSlug: "roofing" },
   { name: "Landscaping", icon: TreePine, tagline: "Grow your online presence", href: "/templates/landscaping", available: true, previewSlug: "landscaping" },
-  { name: "Therapy & Counseling", icon: Heart, tagline: "Connect with clients who need you", href: "/templates/therapy-counseling", available: true, previewSlug: "therapy-counseling" },
-  { name: "Salon & Barbershop", icon: Scissors, tagline: "Cut through the competition", href: "/templates/salon-barbershop", available: true, previewSlug: "salon-barbershop" },
+  { name: "Therapy & Counseling", icon: Heart, tagline: "Connect with clients who need you", href: "/templates/therapy-counseling", available: true, previewSlug: "therapy" },
+  { name: "Salon & Barbershop", icon: Scissors, tagline: "Cut through the competition", href: "/templates/salon-barbershop", available: true, previewSlug: "salon" },
   { name: "Plumbing", icon: Droplets, tagline: "Stop leaking leads", href: "/templates/plumbing", available: true, previewSlug: "plumbing" },
   { name: "Fencing", icon: Grid3X3, tagline: "Build your digital boundary", href: "/contact", available: false, previewSlug: "fencing" },
   { name: "Construction", icon: HardHat, tagline: "Construct your online empire", href: "/contact", available: false },
