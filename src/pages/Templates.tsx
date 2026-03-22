@@ -27,9 +27,9 @@ const industries: Industry[] = [
   { name: "Construction", icon: HardHat, tagline: "Construct your online empire and win more bids", href: "/templates/construction", available: true, previewSlug: "construction" },
   { name: "Auto Repair", icon: Wrench, tagline: "Drive more customers to your shop", href: "/templates/auto-repair", available: true, previewSlug: "auto-repair" },
   { name: "Life Coaching", icon: Compass, tagline: "Guide more people to find you online", href: "/templates/life-coaching", available: true, previewSlug: "life-coaching" },
-  { name: "Real Estate Services", icon: Home, tagline: "List your business and generate quality leads", href: "/templates/real-estate", available: true, previewSlug: "real-estate-agent" },
+  { name: "Real Estate Services", icon: Home, tagline: "List your business and generate quality leads", href: "/templates/real-estate", available: true, previewSlug: "real-estate" },
   { name: "Personal Training", icon: Dumbbell, tagline: "Flex your online presence and book more clients", href: "/templates/personal-training", available: true, previewSlug: "personal-training" },
-  { name: "Salon & Barbershop", icon: Scissors, tagline: "Cut through the competition with a stunning site", href: "/templates/salon-barbershop", available: true, previewSlug: "salon-barber-shop" },
+  { name: "Salon & Barbershop", icon: Scissors, tagline: "Cut through the competition with a stunning site", href: "/templates/salon-barbershop", available: true, previewSlug: "salon" },
   { name: "Plumbing", icon: Droplets, tagline: "Stop leaking leads and get found locally", href: "/templates/plumbing", available: true, previewSlug: "plumbing" },
   { name: "Electrical", icon: Zap, tagline: "Power up your marketing and win more jobs", href: "/templates/electrical", available: true, previewSlug: "electrical" },
 ];
@@ -77,7 +77,7 @@ const Templates = () => {
             {industries.map((ind, i) => {
               const Icon = ind.icon;
               const previewUrl = ind.previewSlug
-                ? `https://skooped-io.github.io/${ind.previewSlug}-template/`
+                ? `https://preview-${ind.previewSlug}.skooped.io`
                 : undefined;
               return (
                 <ScrollReveal key={ind.name} delay={i * 0.04}>

@@ -105,7 +105,7 @@ const IndustryTemplate = () => {
   const data = slug ? industryTemplates[slug] : undefined;
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const ghSlug = slug ? previewSlugs[slug] : undefined;
-  const previewUrl = ghSlug ? `https://skooped-io.github.io/${ghSlug}-template/` : undefined;
+  const previewUrl = ghSlug ? `https://preview-${ghSlug}.skooped.io` : undefined;
 
   usePageSeo(data?.seo ?? { title: "Templates | Skooped", description: "" });
 
