@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { usePageSeo } from "@/hooks/use-page-seo";
+import usePageSeo from "@/hooks/use-page-seo";
 
 const Privacy = () => {
   usePageSeo({
