@@ -11,6 +11,8 @@ import NotFound from "./pages/NotFound.tsx";
 import Templates from "./pages/Templates.tsx";
 import IndustryTemplate from "./pages/IndustryTemplate.tsx";
 import SignupRedirect from "./pages/SignupRedirect.tsx";
+import Privacy from "./pages/Privacy.tsx";
+import Terms from "./pages/Terms.tsx";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +30,8 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/signup" element={<SignupRedirect />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
