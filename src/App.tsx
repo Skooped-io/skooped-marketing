@@ -11,6 +11,8 @@ import NotFound from "./pages/NotFound.tsx";
 import Templates from "./pages/Templates.tsx";
 import IndustryTemplate from "./pages/IndustryTemplate.tsx";
 import SignupRedirect from "./pages/SignupRedirect.tsx";
+import Privacy from "./pages/Privacy.tsx";
+import Terms from "./pages/Terms.tsx";
 
 const queryClient = new QueryClient();
 
