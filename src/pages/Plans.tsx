@@ -296,6 +296,10 @@ const Plans = () => {
               <span>➕ Additional site: <strong className="text-foreground">+$25/mo</strong> on the same plan</span>
               <span>📅 Annual prepay: <strong className="text-foreground">10× monthly</strong> — 2 months free</span>
             </div>
+            <p className="text-center text-sm text-muted-foreground mt-3">
+              Bigger operation? Multi-location and dedicated-management retainers are built on Premium as
+              transparent line items — scoped through a <Link to="/contact" className="text-primary font-semibold hover:underline">Discovery session</Link>.
+            </p>
           </ScrollReveal>
         </div>
       </section>
