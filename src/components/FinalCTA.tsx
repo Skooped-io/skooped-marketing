@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "./ScrollReveal";
 
@@ -9,24 +10,23 @@ const FinalCTA = () => (
     <div className="relative container mx-auto text-center max-w-2xl">
       <ScrollReveal>
         <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary-foreground mb-4">
-          Pick your template. Try it free for 14 days.
+          Ready when you are.
         </h2>
         <p className="text-primary-foreground/80 text-lg mb-8 leading-relaxed">
-          Your website, your SEO, your social media — all managed by 7 AI specialists. No credit card required.
+          Custom websites from $500. Plans from $49/mo. Every lead texted to your phone. One call and we'll tell you exactly what fits.
         </p>
-        <Link to="/templates">
+        <a href="tel:6153151541">
           <Button variant="hero" size="xl" className="mb-4">
-            Start Your Free Trial
+            <Phone size={18} /> Call or Text 615-315-1541
           </Button>
-        </Link>
-        <p className="text-sm text-primary-foreground/60 mb-4">Or call us: 615-856-3871</p>
+        </a>
         <div>
-          <a
-            href="https://app.skooped.io/login"
+          <Link
+            to="/contact"
             className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm underline"
           >
-            Already have an account? Log in at app.skooped.io →
-          </a>
+            Prefer to type? Send us a message →
+          </Link>
         </div>
       </ScrollReveal>
     </div>

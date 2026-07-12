@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import skoopedLogo from "@/assets/skooped-logo.png";
 
@@ -70,7 +71,7 @@ const HeroSection = () => {
           transition={{ delay: 0.6, duration: 0.5 }}
           className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Pick your industry. Add your brand. Your website is live in 60 seconds — then your AI team takes over. SEO, social media, Google Ads, analytics. Try it free for 14 days.
+          Custom websites from $500. Plans from $49/mo. Every lead texted to your phone.
         </motion.p>
 
         <motion.div
@@ -79,14 +80,14 @@ const HeroSection = () => {
           transition={{ delay: 0.9, duration: 0.4 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <Link to="/templates">
+          <a href="tel:6153151541">
             <Button variant="hero" size="xl">
-              Start Your Free Trial
+              <Phone size={18} /> Call or Text 615-315-1541
             </Button>
-          </Link>
+          </a>
           <Link to="/plans">
             <Button variant="hero-outline" size="xl">
-              See How It Works
+              See Plans & Pricing
             </Button>
           </Link>
         </motion.div>
@@ -96,7 +97,7 @@ const HeroSection = () => {
           transition={{ delay: 1.1, duration: 0.4 }}
           className="text-sm text-muted-foreground mt-4"
         >
-          14 days free. No credit card required. Cancel anytime.
+          Franklin, TN. Real people, AI-fast delivery. No pushy sales calls.
         </motion.p>
       </div>
     </section>

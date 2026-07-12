@@ -1,145 +1,242 @@
 import { motion } from "framer-motion";
-import { Check, X, ChevronDown, Phone, CreditCard, Rocket, Heart } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { Check, X, ChevronDown, Phone, Hammer, Building2, Puzzle, FileCheck2 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import IncludedStrip from "@/components/IncludedStrip";
 import ScrollReveal from "@/components/ScrollReveal";
 import usePageSeo from "@/hooks/use-page-seo";
 import tier1Img from "@/assets/skooped-tier-1.png";
 import tier2Img from "@/assets/skooped-tier-2.png";
 import tier3Img from "@/assets/skooped-tier-3.png";
 
-/* ───── Pricing card (compact) ───── */
-interface PlanCardProps {
-  name: string;
-  tagline: string;
-  price: string;
-  features: string[];
-  popular?: boolean;
-  delay: number;
-  accentColor?: string;
-  image: string;
-  expanded: boolean;
-  onToggleExpand: () => void;
-  isMobile: boolean;
-}
+/* ───── One-time builds ───── */
+const builds = [
+  {
+    icon: Hammer,
+    name: "Launch",
+    price: "$500",
+    priceNote: "one-time · requires a monthly plan",
+    tagline: "Get online and look legit.",
+    features: [
+      "5-page custom site from our industry library",
+      "Mobile-ready, fast, built to convert",
+      "On-page SEO: metadata, schema, Google Business Profile link",
+      "Lead form wired to SMS + email alerts",
+      "Domain purchase & DNS handled (domain billed at cost)",
+      "Launch report when you go live",
+    ],
+  },
+  {
+    icon: Building2,
+    name: "Establish",
+    price: "$1,000",
+    priceNote: "one-time · requires a monthly plan",
+    tagline: "Everything in Launch, plus get found.",
+    popular: true,
+    features: [
+      "Everything in Launch, plus:",
+      "Google Business Profile created, verified & optimized",
+      "Google reviews widget on your site",
+      "Local SEO: service-area pages & citations",
+      "Light brand cleanup (logo & colors)",
+      "30-day post-launch tweak window",
+    ],
+  },
+  {
+    icon: Puzzle,
+    name: "Custom",
+    price: "from $2,000",
+    priceNote: "quoted through Discovery — never on the spot",
+    tagline: "Integrations, booking, stores, multi-location.",
+    features: [
+      "Quoting tools & booking systems",
+      "Dashboards and online stores",
+      "AI integrations",
+      "Multi-location businesses",
+      "Fixed quote from your Discovery roadmap",
+      "Milestone billing: 50% start, 50% launch",
+    ],
+  },
+];
 
-const PlanCard = ({ name, tagline, price, features, popular, delay, image, expanded, onToggleExpand, isMobile }: PlanCardProps) => {
-  const visibleFeatures = expanded ? features : features.slice(0, 5);
+/* ───── Monthly plans ───── */
+const plans = [
+  {
+    name: "Single",
+    tagline: "Your site, alive and answering.",
+    price: "$49",
+    image: tier1Img,
+    features: [
+      "Hosting, SSL, DNS & domain management",
+      "Security & software updates",
+      "SMS + email lead alerts — every lead texted to you",
+      "Monthly plain-English report: visits, leads, changes made",
+      "30 minutes of small edits every month",
+    ],
+  },
+  {
+    name: "Double",
+    tagline: "Show up higher. Stay fresh.",
+    price: "$149",
+    popular: true,
+    image: tier2Img,
+    features: [
+      "Everything in Single, plus:",
+      "Ongoing local SEO: Google Business posts, review responses, content refresh",
+      "2 hours of edits every month",
+      "Priority response",
+      "Quarterly strategy call",
+    ],
+  },
+  {
+    name: "Triple",
+    tagline: "The full operation. We run it all.",
+    price: "$299",
+    image: tier3Img,
+    features: [
+      "Everything in Double, plus:",
+      "Ads management: Google Local Service Ads & Meta",
+      "Ad spend bills to your own card — we never mark it up",
+      "Social media coordination",
+      "Monthly call",
+    ],
+  },
+];
 
-  return (
-    <ScrollReveal delay={delay}>
-      <motion.div
-        className={`relative rounded-2xl p-6 flex flex-col h-full transition-shadow duration-300 ${
-          popular
-            ? "bg-card border-2 border-primary shadow-xl scale-[1.03] z-10"
-            : "bg-card/80 backdrop-blur-sm border border-border shadow-md"
-        }`}
-        whileHover={{
-          boxShadow: "0 20px 40px -12px hsl(340 60% 57% / 0.15)",
-        }}
-        transition={{ duration: 0.3 }}
-      >
-        {popular && (
-          <span className="absolute -top-3 right-6 bg-accent text-accent-foreground text-xs font-bold px-4 py-1 rounded-full shadow">
-            Most Popular
-          </span>
-        )}
-
-        <img src={image} alt={`${name} plan`} className="w-24 h-24 object-contain mx-auto mb-2" />
-        <h3 className="font-heading text-xl font-extrabold text-foreground text-center">{name}</h3>
-        <p className="text-muted-foreground text-xs text-center mb-3">{tagline}</p>
-        <p className="text-center mb-4">
-          <span className="font-heading text-4xl font-extrabold text-primary">{price}</span>
-          <span className="text-muted-foreground text-sm">/mo</span>
-        </p>
-
-        <ul className="space-y-2 mb-3 flex-1">
-          {visibleFeatures.map((f, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-foreground">
-              <Check size={14} className="text-primary shrink-0 mt-0.5" />
-              <span>{f}</span>
-            </li>
-          ))}
-        </ul>
-
-        {features.length > 5 && !isMobile && (
-          <button
-            onClick={onToggleExpand}
-            className="text-xs text-primary font-semibold mb-4 hover:underline flex items-center gap-1 mx-auto"
-          >
-            {expanded ? "Show less" : `See all ${features.length} features`}
-            <motion.span animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
-              <ChevronDown size={12} />
-            </motion.span>
-          </button>
-        )}
-
-        <Link to="/signup">
-          <Button variant="hero" size="lg" className="w-full">Try Free — 14 Days</Button>
-        </Link>
-        <p className="text-[11px] text-muted-foreground text-center mt-1.5">No credit card required</p>
-      </motion.div>
-    </ScrollReveal>
-  );
-};
-
-/* ───── FAQ data (grouped, trimmed to 8) ───── */
+/* ───── FAQ data ───── */
 const faqGroups = [
   {
     title: "Getting Started",
     items: [
-      { q: "Is the free trial really free?", a: "Yes. No credit card, no hidden fees. Pick a template, sign up, and your website is live in 60 seconds. You get 14 full days with your AI team." },
-      { q: "How is this different from Wix or Squarespace?", a: "Those platforms give you a template and say 'good luck.' We build your site, optimize it for Google, manage your social media, and run your ads. You get an entire marketing team — not a DIY tool." },
-      { q: "How long does SEO take to work?", a: "You'll start seeing movement within 30-60 days. One client went from 200 to 8,000+ Google impressions in three months." },
+      { q: "How much does a website cost?", a: "Launch is $500 flat. Establish is $1,000 flat. Anything custom gets a fixed quote through a $300 Discovery session — and the $300 is credited to your build if you sign within 30 days. No estimates on a napkin, no surprise invoices." },
+      { q: "How fast will I be online?", a: "About a week from payment to launch. We build from a proven industry library and customize it to your business, so you're not waiting on an agency timeline." },
+      { q: "What's a Discovery session?", a: "A one-hour sit-down about your business. Within 7 days you get a written roadmap and a fixed cost estimate. It's $300, and 100% of it is credited toward your build if you sign within 30 days." },
     ],
   },
   {
     title: "What's Included",
     items: [
+      { q: "Why do builds require a monthly plan?", a: "Because a website isn't done when it launches. The Single plan covers hosting, security, domain management, small edits — and the part that makes you money: every lead from your site texted straight to your phone, plus a monthly report in plain English." },
       { q: "Do I own my website?", a: "Yes. Your website, your content, your data. Always." },
-      { q: "Will my phone actually ring more?", a: "That's the goal and the standard. If our work isn't driving real leads, we adjust." },
-      { q: "Wait — your team is AI?", a: "Yes, and that's what makes us different. Our AI team works 24/7, never takes a day off, and costs a fraction of a traditional agency. But every strategy is built specifically for your business." },
+      { q: "How is this different from Wix or Squarespace?", a: "Those platforms give you a template and say 'good luck.' We build your site, handle your domain and SEO, and text you every lead. You get a marketing team — not a DIY tool." },
+      { q: "Do you run my ad budget?", a: "Ads bill directly to your own card — we never front spend or mark it up. On Triple, we manage the campaigns and you see every dollar." },
     ],
   },
   {
     title: "Billing & Contracts",
     items: [
-      { q: "Is there a contract or setup fee?", a: "No long-term contracts. No hidden fees. We earn your business every month." },
-      { q: "What if I already have a website?", a: "We can work with it or rebuild from scratch — whatever makes sense. We'll do a free review and give you an honest recommendation." },
+      { q: "Is the $500 a one-time payment or a subscription?", a: "One-time. Once the build is paid, it's never billed again. The subscription is a separate, smaller thing: the monthly plan (from $49/mo) that keeps your site hosted, secure, updated, and texting you every lead. Typical start: $500 today, then $49/mo from launch." },
+      { q: "Is there a contract?", a: "One page of paper: your scope and the plan you're on. No long-term lock-in, no hidden fees. Plans bill monthly with a card on file." },
+      { q: "Can I pay annually?", a: "Yes — annual prepay is 10× the monthly price, so you get 2 months free. Single runs $490/yr, Double $1,490/yr." },
+      { q: "I have more than one site.", a: "Each additional site is +$25/mo on the same plan — same lead alerts, same report." },
     ],
   },
 ];
 
 /* ───── Comparison table ───── */
 const compRows = [
-  { label: "Setup fee", trad: "$3,000 – $8,000", skoop: "$0 (templates) / $299 (custom)" },
-  { label: "Website delivery", trad: "4-8 weeks", skoop: "60 seconds / 24-48 hrs" },
-  { label: "Monthly cost", trad: "$100 – $800/mo", skoop: "$49 – $149/mo" },
-  { label: "Availability", trad: "Business hours", skoop: "24/7" },
-  { label: "Free trial", trad: false, skoop: "14 days free" },
-  { label: "Your dashboard", trad: false, skoop: true },
-  { label: "AI-powered", trad: false, skoop: true },
-  { label: "Contracts", trad: "6–12 months", skoop: "None" },
+  { label: "Setup fee", trad: "$3,000 – $8,000", skoop: "$500 flat" },
+  { label: "Website delivery", trad: "4-8 weeks", skoop: "About a week" },
+  { label: "Monthly cost", trad: "$100 – $800/mo", skoop: "$49 – $299/mo" },
+  { label: "Every lead texted to your phone", trad: false, skoop: true },
+  { label: "Plain-English monthly report", trad: false, skoop: true },
+  { label: "Ad spend markup", trad: "10 – 20% of spend", skoop: "$0 — bills to your card" },
+  { label: "Contracts", trad: "6–12 months", skoop: "One page. No lock-in." },
 ];
 
-/* ───── How trial works steps ───── */
-const trialSteps = [
-  { icon: CreditCard, title: "Pick a template & plan", desc: "Browse our industry templates, choose one, and select the plan that fits your business. You won't be charged anything today." },
-  { icon: Rocket, title: "Your AI team builds your site", desc: "Your website goes live in 60 seconds. Your 7-person AI team starts working — SEO, social media, analytics, everything." },
-  { icon: Heart, title: "Decide if it's for you", desc: "After 14 days, add a payment method to keep your team working. No card on file? Your site goes to sleep (not deleted) — come back anytime." },
-];
+/* ───── Build card ───── */
+const BuildCard = ({ build, delay }: { build: (typeof builds)[number]; delay: number }) => (
+  <ScrollReveal delay={delay}>
+    <motion.div
+      className={`relative rounded-2xl p-6 flex flex-col h-full transition-shadow duration-300 ${
+        build.popular
+          ? "bg-card border-2 border-primary shadow-xl z-10"
+          : "bg-card/80 backdrop-blur-sm border border-border shadow-md"
+      }`}
+      whileHover={{ boxShadow: "0 20px 40px -12px hsl(340 60% 57% / 0.15)" }}
+      transition={{ duration: 0.3 }}
+    >
+      {build.popular && (
+        <span className="absolute -top-3 right-6 bg-accent text-accent-foreground text-xs font-bold px-4 py-1 rounded-full shadow">
+          Most Popular
+        </span>
+      )}
+      <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+        <build.icon size={22} className="text-primary" />
+      </div>
+      <h3 className="font-heading text-xl font-extrabold text-foreground">{build.name}</h3>
+      <p className="text-muted-foreground text-xs mb-3">{build.tagline}</p>
+      <p className="mb-1">
+        <span className="font-heading text-4xl font-extrabold text-primary">{build.price}</span>
+      </p>
+      <p className="text-[11px] text-muted-foreground mb-4">{build.priceNote}</p>
+      <ul className="space-y-2 mb-5 flex-1">
+        {build.features.map((f, i) => (
+          <li key={i} className="flex items-start gap-2 text-sm text-foreground">
+            <Check size={14} className="text-primary shrink-0 mt-0.5" />
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+      <Link to="/contact">
+        <Button variant={build.popular ? "hero" : "hero-outline"} size="lg" className="w-full">
+          {build.name === "Custom" ? "Book My Discovery Session" : "Start My Build"}
+        </Button>
+      </Link>
+    </motion.div>
+  </ScrollReveal>
+);
+
+/* ───── Plan card ───── */
+const PlanCard = ({ plan, delay }: { plan: (typeof plans)[number]; delay: number }) => (
+  <ScrollReveal delay={delay}>
+    <motion.div
+      className={`relative rounded-2xl p-6 flex flex-col h-full transition-shadow duration-300 ${
+        plan.popular
+          ? "bg-card border-2 border-primary shadow-xl md:scale-[1.03] z-10"
+          : "bg-card/80 backdrop-blur-sm border border-border shadow-md"
+      }`}
+      whileHover={{ boxShadow: "0 20px 40px -12px hsl(340 60% 57% / 0.15)" }}
+      transition={{ duration: 0.3 }}
+    >
+      {plan.popular && (
+        <span className="absolute -top-3 right-6 bg-accent text-accent-foreground text-xs font-bold px-4 py-1 rounded-full shadow">
+          Most Popular
+        </span>
+      )}
+      <img src={plan.image} alt={`${plan.name} plan`} className="w-24 h-24 object-contain mx-auto mb-2" />
+      <h3 className="font-heading text-xl font-extrabold text-foreground text-center">{plan.name}</h3>
+      <p className="text-muted-foreground text-xs text-center mb-3">{plan.tagline}</p>
+      <p className="text-center mb-4">
+        <span className="font-heading text-4xl font-extrabold text-primary">{plan.price}</span>
+        <span className="text-muted-foreground text-sm">/mo</span>
+      </p>
+      <ul className="space-y-2 mb-5 flex-1">
+        {plan.features.map((f, i) => (
+          <li key={i} className="flex items-start gap-2 text-sm text-foreground">
+            <Check size={14} className="text-primary shrink-0 mt-0.5" />
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+      <Link to="/contact">
+        <Button variant={plan.popular ? "hero" : "hero-outline"} size="lg" className="w-full">
+          Pick My Plan
+        </Button>
+      </Link>
+    </motion.div>
+  </ScrollReveal>
+);
 
 /* ───── Page ───── */
 const Plans = () => {
-  usePageSeo({ title: "Marketing & Website Pricing | Plans from $49/mo | Skooped Franklin TN", description: "Transparent pricing for custom websites, SEO, Google Ads & social media. Try any plan free for 14 days. No credit card required." });
-  const isMobile = useIsMobile();
-  const [featuresExpanded, setFeaturesExpanded] = useState(false);
-  const allExpanded = isMobile || featuresExpanded;
-  const toggleExpand = () => setFeaturesExpanded(prev => !prev);
+  usePageSeo({
+    title: "Pricing | Websites from $500, Plans from $49/mo | Skooped Franklin TN",
+    description: "One price list: Launch $500, Establish $1,000, custom builds quoted via a $300 Discovery session (credited). Single $49, Double $149, Triple $299 monthly. Every lead texted to your phone.",
+  });
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
@@ -153,131 +250,137 @@ const Plans = () => {
         <div className="relative container mx-auto px-6 text-center max-w-3xl">
           <ScrollReveal>
             <h1 className="text-4xl md:text-[48px] md:leading-tight font-extrabold text-foreground mb-3">
-              Plans that grow with your business.
+              One price list. No surprises.
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={0.15}>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Every plan comes with a custom website, real SEO, and a team that works 24/7. No contracts. No hidden fees.
+              Two numbers, that's it: a <strong className="text-foreground">one-time build</strong> to get online, plus a{" "}
+              <strong className="text-foreground">monthly plan</strong> that keeps it running. Most clients start at $500 + $49/mo.
             </p>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* ── Trial banner ── */}
-      <section className="px-6 mb-6">
+      {/* ── One-time builds ── */}
+      <section className="pb-16 px-6">
         <div className="container mx-auto max-w-5xl">
-          <div className="bg-primary rounded-xl py-3 px-6 text-center">
-            <p className="font-heading font-extrabold text-primary-foreground text-base">
-              🎉 Try any plan free for 14 days — no credit card required.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Pricing cards (compact) ── */}
-      <section className="pb-16 px-6">
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl items-stretch">
-          <PlanCard
-            name="Single"
-            tagline="Get online and look legit."
-            price="$49"
-            features={[
-              "Instant website — live in 60 seconds",
-              "Custom-built website (not a template)",
-              "Mobile-responsive design",
-              "Basic SEO setup",
-              "Google Business Profile setup",
-              "Monthly performance check-in",
-              "Hosting & maintenance included",
-            ]}
-            delay={0}
-            image={tier1Img}
-            expanded={allExpanded}
-            onToggleExpand={toggleExpand}
-            isMobile={isMobile}
-          />
-          <PlanCard
-            name="Double"
-            tagline="Start showing up and standing out."
-            price="$99"
-            features={[
-              "Everything in Single, plus:",
-              "Ongoing SEO monitoring & optimization",
-              "Google Search Console management",
-              "Monthly content updates",
-              "Social media (Instagram + Facebook)",
-              "Google Analytics setup",
-              "Priority support",
-            ]}
-            popular
-            delay={0.1}
-            image={tier2Img}
-            expanded={allExpanded}
-            onToggleExpand={toggleExpand}
-            isMobile={isMobile}
-          />
-          <PlanCard
-            name="Triple"
-            tagline="The full operation. We run it all."
-            price="$149"
-            features={[
-              "Everything in Double, plus:",
-              "Google Local Service Ads management",
-              "Advanced SEO pages (service + city)",
-              "Advanced analytics & conversion tracking",
-              "Call/text back system integration",
-              "Scheduling integration",
-              "Weekly performance reports",
-              "Dedicated account management",
-            ]}
-            delay={0.2}
-            image={tier3Img}
-            expanded={allExpanded}
-            onToggleExpand={toggleExpand}
-            isMobile={isMobile}
-          />
-        </div>
-      </section>
-
-      {/* ── Build pricing note ── */}
-      <section className="pb-12 px-6 text-center">
-        <ScrollReveal>
-          <p className="font-heading font-extrabold text-xl text-foreground mb-1">
-            Templates: $0 to go live. Custom builds: $299 one-time.
-          </p>
-          <p className="text-muted-foreground">Pick a template, add your details, live instantly. Or get a one-of-a-kind design in 24-48 hours.</p>
-        </ScrollReveal>
-      </section>
-
-      {/* ── How the free trial works ── */}
-      <section className="pb-16 px-6">
-        <div className="container mx-auto max-w-4xl">
           <ScrollReveal>
-            <h2 className="font-heading text-3xl font-extrabold text-foreground text-center mb-8">How the free trial works</h2>
+            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-1">Step 1 — Pick your build</h2>
+            <p className="text-sm text-muted-foreground mb-6">A one-time price. Pay it once, own the site. This is not a subscription.</p>
           </ScrollReveal>
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            {trialSteps.map((s, i) => (
-              <ScrollReveal key={i} delay={i * 0.1}>
-                <div className="text-center">
-                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <s.icon size={24} className="text-primary" />
-                  </div>
-                  <h3 className="font-heading font-bold text-foreground mb-2">{s.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-                </div>
-              </ScrollReveal>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+            {builds.map((b, i) => (
+              <BuildCard key={b.name} build={b} delay={i * 0.1} />
             ))}
           </div>
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-            <span>🔒 No credit card required</span>
-            <span>❌ Cancel anytime</span>
-            <span>✅ Your data is always yours</span>
-          </div>
         </div>
       </section>
 
-      {/* ── Comparison table (enhanced) ── */}
+      {/* ── Monthly plans ── */}
+      <section className="pb-10 px-6">
+        <div className="container mx-auto max-w-5xl">
+          <ScrollReveal>
+            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-1">Step 2 — Pick your monthly plan</h2>
+            <p className="text-sm text-muted-foreground mb-6">
+              This is the recurring part — not an alternative to the build. It keeps your site hosted, secure, and texting you every lead.
+            </p>
+          </ScrollReveal>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+            {plans.map((p, i) => (
+              <PlanCard key={p.name} plan={p} delay={i * 0.1} />
+            ))}
+          </div>
+          <ScrollReveal delay={0.3}>
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 mt-6 text-sm text-muted-foreground">
+              <span>➕ Additional site: <strong className="text-foreground">+$25/mo</strong> on the same plan</span>
+              <span>📅 Annual prepay: <strong className="text-foreground">10× monthly</strong> — 2 months free</span>
+            </div>
+            <p className="text-center text-sm text-muted-foreground mt-3">
+              Bigger operation? Multi-location and dedicated-management retainers are built on Triple as
+              transparent line items — scoped through a <Link to="/contact" className="text-primary font-semibold hover:underline">Discovery session</Link>.
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── The math, spelled out ── */}
+      <section className="pb-16 px-6">
+        <div className="container mx-auto max-w-5xl">
+          <ScrollReveal>
+            <div className="rounded-2xl border-2 border-primary/30 bg-primary/5 p-6 md:p-8 text-center">
+              <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-semibold mb-3">
+                So what do I actually pay?
+              </p>
+              <p className="font-heading text-xl md:text-2xl font-extrabold text-foreground mb-2">
+                Build once + plan monthly. Example: Launch + Single ={" "}
+                <span className="text-primary">$500 today, then $49/mo</span> from launch.
+              </p>
+              <p className="text-sm text-muted-foreground">
+                That's the whole bill. No setup fees, no hourly surprises — the build is never billed again.
+              </p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── Discovery callout ── */}
+      <section className="pb-16 px-6">
+        <div className="container mx-auto max-w-5xl">
+          <ScrollReveal>
+            <div className="bg-maroon rounded-2xl p-8 md:p-10 grid md:grid-cols-[1fr_auto] gap-6 items-center">
+              <div>
+                <h3 className="font-heading text-2xl font-extrabold text-primary-foreground mb-2">
+                  The Discovery session — $300, credited to your build.
+                </h3>
+                <p className="text-primary-foreground/80 text-sm leading-relaxed max-w-2xl">
+                  For anything custom, we start with a one-hour sit-down about your business. Within 7 days you get a written
+                  roadmap and a fixed quote. Sign within 30 days and the full $300 comes off your build. No free scoping,
+                  no vague estimates — just a plan you can hold us to.
+                </p>
+              </div>
+              <Link to="/contact">
+                <Button variant="hero" size="lg">Book My Session</Button>
+              </Link>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── Business Launch Pack add-on ── */}
+      <section className="pb-16 px-6">
+        <div className="container mx-auto max-w-5xl">
+          <ScrollReveal>
+            <div className="rounded-2xl border-2 border-accent bg-card p-8 grid md:grid-cols-[auto_1fr_auto] gap-6 items-center">
+              <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
+                <FileCheck2 size={26} className="text-accent" />
+              </div>
+              <div>
+                <h3 className="font-heading text-xl font-extrabold text-foreground mb-1">
+                  Business Launch Pack — add-on, +$500
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Brand new business? We handle the boring part: Tennessee LLC filing (the $300 state fee is included, passed
+                  through at cost), your EIN, a starter operating agreement, and Google Business Profile verification support.
+                  Filing assistance, not legal advice.
+                </p>
+              </div>
+              <Link to="/contact">
+                <Button variant="outline" size="lg" className="border-accent text-accent hover:bg-accent/10 font-extrabold">
+                  Add It to My Build
+                </Button>
+              </Link>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── Every plan includes ── */}
+      <div className="mb-16">
+        <IncludedStrip />
+      </div>
+
+      {/* ── Comparison table ── */}
       <section className="pb-16 px-6">
         <div className="container mx-auto max-w-3xl">
           <ScrollReveal>
@@ -369,15 +472,15 @@ const Plans = () => {
       {/* ── Bottom CTA ── */}
       <section className="pb-24 px-6 text-center">
         <ScrollReveal>
-          <h2 className="font-heading text-2xl font-extrabold text-foreground mb-3">Still have questions?</h2>
-          <a href="tel:6158563871" className="inline-flex items-center gap-2 text-2xl md:text-3xl font-heading font-extrabold text-primary hover:underline mb-6">
-            <Phone size={24} /> 615-856-3871
+          <h2 className="font-heading text-2xl font-extrabold text-foreground mb-3">Not sure which fits? Just ask.</h2>
+          <a href="tel:6153151541" className="inline-flex items-center gap-2 text-2xl md:text-3xl font-heading font-extrabold text-primary hover:underline mb-6">
+            <Phone size={24} /> 615-315-1541
           </a>
           <div>
-            <Link to="/templates">
-              <Button variant="hero" size="xl">Start Your Free Trial</Button>
+            <Link to="/contact">
+              <Button variant="hero" size="xl">Send Us a Message</Button>
             </Link>
-            <p className="text-sm text-muted-foreground mt-3">14 days free. No credit card required.</p>
+            <p className="text-sm text-muted-foreground mt-3">We'll tell you straight — even if the answer is "you don't need us yet."</p>
           </div>
         </ScrollReveal>
       </section>

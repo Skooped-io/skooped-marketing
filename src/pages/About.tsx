@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -66,10 +65,10 @@ const About = () => {
                 <p className="font-heading text-xl font-extrabold text-foreground mb-2">
                   Every business is different. That's why we build custom.
                 </p>
-                <p className="text-muted-foreground text-sm mb-5">From industry templates or from scratch — your AI team is ready. Free for 14 days.</p>
-                <Link to="/templates">
-                  <Button variant="hero" size="xl">Start Your Free Trial</Button>
-                </Link>
+                <p className="text-muted-foreground text-sm mb-5">Builds from $500, plans from $49/mo — and every lead texted to your phone.</p>
+                <a href="tel:6153151541">
+                  <Button variant="hero" size="xl">Call or Text 615-315-1541</Button>
+                </a>
               </div>
             </ScrollReveal>
           </div>

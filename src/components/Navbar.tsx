@@ -62,15 +62,9 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <a
-              href="https://app.skooped.io/login"
-              className="font-body text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
-            >
-              Login
+            <a href="tel:6153151541">
+              <Button variant="hero" size="sm">Call or Text 615-315-1541</Button>
             </a>
-            <Link to="/templates">
-              <Button variant="hero" size="sm">Try Free</Button>
-            </Link>
           </div>
 
           <button
@@ -112,16 +106,9 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
-            <a
-              href="https://app.skooped.io/login"
-              onClick={() => setMobileOpen(false)}
-              className="font-heading text-2xl font-bold text-primary-foreground/70 hover:text-primary transition-colors"
-            >
-              Login
+            <a href="tel:6153151541" onClick={() => setMobileOpen(false)}>
+              <Button variant="hero" size="lg">Call or Text 615-315-1541</Button>
             </a>
-            <Link to="/templates" onClick={() => setMobileOpen(false)}>
-              <Button variant="hero" size="lg">Try Free</Button>
-            </Link>
           </motion.div>
         )}
       </AnimatePresence>

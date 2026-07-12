@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 const Footer = () => (
   <footer className="bg-card py-16 px-6">
     <div className="container mx-auto">
-      {/* Trial banner */}
+      {/* Contact banner */}
       <div className="text-center mb-10">
-        <Link to="/templates" className="inline-block text-sm font-heading font-bold text-primary hover:underline transition-colors">
-          Start your 14-day free trial — no credit card required →
-        </Link>
+        <a href="tel:6153151541" className="inline-block text-sm font-heading font-bold text-primary hover:underline transition-colors">
+          Call or text 615-315-1541 — we'll tell you straight what fits →
+        </a>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
@@ -38,7 +38,7 @@ const Footer = () => (
         <div>
           <h4 className="font-heading font-bold text-sm text-foreground mb-3">Contact</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li><a href="tel:6158563871" className="hover:text-primary transition-colors">615-856-3871</a></li>
+            <li><a href="tel:6153151541" className="hover:text-primary transition-colors">615-315-1541</a></li>
             <li>Franklin, TN</li>
             <li><a href="https://instagram.com/skooped.io" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">@skooped.io</a></li>
           </ul>

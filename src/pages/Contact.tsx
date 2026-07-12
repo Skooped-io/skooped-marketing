@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, MapPin, Instagram, Clock, Lock, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -42,15 +41,23 @@ const FloatingInput = ({ label, name, type = "text", required = false, ...props 
 };
 
 const Contact = () => {
-  usePageSeo({ title: "Contact Skooped | Free Marketing Consultation | Franklin TN", description: "Ready to grow your local business? Contact Skooped for a free consultation. AI-powered marketing, custom websites & SEO. Call 615-856-3871." });
-  const [submitted, setSubmitted] = useState(false);
+  usePageSeo({ title: "Contact Skooped | Websites & Marketing | Franklin TN", description: "Tell us about your business — websites from $500, plans from $49/mo, every lead texted to your phone. Call or text 615-315-1541." });
+  const [composed, setComposed] = useState<string | null>(null);
   const [service, setService] = useState("");
   const [message, setMessage] = useState("");
   const [msgFocused, setMsgFocused] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    const data = new FormData(e.currentTarget);
+    const lines = [
+      `Hi Skooped — I'm ${data.get("name") || ""} from ${data.get("business") || ""}.`,
+      `Reach me at ${data.get("phone") || ""}${data.get("email") ? ` / ${data.get("email")}` : ""}.`,
+      data.get("website") ? `Current website: ${data.get("website")}` : "",
+      service ? `Interested in: ${service}` : "",
+      message ? `About my business: ${message}` : "",
+    ].filter(Boolean);
+    setComposed(lines.join("\n"));
   };
 
   return (
@@ -72,8 +79,8 @@ const Contact = () => {
               No sales pitch — just a real conversation about what your business needs.
             </p>
             <p className="text-sm text-muted-foreground">
-              Want to skip the form and just try it?{" "}
-              <Link to="/templates" className="text-primary font-semibold hover:underline">Start your free trial →</Link>
+              Want to skip the form?{" "}
+              <a href="tel:6153151541" className="text-primary font-semibold hover:underline">Call or text 615-315-1541 →</a>
             </p>
           </ScrollReveal>
         </div>
@@ -88,12 +95,12 @@ const Contact = () => {
             <div className="md:col-span-3">
               <ScrollReveal>
                 <AnimatePresence mode="wait">
-                  {submitted ? (
+                  {composed ? (
                     <motion.div
                       key="success"
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      className="bg-card rounded-2xl p-10 text-center"
+                      className="bg-card rounded-2xl p-8 text-center"
                     >
                       <motion.div
                         initial={{ scale: 0 }}
@@ -103,8 +110,24 @@ const Contact = () => {
                       >
                         <Check size={32} className="text-primary" />
                       </motion.div>
-                      <h3 className="font-heading text-2xl font-extrabold text-foreground mb-2">We got your message!</h3>
-                      <p className="text-muted-foreground">We'll get back to you within a few hours. Talk soon.</p>
+                      <h3 className="font-heading text-2xl font-extrabold text-foreground mb-2">One tap to send.</h3>
+                      <p className="text-muted-foreground text-sm mb-5">
+                        No contact-form black hole here — this goes straight to our phone.
+                      </p>
+                      <p className="bg-background border border-border rounded-xl p-4 text-left text-sm text-foreground whitespace-pre-line mb-5">
+                        {composed}
+                      </p>
+                      <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                        <a href={`sms:6153151541?&body=${encodeURIComponent(composed)}`}>
+                          <Button variant="hero" size="lg" className="w-full">Text It to Us</Button>
+                        </a>
+                        <a href={`mailto:cooper@skooped.io?subject=${encodeURIComponent("New inquiry from skooped.io")}&body=${encodeURIComponent(composed)}`}>
+                          <Button variant="hero-outline" size="lg" className="w-full">Email It Instead</Button>
+                        </a>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-4">
+                        Or just call: <a href="tel:6153151541" className="text-primary font-semibold hover:underline">615-315-1541</a>
+                      </p>
                     </motion.div>
                   ) : (
                     <motion.form
@@ -176,15 +199,15 @@ const Contact = () => {
             <div className="md:col-span-2">
               <ScrollReveal delay={0.2}>
                 <div className="space-y-6">
-                  <a href="tel:6158563871" className="flex items-center gap-3 group">
+                  <a href="tel:6153151541" className="flex items-center gap-3 group">
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                       <Phone size={18} className="text-primary" />
                     </div>
-                    <span className="font-heading text-xl font-extrabold text-primary group-hover:underline">615-856-3871</span>
+                    <span className="font-heading text-xl font-extrabold text-primary group-hover:underline">615-315-1541</span>
                   </a>
 
                   {/* Mobile-only text button */}
-                  <a href="sms:6158563871" className="md:hidden block">
+                  <a href="sms:6153151541" className="md:hidden block">
                     <Button variant="hero-outline" size="lg" className="w-full">Text Us</Button>
                   </a>
 
