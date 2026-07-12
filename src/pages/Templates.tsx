@@ -62,7 +62,7 @@ const Templates = () => {
           </ScrollReveal>
           <ScrollReveal delay={0.25}>
             <p className="mt-4 text-sm font-semibold text-primary">
-              Browse the live demos below, then call or text 615-856-3871 to start yours.
+              Browse the live demos below, then call or text 615-315-1541 to start yours.
             </p>
           </ScrollReveal>
         </div>

@@ -63,8 +63,8 @@ const AutomationFeed = () => {
             Leads that sit in an inbox go cold. Leads that hit your pocket get booked.
           </p>
           <div className="text-center">
-            <a href="tel:6158563871">
-              <Button variant="hero" size="xl">Call or Text 615-856-3871</Button>
+            <a href="tel:6153151541">
+              <Button variant="hero" size="xl">Call or Text 615-315-1541</Button>
             </a>
           </div>
         </ScrollReveal>

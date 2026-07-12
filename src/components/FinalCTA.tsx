@@ -15,9 +15,9 @@ const FinalCTA = () => (
         <p className="text-primary-foreground/80 text-lg mb-8 leading-relaxed">
           Custom websites from $500. Care plans from $49/mo. Every lead texted to your phone. One call and we'll tell you exactly what fits.
         </p>
-        <a href="tel:6158563871">
+        <a href="tel:6153151541">
           <Button variant="hero" size="xl" className="mb-4">
-            <Phone size={18} /> Call or Text 615-856-3871
+            <Phone size={18} /> Call or Text 615-315-1541
           </Button>
         </a>
         <div>

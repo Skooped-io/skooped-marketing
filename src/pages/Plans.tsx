@@ -128,6 +128,7 @@ const faqGroups = [
   {
     title: "Billing & Contracts",
     items: [
+      { q: "Is the $500 a one-time payment or a subscription?", a: "One-time. Once the build is paid, it's never billed again. The subscription is a separate, smaller thing: the monthly plan (from $49/mo) that keeps your site hosted, secure, updated, and texting you every lead. Typical start: $500 today, then $49/mo from launch." },
       { q: "Is there a contract?", a: "One page of paper: your scope and the plan you're on. No long-term lock-in, no hidden fees. Plans bill monthly with a card on file." },
       { q: "Can I pay annually?", a: "Yes — annual prepay is 10× the monthly price, so you get 2 months free. Care runs $490/yr, Growth $1,490/yr." },
       { q: "I have more than one site.", a: "Each additional site is +$25/mo on the same plan — same lead alerts, same report." },
@@ -254,7 +255,8 @@ const Plans = () => {
           </ScrollReveal>
           <ScrollReveal delay={0.15}>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              A flat price to get built, a monthly plan to stay running. Every plan texts your leads to your phone and reports in plain English.
+              Two numbers, that's it: a <strong className="text-foreground">one-time build</strong> to get online, plus a{" "}
+              <strong className="text-foreground">monthly plan</strong> that keeps it running. Most clients start at $500 + $49/mo.
             </p>
           </ScrollReveal>
         </div>
@@ -264,14 +266,57 @@ const Plans = () => {
       <section className="pb-16 px-6">
         <div className="container mx-auto max-w-5xl">
           <ScrollReveal>
-            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-1">One-time builds</h2>
-            <p className="text-sm text-muted-foreground mb-6">Pay once, own it. Every build pairs with a monthly Care plan below.</p>
+            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-1">Step 1 — Pick your build</h2>
+            <p className="text-sm text-muted-foreground mb-6">A one-time price. Pay it once, own the site. This is not a subscription.</p>
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
             {builds.map((b, i) => (
               <BuildCard key={b.name} build={b} delay={i * 0.1} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── Monthly plans ── */}
+      <section className="pb-10 px-6">
+        <div className="container mx-auto max-w-5xl">
+          <ScrollReveal>
+            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-1">Step 2 — Pick your monthly plan</h2>
+            <p className="text-sm text-muted-foreground mb-6">
+              This is the recurring part — not an alternative to the build. It keeps your site hosted, secure, and texting you every lead.
+            </p>
+          </ScrollReveal>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+            {plans.map((p, i) => (
+              <PlanCard key={p.name} plan={p} delay={i * 0.1} />
+            ))}
+          </div>
+          <ScrollReveal delay={0.3}>
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 mt-6 text-sm text-muted-foreground">
+              <span>➕ Additional site: <strong className="text-foreground">+$25/mo</strong> on the same plan</span>
+              <span>📅 Annual prepay: <strong className="text-foreground">10× monthly</strong> — 2 months free</span>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── The math, spelled out ── */}
+      <section className="pb-16 px-6">
+        <div className="container mx-auto max-w-5xl">
+          <ScrollReveal>
+            <div className="rounded-2xl border-2 border-primary/30 bg-primary/5 p-6 md:p-8 text-center">
+              <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-semibold mb-3">
+                So what do I actually pay?
+              </p>
+              <p className="font-heading text-xl md:text-2xl font-extrabold text-foreground mb-2">
+                Build once + plan monthly. Example: Launch + Care ={" "}
+                <span className="text-primary">$500 today, then $49/mo</span> from launch.
+              </p>
+              <p className="text-sm text-muted-foreground">
+                That's the whole bill. No setup fees, no hourly surprises — the build is never billed again.
+              </p>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -293,27 +338,6 @@ const Plans = () => {
               <Link to="/contact">
                 <Button variant="hero" size="lg">Book My Session</Button>
               </Link>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ── Monthly plans ── */}
-      <section className="pb-10 px-6">
-        <div className="container mx-auto max-w-5xl">
-          <ScrollReveal>
-            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-1">Monthly plans</h2>
-            <p className="text-sm text-muted-foreground mb-6">Every plan keeps your site alive — and every lead lands on your phone.</p>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-            {plans.map((p, i) => (
-              <PlanCard key={p.name} plan={p} delay={i * 0.1} />
-            ))}
-          </div>
-          <ScrollReveal delay={0.3}>
-            <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 mt-6 text-sm text-muted-foreground">
-              <span>➕ Additional site: <strong className="text-foreground">+$25/mo</strong> on the same plan</span>
-              <span>📅 Annual prepay: <strong className="text-foreground">10× monthly</strong> — 2 months free</span>
             </div>
           </ScrollReveal>
         </div>
@@ -445,8 +469,8 @@ const Plans = () => {
       <section className="pb-24 px-6 text-center">
         <ScrollReveal>
           <h2 className="font-heading text-2xl font-extrabold text-foreground mb-3">Not sure which fits? Just ask.</h2>
-          <a href="tel:6158563871" className="inline-flex items-center gap-2 text-2xl md:text-3xl font-heading font-extrabold text-primary hover:underline mb-6">
-            <Phone size={24} /> 615-856-3871
+          <a href="tel:6153151541" className="inline-flex items-center gap-2 text-2xl md:text-3xl font-heading font-extrabold text-primary hover:underline mb-6">
+            <Phone size={24} /> 615-315-1541
           </a>
           <div>
             <Link to="/contact">

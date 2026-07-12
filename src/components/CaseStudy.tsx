@@ -25,10 +25,10 @@ const CaseStudy = () => (
           </svg>
 
           <a
-            href="tel:6158563871"
+            href="tel:6153151541"
             className="text-primary font-semibold inline-flex items-center gap-1 group relative"
           >
-            Want the same? Call or text 615-856-3871 →
+            Want the same? Call or text 615-315-1541 →
             <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
           </a>
         </div>

@@ -41,7 +41,7 @@ const FloatingInput = ({ label, name, type = "text", required = false, ...props 
 };
 
 const Contact = () => {
-  usePageSeo({ title: "Contact Skooped | Websites & Marketing | Franklin TN", description: "Tell us about your business — websites from $500, care plans from $49/mo, every lead texted to your phone. Call or text 615-856-3871." });
+  usePageSeo({ title: "Contact Skooped | Websites & Marketing | Franklin TN", description: "Tell us about your business — websites from $500, care plans from $49/mo, every lead texted to your phone. Call or text 615-315-1541." });
   const [composed, setComposed] = useState<string | null>(null);
   const [service, setService] = useState("");
   const [message, setMessage] = useState("");
@@ -80,7 +80,7 @@ const Contact = () => {
             </p>
             <p className="text-sm text-muted-foreground">
               Want to skip the form?{" "}
-              <a href="tel:6158563871" className="text-primary font-semibold hover:underline">Call or text 615-856-3871 →</a>
+              <a href="tel:6153151541" className="text-primary font-semibold hover:underline">Call or text 615-315-1541 →</a>
             </p>
           </ScrollReveal>
         </div>
@@ -118,7 +118,7 @@ const Contact = () => {
                         {composed}
                       </p>
                       <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                        <a href={`sms:6158563871?&body=${encodeURIComponent(composed)}`}>
+                        <a href={`sms:6153151541?&body=${encodeURIComponent(composed)}`}>
                           <Button variant="hero" size="lg" className="w-full">Text It to Us</Button>
                         </a>
                         <a href={`mailto:cooper@skooped.io?subject=${encodeURIComponent("New inquiry from skooped.io")}&body=${encodeURIComponent(composed)}`}>
@@ -126,7 +126,7 @@ const Contact = () => {
                         </a>
                       </div>
                       <p className="text-xs text-muted-foreground mt-4">
-                        Or just call: <a href="tel:6158563871" className="text-primary font-semibold hover:underline">615-856-3871</a>
+                        Or just call: <a href="tel:6153151541" className="text-primary font-semibold hover:underline">615-315-1541</a>
                       </p>
                     </motion.div>
                   ) : (
@@ -199,15 +199,15 @@ const Contact = () => {
             <div className="md:col-span-2">
               <ScrollReveal delay={0.2}>
                 <div className="space-y-6">
-                  <a href="tel:6158563871" className="flex items-center gap-3 group">
+                  <a href="tel:6153151541" className="flex items-center gap-3 group">
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                       <Phone size={18} className="text-primary" />
                     </div>
-                    <span className="font-heading text-xl font-extrabold text-primary group-hover:underline">615-856-3871</span>
+                    <span className="font-heading text-xl font-extrabold text-primary group-hover:underline">615-315-1541</span>
                   </a>
 
                   {/* Mobile-only text button */}
-                  <a href="sms:6158563871" className="md:hidden block">
+                  <a href="sms:6153151541" className="md:hidden block">
                     <Button variant="hero-outline" size="lg" className="w-full">Text Us</Button>
                   </a>
 

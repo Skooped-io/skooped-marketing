@@ -92,9 +92,9 @@ const previewSlugs: Record<string, string> = {
   construction: "construction",
   "auto-repair": "auto-repair",
   "life-coaching": "life-coaching",
-  "real-estate": "real-estate-agent",
+  "real-estate": "real-estate",
   "personal-training": "personal-training",
-  "salon-barbershop": "salon-barber-shop",
+  "salon-barbershop": "salon",
   plumbing: "plumbing",
   electrical: "electrical",
 };
@@ -263,7 +263,7 @@ const IndustryTemplate = () => {
             <Link to="/contact">
               <Button variant="hero" size="xl" className="w-full sm:w-auto">Start My Build</Button>
             </Link>
-            <p className="text-sm text-muted-foreground mt-3">Or call/text 615-856-3871 — we'll tell you straight what fits.</p>
+            <p className="text-sm text-muted-foreground mt-3">Or call/text 615-315-1541 — we'll tell you straight what fits.</p>
           </div>
         </div>
       </section>
@@ -289,8 +289,8 @@ const IndustryTemplate = () => {
             <Link to="/contact"><Button variant="hero" size="xl">Start My Build — $500</Button></Link>
             <p className="text-sm text-primary-foreground/60 mt-3">Live in about a week. Every lead texted to your phone.</p>
             <div className="mt-6">
-              <a href="tel:6158563871" className="inline-flex items-center gap-2 text-primary-foreground/80 hover:text-primary transition-colors font-heading font-bold">
-                <Phone size={18} /> Or call us: 615-856-3871
+              <a href="tel:6153151541" className="inline-flex items-center gap-2 text-primary-foreground/80 hover:text-primary transition-colors font-heading font-bold">
+                <Phone size={18} /> Or call us: 615-315-1541
               </a>
             </div>
           </ScrollReveal>

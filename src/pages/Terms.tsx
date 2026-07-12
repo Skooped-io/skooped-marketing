@@ -99,7 +99,7 @@ const Terms = () => {
           <section>
             <h2 className="font-heading text-xl font-bold text-foreground">Contact</h2>
             <p>
-              Questions? Call or text 615-856-3871, or email cooper@skooped.io.
+              Questions? Call or text 615-315-1541, or email cooper@skooped.io.
             </p>
             <p>Skooped.io<br />Franklin, Tennessee</p>
           </section>

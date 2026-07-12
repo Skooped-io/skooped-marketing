@@ -64,8 +64,8 @@ const HowItWorks = () => (
 
       <ScrollReveal delay={0.5}>
         <div className="text-center mt-12">
-          <a href="tel:6158563871">
-            <Button variant="hero" size="xl">Call or Text 615-856-3871</Button>
+          <a href="tel:6153151541">
+            <Button variant="hero" size="xl">Call or Text 615-315-1541</Button>
           </a>
           <p className="text-sm text-muted-foreground mt-3">Builds from $500. Care plans from $49/mo.</p>
         </div>
