@@ -18,7 +18,7 @@ const builds = [
     icon: Hammer,
     name: "Launch",
     price: "$500",
-    priceNote: "one-time · requires a Care plan",
+    priceNote: "one-time · requires a monthly plan",
     tagline: "Get online and look legit.",
     features: [
       "5-page custom site from our industry library",
@@ -33,7 +33,7 @@ const builds = [
     icon: Building2,
     name: "Establish",
     price: "$1,000",
-    priceNote: "one-time · requires a Care plan",
+    priceNote: "one-time · requires a monthly plan",
     tagline: "Everything in Launch, plus get found.",
     popular: true,
     features: [
@@ -65,7 +65,7 @@ const builds = [
 /* ───── Monthly plans ───── */
 const plans = [
   {
-    name: "Care",
+    name: "Single",
     tagline: "Your site, alive and answering.",
     price: "$49",
     image: tier1Img,
@@ -78,13 +78,13 @@ const plans = [
     ],
   },
   {
-    name: "Growth",
+    name: "Double",
     tagline: "Show up higher. Stay fresh.",
     price: "$149",
     popular: true,
     image: tier2Img,
     features: [
-      "Everything in Care, plus:",
+      "Everything in Single, plus:",
       "Ongoing local SEO: Google Business posts, review responses, content refresh",
       "2 hours of edits every month",
       "Priority response",
@@ -92,12 +92,12 @@ const plans = [
     ],
   },
   {
-    name: "Premium",
+    name: "Triple",
     tagline: "The full operation. We run it all.",
     price: "$299",
     image: tier3Img,
     features: [
-      "Everything in Growth, plus:",
+      "Everything in Double, plus:",
       "Ads management: Google Local Service Ads & Meta",
       "Ad spend bills to your own card — we never mark it up",
       "Social media coordination",
@@ -119,10 +119,10 @@ const faqGroups = [
   {
     title: "What's Included",
     items: [
-      { q: "Why do builds require a Care plan?", a: "Because a website isn't done when it launches. Care covers hosting, security, domain management, small edits — and the part that makes you money: every lead from your site texted straight to your phone, plus a monthly report in plain English." },
+      { q: "Why do builds require a monthly plan?", a: "Because a website isn't done when it launches. The Single plan covers hosting, security, domain management, small edits — and the part that makes you money: every lead from your site texted straight to your phone, plus a monthly report in plain English." },
       { q: "Do I own my website?", a: "Yes. Your website, your content, your data. Always." },
       { q: "How is this different from Wix or Squarespace?", a: "Those platforms give you a template and say 'good luck.' We build your site, handle your domain and SEO, and text you every lead. You get a marketing team — not a DIY tool." },
-      { q: "Do you run my ad budget?", a: "Ads bill directly to your own card — we never front spend or mark it up. On Premium, we manage the campaigns and you see every dollar." },
+      { q: "Do you run my ad budget?", a: "Ads bill directly to your own card — we never front spend or mark it up. On Triple, we manage the campaigns and you see every dollar." },
     ],
   },
   {
@@ -130,7 +130,7 @@ const faqGroups = [
     items: [
       { q: "Is the $500 a one-time payment or a subscription?", a: "One-time. Once the build is paid, it's never billed again. The subscription is a separate, smaller thing: the monthly plan (from $49/mo) that keeps your site hosted, secure, updated, and texting you every lead. Typical start: $500 today, then $49/mo from launch." },
       { q: "Is there a contract?", a: "One page of paper: your scope and the plan you're on. No long-term lock-in, no hidden fees. Plans bill monthly with a card on file." },
-      { q: "Can I pay annually?", a: "Yes — annual prepay is 10× the monthly price, so you get 2 months free. Care runs $490/yr, Growth $1,490/yr." },
+      { q: "Can I pay annually?", a: "Yes — annual prepay is 10× the monthly price, so you get 2 months free. Single runs $490/yr, Double $1,490/yr." },
       { q: "I have more than one site.", a: "Each additional site is +$25/mo on the same plan — same lead alerts, same report." },
     ],
   },
@@ -235,7 +235,7 @@ const PlanCard = ({ plan, delay }: { plan: (typeof plans)[number]; delay: number
 const Plans = () => {
   usePageSeo({
     title: "Pricing | Websites from $500, Plans from $49/mo | Skooped Franklin TN",
-    description: "One price list: Launch $500, Establish $1,000, custom builds quoted via a $300 Discovery session (credited). Care $49, Growth $149, Premium $299 monthly. Every lead texted to your phone.",
+    description: "One price list: Launch $500, Establish $1,000, custom builds quoted via a $300 Discovery session (credited). Single $49, Double $149, Triple $299 monthly. Every lead texted to your phone.",
   });
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -297,7 +297,7 @@ const Plans = () => {
               <span>📅 Annual prepay: <strong className="text-foreground">10× monthly</strong> — 2 months free</span>
             </div>
             <p className="text-center text-sm text-muted-foreground mt-3">
-              Bigger operation? Multi-location and dedicated-management retainers are built on Premium as
+              Bigger operation? Multi-location and dedicated-management retainers are built on Triple as
               transparent line items — scoped through a <Link to="/contact" className="text-primary font-semibold hover:underline">Discovery session</Link>.
             </p>
           </ScrollReveal>
@@ -313,7 +313,7 @@ const Plans = () => {
                 So what do I actually pay?
               </p>
               <p className="font-heading text-xl md:text-2xl font-extrabold text-foreground mb-2">
-                Build once + plan monthly. Example: Launch + Care ={" "}
+                Build once + plan monthly. Example: Launch + Single ={" "}
                 <span className="text-primary">$500 today, then $49/mo</span> from launch.
               </p>
               <p className="text-sm text-muted-foreground">

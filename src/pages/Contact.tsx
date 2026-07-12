@@ -41,7 +41,7 @@ const FloatingInput = ({ label, name, type = "text", required = false, ...props 
 };
 
 const Contact = () => {
-  usePageSeo({ title: "Contact Skooped | Websites & Marketing | Franklin TN", description: "Tell us about your business — websites from $500, care plans from $49/mo, every lead texted to your phone. Call or text 615-315-1541." });
+  usePageSeo({ title: "Contact Skooped | Websites & Marketing | Franklin TN", description: "Tell us about your business — websites from $500, plans from $49/mo, every lead texted to your phone. Call or text 615-315-1541." });
   const [composed, setComposed] = useState<string | null>(null);
   const [service, setService] = useState("");
   const [message, setMessage] = useState("");

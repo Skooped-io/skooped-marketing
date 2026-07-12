@@ -13,7 +13,7 @@ const FinalCTA = () => (
           Ready when you are.
         </h2>
         <p className="text-primary-foreground/80 text-lg mb-8 leading-relaxed">
-          Custom websites from $500. Care plans from $49/mo. Every lead texted to your phone. One call and we'll tell you exactly what fits.
+          Custom websites from $500. Plans from $49/mo. Every lead texted to your phone. One call and we'll tell you exactly what fits.
         </p>
         <a href="tel:6153151541">
           <Button variant="hero" size="xl" className="mb-4">

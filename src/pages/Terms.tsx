@@ -29,16 +29,16 @@ const Terms = () => {
             <h2 className="font-heading text-xl font-bold text-foreground">Plans &amp; Pricing</h2>
             <p className="mb-2">One-time website builds:</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Launch: $500 one-time (requires an active Care plan)</li>
-              <li>Establish: $1,000 one-time (requires an active Care plan)</li>
+              <li>Launch: $500 one-time (requires an active monthly plan)</li>
+              <li>Establish: $1,000 one-time (requires an active monthly plan)</li>
               <li>Custom builds and integrations: from $2,000, quoted through a Discovery session and billed in milestones (50% to start, 50% at launch)</li>
               <li>Business Launch Pack add-on: +$500 (Tennessee LLC filing assistance with the $300 state fee passed through at cost, EIN, starter operating agreement, Google Business Profile verification support — filing assistance, not legal advice)</li>
             </ul>
             <p className="mt-3 mb-2">Monthly plans:</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Care: $49/month</li>
-              <li>Growth: $149/month</li>
-              <li>Premium: $299/month (ad spend bills directly to your own payment method; we do not mark up ad spend)</li>
+              <li>Single: $49/month</li>
+              <li>Double: $149/month</li>
+              <li>Triple: $299/month (ad spend bills directly to your own payment method; we do not mark up ad spend)</li>
               <li>Additional website on the same plan: +$25/month</li>
               <li>Annual prepay: 10× the monthly price (equivalent to 2 months free)</li>
             </ul>

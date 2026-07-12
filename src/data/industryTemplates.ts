@@ -48,7 +48,7 @@ const baseFeatures = (industry: string, searchTerms: string, socialContent: stri
   { icon: Search, title: "Local SEO That Works", desc: `We target the searches that matter: ${searchTerms}. Your competitors are ranking. You should be too.` },
   { icon: MapPin, title: "Google Business Profile", desc: "We set up and optimize your Google Business Profile so you show up in Maps, local search, and the 3-pack." },
   { icon: PhoneIncoming, title: "SMS Lead Alerts", desc: "Every lead from your website is texted straight to your phone the moment it lands. No inbox to check, no lost jobs." },
-  { icon: Instagram, title: "Social Media Coordination", desc: `${socialContent} — planned and posted for you on the Premium plan.`, premium: true },
+  { icon: Instagram, title: "Social Media Coordination", desc: `${socialContent} — planned and posted for you on the Triple plan.`, premium: true },
   { icon: Megaphone, title: "Google Local Service Ads", desc: "Pay-per-lead ads that put you at the very top of Google. Ad spend bills to your own card — we manage, never mark up.", premium: true },
   { icon: Star, title: "Reviews Front & Center", desc: "A live Google reviews widget on your site, plus a simple playbook for asking every happy customer." },
   { icon: BarChart3, title: "Monthly Plain-English Report", desc: "Visits, leads, and what we changed — one email a month you'll actually read." },
@@ -62,10 +62,10 @@ const baseStats: IndustryStat[] = [
 
 const baseFaq = (industry: string): IndustryFaq[] => [
   { q: `How is this different from other ${industry.toLowerCase()} marketing companies?`, a: `Traditional agencies charge thousands and lock you in contracts. Skooped gives you an entire AI marketing team for a fraction of the price — and you own everything.` },
-  { q: "I already have a website. Can you work with it?", a: "Absolutely. Call or text us and we'll take an honest look — sometimes the answer is a $500 rebuild, sometimes a Care plan that keeps what you have alive and texting you leads." },
+  { q: "I already have a website. Can you work with it?", a: "Absolutely. Call or text us and we'll take an honest look — sometimes the answer is a $500 rebuild, sometimes a monthly plan that keeps what you have alive and texting you leads." },
   { q: `Do you work with ${industry.toLowerCase()} businesses outside of Tennessee?`, a: "Yes. Our AI team works nationwide. We target the specific cities and services you cover." },
   { q: "How quickly will I see results?", a: "Your website goes live within a week. SEO movement starts in 30-60 days. Ad leads can start the same week your campaigns launch." },
-  { q: "What if I need something changed on my site?", a: "Just text us the change. Care plans include 30 minutes of edits every month; Growth includes 2 hours. No editor to learn, no coding." },
+  { q: "What if I need something changed on my site?", a: "Just text us the change. Single includes 30 minutes of edits a month; Double includes 2 hours. No editor to learn, no coding." },
 ];
 
 /* ═══════════════════ INDUSTRY DATA ═══════════════════ */
@@ -89,16 +89,16 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     testimonial: { quote: "We went from barely showing up on Google to getting calls every day. Skooped built our site, set up our ads, and now we're on track for our best year ever.", cite: "Roofing contractor, Franklin TN" },
     faq: [
       { q: "How is this different from HomeAdvisor or Angi?", a: "Those platforms own your leads and charge you per click. With Skooped, you own your website, your SEO, and your customers. No middleman taking a cut." },
-      { q: "I already have a website. Can you work with it?", a: "Absolutely. Call or text us and we'll take an honest look — sometimes the answer is a $500 rebuild, sometimes a Care plan that keeps what you have alive and texting you leads." },
+      { q: "I already have a website. Can you work with it?", a: "Absolutely. Call or text us and we'll take an honest look — sometimes the answer is a $500 rebuild, sometimes a monthly plan that keeps what you have alive and texting you leads." },
       { q: "Do you work with roofing companies outside of Tennessee?", a: "Yes. Our AI team works nationwide. We target the specific cities and services you cover." },
       { q: "How quickly will I see results?", a: "Your website goes live within a week. SEO movement starts in 30-60 days. Ad leads can start the same week your campaigns launch." },
-      { q: "What if I need something changed on my site?", a: "Just text us the change. Care plans include 30 minutes of edits every month; Growth includes 2 hours. No editor to learn, no coding." },
+      { q: "What if I need something changed on my site?", a: "Just text us the change. Single includes 30 minutes of edits a month; Double includes 2 hours. No editor to learn, no coding." },
     ],
     ctaHeadline: "Your next customer is searching for a roofer right now.",
     ctaSub: "Make sure they find you.",
     seo: {
       title: "Roofing Contractor Website & Marketing | Built for Roofers | Skooped",
-      description: "Get a custom roofing website with SEO, Google Ads, and social media — all managed by AI. Built specifically for roofing contractors. Sites from $500, care plans from $49/mo — every lead texted to your phone.",
+      description: "Get a custom roofing website with SEO, Google Ads, and social media — all managed by AI. Built specifically for roofing contractors. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -123,7 +123,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find you.",
     seo: {
       title: "Landscaping Website & Marketing | Built for Landscapers | Skooped",
-      description: "Custom landscaping website with SEO, social media, and Google Ads — all managed by AI. Sites from $500, care plans from $49/mo — every lead texted to your phone.",
+      description: "Custom landscaping website with SEO, social media, and Google Ads — all managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -148,7 +148,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find you.",
     seo: {
       title: "Fencing Contractor Website & Marketing | Skooped",
-      description: "Custom fencing website with SEO, Google Ads, and social media — managed by AI. Sites from $500, care plans from $49/mo — every lead texted to your phone.",
+      description: "Custom fencing website with SEO, Google Ads, and social media — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -173,7 +173,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find your company.",
     seo: {
       title: "Construction Company Website & Marketing | Skooped",
-      description: "Custom construction website with SEO, Google Ads, and social media — managed by AI. Sites from $500, care plans from $49/mo — every lead texted to your phone.",
+      description: "Custom construction website with SEO, Google Ads, and social media — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -198,7 +198,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find your practice.",
     seo: {
       title: "Therapist Website & Marketing | Built for Counselors | Skooped",
-      description: "Custom therapy website with SEO, social media, and online booking — managed by AI. Sites from $500, care plans from $49/mo — every lead texted to your phone.",
+      description: "Custom therapy website with SEO, social media, and online booking — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -223,7 +223,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find you.",
     seo: {
       title: "Life Coach Website & Marketing | Skooped",
-      description: "Custom life coaching website with SEO, social media, and booking — managed by AI. Sites from $500, care plans from $49/mo — every lead texted to your phone.",
+      description: "Custom life coaching website with SEO, social media, and booking — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -248,7 +248,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find your shop.",
     seo: {
       title: "Auto Repair Website & Marketing | Built for Mechanics | Skooped",
-      description: "Custom auto repair website with SEO, Google Ads, and social media — managed by AI. Sites from $500, care plans from $49/mo — every lead texted to your phone.",
+      description: "Custom auto repair website with SEO, Google Ads, and social media — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -273,7 +273,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find you first.",
     seo: {
       title: "Real Estate Website & Marketing | Skooped",
-      description: "Custom real estate website with SEO, social media, and lead gen — managed by AI. Sites from $500, care plans from $49/mo — every lead texted to your phone.",
+      description: "Custom real estate website with SEO, social media, and lead gen — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -298,7 +298,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find your gym.",
     seo: {
       title: "Personal Trainer Website & Marketing | Skooped",
-      description: "Custom personal training website with SEO, social media, and booking — managed by AI. Sites from $500, care plans from $49/mo — every lead texted to your phone.",
+      description: "Custom personal training website with SEO, social media, and booking — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -323,7 +323,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they book with you.",
     seo: {
       title: "Salon & Barbershop Website & Marketing | Skooped",
-      description: "Custom salon website with SEO, booking, and social media — managed by AI. Sites from $500, care plans from $49/mo — every lead texted to your phone.",
+      description: "Custom salon website with SEO, booking, and social media — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -348,7 +348,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they call you.",
     seo: {
       title: "Plumbing Website & Marketing | Built for Plumbers | Skooped",
-      description: "Custom plumbing website with SEO, Google Ads, and social media — managed by AI. Sites from $500, care plans from $49/mo — every lead texted to your phone.",
+      description: "Custom plumbing website with SEO, Google Ads, and social media — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -373,7 +373,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find you.",
     seo: {
       title: "Electrician Website & Marketing | Skooped",
-      description: "Custom electrical contractor website with SEO, Google Ads, and social media — managed by AI. Sites from $500, care plans from $49/mo — every lead texted to your phone.",
+      description: "Custom electrical contractor website with SEO, Google Ads, and social media — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 };

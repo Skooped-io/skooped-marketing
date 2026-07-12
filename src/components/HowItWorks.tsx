@@ -67,7 +67,7 @@ const HowItWorks = () => (
           <a href="tel:6153151541">
             <Button variant="hero" size="xl">Call or Text 615-315-1541</Button>
           </a>
-          <p className="text-sm text-muted-foreground mt-3">Builds from $500. Care plans from $49/mo.</p>
+          <p className="text-sm text-muted-foreground mt-3">Builds from $500. Plans from $49/mo.</p>
         </div>
       </ScrollReveal>
     </div>

@@ -72,9 +72,9 @@ const FaqItem = ({ q, a, open, toggle }: { q: string; a: string; open: boolean; 
 
 /* ───── Monthly plans (shared) ───── */
 const tiers = [
-  { name: "Care", price: "$49", desc: "Hosting, updates, lead alerts, monthly report" },
-  { name: "Growth", price: "$149", desc: "Care + ongoing local SEO & content", popular: true },
-  { name: "Premium", price: "$299", desc: "Growth + ads management & social" },
+  { name: "Single", price: "$49", desc: "Hosting, updates, lead alerts, monthly report" },
+  { name: "Double", price: "$149", desc: "Single + ongoing local SEO & content", popular: true },
+  { name: "Triple", price: "$299", desc: "Double + ads management & social" },
 ];
 
 /* ───── Steps (shared) ───── */
@@ -171,7 +171,7 @@ const IndustryTemplate = () => {
                       <div>
                         <h3 className="font-heading font-bold text-foreground mb-1 flex items-center gap-2">
                           {f.title}
-                          {f.premium && <span className="text-[10px] font-bold bg-accent/15 text-accent px-2 py-0.5 rounded-full">Premium</span>}
+                          {f.premium && <span className="text-[10px] font-bold bg-accent/15 text-accent px-2 py-0.5 rounded-full">Triple plan</span>}
                         </h3>
                         <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
                       </div>

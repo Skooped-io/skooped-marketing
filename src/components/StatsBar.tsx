@@ -5,7 +5,7 @@ const stats = [
   { value: "7 days", label: "From payment to live website" },
   { value: "8,000+", label: "Google impressions in 3 months" },
   { value: "$500", label: "Flat-rate builds. No surprises." },
-  { value: "$49", label: "Care plans from $49/mo" },
+  { value: "$49", label: "Plans from $49/mo" },
 ];
 
 const AnimatedNumber = ({ value }: { value: string }) => {

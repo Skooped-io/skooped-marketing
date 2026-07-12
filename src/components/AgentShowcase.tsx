@@ -99,7 +99,7 @@ const agents: AgentData[] = [
       { icon: Hash, text: "Hashtag research — refreshed monthly per industry" },
       { icon: Bell, text: "Engagement alerts — flags comments that need responses" },
     ],
-    stat: "Premium plan feature",
+    stat: "Triple plan feature",
     avatar: sierraAvatar,
   },
   {
