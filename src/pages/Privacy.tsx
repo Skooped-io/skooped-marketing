@@ -78,12 +78,12 @@ const Privacy = () => {
               <li>Delete your account and all associated data</li>
               <li>Disconnect your Google account at any time</li>
             </ul>
-            <p className="mt-4">Contact us at privacy@skooped.io or through the Contact Cooper page in your dashboard.</p>
+            <p className="mt-4">Contact us at cooper@skooped.io or call/text 615-315-1541.</p>
           </section>
 
           <section>
             <h2 className="font-heading text-xl font-bold text-foreground">Contact</h2>
-            <p>Skooped.io<br />Franklin, Tennessee<br />privacy@skooped.io</p>
+            <p>Skooped.io<br />Franklin, Tennessee<br />cooper@skooped.io · 615-315-1541</p>
           </section>
         </div>
       </main>
