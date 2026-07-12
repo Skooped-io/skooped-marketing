@@ -1,19 +1,14 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const feedItems = [
-  { time: "6:30 AM", color: "hsl(142 71% 45%)", agent: "Cooper", text: "generated your morning performance digest" },
-  { time: "7:00 AM", color: "hsl(217 91% 60%)", agent: "Scout", text: "checked your Google rankings — up 3 positions" },
-  { time: "9:00 AM", color: "hsl(142 71% 45%)", agent: "Sierra", text: 'published your Instagram post — "5 Signs You Need a New Roof"' },
-  { time: "11:00 AM", color: "hsl(38 92% 50%)", agent: "Riley", text: "detected a traffic spike — investigating source" },
-  { time: "2:00 PM", color: "hsl(217 91% 60%)", agent: "Bob", text: "ran a Lighthouse scan — performance score: 94" },
-  { time: "4:00 PM", color: "hsl(263 70% 50%)", agent: "Sandra", text: "flagged: ad spend trending 8% under budget" },
-  { time: "6:00 PM", color: "hsl(0 84% 60%)", agent: "Mark", text: "completed daily security scan — all clear" },
-  { time: "8:00 PM", color: "hsl(142 71% 45%)", agent: "Scout", text: "identified 3 new keyword opportunities" },
-  { time: "11:59 PM", color: "hsl(217 91% 60%)", agent: "Cooper", text: "compiled the daily summary and knowledge update" },
+  { time: "2:14 PM", color: "hsl(217 91% 60%)", agent: "Your website", text: 'captures a lead — "Need a quote on a backyard fence, ~120 ft."' },
+  { time: "2:14 PM", color: "hsl(142 71% 45%)", agent: "Skooped", text: "texts it to your phone — name, number, and what they asked for" },
+  { time: "2:16 PM", color: "hsl(38 92% 50%)", agent: "You", text: "call them back while your competitors' inboxes sit unread" },
+  { time: "2:31 PM", color: "hsl(263 70% 50%)", agent: "You", text: "book the walkthrough. That's the whole point." },
+  { time: "Month's end", color: "hsl(340 60% 57%)", agent: "Skooped", text: "sends your plain-English report — visits, leads, and what we changed" },
 ];
 
 const AutomationFeed = () => {
@@ -31,10 +26,10 @@ const AutomationFeed = () => {
       <div className="relative container mx-auto max-w-3xl">
         <ScrollReveal>
           <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-primary-foreground text-center mb-3">
-            Your Business Runs on Autopilot
+            A lead lands. Your phone buzzes.
           </h2>
           <p className="text-primary-foreground/60 text-center text-lg mb-12">
-            Here's what happens behind the scenes — without you lifting a finger.
+            Here's what happens when someone fills out the form on your website.
           </p>
         </ScrollReveal>
 
@@ -52,7 +47,7 @@ const AutomationFeed = () => {
                 className="w-2.5 h-2.5 rounded-full mt-1.5 shrink-0"
                 style={{ backgroundColor: item.color }}
               />
-              <span className="text-primary-foreground/40 text-sm font-mono whitespace-nowrap w-20 shrink-0">
+              <span className="text-primary-foreground/40 text-sm font-mono whitespace-nowrap w-24 shrink-0">
                 {item.time}
               </span>
               <span className="text-primary-foreground/90 text-sm">
@@ -65,12 +60,12 @@ const AutomationFeed = () => {
 
         <ScrollReveal delay={1.2}>
           <p className="text-primary-foreground/50 text-center text-sm mb-8">
-            This happens every day. For every client. Automatically.
+            Leads that sit in an inbox go cold. Leads that hit your pocket get booked.
           </p>
           <div className="text-center">
-            <Link to="/templates">
-              <Button variant="hero" size="xl">Try It Free for 14 Days</Button>
-            </Link>
+            <a href="tel:6158563871">
+              <Button variant="hero" size="xl">Call or Text 615-856-3871</Button>
+            </a>
           </div>
         </ScrollReveal>
       </div>

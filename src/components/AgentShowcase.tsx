@@ -44,11 +44,11 @@ const agents: AgentData[] = [
     capabilityIcons: [MessageSquare, CheckCircle, FolderKanban, ArrowDownUp, Users],
     automations: [
       { icon: Clock, text: "Daily performance digest — every morning at 6:30 AM" },
-      { icon: Users, text: "Client onboarding workflows — triggered on signup" },
+      { icon: Users, text: "Client onboarding workflows — kicked off the day you sign" },
       { icon: FolderKanban, text: "Agent task assignment — auto-delegates based on priority" },
-      { icon: AlertTriangle, text: "Escalation alerts — flags urgent items to Jake instantly" },
+      { icon: AlertTriangle, text: "Escalation alerts — flags urgent items to a human instantly" },
     ],
-    stat: "1,247 actions this month",
+    stat: "Your account manager, 24/7",
     avatar: cooperAvatar,
   },
   {
@@ -82,7 +82,7 @@ const agents: AgentData[] = [
       { icon: ScanLine, text: "Broken link detection — scans all pages nightly" },
       { icon: Lock, text: "SSL certificate monitoring — alerts 30 days before expiry" },
     ],
-    stat: "847 deploys this month",
+    stat: "Builds every Skooped site",
     avatar: bobAvatar,
   },
   {
@@ -99,7 +99,7 @@ const agents: AgentData[] = [
       { icon: Hash, text: "Hashtag research — refreshed monthly per industry" },
       { icon: Bell, text: "Engagement alerts — flags comments that need responses" },
     ],
-    stat: "312 posts scheduled",
+    stat: "Premium plan feature",
     avatar: sierraAvatar,
   },
   {
@@ -116,7 +116,7 @@ const agents: AgentData[] = [
       { icon: DollarSign, text: "Monthly ROI summary — shows exactly what your marketing earned" },
       { icon: Target, text: "Goal tracking — monitors conversion targets in real-time" },
     ],
-    stat: "98 reports generated",
+    stat: "Reports monthly, in plain English",
     avatar: rileyAvatar,
   },
   {
@@ -150,7 +150,7 @@ const agents: AgentData[] = [
       { icon: ReceiptText, text: "Monthly efficiency report — where to save, where to invest" },
       { icon: Cpu, text: "Model usage optimization — always uses the cheapest effective AI" },
     ],
-    stat: "$0 wasted this month",
+    stat: "Zero wasted spend",
     avatar: sandraAvatar,
   },
 ];
@@ -339,7 +339,7 @@ const AgentShowcase = () => {
         {/* Summary stats */}
         <div className="grid grid-cols-3 gap-4 mt-8">
           {[
-            { value: "5,000+", label: "actions per month" },
+            { value: "Every lead", label: "texted to your phone" },
             { value: "24/7/365", label: "availability" },
             { value: "7 specialists", label: "1 goal" },
           ].map((s) => (
@@ -353,7 +353,7 @@ const AgentShowcase = () => {
         </div>
         <ScrollReveal>
           <p className="text-muted-foreground text-center text-sm mt-4">
-            This is what $49/mo gets you. Not a chatbot. Not a template. A real team.
+            The team behind every Skooped plan — run by a real human in Franklin, TN.
           </p>
         </ScrollReveal>
       </div>

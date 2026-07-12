@@ -13,7 +13,7 @@ const Terms = () => {
       <Navbar />
       <main className="container mx-auto max-w-3xl px-6 pt-32 pb-20">
         <h1 className="font-heading text-4xl font-extrabold text-foreground mb-2">Terms of Service</h1>
-        <p className="text-sm text-muted-foreground mb-10">Last updated: March 22, 2026</p>
+        <p className="text-sm text-muted-foreground mb-10">Last updated: July 11, 2026</p>
 
         <div className="prose prose-neutral max-w-none space-y-8 text-foreground/90 text-base leading-relaxed">
           <p>By using Skooped.io, you agree to these terms.</p>
@@ -27,29 +27,39 @@ const Terms = () => {
 
           <section>
             <h2 className="font-heading text-xl font-bold text-foreground">Plans &amp; Pricing</h2>
+            <p className="mb-2">One-time website builds:</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Starter: $49/month</li>
-              <li>Growth: $99/month</li>
-              <li>Scale: $149/month</li>
-              <li>Custom website builds: $299 one-time fee (in addition to monthly plan)</li>
-              <li>All plans include a 14-day free trial with no credit card required to start</li>
+              <li>Launch: $500 one-time (requires an active Care plan)</li>
+              <li>Establish: $1,000 one-time (requires an active Care plan)</li>
+              <li>Custom builds and integrations: from $2,000, quoted through a Discovery session and billed in milestones (50% to start, 50% at launch)</li>
+              <li>Business Launch Pack add-on: +$500 (Tennessee LLC filing assistance with the $300 state fee passed through at cost, EIN, starter operating agreement, Google Business Profile verification support — filing assistance, not legal advice)</li>
+            </ul>
+            <p className="mt-3 mb-2">Monthly plans:</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Care: $49/month</li>
+              <li>Growth: $149/month</li>
+              <li>Premium: $299/month (ad spend bills directly to your own payment method; we do not mark up ad spend)</li>
+              <li>Additional website on the same plan: +$25/month</li>
+              <li>Annual prepay: 10× the monthly price (equivalent to 2 months free)</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="font-heading text-xl font-bold text-foreground">Free Trial</h2>
+            <h2 className="font-heading text-xl font-bold text-foreground">Discovery Sessions</h2>
             <p>
-              Your 14-day free trial begins when you complete signup. During the trial, you have full access to all features of your selected plan. No charge is made until the trial ends. You can cancel at any time during the trial.
+              Custom work is scoped through a paid Discovery session ($300): a one-hour consultation followed by a written
+              roadmap and fixed cost estimate within 7 days. The full $300 is credited toward your build if you sign within
+              30 days of receiving the roadmap.
             </p>
           </section>
 
           <section>
             <h2 className="font-heading text-xl font-bold text-foreground">Billing &amp; Cancellation</h2>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Billing is monthly, starting after your 14-day trial</li>
-              <li>You can cancel anytime from your dashboard — no contracts, no cancellation fees</li>
-              <li>If you cancel, your website remains active through the end of your current billing period</li>
-              <li>After cancellation, your website will be taken offline. You can export your content before cancellation.</li>
+              <li>Build fees are due before work begins; monthly plans bill to a card on file</li>
+              <li>Your scope and plan are confirmed on a one-page agreement — no long-term lock-in, no cancellation fees</li>
+              <li>You can cancel your monthly plan anytime by contacting us; your website remains active through the end of your current billing period</li>
+              <li>After cancellation, your website will be taken offline. You can request an export of your content before cancellation.</li>
             </ul>
           </section>
 
@@ -89,7 +99,7 @@ const Terms = () => {
           <section>
             <h2 className="font-heading text-xl font-bold text-foreground">Contact</h2>
             <p>
-              Questions? Reach out through your dashboard or email support@skooped.io.
+              Questions? Call or text 615-856-3871, or email cooper@skooped.io.
             </p>
             <p>Skooped.io<br />Franklin, Tennessee</p>
           </section>

@@ -70,18 +70,18 @@ const FaqItem = ({ q, a, open, toggle }: { q: string; a: string; open: boolean; 
   </div>
 );
 
-/* ───── Pricing tiers (shared) ───── */
+/* ───── Monthly plans (shared) ───── */
 const tiers = [
-  { name: "Single", price: "$49", desc: "Website + basic SEO" },
-  { name: "Double", price: "$99", desc: "Website + SEO + social media", popular: true },
-  { name: "Triple", price: "$149", desc: "Everything + ads + call-back" },
+  { name: "Care", price: "$49", desc: "Hosting, updates, lead alerts, monthly report" },
+  { name: "Growth", price: "$149", desc: "Care + ongoing local SEO & content", popular: true },
+  { name: "Premium", price: "$299", desc: "Growth + ads management & social" },
 ];
 
 /* ───── Steps (shared) ───── */
 const steps = [
-  { num: "1", title: "Pick This Template", desc: "Click 'Try This Template Free' and create your account. Takes 2 minutes." },
-  { num: "2", title: "Tell Us About Your Business", desc: "Add your company name, logo, service area, and services. We handle the rest." },
-  { num: "3", title: "Your Site Is Live in 60 Seconds", desc: "Your website goes live instantly. Your AI team starts SEO, social media, and analytics 24/7." },
+  { num: "1", title: "Call, Text, or Send the Form", desc: "Tell us about your business. We'll confirm the scope and price on one page of paper." },
+  { num: "2", title: "We Build It", desc: "Your company name, logo, services, and service area — customized onto this design by our team." },
+  { num: "3", title: "Live in About a Week", desc: "We launch it with you on the phone — and from day one, every lead is texted straight to you." },
 ];
 
 const previewSlugs: Record<string, string> = {
@@ -133,8 +133,8 @@ const IndustryTemplate = () => {
             </ScrollReveal>
             <ScrollReveal delay={0.3}>
               <div className="flex flex-wrap gap-3 mb-3">
-                <Link to={`/signup?template=${slug}`}><Button variant="hero" size="lg">Try This Template Free — Live in 60 Seconds</Button></Link>
-                <Link to="/plans"><Button variant="outline" size="lg">See Plans</Button></Link>
+                <Link to="/contact"><Button variant="hero" size="lg">Start My Build — $500</Button></Link>
+                <Link to="/plans"><Button variant="outline" size="lg">See Pricing</Button></Link>
                 {previewUrl && (
                   <a href={previewUrl} target="_blank" rel="noopener noreferrer">
                     <Button variant="outline" size="lg">
@@ -143,7 +143,7 @@ const IndustryTemplate = () => {
                   </a>
                 )}
               </div>
-              <p className="text-xs text-muted-foreground">14 days free. No credit card required.</p>
+              <p className="text-xs text-muted-foreground">$500 flat, live in about a week. Every lead texted to your phone.</p>
             </ScrollReveal>
           </div>
           <ScrollReveal delay={0.2}>
@@ -193,8 +193,8 @@ const IndustryTemplate = () => {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-12">
             <ScrollReveal delay={0}>
               <div className="text-center bg-card border border-border rounded-2xl p-8">
-                <p className="font-heading text-4xl font-extrabold text-primary mb-2">60 sec</p>
-                <p className="text-sm text-muted-foreground">From signup to live website</p>
+                <p className="font-heading text-4xl font-extrabold text-primary mb-2">7 days</p>
+                <p className="text-sm text-muted-foreground">From payment to live website</p>
               </div>
             </ScrollReveal>
             {data.stats.map((s, i) => (
@@ -239,7 +239,9 @@ const IndustryTemplate = () => {
       <section className="py-20 px-6">
         <div className="container mx-auto max-w-4xl">
           <ScrollReveal>
-            <p className="text-center text-sm text-muted-foreground mb-6">Start with any plan — your first 14 days are on us.</p>
+            <p className="text-center text-sm text-muted-foreground mb-6">
+              Your build is <strong className="text-foreground">$500 flat</strong> — then pick the monthly plan that runs it.
+            </p>
           </ScrollReveal>
           <div className="grid sm:grid-cols-3 gap-6 mb-8">
             {tiers.map((t, i) => (
@@ -249,19 +251,19 @@ const IndustryTemplate = () => {
                   <p className="font-heading font-extrabold text-foreground text-lg mb-1">{t.name}</p>
                   <p className="font-heading text-3xl font-extrabold text-primary mb-2">{t.price}<span className="text-sm text-muted-foreground font-normal">/mo</span></p>
                   <p className="text-sm text-muted-foreground mb-4">{t.desc}</p>
-                  <Link to={`/signup?template=${slug}`}>
-                    <Button variant={t.popular ? "hero" : "outline"} size="sm" className="w-full">Try Free</Button>
+                  <Link to="/contact">
+                    <Button variant={t.popular ? "hero" : "outline"} size="sm" className="w-full">Pick My Plan</Button>
                   </Link>
                 </div>
               </ScrollReveal>
             ))}
           </div>
-          <p className="text-center text-sm text-muted-foreground mb-6">All plans include a custom {data.name.toLowerCase()} website. No contracts.</p>
+          <p className="text-center text-sm text-muted-foreground mb-6">Every plan includes a custom {data.name.toLowerCase()} website kept alive, secure, and texting you leads.</p>
           <div className="text-center">
-            <Link to={`/signup?template=${slug}`}>
-              <Button variant="hero" size="xl" className="w-full sm:w-auto">Start Your Free Trial</Button>
+            <Link to="/contact">
+              <Button variant="hero" size="xl" className="w-full sm:w-auto">Start My Build</Button>
             </Link>
-            <p className="text-sm text-muted-foreground mt-3">14 days free. No credit card required.</p>
+            <p className="text-sm text-muted-foreground mt-3">Or call/text 615-856-3871 — we'll tell you straight what fits.</p>
           </div>
         </div>
       </section>
@@ -284,8 +286,8 @@ const IndustryTemplate = () => {
           <ScrollReveal>
             <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-primary-foreground mb-4">{data.ctaHeadline}</h2>
             <p className="text-primary-foreground/70 text-lg mb-8">{data.ctaSub}</p>
-            <Link to={`/signup?template=${slug}`}><Button variant="hero" size="xl">Start Your Free Trial — No Card Needed</Button></Link>
-            <p className="text-sm text-primary-foreground/60 mt-3">14 days free. No credit card required.</p>
+            <Link to="/contact"><Button variant="hero" size="xl">Start My Build — $500</Button></Link>
+            <p className="text-sm text-primary-foreground/60 mt-3">Live in about a week. Every lead texted to your phone.</p>
             <div className="mt-6">
               <a href="tel:6158563871" className="inline-flex items-center gap-2 text-primary-foreground/80 hover:text-primary transition-colors font-heading font-bold">
                 <Phone size={18} /> Or call us: 615-856-3871

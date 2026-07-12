@@ -1,33 +1,32 @@
-import { Layout, Paintbrush, Rocket, Bot } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Phone, ClipboardList, Rocket, MessageSquareText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "./ScrollReveal";
 
 const steps = [
   {
     num: "01",
-    icon: Layout,
-    heading: "Pick your industry.",
-    text: "Browse templates built for your business. Each one converts visitors into customers.",
+    icon: Phone,
+    heading: "Call, text, or send the form.",
+    text: "Tell us what you need. We'll tell you straight which plan fits — no pitch, no pressure.",
   },
   {
     num: "02",
-    icon: Paintbrush,
-    heading: "Add your brand.",
-    text: "Logo, colors, services, business details. Live preview updates in real-time. Takes 3 minutes.",
+    icon: ClipboardList,
+    heading: "One page of paper.",
+    text: "Your scope and price on a single page. Pay the flat build price and we start same-week.",
   },
   {
     num: "03",
     icon: Rocket,
-    heading: "Your website is live.",
-    text: "Not in a few days. Right now. Hit 'Go Live' and you're online immediately.",
+    heading: "Live in about a week.",
+    text: "Your custom site, on-page SEO, domain and hosting handled. We launch it with you on the phone.",
     glow: true,
   },
   {
     num: "04",
-    icon: Bot,
-    heading: "7 AI specialists get to work.",
-    text: "Scout tracks rankings. Sierra schedules social. Mark runs security. Riley sets up analytics. 24/7 autopilot.",
+    icon: MessageSquareText,
+    heading: "You answer the phone.",
+    text: "Every lead from your site is texted to you the moment it lands. A plain-English report hits your inbox monthly.",
   },
 ];
 
@@ -38,9 +37,9 @@ const HowItWorks = () => (
     <div className="container mx-auto max-w-5xl relative">
       <ScrollReveal>
         <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-2">
-          From signup to live website in <span className="text-primary">60 seconds.</span>
+          From first call to live website in <span className="text-primary">about a week.</span>
         </h2>
-        <p className="text-center text-muted-foreground mb-16">Not days. Not weeks. Sixty. Seconds.</p>
+        <p className="text-center text-muted-foreground mb-16">No 8-week agency timelines. No DIY homework. We build, you approve.</p>
       </ScrollReveal>
 
       <div className="grid md:grid-cols-4 gap-8 md:gap-6 relative">
@@ -65,10 +64,10 @@ const HowItWorks = () => (
 
       <ScrollReveal delay={0.5}>
         <div className="text-center mt-12">
-          <Link to="/templates">
-            <Button variant="hero" size="xl">Start Your Free Trial</Button>
-          </Link>
-          <p className="text-sm text-muted-foreground mt-3">14 days free. No credit card required.</p>
+          <a href="tel:6158563871">
+            <Button variant="hero" size="xl">Call or Text 615-856-3871</Button>
+          </a>
+          <p className="text-sm text-muted-foreground mt-3">Builds from $500. Care plans from $49/mo.</p>
         </div>
       </ScrollReveal>
     </div>
