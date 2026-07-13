@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import CallTextButton from "@/components/CallTextButton";
 import skoopedLogo from "@/assets/skooped-logo.png";
 
 const Sparkle = ({ className }: { className?: string }) => (
@@ -18,8 +18,8 @@ const Sparkle = ({ className }: { className?: string }) => (
   </motion.svg>
 );
 
-const headlineStart = "We build it. We run it. You".split(" ");
-const headlineEnd = "answer the phone.";
+const headlineStart = "We build it. We run it.".split(" ");
+const headlineEnd = "You answer the phone.";
 
 const HeroSection = () => {
   return (
@@ -29,9 +29,9 @@ const HeroSection = () => {
       <div className="absolute top-20 -left-20 w-80 h-80 rounded-full bg-primary/10 blur-3xl animate-float" />
       <div className="absolute bottom-20 -right-20 w-96 h-96 rounded-full bg-accent/10 blur-3xl animate-float-delayed" />
 
-      <Sparkle className="absolute top-32 left-[20%] text-accent" />
-      <Sparkle className="absolute top-48 right-[25%] text-accent" />
-      <Sparkle className="absolute bottom-40 left-[30%] text-accent" />
+      <Sparkle className="hidden sm:block absolute top-32 left-[20%] text-accent" />
+      <Sparkle className="hidden sm:block absolute top-48 right-[25%] text-accent" />
+      <Sparkle className="hidden sm:block absolute bottom-40 left-[30%] text-accent" />
 
       <div className="relative container mx-auto px-6 text-center max-w-3xl py-24">
         <motion.img
@@ -80,11 +80,7 @@ const HeroSection = () => {
           transition={{ delay: 0.9, duration: 0.4 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <a href="tel:6153151541">
-            <Button variant="hero" size="xl">
-              <Phone size={18} /> Call or Text 615-315-1541
-            </Button>
-          </a>
+          <CallTextButton withIcon />
           <Link to="/plans">
             <Button variant="hero-outline" size="xl">
               See Plans & Pricing

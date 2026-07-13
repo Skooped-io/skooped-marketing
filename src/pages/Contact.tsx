@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, MapPin, Instagram, Clock, Lock, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CallTextLink } from "@/components/CallTextButton";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -80,7 +81,7 @@ const Contact = () => {
             </p>
             <p className="text-sm text-muted-foreground">
               Want to skip the form?{" "}
-              <a href="tel:6153151541" className="text-primary font-semibold hover:underline">Call or text 615-315-1541 →</a>
+              <CallTextLink className="text-primary font-semibold hover:underline">Call or text 615-315-1541 →</CallTextLink>
             </p>
           </ScrollReveal>
         </div>

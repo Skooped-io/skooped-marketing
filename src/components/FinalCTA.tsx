@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
-import { Phone } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import CallTextButton from "@/components/CallTextButton";
 import ScrollReveal from "./ScrollReveal";
 
 const FinalCTA = () => (
   <section className="relative py-24 px-6 bg-maroon overflow-hidden grain-overlay">
     <div className="absolute inset-0 bg-gradient-to-br from-maroon via-maroon to-primary/20" />
 
-    <div className="relative container mx-auto text-center max-w-2xl">
+    <div className="relative container mx-auto px-0 text-center max-w-2xl">
       <ScrollReveal>
         <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary-foreground mb-4">
           Ready when you are.
@@ -15,11 +14,7 @@ const FinalCTA = () => (
         <p className="text-primary-foreground/80 text-lg mb-8 leading-relaxed">
           Custom websites from $500. Plans from $49/mo. Every lead texted to your phone. One call and we'll tell you exactly what fits.
         </p>
-        <a href="tel:6153151541">
-          <Button variant="hero" size="xl" className="mb-4">
-            <Phone size={18} /> Call or Text 615-315-1541
-          </Button>
-        </a>
+        <CallTextButton withIcon className="mb-4" />
         <div>
           <Link
             to="/contact"

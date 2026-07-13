@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import CallTextButton from "@/components/CallTextButton";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
@@ -62,9 +62,7 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <a href="tel:6153151541">
-              <Button variant="hero" size="sm">Call or Text 615-315-1541</Button>
-            </a>
+            <CallTextButton size="sm" />
           </div>
 
           <button
@@ -106,9 +104,7 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
-            <a href="tel:6153151541" onClick={() => setMobileOpen(false)}>
-              <Button variant="hero" size="lg">Call or Text 615-315-1541</Button>
-            </a>
+            <CallTextButton size="lg" onAction={() => setMobileOpen(false)} />
           </motion.div>
         )}
       </AnimatePresence>
