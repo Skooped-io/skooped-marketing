@@ -32,7 +32,7 @@ const Terms = () => {
               <li>Launch: $500 one-time (requires an active monthly plan)</li>
               <li>Establish: $1,000 one-time (requires an active monthly plan)</li>
               <li>Custom builds and integrations: from $2,000, quoted through a Discovery session and billed in milestones (50% to start, 50% at launch)</li>
-              <li>Business Launch Pack add-on: +$500 (Tennessee LLC filing assistance with the $300 state fee passed through at cost, EIN, starter operating agreement, Google Business Profile verification support — filing assistance, not legal advice)</li>
+              <li>Business Launch Pack add-on: +$500 (LLC filing assistance in your state with the state filing fee passed through at cost, EIN, starter operating agreement, Google Business Profile verification support — filing assistance, not legal advice)</li>
             </ul>
             <p className="mt-3 mb-2">Monthly plans:</p>
             <ul className="list-disc pl-5 space-y-1">

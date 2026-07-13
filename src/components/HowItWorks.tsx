@@ -65,7 +65,7 @@ const HowItWorks = () => (
       <ScrollReveal delay={0.5}>
         <div className="text-center mt-12">
           <CallTextButton />
-          <p className="text-sm text-muted-foreground mt-3">Builds from $500. Plans from $49/mo.</p>
+          <p className="text-sm text-muted-foreground mt-3">Build from $500 + plan from $49/mo.</p>
         </div>
       </ScrollReveal>
     </div>

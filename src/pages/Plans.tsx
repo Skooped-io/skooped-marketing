@@ -360,7 +360,7 @@ const Plans = () => {
                   Business Launch Pack — add-on, +$500
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Brand new business? We handle the boring part: Tennessee LLC filing (the $300 state fee is included, passed
+                  Brand new business? We handle the boring part: LLC filing in your state (your state's filing fee passed
                   through at cost), your EIN, a starter operating agreement, and Google Business Profile verification support.
                   Filing assistance, not legal advice.
                 </p>

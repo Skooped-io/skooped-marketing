@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import ThreeDoors from "@/components/ThreeDoors";
+import PricingFlow from "@/components/PricingFlow";
 import IncludedStrip from "@/components/IncludedStrip";
 import StatsBar from "@/components/StatsBar";
 import CaseStudy from "@/components/CaseStudy";
@@ -13,7 +13,7 @@ const Index = () => (
   <>
     <Navbar />
     <HeroSection />
-    <ThreeDoors />
+    <PricingFlow />
     <IncludedStrip />
     <StatsBar />
     <CaseStudy />
