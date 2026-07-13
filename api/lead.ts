@@ -19,7 +19,7 @@ import {
   validateLead,
   type LeadPayload,
   type LeadRoute,
-} from "./_lead-core";
+} from "./_lead-core.js";
 
 const CORS_HEADERS: Record<string, string> = {
   "Access-Control-Allow-Origin": "*",
