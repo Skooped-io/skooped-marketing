@@ -45,7 +45,7 @@ const CallTextButton = ({
   label = `Call or Text ${PHONE_DISPLAY}`,
   onAction,
 }: CallTextButtonProps) => (
-  <DropdownMenu>
+  <DropdownMenu modal={false}>
     <DropdownMenuTrigger asChild>
       <Button variant={variant} size={size} className={className}>
         {withIcon && <Phone size={18} />} {label}
@@ -57,7 +57,7 @@ const CallTextButton = ({
 
 /** Inline-link version of the same call/text chooser. */
 export const CallTextLink = ({ className, children }: { className?: string; children: ReactNode }) => (
-  <DropdownMenu>
+  <DropdownMenu modal={false}>
     <DropdownMenuTrigger asChild>
       <button type="button" className={className}>
         {children}
