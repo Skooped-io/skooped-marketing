@@ -1,5 +1,5 @@
 import { Phone, ClipboardList, Rocket, MessageSquareText } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import CallTextButton from "@/components/CallTextButton";
 import ScrollReveal from "./ScrollReveal";
 
 const steps = [
@@ -34,7 +34,7 @@ const HowItWorks = () => (
   <section className="py-24 px-6 relative overflow-hidden">
     <div className="absolute top-20 right-[-5rem] w-64 h-64 rounded-full bg-primary/12 blur-3xl pointer-events-none" />
     <div className="absolute bottom-10 left-[-4rem] w-48 h-48 rounded-full bg-accent/10 blur-2xl pointer-events-none" />
-    <div className="container mx-auto max-w-5xl relative">
+    <div className="container mx-auto px-0 max-w-5xl relative">
       <ScrollReveal>
         <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-2">
           From first call to live website in <span className="text-primary">about a week.</span>
@@ -64,9 +64,7 @@ const HowItWorks = () => (
 
       <ScrollReveal delay={0.5}>
         <div className="text-center mt-12">
-          <a href="tel:6153151541">
-            <Button variant="hero" size="xl">Call or Text 615-315-1541</Button>
-          </a>
+          <CallTextButton />
           <p className="text-sm text-muted-foreground mt-3">Builds from $500. Plans from $49/mo.</p>
         </div>
       </ScrollReveal>

@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Button } from "@/components/ui/button";
+import CallTextButton from "@/components/CallTextButton";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const feedItems = [
@@ -23,7 +23,7 @@ const AutomationFeed = () => {
         backgroundSize: "40px 40px",
       }} />
 
-      <div className="relative container mx-auto max-w-3xl">
+      <div className="relative container mx-auto px-0 max-w-3xl">
         <ScrollReveal>
           <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-primary-foreground text-center mb-3">
             A lead lands. Your phone buzzes.
@@ -63,9 +63,7 @@ const AutomationFeed = () => {
             Leads that sit in an inbox go cold. Leads that hit your pocket get booked.
           </p>
           <div className="text-center">
-            <a href="tel:6153151541">
-              <Button variant="hero" size="xl">Call or Text 615-315-1541</Button>
-            </a>
+            <CallTextButton />
           </div>
         </ScrollReveal>
       </div>
