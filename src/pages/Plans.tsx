@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Check, X, ChevronDown, Phone, Hammer, Building2, Puzzle, FileCheck2 } from "lucide-react";
+import { Check, X, ChevronDown, Phone, Hammer, Building2, Puzzle, FileCheck2, Sparkles, Plus, CalendarDays } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -16,10 +16,10 @@ import tier3Img from "@/assets/skooped-tier-3.png";
 const builds = [
   {
     icon: Hammer,
-    name: "Launch",
+    name: "Cake Cone",
     price: "$500",
     priceNote: "one-time · requires a monthly plan",
-    tagline: "Get online and look legit.",
+    tagline: "The Launch build — get online and look legit.",
     features: [
       "5-page custom site from our industry library",
       "Mobile-ready, fast, built to convert",
@@ -31,13 +31,13 @@ const builds = [
   },
   {
     icon: Building2,
-    name: "Establish",
+    name: "Waffle Cone",
     price: "$1,000",
     priceNote: "one-time · requires a monthly plan",
-    tagline: "Everything in Launch, plus get found.",
+    tagline: "The Establish build — everything in Cake Cone, plus get found.",
     popular: true,
     features: [
-      "Everything in Launch, plus:",
+      "Everything in Cake Cone, plus:",
       "Google Business Profile created, verified & optimized",
       "Google reviews widget on your site",
       "Local SEO: service-area pages & citations",
@@ -47,10 +47,10 @@ const builds = [
   },
   {
     icon: Puzzle,
-    name: "Custom",
+    name: "The Sundae",
     price: "from $2,000",
-    priceNote: "quoted through Discovery — never on the spot",
-    tagline: "Integrations, booking, stores, multi-location.",
+    priceNote: "quoted through the Sample Spoon — never on the spot",
+    tagline: "The custom build — integrations, booking, stores, multi-location.",
     features: [
       "Quoting tools & booking systems",
       "Dashboards and online stores",
@@ -106,14 +106,72 @@ const plans = [
   },
 ];
 
+/* ───── Toppings (add-ons — attach to any monthly plan) ───── */
+const toppings = [
+  {
+    icon: Sparkles,
+    name: "Sprinkles",
+    subtitle: "Dedicated Content Specialist",
+    price: "+$350",
+    priceNote: "/mo · limited availability",
+    features: [
+      "A monthly on-site content day at your jobs",
+      "12 produced photo & video posts a month",
+      "Comments & DMs answered within a business day",
+      "Content calendar + boosted-post management",
+    ],
+    cta: "Ask About Availability",
+  },
+  {
+    icon: FileCheck2,
+    name: "Cherry on Top",
+    subtitle: "Business Launch Pack",
+    price: "+$500",
+    priceNote: "one-time · filing assistance, not legal advice",
+    features: [
+      "LLC filing in your state (state fee at cost)",
+      "Your EIN, ready for the bank",
+      "Starter operating agreement",
+      "Google Business Profile verification support",
+    ],
+    cta: "Add It to My Build",
+  },
+  {
+    icon: Plus,
+    name: "Extra Scoop",
+    subtitle: "Additional website",
+    price: "+$25",
+    priceNote: "/mo per site, on the same plan",
+    features: [
+      "Same hosting, security, and updates",
+      "Same lead alerts to your phone",
+      "Same plain-English monthly report",
+    ],
+    cta: "Add a Site",
+  },
+  {
+    icon: CalendarDays,
+    name: "By the Pint",
+    subtitle: "Annual prepay — 2 months free",
+    price: "10×",
+    priceNote: "monthly, once a year",
+    features: [
+      "Single: $490/yr",
+      "Double: $1,490/yr",
+      "Triple: $2,990/yr",
+    ],
+    cta: "Ask About Annual",
+  },
+];
+
 /* ───── FAQ data ───── */
 const faqGroups = [
   {
     title: "Getting Started",
     items: [
-      { q: "How much does a website cost?", a: "Launch is $500 flat. Establish is $1,000 flat. Anything custom gets a fixed quote through a $300 Discovery session — and the $300 is credited to your build if you sign within 30 days. No estimates on a napkin, no surprise invoices." },
+      { q: "How much does a website cost?", a: "The Cake Cone (our Launch build) is $500 flat. The Waffle Cone (Establish) is $1,000 flat. Anything custom is a Sundae — a fixed quote through a $300 Sample Spoon session, and the $300 is credited to your build if you sign within 30 days. No estimates on a napkin, no surprise invoices." },
       { q: "How fast will I be online?", a: "About a week from payment to launch. We build from a proven industry library and customize it to your business, so you're not waiting on an agency timeline." },
-      { q: "What's a Discovery session?", a: "A one-hour sit-down about your business. Within 7 days you get a written roadmap and a fixed cost estimate. It's $300, and 100% of it is credited toward your build if you sign within 30 days." },
+      { q: "What's the Sample Spoon?", a: "Our Discovery session — a taste before you order. A one-hour sit-down about your business; within 7 days you get a written roadmap and a fixed cost estimate. It's $300, and 100% of it is credited toward your build if you sign within 30 days." },
     ],
   },
   {
@@ -123,6 +181,7 @@ const faqGroups = [
       { q: "Do I own my website?", a: "Yes. Your website, your content, your data. Always." },
       { q: "How is this different from Wix or Squarespace?", a: "Those platforms give you a template and say 'good luck.' We build your site, handle your domain and SEO, and text you every lead. You get a marketing team — not a DIY tool." },
       { q: "Do you run my ad budget?", a: "Ads bill directly to your own card — we never front spend or mark it up. On Triple, we manage the campaigns and you see every dollar." },
+      { q: "What are toppings?", a: "Optional add-ons that go on any monthly plan. Sprinkles ($350/mo) is a dedicated content specialist shooting real photo and video at your job sites — limited availability. Cherry on Top ($500) files your LLC if your business is brand new. Extra Scoop adds another website for +$25/mo. Toppings work with any scoop — Sprinkles hits hardest with Triple, where the ads amplify the content." },
     ],
   },
   {
@@ -130,7 +189,7 @@ const faqGroups = [
     items: [
       { q: "Is the $500 a one-time payment or a subscription?", a: "One-time. Once the build is paid, it's never billed again. The subscription is a separate, smaller thing: the monthly plan (from $49/mo) that keeps your site hosted, secure, updated, and texting you every lead. Typical start: $500 today, then $49/mo from launch." },
       { q: "Is there a contract?", a: "One page of paper: your scope and the plan you're on. No long-term lock-in, no hidden fees. Plans bill monthly with a card on file." },
-      { q: "Can I pay annually?", a: "Yes — annual prepay is 10× the monthly price, so you get 2 months free. Single runs $490/yr, Double $1,490/yr." },
+      { q: "Can I pay annually?", a: "Yes — that's By the Pint: annual prepay at 10× the monthly price, so you get 2 months free. Single runs $490/yr, Double $1,490/yr, Triple $2,990/yr." },
       { q: "I have more than one site.", a: "Each additional site is +$25/mo on the same plan — same lead alerts, same report." },
     ],
   },
@@ -183,7 +242,7 @@ const BuildCard = ({ build, delay }: { build: (typeof builds)[number]; delay: nu
       </ul>
       <Link to="/contact">
         <Button variant={build.popular ? "hero" : "hero-outline"} size="lg" className="w-full">
-          {build.name === "Custom" ? "Book My Discovery Session" : "Start My Build"}
+          {build.name === "The Sundae" ? "Book My Discovery Session" : "Start My Build"}
         </Button>
       </Link>
     </motion.div>
@@ -231,11 +290,45 @@ const PlanCard = ({ plan, delay }: { plan: (typeof plans)[number]; delay: number
   </ScrollReveal>
 );
 
+/* ───── Topping card ───── */
+const ToppingCard = ({ topping, delay }: { topping: (typeof toppings)[number]; delay: number }) => (
+  <ScrollReveal delay={delay}>
+    <motion.div
+      className="relative rounded-2xl p-6 flex flex-col h-full bg-card/80 backdrop-blur-sm border border-border shadow-md transition-shadow duration-300"
+      whileHover={{ boxShadow: "0 20px 40px -12px hsl(340 60% 57% / 0.15)" }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center mb-3">
+        <topping.icon size={22} className="text-accent" />
+      </div>
+      <h3 className="font-heading text-xl font-extrabold text-foreground">{topping.name}</h3>
+      <p className="text-muted-foreground text-xs mb-3">{topping.subtitle}</p>
+      <p className="mb-1">
+        <span className="font-heading text-3xl font-extrabold text-primary">{topping.price}</span>
+      </p>
+      <p className="text-[11px] text-muted-foreground mb-4">{topping.priceNote}</p>
+      <ul className="space-y-2 mb-5 flex-1">
+        {topping.features.map((f, i) => (
+          <li key={i} className="flex items-start gap-2 text-sm text-foreground">
+            <Check size={14} className="text-primary shrink-0 mt-0.5" />
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+      <Link to="/contact">
+        <Button variant="hero-outline" size="lg" className="w-full">
+          {topping.cta}
+        </Button>
+      </Link>
+    </motion.div>
+  </ScrollReveal>
+);
+
 /* ───── Page ───── */
 const Plans = () => {
   usePageSeo({
     title: "Pricing | Websites from $500, Plans from $49/mo | Skooped Franklin TN",
-    description: "One price list: Launch $500, Establish $1,000, custom builds quoted via a $300 Discovery session (credited). Single $49, Double $149, Triple $299 monthly. Every lead texted to your phone.",
+    description: "One price list: builds from $500, custom quoted via a $300 Discovery session (credited). Single $49, Double $149, Triple $299 monthly. Toppings: dedicated content specialist +$350/mo, LLC filing +$500. Every lead texted to your phone.",
   });
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -255,8 +348,9 @@ const Plans = () => {
           </ScrollReveal>
           <ScrollReveal delay={0.15}>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Two numbers, that's it: a <strong className="text-foreground">one-time build</strong> to get online, plus a{" "}
-              <strong className="text-foreground">monthly plan</strong> that keeps it running. Most clients start at $500 + $49/mo.
+              Two numbers, that's it: a <strong className="text-foreground">one-time build</strong> (the cone) to get online, plus a{" "}
+              <strong className="text-foreground">monthly plan</strong> (the scoops) that keeps it running. Optional toppings go on any plan.
+              Most clients start at $500 + $49/mo.
             </p>
           </ScrollReveal>
         </div>
@@ -266,8 +360,8 @@ const Plans = () => {
       <section className="pb-16 px-6">
         <div className="container mx-auto max-w-5xl">
           <ScrollReveal>
-            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-1">Step 1 — Pick your build</h2>
-            <p className="text-sm text-muted-foreground mb-6">A one-time price. Pay it once, own the site. This is not a subscription.</p>
+            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-1">Step 1 — Pick your cone</h2>
+            <p className="text-sm text-muted-foreground mb-6">The one-time build everything sits on. Pay it once, own the site. This is not a subscription.</p>
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
             {builds.map((b, i) => (
@@ -281,9 +375,9 @@ const Plans = () => {
       <section className="pb-10 px-6">
         <div className="container mx-auto max-w-5xl">
           <ScrollReveal>
-            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-1">Step 2 — Pick your monthly plan</h2>
+            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-1">Step 2 — Pick your scoops</h2>
             <p className="text-sm text-muted-foreground mb-6">
-              This is the recurring part — not an alternative to the build. It keeps your site hosted, secure, and texting you every lead.
+              The monthly plan — not an alternative to the build. It keeps your site hosted, secure, and texting you every lead.
             </p>
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
@@ -292,15 +386,28 @@ const Plans = () => {
             ))}
           </div>
           <ScrollReveal delay={0.3}>
-            <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 mt-6 text-sm text-muted-foreground">
-              <span>➕ Additional site: <strong className="text-foreground">+$25/mo</strong> on the same plan</span>
-              <span>📅 Annual prepay: <strong className="text-foreground">10× monthly</strong> — 2 months free</span>
-            </div>
-            <p className="text-center text-sm text-muted-foreground mt-3">
+            <p className="text-center text-sm text-muted-foreground mt-6">
               Bigger operation? Multi-location and dedicated-management retainers are built on Triple as
-              transparent line items — scoped through a <Link to="/contact" className="text-primary font-semibold hover:underline">Discovery session</Link>.
+              transparent line items — scoped through a <Link to="/contact" className="text-primary font-semibold hover:underline">Sample Spoon session</Link>.
             </p>
           </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── Toppings ── */}
+      <section className="pb-16 px-6">
+        <div className="container mx-auto max-w-5xl">
+          <ScrollReveal>
+            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-1">Step 3 — Add your toppings <span className="text-muted-foreground font-bold text-base">(optional)</span></h2>
+            <p className="text-sm text-muted-foreground mb-6">
+              Toppings go on any scoop. Add them at signup or whenever you're ready.
+            </p>
+          </ScrollReveal>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+            {toppings.map((t, i) => (
+              <ToppingCard key={t.name} topping={t} delay={i * 0.08} />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -313,7 +420,7 @@ const Plans = () => {
                 So what do I actually pay?
               </p>
               <p className="font-heading text-xl md:text-2xl font-extrabold text-foreground mb-2">
-                Build once + plan monthly. Example: Launch + Single ={" "}
+                Cone once + scoops monthly. Example: Cake Cone + Single ={" "}
                 <span className="text-primary">$500 today, then $49/mo</span> from launch.
               </p>
               <p className="text-sm text-muted-foreground">
@@ -331,44 +438,16 @@ const Plans = () => {
             <div className="bg-maroon rounded-2xl p-8 md:p-10 grid md:grid-cols-[1fr_auto] gap-6 items-center">
               <div>
                 <h3 className="font-heading text-2xl font-extrabold text-primary-foreground mb-2">
-                  The Discovery session — $300, credited to your build.
+                  The Sample Spoon — a $300 taste, credited to your build.
                 </h3>
                 <p className="text-primary-foreground/80 text-sm leading-relaxed max-w-2xl">
-                  For anything custom, we start with a one-hour sit-down about your business. Within 7 days you get a written
-                  roadmap and a fixed quote. Sign within 30 days and the full $300 comes off your build. No free scoping,
-                  no vague estimates — just a plan you can hold us to.
+                  Before you order a Sundae, taste first: a one-hour sit-down about your business. Within 7 days you get a
+                  written roadmap and a fixed quote. Sign within 30 days and the full $300 comes off your build. No free
+                  scoping, no vague estimates — just a plan you can hold us to.
                 </p>
               </div>
               <Link to="/contact">
                 <Button variant="hero" size="lg">Book My Session</Button>
-              </Link>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ── Business Launch Pack add-on ── */}
-      <section className="pb-16 px-6">
-        <div className="container mx-auto max-w-5xl">
-          <ScrollReveal>
-            <div className="rounded-2xl border-2 border-accent bg-card p-8 grid md:grid-cols-[auto_1fr_auto] gap-6 items-center">
-              <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
-                <FileCheck2 size={26} className="text-accent" />
-              </div>
-              <div>
-                <h3 className="font-heading text-xl font-extrabold text-foreground mb-1">
-                  Business Launch Pack — add-on, +$500
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Brand new business? We handle the boring part: LLC filing in your state (your state's filing fee passed
-                  through at cost), your EIN, a starter operating agreement, and Google Business Profile verification support.
-                  Filing assistance, not legal advice.
-                </p>
-              </div>
-              <Link to="/contact">
-                <Button variant="outline" size="lg" className="border-accent text-accent hover:bg-accent/10 font-extrabold">
-                  Add It to My Build
-                </Button>
               </Link>
             </div>
           </ScrollReveal>

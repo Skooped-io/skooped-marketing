@@ -5,9 +5,9 @@ import { CallTextLink } from "@/components/CallTextButton";
 import ScrollReveal from "./ScrollReveal";
 
 const buildOptions = [
-  { name: "Launch", price: "$500", blurb: "5-page custom site, on-page SEO, lead form wired to your phone" },
-  { name: "Establish", price: "$1,000", blurb: "Launch + Google Business Profile, reviews & local SEO" },
-  { name: "Custom", price: "from $2,000", blurb: "Fixed quote via a $300 Discovery session — credited to your build" },
+  { name: "Cake Cone", price: "$500", blurb: "The Launch build — 5-page custom site, on-page SEO, lead form wired to your phone" },
+  { name: "Waffle Cone", price: "$1,000", blurb: "The Establish build — Cake Cone + Google Business Profile, reviews & local SEO" },
+  { name: "The Sundae", price: "from $2,000", blurb: "Custom — fixed quote via a $300 Sample Spoon session, credited to your build" },
 ];
 
 const monthlyOptions = [
@@ -67,7 +67,7 @@ const PricingFlow = () => (
         <ScrollReveal>
           <StepCard
             step="Step 1 · One-time"
-            title="Pick your build"
+            title="Pick your cone"
             note="Pay it once, own the site. Never billed again."
             icon={Hammer}
             options={buildOptions}
@@ -85,7 +85,7 @@ const PricingFlow = () => (
         <ScrollReveal delay={0.15}>
           <StepCard
             step="Step 2 · Recurring"
-            title="Pick your monthly plan"
+            title="Pick your scoops"
             note="Keeps your site live, secure, and sending leads to your phone."
             icon={RefreshCcw}
             options={monthlyOptions}
@@ -96,10 +96,10 @@ const PricingFlow = () => (
       <ScrollReveal delay={0.25}>
         <div className="rounded-2xl border-2 border-primary/30 bg-primary/5 p-6 text-center mt-8">
           <p className="font-heading text-lg md:text-xl font-extrabold text-foreground">
-            Most clients start here: Launch + Single ={" "}
+            Most clients start here: Cake Cone + Single ={" "}
             <span className="text-primary">$500 today, then $49/mo.</span>
           </p>
-          <p className="text-sm text-muted-foreground mt-1">That's the whole bill. No setup fees, no hourly surprises.</p>
+          <p className="text-sm text-muted-foreground mt-1">That's the whole bill. No setup fees, no hourly surprises. Toppings optional.</p>
         </div>
       </ScrollReveal>
 

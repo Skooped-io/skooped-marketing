@@ -13,7 +13,7 @@ const Terms = () => {
       <Navbar />
       <main className="container mx-auto max-w-3xl px-6 pt-32 pb-20">
         <h1 className="font-heading text-4xl font-extrabold text-foreground mb-2">Terms of Service</h1>
-        <p className="text-sm text-muted-foreground mb-10">Last updated: July 11, 2026</p>
+        <p className="text-sm text-muted-foreground mb-10">Last updated: July 14, 2026</p>
 
         <div className="prose prose-neutral max-w-none space-y-8 text-foreground/90 text-base leading-relaxed">
           <p>By using Skooped.io, you agree to these terms.</p>
@@ -29,18 +29,19 @@ const Terms = () => {
             <h2 className="font-heading text-xl font-bold text-foreground">Plans &amp; Pricing</h2>
             <p className="mb-2">One-time website builds:</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Launch: $500 one-time (requires an active monthly plan)</li>
-              <li>Establish: $1,000 one-time (requires an active monthly plan)</li>
-              <li>Custom builds and integrations: from $2,000, quoted through a Discovery session and billed in milestones (50% to start, 50% at launch)</li>
-              <li>Business Launch Pack add-on: +$500 (LLC filing assistance in your state with the state filing fee passed through at cost, EIN, starter operating agreement, Google Business Profile verification support — filing assistance, not legal advice)</li>
+              <li>Launch ("Cake Cone"): $500 one-time (requires an active monthly plan)</li>
+              <li>Establish ("Waffle Cone"): $1,000 one-time (requires an active monthly plan)</li>
+              <li>Custom builds and integrations ("The Sundae"): from $2,000, quoted through a Discovery session and billed in milestones (50% to start, 50% at launch)</li>
+              <li>Business Launch Pack add-on ("Cherry on Top"): +$500 (LLC filing assistance in your state with the state filing fee passed through at cost, EIN, starter operating agreement, Google Business Profile verification support — filing assistance, not legal advice)</li>
             </ul>
-            <p className="mt-3 mb-2">Monthly plans:</p>
+            <p className="mt-3 mb-2">Monthly plans and add-ons:</p>
             <ul className="list-disc pl-5 space-y-1">
               <li>Single: $49/month</li>
               <li>Double: $149/month</li>
               <li>Triple: $299/month (ad spend bills directly to your own payment method; we do not mark up ad spend)</li>
-              <li>Additional website on the same plan: +$25/month</li>
-              <li>Annual prepay: 10× the monthly price (equivalent to 2 months free)</li>
+              <li>Dedicated content specialist add-on ("Sprinkles"): +$350/month, on any monthly plan, subject to availability</li>
+              <li>Additional website on the same plan ("Extra Scoop"): +$25/month</li>
+              <li>Annual prepay ("By the Pint"): 10× the monthly price (equivalent to 2 months free)</li>
             </ul>
           </section>
 
@@ -82,6 +83,14 @@ const Terms = () => {
               <li>Do not use the service for any illegal, harmful, or deceptive purpose</li>
               <li>You are responsible for the accuracy of content you provide for your website</li>
             </ul>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-xl font-bold text-foreground">Our Team</h2>
+            <p>
+              Skooped's staff and contractors work for Skooped. You agree not to engage them directly for the services
+              covered by your plan during our work together and for 12 months after.
+            </p>
           </section>
 
           <section>
