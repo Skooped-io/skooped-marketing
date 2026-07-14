@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, MapPin, Instagram, Clock, Lock, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -43,9 +44,11 @@ const FloatingInput = ({ label, name, type = "text", required = false, ...props 
 
 const Contact = () => {
   usePageSeo({ title: "Contact Skooped | Websites & Marketing | Franklin TN", description: "Tell us about your business — websites from $500, plans from $49/mo, every lead texted to your phone. Call or text 615-315-1541." });
+  const [searchParams] = useSearchParams();
+  const prefill = searchParams.get("build") ?? "";
   const [composed, setComposed] = useState<string | null>(null);
-  const [service, setService] = useState("");
-  const [message, setMessage] = useState("");
+  const [service, setService] = useState(prefill ? "Website" : "");
+  const [message, setMessage] = useState(prefill);
   const [msgFocused, setMsgFocused] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

@@ -353,6 +353,13 @@ const Plans = () => {
               Most clients start at $500 + $49/mo.
             </p>
           </ScrollReveal>
+          <ScrollReveal delay={0.25}>
+            <div className="mt-6">
+              <Link to="/build">
+                <Button variant="hero" size="lg">Build your sundae — see it add up &rarr;</Button>
+              </Link>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
