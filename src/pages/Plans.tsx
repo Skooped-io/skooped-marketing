@@ -1,168 +1,14 @@
 import { motion } from "framer-motion";
-import { Check, X, ChevronDown, Phone, Hammer, Building2, Puzzle, FileCheck2, Sparkles, Plus, CalendarDays } from "lucide-react";
+import { Check, X, ChevronDown, Phone } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import IncludedStrip from "@/components/IncludedStrip";
+import SundaeBuilder from "@/components/SundaeBuilder";
 import ScrollReveal from "@/components/ScrollReveal";
 import usePageSeo from "@/hooks/use-page-seo";
-import tier1Img from "@/assets/skooped-tier-1.png";
-import tier2Img from "@/assets/skooped-tier-2.png";
-import tier3Img from "@/assets/skooped-tier-3.png";
-
-/* ───── One-time builds ───── */
-const builds = [
-  {
-    icon: Hammer,
-    name: "Cup",
-    price: "$500",
-    priceNote: "one-time · requires a monthly plan",
-    tagline: "The Launch build — get online and look legit.",
-    features: [
-      "5-page custom site from our industry library",
-      "Mobile-ready, fast, built to convert",
-      "On-page SEO: metadata, schema, Google Business Profile link",
-      "Lead form wired to SMS + email alerts",
-      "Domain purchase & DNS handled (domain billed at cost)",
-      "Launch report when you go live",
-    ],
-  },
-  {
-    icon: Building2,
-    name: "Waffle Cone",
-    price: "$1,000",
-    priceNote: "one-time · requires a monthly plan",
-    tagline: "The Establish build — everything in the Cup, plus get found.",
-    popular: true,
-    features: [
-      "Everything in the Cup, plus:",
-      "Google Business Profile created, verified & optimized",
-      "Google reviews widget on your site",
-      "Local SEO: service-area pages & citations",
-      "Light brand cleanup (logo & colors)",
-      "30-day post-launch tweak window",
-    ],
-  },
-  {
-    icon: Puzzle,
-    name: "The Sundae",
-    price: "from $2,000",
-    priceNote: "quoted through the Sample Spoon — never on the spot",
-    tagline: "The custom build — integrations, booking, stores, multi-location.",
-    features: [
-      "Quoting tools & booking systems",
-      "Dashboards and online stores",
-      "AI integrations",
-      "Multi-location businesses",
-      "Fixed quote from your Discovery roadmap",
-      "Milestone billing: 50% start, 50% launch",
-    ],
-  },
-];
-
-/* ───── Monthly plans ───── */
-const plans = [
-  {
-    name: "Single",
-    tagline: "Your site, alive and answering.",
-    price: "$49",
-    image: tier1Img,
-    features: [
-      "Hosting, SSL, DNS & domain management",
-      "Security & software updates",
-      "SMS + email lead alerts — every lead texted to you",
-      "Monthly plain-English report: visits, leads, changes made",
-      "30 minutes of small edits every month",
-    ],
-  },
-  {
-    name: "Double",
-    tagline: "Show up higher. Stay fresh.",
-    price: "$149",
-    popular: true,
-    image: tier2Img,
-    features: [
-      "Everything in Single, plus:",
-      "Ongoing local SEO: Google Business posts, review responses, content refresh",
-      "2 hours of edits every month",
-      "Priority response",
-      "Quarterly strategy call",
-    ],
-  },
-  {
-    name: "Triple",
-    tagline: "The full operation. We run it all.",
-    price: "$299",
-    image: tier3Img,
-    features: [
-      "Everything in Double, plus:",
-      "Ads management: Google Local Service Ads & Meta",
-      "Ad spend bills to your own card — we never mark it up",
-      "Social media coordination",
-      "Monthly call",
-    ],
-  },
-];
-
-/* ───── Toppings (add-ons — attach to any monthly plan) ───── */
-const toppings = [
-  {
-    icon: Sparkles,
-    name: "Sprinkles",
-    subtitle: "Dedicated Content Specialist",
-    price: "+$350",
-    priceNote: "/mo · limited availability",
-    features: [
-      "A monthly on-site content day at your jobs",
-      "12 produced photo & video posts a month",
-      "Comments & DMs answered within a business day",
-      "Content calendar + boosted-post management",
-    ],
-    cta: "Ask About Availability",
-  },
-  {
-    icon: FileCheck2,
-    name: "Cherry on Top",
-    subtitle: "Business Launch Pack",
-    price: "+$500",
-    priceNote: "one-time · filing assistance, not legal advice",
-    features: [
-      "LLC filing in your state (state fee at cost)",
-      "Your EIN, ready for the bank",
-      "Starter operating agreement",
-      "Google Business Profile verification support",
-    ],
-    cta: "Add It to My Build",
-  },
-  {
-    icon: Plus,
-    name: "Extra Scoop",
-    subtitle: "Additional website",
-    price: "+$25",
-    priceNote: "/mo per site, on the same plan",
-    features: [
-      "Same hosting, security, and updates",
-      "Same lead alerts to your phone",
-      "Same plain-English monthly report",
-    ],
-    cta: "Add a Site",
-  },
-  {
-    icon: CalendarDays,
-    name: "By the Pint",
-    subtitle: "Annual prepay — 2 months free",
-    price: "10×",
-    priceNote: "monthly, once a year",
-    features: [
-      "Single: $490/yr",
-      "Double: $1,490/yr",
-      "Triple: $2,990/yr",
-    ],
-    cta: "Ask About Annual",
-  },
-];
 
 /* ───── FAQ data ───── */
 const faqGroups = [
@@ -206,124 +52,6 @@ const compRows = [
   { label: "Contracts", trad: "6–12 months", skoop: "One page. No lock-in." },
 ];
 
-/* ───── Build card ───── */
-const BuildCard = ({ build, delay }: { build: (typeof builds)[number]; delay: number }) => (
-  <ScrollReveal delay={delay}>
-    <motion.div
-      className={`relative rounded-2xl p-6 flex flex-col h-full transition-shadow duration-300 ${
-        build.popular
-          ? "bg-card border-2 border-primary shadow-xl z-10"
-          : "bg-card/80 backdrop-blur-sm border border-border shadow-md"
-      }`}
-      whileHover={{ boxShadow: "0 20px 40px -12px hsl(340 60% 57% / 0.15)" }}
-      transition={{ duration: 0.3 }}
-    >
-      {build.popular && (
-        <span className="absolute -top-3 right-6 bg-accent text-accent-foreground text-xs font-bold px-4 py-1 rounded-full shadow">
-          Most Popular
-        </span>
-      )}
-      <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
-        <build.icon size={22} className="text-primary" />
-      </div>
-      <h3 className="font-heading text-xl font-extrabold text-foreground">{build.name}</h3>
-      <p className="text-muted-foreground text-xs mb-3">{build.tagline}</p>
-      <p className="mb-1">
-        <span className="font-heading text-4xl font-extrabold text-primary">{build.price}</span>
-      </p>
-      <p className="text-[11px] text-muted-foreground mb-4">{build.priceNote}</p>
-      <ul className="space-y-2 mb-5 flex-1">
-        {build.features.map((f, i) => (
-          <li key={i} className="flex items-start gap-2 text-sm text-foreground">
-            <Check size={14} className="text-primary shrink-0 mt-0.5" />
-            <span>{f}</span>
-          </li>
-        ))}
-      </ul>
-      <Link to="/contact">
-        <Button variant={build.popular ? "hero" : "hero-outline"} size="lg" className="w-full">
-          {build.name === "The Sundae" ? "Book My Discovery Session" : "Start My Build"}
-        </Button>
-      </Link>
-    </motion.div>
-  </ScrollReveal>
-);
-
-/* ───── Plan card ───── */
-const PlanCard = ({ plan, delay }: { plan: (typeof plans)[number]; delay: number }) => (
-  <ScrollReveal delay={delay}>
-    <motion.div
-      className={`relative rounded-2xl p-6 flex flex-col h-full transition-shadow duration-300 ${
-        plan.popular
-          ? "bg-card border-2 border-primary shadow-xl md:scale-[1.03] z-10"
-          : "bg-card/80 backdrop-blur-sm border border-border shadow-md"
-      }`}
-      whileHover={{ boxShadow: "0 20px 40px -12px hsl(340 60% 57% / 0.15)" }}
-      transition={{ duration: 0.3 }}
-    >
-      {plan.popular && (
-        <span className="absolute -top-3 right-6 bg-accent text-accent-foreground text-xs font-bold px-4 py-1 rounded-full shadow">
-          Most Popular
-        </span>
-      )}
-      <img src={plan.image} alt={`${plan.name} plan`} className="w-24 h-24 object-contain mx-auto mb-2" />
-      <h3 className="font-heading text-xl font-extrabold text-foreground text-center">{plan.name}</h3>
-      <p className="text-muted-foreground text-xs text-center mb-3">{plan.tagline}</p>
-      <p className="text-center mb-4">
-        <span className="font-heading text-4xl font-extrabold text-primary">{plan.price}</span>
-        <span className="text-muted-foreground text-sm">/mo</span>
-      </p>
-      <ul className="space-y-2 mb-5 flex-1">
-        {plan.features.map((f, i) => (
-          <li key={i} className="flex items-start gap-2 text-sm text-foreground">
-            <Check size={14} className="text-primary shrink-0 mt-0.5" />
-            <span>{f}</span>
-          </li>
-        ))}
-      </ul>
-      <Link to="/contact">
-        <Button variant={plan.popular ? "hero" : "hero-outline"} size="lg" className="w-full">
-          Pick My Plan
-        </Button>
-      </Link>
-    </motion.div>
-  </ScrollReveal>
-);
-
-/* ───── Topping card ───── */
-const ToppingCard = ({ topping, delay }: { topping: (typeof toppings)[number]; delay: number }) => (
-  <ScrollReveal delay={delay}>
-    <motion.div
-      className="relative rounded-2xl p-6 flex flex-col h-full bg-card/80 backdrop-blur-sm border border-border shadow-md transition-shadow duration-300"
-      whileHover={{ boxShadow: "0 20px 40px -12px hsl(340 60% 57% / 0.15)" }}
-      transition={{ duration: 0.3 }}
-    >
-      <div className="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center mb-3">
-        <topping.icon size={22} className="text-accent" />
-      </div>
-      <h3 className="font-heading text-xl font-extrabold text-foreground">{topping.name}</h3>
-      <p className="text-muted-foreground text-xs mb-3">{topping.subtitle}</p>
-      <p className="mb-1">
-        <span className="font-heading text-3xl font-extrabold text-primary">{topping.price}</span>
-      </p>
-      <p className="text-[11px] text-muted-foreground mb-4">{topping.priceNote}</p>
-      <ul className="space-y-2 mb-5 flex-1">
-        {topping.features.map((f, i) => (
-          <li key={i} className="flex items-start gap-2 text-sm text-foreground">
-            <Check size={14} className="text-primary shrink-0 mt-0.5" />
-            <span>{f}</span>
-          </li>
-        ))}
-      </ul>
-      <Link to="/contact">
-        <Button variant="hero-outline" size="lg" className="w-full">
-          {topping.cta}
-        </Button>
-      </Link>
-    </motion.div>
-  </ScrollReveal>
-);
-
 /* ───── Page ───── */
 const Plans = () => {
   usePageSeo({
@@ -353,68 +81,18 @@ const Plans = () => {
               Most clients start at $500 + $49/mo.
             </p>
           </ScrollReveal>
-          <ScrollReveal delay={0.25}>
-            <div className="mt-6">
-              <Link to="/build">
-                <Button variant="hero" size="lg">Build your sundae — see it add up &rarr;</Button>
-              </Link>
-            </div>
-          </ScrollReveal>
         </div>
       </section>
 
-      {/* ── One-time builds ── */}
-      <section className="pb-16 px-6">
-        <div className="container mx-auto max-w-5xl">
-          <ScrollReveal>
-            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-1">Step 1 — Pick your cone</h2>
-            <p className="text-sm text-muted-foreground mb-6">The one-time build everything sits on. Pay it once, own the site. This is not a subscription.</p>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-            {builds.map((b, i) => (
-              <BuildCard key={b.name} build={b} delay={i * 0.1} />
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── Interactive builder (replaces the old static price cards) ── */}
+      <SundaeBuilder />
 
-      {/* ── Monthly plans ── */}
-      <section className="pb-10 px-6">
+      <section className="pt-8 pb-4 px-6">
         <div className="container mx-auto max-w-5xl">
-          <ScrollReveal>
-            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-1">Step 2 — Pick your scoops</h2>
-            <p className="text-sm text-muted-foreground mb-6">
-              The monthly plan — not an alternative to the build. It keeps your site hosted, secure, and texting you every lead.
-            </p>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-            {plans.map((p, i) => (
-              <PlanCard key={p.name} plan={p} delay={i * 0.1} />
-            ))}
-          </div>
-          <ScrollReveal delay={0.3}>
-            <p className="text-center text-sm text-muted-foreground mt-6">
-              Bigger operation? Multi-location and dedicated-management retainers are built on Triple as
-              transparent line items — scoped through a <Link to="/contact" className="text-primary font-semibold hover:underline">Sample Spoon session</Link>.
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ── Toppings ── */}
-      <section className="pb-16 px-6">
-        <div className="container mx-auto max-w-5xl">
-          <ScrollReveal>
-            <h2 className="font-heading text-2xl font-extrabold text-foreground mb-1">Step 3 — Add your toppings <span className="text-muted-foreground font-bold text-base">(optional)</span></h2>
-            <p className="text-sm text-muted-foreground mb-6">
-              Toppings go on any scoop. Add them at signup or whenever you're ready.
-            </p>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
-            {toppings.map((t, i) => (
-              <ToppingCard key={t.name} topping={t} delay={i * 0.08} />
-            ))}
-          </div>
+          <p className="text-center text-sm text-muted-foreground">
+            Bigger operation? Multi-location and dedicated-management retainers are built on Triple as
+            transparent line items — scoped through a <Link to="/contact" className="text-primary font-semibold hover:underline">Sample Spoon session</Link>.
+          </p>
         </div>
       </section>
 
