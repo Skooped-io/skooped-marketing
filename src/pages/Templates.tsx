@@ -57,7 +57,7 @@ const Templates = () => {
           <ScrollReveal delay={0.15}>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Every Skooped build starts from a proven industry design and gets customized to your business — your brand,
-              your services, your service area. A Cake Cone build is $500 flat, live in about a week.
+              your services, your service area. A Cup build is $500 flat, live in about a week.
             </p>
           </ScrollReveal>
           <ScrollReveal delay={0.25}>
@@ -190,7 +190,7 @@ const Templates = () => {
       <section className="pb-24 px-6 text-center">
         <ScrollReveal>
           <h2 className="font-heading text-2xl font-extrabold text-foreground mb-2">Don't see your industry?</h2>
-          <p className="text-muted-foreground mb-6">We build custom for any local business — the Cake Cone build is still $500 flat.</p>
+          <p className="text-muted-foreground mb-6">We build custom for any local business — the Cup build is still $500 flat.</p>
           <Link to="/contact">
             <Button variant="hero" size="xl">Start My Build</Button>
           </Link>

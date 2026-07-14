@@ -29,7 +29,7 @@ const Terms = () => {
             <h2 className="font-heading text-xl font-bold text-foreground">Plans &amp; Pricing</h2>
             <p className="mb-2">One-time website builds:</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Launch ("Cake Cone"): $500 one-time (requires an active monthly plan)</li>
+              <li>Launch ("Cup"): $500 one-time (requires an active monthly plan)</li>
               <li>Establish ("Waffle Cone"): $1,000 one-time (requires an active monthly plan)</li>
               <li>Custom builds and integrations ("The Sundae"): from $2,000, quoted through a Discovery session and billed in milestones (50% to start, 50% at launch)</li>
               <li>Business Launch Pack add-on ("Cherry on Top"): +$500 (LLC filing assistance in your state with the state filing fee passed through at cost, EIN, starter operating agreement, Google Business Profile verification support — filing assistance, not legal advice)</li>
