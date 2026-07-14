@@ -5,8 +5,8 @@ import { CallTextLink } from "@/components/CallTextButton";
 import ScrollReveal from "./ScrollReveal";
 
 const buildOptions = [
-  { name: "Cake Cone", price: "$500", blurb: "The Launch build — 5-page custom site, on-page SEO, lead form wired to your phone" },
-  { name: "Waffle Cone", price: "$1,000", blurb: "The Establish build — Cake Cone + Google Business Profile, reviews & local SEO" },
+  { name: "Cup", price: "$500", blurb: "The Launch build — 5-page custom site, on-page SEO, lead form wired to your phone" },
+  { name: "Waffle Cone", price: "$1,000", blurb: "The Establish build — Cup + Google Business Profile, reviews & local SEO" },
   { name: "The Sundae", price: "from $2,000", blurb: "Custom — fixed quote via a $300 Sample Spoon session, credited to your build" },
 ];
 
@@ -96,7 +96,7 @@ const PricingFlow = () => (
       <ScrollReveal delay={0.25}>
         <div className="rounded-2xl border-2 border-primary/30 bg-primary/5 p-6 text-center mt-8">
           <p className="font-heading text-lg md:text-xl font-extrabold text-foreground">
-            Most clients start here: Cake Cone + Single ={" "}
+            Most clients start here: Cup + Single ={" "}
             <span className="text-primary">$500 today, then $49/mo.</span>
           </p>
           <p className="text-sm text-muted-foreground mt-1">That's the whole bill. No setup fees, no hourly surprises. Toppings optional.</p>

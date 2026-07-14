@@ -16,7 +16,7 @@ import tier3Img from "@/assets/skooped-tier-3.png";
 const builds = [
   {
     icon: Hammer,
-    name: "Cake Cone",
+    name: "Cup",
     price: "$500",
     priceNote: "one-time · requires a monthly plan",
     tagline: "The Launch build — get online and look legit.",
@@ -34,10 +34,10 @@ const builds = [
     name: "Waffle Cone",
     price: "$1,000",
     priceNote: "one-time · requires a monthly plan",
-    tagline: "The Establish build — everything in Cake Cone, plus get found.",
+    tagline: "The Establish build — everything in the Cup, plus get found.",
     popular: true,
     features: [
-      "Everything in Cake Cone, plus:",
+      "Everything in the Cup, plus:",
       "Google Business Profile created, verified & optimized",
       "Google reviews widget on your site",
       "Local SEO: service-area pages & citations",
@@ -169,7 +169,7 @@ const faqGroups = [
   {
     title: "Getting Started",
     items: [
-      { q: "How much does a website cost?", a: "The Cake Cone (our Launch build) is $500 flat. The Waffle Cone (Establish) is $1,000 flat. Anything custom is a Sundae — a fixed quote through a $300 Sample Spoon session, and the $300 is credited to your build if you sign within 30 days. No estimates on a napkin, no surprise invoices." },
+      { q: "How much does a website cost?", a: "The Cup (our Launch build) is $500 flat. The Waffle Cone (Establish) is $1,000 flat. Anything custom is a Sundae — a fixed quote through a $300 Sample Spoon session, and the $300 is credited to your build if you sign within 30 days. No estimates on a napkin, no surprise invoices." },
       { q: "How fast will I be online?", a: "About a week from payment to launch. We build from a proven industry library and customize it to your business, so you're not waiting on an agency timeline." },
       { q: "What's the Sample Spoon?", a: "Our Discovery session — a taste before you order. A one-hour sit-down about your business; within 7 days you get a written roadmap and a fixed cost estimate. It's $300, and 100% of it is credited toward your build if you sign within 30 days." },
     ],
@@ -420,7 +420,7 @@ const Plans = () => {
                 So what do I actually pay?
               </p>
               <p className="font-heading text-xl md:text-2xl font-extrabold text-foreground mb-2">
-                Cone once + scoops monthly. Example: Cake Cone + Single ={" "}
+                Cone once + scoops monthly. Example: Cup + Single ={" "}
                 <span className="text-primary">$500 today, then $49/mo</span> from launch.
               </p>
               <p className="text-sm text-muted-foreground">
