@@ -105,9 +105,14 @@ const PricingFlow = () => (
 
       <ScrollReveal delay={0.3}>
         <div className="text-center mt-8">
-          <Link to="/plans">
-            <Button variant="hero" size="lg">See Full Plans &amp; Pricing</Button>
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link to="/build">
+              <Button variant="hero" size="lg">Build your sundae &rarr;</Button>
+            </Link>
+            <Link to="/plans">
+              <Button variant="hero-outline" size="lg">See Full Plans &amp; Pricing</Button>
+            </Link>
+          </div>
           <p className="text-sm text-muted-foreground mt-3">
             Not sure which fits?{" "}
             <CallTextLink className="text-primary font-semibold hover:underline">Call or text 615-315-1541 →</CallTextLink>
