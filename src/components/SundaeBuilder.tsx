@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { PHONE_DISPLAY } from "@/components/CallTextButton";
+import { track } from "@/lib/analytics";
 
 import cup1 from "@/assets/sundae/cup-1.png";
 import cup2 from "@/assets/sundae/cup-2.png";
@@ -148,6 +149,17 @@ const SundaeBuilder = () => {
   const contactHref = `/contact?build=${encodeURIComponent(smsBody)}`;
 
   const toggleTop = (id: TopId) => setTops((t) => ({ ...t, [id]: !t[id] }));
+
+  // High-intent conversion signal: the visitor assembled a sundae and hit the CTA.
+  const fireSundaeBuilt = () =>
+    track("sundae_built", {
+      cone: coneObj.name,
+      scoop: scoopObj.name,
+      toppings: TOPS.filter((t) => tops[t.id]).map((t) => t.name).join(", ") || "none",
+      today,
+      monthly,
+      custom,
+    });
 
   return (
     <div className="relative">
@@ -299,7 +311,7 @@ const SundaeBuilder = () => {
                 </motion.span>
               </div>
             </div>
-            <Link to={contactHref}>
+            <Link to={contactHref} onClick={fireSundaeBuilt}>
               <Button variant="hero" size="lg" className="whitespace-nowrap">
                 {custom ? "Get my Sample Spoon quote →" : "Get this build →"}
               </Button>
