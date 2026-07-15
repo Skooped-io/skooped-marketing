@@ -261,7 +261,7 @@ export const menuItems: Record<string, MenuItem> = {
       { label: "Ongoing local SEO", note: "Google Business Profile posts, review responses, and content refreshes every month" },
       { label: "1 hour of edits per month", note: "Bigger changes, new pages, seasonal updates — just text us (Triple doubles this to 2 hours)" },
       { label: "Priority response", note: "Your requests move to the front of the line" },
-      { label: "Quarterly strategy call", note: "A real conversation about what's working and what's next" },
+      { label: "Support without the meetings", note: "The monthly report keeps you posted and we're a call or text away when you need us — no standing meeting to sit through" },
     ],
     bestFor: [
       "Businesses that want to climb in Google's local results",
@@ -272,9 +272,9 @@ export const menuItems: Record<string, MenuItem> = {
       "The Double is the middle scoop — the most popular plan. It's the natural pairing with the Waffle Cone build, which sets up the SEO the Double then keeps working. Pay yearly with By the Pint: $1,490/yr, two months free.",
     faq: [
       { q: "What does 'ongoing local SEO' actually mean?", a: "Real monthly work, not a set-and-forget: we post to your Google Business Profile, respond to reviews, and refresh site content so Google keeps seeing an active, relevant business. That's what moves you up in the local 3-pack over time." },
-      { q: "How is Double different from Single?", a: "Single keeps your site alive and texting you leads. Double adds active marketing on top — monthly SEO work, an hour of edits, priority response, and a quarterly strategy call." },
+      { q: "How is Double different from Single?", a: "Single keeps your site alive and texting you leads. Double adds active marketing on top — monthly SEO work, an hour of edits, and priority response. No meetings to sit through: your monthly report shows the results, and we're a text away whenever you want to talk." },
       { q: "What's in the monthly report, and how do I get it?", a: REPORT_BASE + " On the Double plan it also tracks your local-SEO progress — how your Google Business Profile and local rankings are moving month over month." },
-      { q: "When should I move up to Triple?", a: "When you're ready to run ads and coordinate social. Triple adds Google/Meta ads management (spend stays on your card) and social coordination on top of everything in Double — plus double the edit time (2 hours) and a strategy call every month instead of quarterly." },
+      { q: "When should I move up to Triple?", a: "When you're ready to run ads and coordinate social. Triple adds Google/Meta ads management (spend stays on your card) and social coordination on top of everything in Double — plus double the edit time (2 hours) and a quarterly strategy call to review it all. Triple is the only plan with a scheduled call." },
     ],
     related: ["waffle-cone", "single", "triple"],
     cta: { label: "Start on the Double plan — $149/mo", message: "Hey Skooped — I'd like the Double plan ($149/mo) with the ongoing local SEO. Let's set it up." },
@@ -304,7 +304,7 @@ export const menuItems: Record<string, MenuItem> = {
       { label: "Ads management", note: "Google Local Service Ads and Meta campaigns, built and managed for you" },
       { label: "Ad spend on your own card", note: "You pay Google/Meta directly — we never front spend or mark it up" },
       { label: "Social media coordination", note: "Your posts planned and scheduled so your channels stay active" },
-      { label: "Monthly strategy call", note: "A dedicated check-in on leads, spend, and results every month — not quarterly like Double" },
+      { label: "Quarterly strategy call", note: "A dedicated sit-down to review leads, ad spend, and results — Triple is the only plan with a scheduled call" },
     ],
     bestFor: [
       "Businesses ready to invest in paid ads and want it managed right",
