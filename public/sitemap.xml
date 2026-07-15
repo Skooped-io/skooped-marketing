@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://skooped.io</loc><priority>1.0</priority></url>
   <url><loc>https://skooped.io/plans</loc><priority>0.9</priority></url>
+  <url><loc>https://skooped.io/plans/cup</loc><priority>0.8</priority></url>
+  <url><loc>https://skooped.io/plans/waffle-cone</loc><priority>0.8</priority></url>
+  <url><loc>https://skooped.io/plans/sundae</loc><priority>0.8</priority></url>
+  <url><loc>https://skooped.io/plans/single</loc><priority>0.8</priority></url>
+  <url><loc>https://skooped.io/plans/double</loc><priority>0.8</priority></url>
+  <url><loc>https://skooped.io/plans/triple</loc><priority>0.8</priority></url>
+  <url><loc>https://skooped.io/plans/sprinkles</loc><priority>0.7</priority></url>
+  <url><loc>https://skooped.io/plans/cherry-on-top</loc><priority>0.7</priority></url>
+  <url><loc>https://skooped.io/plans/extra-scoop</loc><priority>0.6</priority></url>
+  <url><loc>https://skooped.io/plans/by-the-pint</loc><priority>0.6</priority></url>
   <url><loc>https://skooped.io/templates</loc><priority>0.8</priority></url>
   <url><loc>https://skooped.io/contact</loc><priority>0.8</priority></url>
   <url><loc>https://skooped.io/about</loc><priority>0.6</priority></url>

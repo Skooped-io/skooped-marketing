@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import IncludedStrip from "@/components/IncludedStrip";
 import SundaeBuilder from "@/components/SundaeBuilder";
+import MenuIndex from "@/components/MenuIndex";
 import ScrollReveal from "@/components/ScrollReveal";
 import usePageSeo from "@/hooks/use-page-seo";
 
@@ -95,6 +96,9 @@ const Plans = () => {
           </p>
         </div>
       </section>
+
+      {/* ── The full menu — deep-dive detail pages per offering ── */}
+      <MenuIndex />
 
       {/* ── The math, spelled out ── */}
       <section className="pb-16 px-6">
