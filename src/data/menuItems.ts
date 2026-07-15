@@ -65,6 +65,10 @@ export interface MenuItem {
 const LEAD_ALERTS =
   "Every lead from your site is texted straight to your phone the moment it lands — plus an email, so nothing slips through.";
 
+/* Shared monthly-report answer — every plan includes the report; higher tiers append a line. */
+const REPORT_BASE =
+  "It's a short, plain-English email once a month — no dashboard to log into and no jargon. It covers your website traffic, the leads that came in and where they came from, exactly what we worked on or changed that month, and confirmation your site stayed online (we monitor uptime around the clock). Your leads still reach your phone by text in real time the moment each one lands — the monthly report is the big-picture recap.";
+
 export const menuItems: Record<string, MenuItem> = {
   /* ═══════════════════ BUILDS (one-time — the cones) ═══════════════════ */
 
@@ -213,7 +217,7 @@ export const menuItems: Record<string, MenuItem> = {
       { label: "SSL, DNS & domain management", note: "The lock icon, the routing, the renewal — all on us" },
       { label: "Security & updates", note: "Your site stays patched and protected" },
       { label: "SMS + email lead alerts", note: LEAD_ALERTS },
-      { label: "Monthly proof-of-value report", note: "Visits, leads, and what we changed — one plain-English email a month" },
+      { label: "Monthly proof-of-value report", note: "Traffic, leads, and what we changed — one plain-English email a month, no dashboard to log into" },
       { label: "30 minutes of edits per month", note: "Text us a change; no editor to learn, no coding" },
     ],
     bestFor: [
@@ -226,6 +230,7 @@ export const menuItems: Record<string, MenuItem> = {
     faq: [
       { q: "Is $49/mo really everything?", a: "For the base plan, yes: hosting, security, domain, lead alerts, monthly report, and 30 minutes of edits. Add-ons (toppings) are optional and clearly priced. No hidden fees." },
       { q: "What are the lead alerts, exactly?", a: "The moment someone fills out a form on your site, we text it to your phone and email it to you. No inbox to remember to check — the lead buzzes in your pocket." },
+      { q: "What's in the monthly report, and how do I get it?", a: REPORT_BASE },
       { q: "Can I pay annually?", a: "Yes — that's By the Pint: $490/yr for Single, which is two months free versus paying monthly." },
     ],
     related: ["cup", "double", "by-the-pint"],
@@ -254,7 +259,7 @@ export const menuItems: Record<string, MenuItem> = {
     includes: [
       { label: "Everything in the Single plan", note: "Hosting, security, domain, lead alerts, and your monthly report" },
       { label: "Ongoing local SEO", note: "Google Business Profile posts, review responses, and content refreshes every month" },
-      { label: "2 hours of edits per month", note: "Bigger changes, new pages, seasonal updates — just text us" },
+      { label: "1 hour of edits per month", note: "Bigger changes, new pages, seasonal updates — just text us (Triple doubles this to 2 hours)" },
       { label: "Priority response", note: "Your requests move to the front of the line" },
       { label: "Quarterly strategy call", note: "A real conversation about what's working and what's next" },
     ],
@@ -267,8 +272,9 @@ export const menuItems: Record<string, MenuItem> = {
       "The Double is the middle scoop — the most popular plan. It's the natural pairing with the Waffle Cone build, which sets up the SEO the Double then keeps working. Pay yearly with By the Pint: $1,490/yr, two months free.",
     faq: [
       { q: "What does 'ongoing local SEO' actually mean?", a: "Real monthly work, not a set-and-forget: we post to your Google Business Profile, respond to reviews, and refresh site content so Google keeps seeing an active, relevant business. That's what moves you up in the local 3-pack over time." },
-      { q: "How is Double different from Single?", a: "Single keeps your site alive and texting you leads. Double adds active marketing on top — monthly SEO work, more edit time, priority response, and a quarterly strategy call." },
-      { q: "When should I move up to Triple?", a: "When you're ready to run ads and coordinate social. Triple adds Google/Meta ads management (spend stays on your card) and social coordination on top of everything in Double." },
+      { q: "How is Double different from Single?", a: "Single keeps your site alive and texting you leads. Double adds active marketing on top — monthly SEO work, an hour of edits, priority response, and a quarterly strategy call." },
+      { q: "What's in the monthly report, and how do I get it?", a: REPORT_BASE + " On the Double plan it also tracks your local-SEO progress — how your Google Business Profile and local rankings are moving month over month." },
+      { q: "When should I move up to Triple?", a: "When you're ready to run ads and coordinate social. Triple adds Google/Meta ads management (spend stays on your card) and social coordination on top of everything in Double — plus double the edit time (2 hours) and a strategy call every month instead of quarterly." },
     ],
     related: ["waffle-cone", "single", "triple"],
     cta: { label: "Start on the Double plan — $149/mo", message: "Hey Skooped — I'd like the Double plan ($149/mo) with the ongoing local SEO. Let's set it up." },
@@ -293,11 +299,12 @@ export const menuItems: Record<string, MenuItem> = {
       "The Triple scoop is the full marketing team. On top of the Double's SEO work, we manage your paid ads (Google Local Service Ads and Meta) and coordinate your social media. Ad spend always bills to your own card — we manage it, we never front it, and we never mark it up. It's the plan for owners ready to put fuel on the fire.",
     includesHeading: "What $299/mo covers",
     includes: [
-      { label: "Everything in the Double plan", note: "Local SEO, edits, priority response, and your strategy calls" },
+      { label: "Everything in the Double plan", note: "Ongoing local SEO, priority response, and content refreshes" },
+      { label: "2 hours of edits per month", note: "Up from 1 hour on Double — bigger changes and new pages, just text us" },
       { label: "Ads management", note: "Google Local Service Ads and Meta campaigns, built and managed for you" },
       { label: "Ad spend on your own card", note: "You pay Google/Meta directly — we never front spend or mark it up" },
       { label: "Social media coordination", note: "Your posts planned and scheduled so your channels stay active" },
-      { label: "Monthly call", note: "A dedicated check-in on leads, spend, and results every month" },
+      { label: "Monthly strategy call", note: "A dedicated check-in on leads, spend, and results every month — not quarterly like Double" },
     ],
     bestFor: [
       "Businesses ready to invest in paid ads and want it managed right",
@@ -308,6 +315,7 @@ export const menuItems: Record<string, MenuItem> = {
       "The Triple is the top scoop. It's also the plan the Sprinkles topping rides on — a dedicated content specialist only makes sense once Triple's ads are amplifying the content. Pay yearly with By the Pint: $2,990/yr, two months free.",
     faq: [
       { q: "Do you take a cut of my ad spend?", a: "Never. Ad spend bills directly to your own card — you see every dollar Google and Meta charge. We charge only for managing the campaigns. No markup, no fronting spend." },
+      { q: "What's in the monthly report, and how do I get it?", a: REPORT_BASE + " On the Triple plan it also breaks down your ad performance — what you spent and the leads your Google and Meta campaigns brought in." },
       { q: "What's the difference between Triple and Sprinkles?", a: "Triple ($299/mo) manages your ads and social. Sprinkles (+$350/mo) adds a dedicated content specialist who shoots real photo and video at your job sites — 12 produced posts a month. Sprinkles rides on top of Triple." },
       { q: "Can you build custom retainers on Triple?", a: "Yes. Bigger operations — multi-location, dedicated management, contractor pass-throughs — are built on Triple as transparent line items, scoped through a Sample Spoon session." },
     ],

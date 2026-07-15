@@ -65,7 +65,7 @@ const baseFaq = (industry: string): IndustryFaq[] => [
   { q: "I already have a website. Can you work with it?", a: "Absolutely. Call or text us and we'll take an honest look — sometimes the answer is a $500 rebuild, sometimes a monthly plan that keeps what you have alive and texting you leads." },
   { q: `Do you work with ${industry.toLowerCase()} businesses outside of Tennessee?`, a: "Yes. Our AI team works nationwide. We target the specific cities and services you cover." },
   { q: "How quickly will I see results?", a: "Your website goes live within a week. SEO movement starts in 30-60 days. Ad leads can start the same week your campaigns launch." },
-  { q: "What if I need something changed on my site?", a: "Just text us the change. Single includes 30 minutes of edits a month; Double includes 2 hours. No editor to learn, no coding." },
+  { q: "What if I need something changed on my site?", a: "Just text us the change. Single includes 30 minutes of edits a month; Double includes 1 hour; Triple includes 2. No editor to learn, no coding." },
 ];
 
 /* ═══════════════════ INDUSTRY DATA ═══════════════════ */
@@ -92,7 +92,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
       { q: "I already have a website. Can you work with it?", a: "Absolutely. Call or text us and we'll take an honest look — sometimes the answer is a $500 rebuild, sometimes a monthly plan that keeps what you have alive and texting you leads." },
       { q: "Do you work with roofing companies outside of Tennessee?", a: "Yes. Our AI team works nationwide. We target the specific cities and services you cover." },
       { q: "How quickly will I see results?", a: "Your website goes live within a week. SEO movement starts in 30-60 days. Ad leads can start the same week your campaigns launch." },
-      { q: "What if I need something changed on my site?", a: "Just text us the change. Single includes 30 minutes of edits a month; Double includes 2 hours. No editor to learn, no coding." },
+      { q: "What if I need something changed on my site?", a: "Just text us the change. Single includes 30 minutes of edits a month; Double includes 1 hour; Triple includes 2. No editor to learn, no coding." },
     ],
     ctaHeadline: "Your next customer is searching for a roofer right now.",
     ctaSub: "Make sure they find you.",
