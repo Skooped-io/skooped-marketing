@@ -39,7 +39,7 @@ const Terms = () => {
               <li>Single: $49/month</li>
               <li>Double: $149/month</li>
               <li>Triple: $299/month (ad spend bills directly to your own payment method; we do not mark up ad spend)</li>
-              <li>Dedicated content specialist add-on ("Sprinkles"): +$350/month, on any monthly plan, subject to availability</li>
+              <li>Dedicated content specialist add-on ("Sprinkles"): +$350/month, requires the Triple plan, subject to availability</li>
               <li>Additional website on the same plan ("Extra Scoop"): +$25/month</li>
               <li>Annual prepay ("By the Pint"): 10× the monthly price (equivalent to 2 months free)</li>
             </ul>

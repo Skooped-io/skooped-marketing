@@ -52,7 +52,7 @@ const SCOOPS: { id: ScoopId; n: number; name: string; mo: number; thumb: string;
 ];
 
 const TOPS: { id: TopId; name: string; price: string; per: string; thumb: string; blurb: string }[] = [
-  { id: "sprinkles", name: "Sprinkles", price: "+$350", per: "/mo", thumb: topSprinkles, blurb: "Dedicated content specialist — on-site content day, 12 produced posts a month." },
+  { id: "sprinkles", name: "Sprinkles", price: "+$350", per: "/mo", thumb: topSprinkles, blurb: "Dedicated content specialist — on-site content day, 12 produced posts a month. Rides on the Triple plan." },
   { id: "cherry", name: "Cherry on Top", price: "+$500", per: "one-time", thumb: topCherry, blurb: "Business Launch Pack — LLC filing, EIN, starter operating agreement." },
   { id: "extra", name: "Extra Scoop", price: "+$25", per: "/mo", thumb: topExtra, blurb: "Another website on the same plan — same alerts, same report." },
   { id: "pint", name: "By the Pint", price: "10×", per: "once a year", thumb: topPint, blurb: "Prepay the year at 10× monthly — 2 months free." },
@@ -148,7 +148,19 @@ const SundaeBuilder = () => {
     : `Hey Skooped — I built my sundae on your site: ${order}. ${todayText} today, then ${moText}. Let's do it.`;
   const contactHref = `/contact?build=${encodeURIComponent(smsBody)}`;
 
-  const toggleTop = (id: TopId) => setTops((t) => ({ ...t, [id]: !t[id] }));
+  // Sprinkles rides on the Triple plan: toggling it on bumps the scoop to Triple,
+  // and dropping below Triple removes it — keeps the builder honest to the ops rule
+  // (the dedicated specialist only makes sense once Triple's ads amplify the content).
+  const toggleTop = (id: TopId) => {
+    const turningOn = !tops[id];
+    setTops((t) => ({ ...t, [id]: !t[id] }));
+    if (id === "sprinkles" && turningOn) setScoop("triple");
+  };
+
+  const selectScoop = (id: ScoopId) => {
+    setScoop(id);
+    if (id !== "triple" && tops.sprinkles) setTops((t) => ({ ...t, sprinkles: false }));
+  };
 
   // High-intent conversion signal: the visitor assembled a sundae and hit the CTA.
   const fireSundaeBuilt = () =>
@@ -256,7 +268,7 @@ const SundaeBuilder = () => {
                     per="/mo"
                     popular={s.popular}
                     selected={scoop === s.id}
-                    onClick={() => setScoop(s.id)}
+                    onClick={() => selectScoop(s.id)}
                     role="radio"
                   />
                 ))}
@@ -268,7 +280,7 @@ const SundaeBuilder = () => {
                 <span className="text-[0.8rem] uppercase tracking-widest text-primary">Step 3</span> Add your toppings
                 <span className="text-sm font-normal text-muted-foreground">(optional — tap to toggle)</span>
               </h2>
-              <p className="mb-3 text-sm text-muted-foreground">Toppings go on any scoop. Add them at signup or whenever you're ready.</p>
+              <p className="mb-3 text-sm text-muted-foreground">Add them at signup or whenever you're ready. Sprinkles rides on the Triple plan — pick it and we'll bump you up.</p>
               <div className="flex flex-col gap-2">
                 {TOPS.map((t) => (
                   <OptionCard
