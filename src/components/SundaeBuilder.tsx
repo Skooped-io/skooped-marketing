@@ -39,10 +39,13 @@ type TopId = "sprinkles" | "cherry" | "extra" | "pint";
 
 const CONE_PREFIX: Record<ConeId, string> = { cup: "cup", waffle: "waffle", sundae: "coupe" };
 
+// Step-1 thumbs all show a single scoop on purpose: the cards differ ONLY by vessel
+// (the one-time build). Scoop count means the monthly plan, and that's shown in Step 2 —
+// never let a build card imply "bigger build = more scoops."
 const CONES: { id: ConeId; name: string; price: string; per: string; thumb: string; blurb: string; popular?: boolean }[] = [
-  { id: "cup", name: "Cup", price: "$500", per: "one-time", thumb: "cup-1", blurb: "The Launch build — 5-page site, on-page SEO, lead form wired to your phone." },
-  { id: "waffle", name: "Waffle Cone", price: "$1,000", per: "one-time", thumb: "waffle-2", blurb: "The Establish build — Cup + Google Business Profile, reviews & local SEO.", popular: true },
-  { id: "sundae", name: "The Sundae", price: "from $2,000", per: "quoted", thumb: "coupe-3", blurb: "Custom — fixed quote via a $300 Sample Spoon session, credited to your build." },
+  { id: "cup", name: "Cup", price: "$500", per: "one-time", thumb: "cup-1", blurb: "5-page site, on-page SEO, lead form wired to your phone." },
+  { id: "waffle", name: "Waffle Cone", price: "$1,000", per: "one-time", thumb: "waffle-1", blurb: "Everything in the Cup + Google Business Profile, reviews & local SEO.", popular: true },
+  { id: "sundae", name: "The Sundae", price: "from $2,000", per: "quoted", thumb: "coupe-1", blurb: "Custom — fixed quote via a $300 Sample Spoon session, credited to your build." },
 ];
 
 const SCOOPS: { id: ScoopId; n: number; name: string; mo: number; thumb: string; blurb: string; popular?: boolean }[] = [
@@ -231,7 +234,7 @@ const SundaeBuilder = () => {
           <div className="flex flex-col gap-8">
             <div role="radiogroup" aria-label="One-time build">
               <h2 className="mb-0.5 flex items-baseline gap-2.5 font-heading text-xl font-extrabold text-foreground">
-                <span className="text-[0.8rem] uppercase tracking-widest text-primary">Step 1</span> Pick your cup
+                <span className="text-[0.8rem] uppercase tracking-widest text-primary">Step 1 · One-time</span> Pick your cup
               </h2>
               <p className="mb-3 text-sm text-muted-foreground">The one-time build everything sits on. Pay it once, own the site — never billed again.</p>
               <div className="flex flex-col gap-2">
@@ -254,9 +257,9 @@ const SundaeBuilder = () => {
 
             <div role="radiogroup" aria-label="Monthly plan">
               <h2 className="mb-0.5 flex items-baseline gap-2.5 font-heading text-xl font-extrabold text-foreground">
-                <span className="text-[0.8rem] uppercase tracking-widest text-primary">Step 2</span> Pick your scoops
+                <span className="text-[0.8rem] uppercase tracking-widest text-primary">Step 2 · Every month</span> Pick your scoops
               </h2>
-              <p className="mb-3 text-sm text-muted-foreground">The monthly plan that keeps it hosted, secure, and texting you every lead.</p>
+              <p className="mb-3 text-sm text-muted-foreground">The monthly plan that keeps it hosted, secure, and texting you every lead — billed every month.</p>
               <div className="flex flex-col gap-2">
                 {SCOOPS.map((s) => (
                   <OptionCard
@@ -277,7 +280,7 @@ const SundaeBuilder = () => {
 
             <div>
               <h2 className="mb-0.5 flex items-baseline gap-2.5 font-heading text-xl font-extrabold text-foreground">
-                <span className="text-[0.8rem] uppercase tracking-widest text-primary">Step 3</span> Add your toppings
+                <span className="text-[0.8rem] uppercase tracking-widest text-primary">Step 3 · Add-ons</span> Add your toppings
                 <span className="text-sm font-normal text-muted-foreground">(optional — tap to toggle)</span>
               </h2>
               <p className="mb-3 text-sm text-muted-foreground">Add them at signup or whenever you're ready. Sprinkles rides on the Triple plan — pick it and we'll bump you up.</p>

@@ -16,7 +16,7 @@ const faqGroups = [
   {
     title: "Getting Started",
     items: [
-      { q: "How much does a website cost?", a: "The Cup (our Launch build) is $500 flat. The Waffle Cone (Establish) is $1,000 flat. Anything custom is a Sundae — a fixed quote through a $300 Sample Spoon session, and the $300 is credited to your build if you sign within 30 days. No estimates on a napkin, no surprise invoices." },
+      { q: "How much does a website cost?", a: "The Cup is $500 flat — a 5-page website. The Waffle Cone is $1,000 flat — the website plus your Google presence. Anything custom is a Sundae — a fixed quote through a $300 Sample Spoon session, and the $300 is credited to your build if you sign within 30 days. No estimates on a napkin, no surprise invoices." },
       { q: "How fast will I be online?", a: "About a week from payment to launch. We build from a proven industry library and customize it to your business, so you're not waiting on an agency timeline." },
       { q: "What's the Sample Spoon?", a: "Our Discovery session — a taste before you order. A one-hour sit-down about your business; within 7 days you get a written roadmap and a fixed cost estimate. It's $300, and 100% of it is credited toward your build if you sign within 30 days." },
     ],

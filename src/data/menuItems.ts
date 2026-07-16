@@ -42,7 +42,7 @@ export interface MenuItem {
   slug: string;
   category: MenuCategory;
   name: string; // theme name — "Cup"
-  subtitle: string; // plain-English — "The Launch build"
+  subtitle: string; // plain-English — "A 5-page website"
   hero: string;
   priceLabel: string; // "$500", "$49", "from $2,000", "+$350", "10×"
   priceUnit: string; // "one-time", "/mo", "quoted", "once a year"
@@ -76,7 +76,7 @@ export const menuItems: Record<string, MenuItem> = {
     slug: "cup",
     category: "build",
     name: "Cup",
-    subtitle: "The Launch build — $500 one-time",
+    subtitle: "A 5-page website — $500 one-time",
     hero: cup1,
     priceLabel: "$500",
     priceUnit: "one-time",
@@ -106,10 +106,10 @@ export const menuItems: Record<string, MenuItem> = {
       { q: "How fast will I be online?", a: "About a week from payment to launch. We build from a proven library and customize it, so you're not waiting on an agency timeline." },
     ],
     related: ["waffle-cone", "single", "cherry-on-top"],
-    cta: { label: "Get the Cup build — $500", message: "Hey Skooped — I want the Cup (Launch) build for $500, plus a monthly plan. Let's get started." },
+    cta: { label: "Get the Cup build — $500", message: "Hey Skooped — I want the Cup build for $500, plus a monthly plan. Let's get started." },
     offer: { kind: "fixed", price: 500 },
     seo: {
-      title: "Launch Website — $500 Flat, 5-Page Site Live in a Week | Skooped Franklin TN",
+      title: "5-Page Website — $500 Flat, Live in a Week | Skooped Franklin TN",
       description:
         "The Cup: a $500 flat-rate 5-page website for local service businesses in Franklin, TN. Mobile-ready, on-page SEO, domain handled, and every lead texted to your phone. Live in about a week.",
     },
@@ -119,17 +119,17 @@ export const menuItems: Record<string, MenuItem> = {
     slug: "waffle-cone",
     category: "build",
     name: "Waffle Cone",
-    subtitle: "The Establish build — $1,000 one-time",
+    subtitle: "Website + Google presence — $1,000 one-time",
     hero: waffle2,
     priceLabel: "$1,000",
     priceUnit: "one-time",
     popular: true,
-    tagline: "Everything in the Launch build — plus we get you found on Google.",
+    tagline: "Everything in the Cup — plus we get you found on Google.",
     intro:
       "The Waffle Cone is the Cup plus the local-search machinery that puts you on the map — literally. We build and optimize your Google Business Profile, put a live reviews widget on your site, add service-area pages so you rank for the towns you cover, and tidy up your brand. It's the build for owners who want to be found, not just online.",
     includesHeading: "What your $1,000 gets you",
     includes: [
-      { label: "Everything in the Cup (Launch)", note: "The full 5-page site, on-page SEO, lead alerts, domain, and launch report" },
+      { label: "Everything in the Cup", note: "The full 5-page site, on-page SEO, lead alerts, domain, and launch report" },
       { label: "Google Business Profile", note: "Created, verified, and optimized so you show up in Maps and the local 3-pack" },
       { label: "Google reviews widget", note: "Your real reviews, live on your site, building trust the moment visitors land" },
       { label: "Local SEO", note: "Service-area pages and citation building so you rank in the towns you serve" },
@@ -149,10 +149,10 @@ export const menuItems: Record<string, MenuItem> = {
       { q: "Is this a one-time cost too?", a: "Yes — $1,000 once, never billed again. Like every build, it runs on a monthly plan (Double is the common pairing) that keeps the SEO work going." },
     ],
     related: ["cup", "double", "sundae"],
-    cta: { label: "Get the Waffle Cone build — $1,000", message: "Hey Skooped — I want the Waffle Cone (Establish) build for $1,000, plus a monthly plan. Let's talk." },
+    cta: { label: "Get the Waffle Cone build — $1,000", message: "Hey Skooped — I want the Waffle Cone build for $1,000, plus a monthly plan. Let's talk." },
     offer: { kind: "fixed", price: 1000 },
     seo: {
-      title: "Establish Website — $1,000 Site + Google Business Profile & Local SEO | Skooped",
+      title: "$1,000 Website + Google Business Profile & Local SEO | Skooped Franklin TN",
       description:
         "The Waffle Cone: a $1,000 website for local businesses that includes a Google Business Profile, a live reviews widget, and local SEO service-area pages. Get found in Google Maps in Franklin, TN.",
     },
