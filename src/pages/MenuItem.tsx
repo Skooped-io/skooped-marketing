@@ -188,19 +188,28 @@ const MenuItem = () => {
               </ScrollReveal>
               <ScrollReveal delay={0.3}>
                 <div className="flex flex-wrap gap-3">
-                  <Link to={contactHref}><Button variant="hero" size="lg">{item.cta.label}</Button></Link>
-                  {item.payLink && (
+                  {item.payLink ? (
                     <a href={item.payLink} onClick={() => track("pay_link_click", { item: item.slug, source: "hero" })}>
-                      <Button variant="outline" size="lg">{item.payCta}</Button>
+                      <Button variant="hero" size="lg">{item.payCta}</Button>
                     </a>
+                  ) : (
+                    <Link to={contactHref}><Button variant="hero" size="lg">{item.cta.label}</Button></Link>
                   )}
-                  <Link to="/plans"><Button variant="outline" size="lg">Build your sundae</Button></Link>
+                  <Link to="/plans">
+                    <Button variant="outline" size="lg">
+                      {item.category === "plan" ? "Need a website first? Build your sundae" : "Build your sundae"}
+                    </Button>
+                  </Link>
                 </div>
+                {item.payLink && item.payNote && (
+                  <p className="mt-2.5 text-sm font-semibold text-foreground">{item.payNote}</p>
+                )}
                 <p className="mt-3 text-xs text-muted-foreground">
                   {item.payLink ? (
                     <>
-                      "{item.payCta}" checks out securely through Stripe. Prefer to talk first? Call/text{" "}
-                      <a href={`tel:${PHONE}`} className="font-semibold text-primary hover:underline">{PHONE_DISPLAY}</a> — the form and the phone never charge anything.
+                      Checkout is a secure Stripe page. Prefer to talk first? Call/text{" "}
+                      <a href={`tel:${PHONE}`} className="font-semibold text-primary hover:underline">{PHONE_DISPLAY}</a> or{" "}
+                      <Link to={contactHref} className="font-semibold text-primary hover:underline">send us the form</Link> — nothing is charged there.
                     </>
                   ) : (
                     <>
