@@ -66,6 +66,15 @@ const TOPS: { id: TopId; name: string; price: string; per: string; thumb: string
 const fmt = (n: number) => "$" + n.toLocaleString("en-US");
 const PHONE = "6153151541";
 
+/* Live Stripe Payment Links (v2, terms-consent required) — STRIPE-CATALOG-2026-07.md in the
+   HQ repo is canonical. Only the build (or the Sample Spoon, on custom) is payable up front:
+   the monthly plan and toppings get set up at launch, so no links for those here. */
+const PAY_LINKS: Record<"cup" | "waffle" | "sampleSpoon", string> = {
+  cup: "https://buy.stripe.com/3cI28q82B0qg3ZPdyE8Ra06",
+  waffle: "https://buy.stripe.com/00weVc1Ed2yo53T0LS8Ra07",
+  sampleSpoon: "https://buy.stripe.com/4gM7sKbeN7SIcwl9io8Ra08",
+};
+
 /* ── Option card ── */
 const OptionCard = ({
   thumb, name, blurb, price, per, popular, selected, onClick, role,
@@ -345,7 +354,21 @@ const SundaeBuilder = () => {
           </div>
           <p className="mt-1.5 text-[0.72rem] text-muted-foreground">
             Takes you to our contact form with the order pre-filled — or call/text{" "}
-            <a href={`tel:${PHONE}`} className="text-primary font-semibold hover:underline">{PHONE_DISPLAY}</a>. Nothing is charged here.
+            <a href={`tel:${PHONE}`} className="text-primary font-semibold hover:underline">{PHONE_DISPLAY}</a>. Nothing is charged here.{" "}
+            Ready right now?{" "}
+            <a
+              href={custom ? PAY_LINKS.sampleSpoon : cone === "cup" ? PAY_LINKS.cup : PAY_LINKS.waffle}
+              onClick={() => {
+                fireSundaeBuilt();
+                track("pay_link_click", { item: custom ? "sample-spoon" : cone, source: "builder" });
+              }}
+              className="text-primary font-semibold hover:underline"
+            >
+              Pay online
+            </a>
+            {custom
+              ? " — book your Sample Spoon ($300, credited to your build)."
+              : ` — your ${coneObj.name} build (${cone === "cup" ? "$500" : "$1,000"}) checks out now; the plan starts at launch.`}
           </p>
         </div>
       </div>

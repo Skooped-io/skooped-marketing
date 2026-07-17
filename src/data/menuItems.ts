@@ -57,6 +57,11 @@ export interface MenuItem {
   faq: MenuFaq[];
   related: string[]; // slugs
   cta: { label: string; message: string }; // message → /contact?build=<message>
+  /** Live Stripe Payment Link (v2, terms-consent required) — STRIPE-CATALOG-2026-07.md in the
+   *  HQ repo is canonical. Omitted = sold by conversation only (Sprinkles is capacity-gated;
+   *  toppings and annual prepay get added to a subscription by us, not self-served). */
+  payLink?: string;
+  payCta?: string; // pay-button label — set whenever payLink is set
   offer: MenuOffer;
   disclaimer?: string;
   seo: { title: string; description: string };
@@ -108,6 +113,8 @@ export const menuItems: Record<string, MenuItem> = {
     ],
     related: ["waffle-cone", "single", "cherry-on-top"],
     cta: { label: "Get the Cup build — $500", message: "Hey Skooped — I want the Cup build for $500, plus a monthly plan. Let's get started." },
+    payLink: "https://buy.stripe.com/3cI28q82B0qg3ZPdyE8Ra06",
+    payCta: "Pay online — $500",
     offer: { kind: "fixed", price: 500 },
     seo: {
       title: "5-Page Website — $500 Flat, Live in a Week | Skooped Franklin TN",
@@ -150,6 +157,8 @@ export const menuItems: Record<string, MenuItem> = {
     ],
     related: ["cup", "double", "sundae"],
     cta: { label: "Get the Waffle Cone build — $1,000", message: "Hey Skooped — I want the Waffle Cone build for $1,000, plus a monthly plan. Let's talk." },
+    payLink: "https://buy.stripe.com/00weVc1Ed2yo53T0LS8Ra07",
+    payCta: "Pay online — $1,000",
     offer: { kind: "fixed", price: 1000 },
     seo: {
       title: "$1,000 Website + Google Business Profile & Local SEO | Skooped Franklin TN",
@@ -190,6 +199,8 @@ export const menuItems: Record<string, MenuItem> = {
     ],
     related: ["waffle-cone", "triple", "single"],
     cta: { label: "Book my Sample Spoon — $300 credited", message: "Hey Skooped — I've got a custom project (a Sundae) in mind. I'd like to book the $300 Sample Spoon to get my roadmap and fixed quote." },
+    payLink: "https://buy.stripe.com/4gM7sKbeN7SIcwl9io8Ra08",
+    payCta: "Book online — pay the $300 now",
     offer: { kind: "from", lowPrice: 2000 },
     seo: {
       title: "Custom Websites & Integrations — Booking, Quoting, Online Stores | Skooped",
@@ -235,6 +246,8 @@ export const menuItems: Record<string, MenuItem> = {
     ],
     related: ["cup", "double", "by-the-pint"],
     cta: { label: "Start on the Single plan — $49/mo", message: "Hey Skooped — I want to get set up on the Single plan ($49/mo). Let's do it." },
+    payLink: "https://buy.stripe.com/5kQbJ082B0qg2VL5288Ra09",
+    payCta: "Start online — $49/mo",
     offer: { kind: "recurring", price: 49, unit: "MONTH" },
     seo: {
       title: "Single Plan — $49/mo Hosting, Security & SMS Lead Alerts | Skooped Franklin TN",
@@ -280,6 +293,8 @@ export const menuItems: Record<string, MenuItem> = {
     ],
     related: ["waffle-cone", "single", "triple"],
     cta: { label: "Start on the Double plan — $149/mo", message: "Hey Skooped — I'd like the Double plan ($149/mo) with the ongoing local SEO. Let's set it up." },
+    payLink: "https://buy.stripe.com/dRmcN4eqZ0qg67X8ek8Ra0a",
+    payCta: "Start online — $149/mo",
     offer: { kind: "recurring", price: 149, unit: "MONTH" },
     seo: {
       title: "Double Plan — $149/mo Local SEO, Reviews & Content | Skooped Franklin TN",
@@ -323,6 +338,8 @@ export const menuItems: Record<string, MenuItem> = {
     ],
     related: ["double", "sprinkles", "by-the-pint"],
     cta: { label: "Start on the Triple plan — $299/mo", message: "Hey Skooped — I want the Triple plan ($299/mo) with ads and social management. Let's talk." },
+    payLink: "https://buy.stripe.com/fZu9AS0A9b4U53T66c8Ra0b",
+    payCta: "Start online — $299/mo",
     offer: { kind: "recurring", price: 299, unit: "MONTH" },
     seo: {
       title: "Triple Plan — $299/mo Ads Management & Social Media | Skooped Franklin TN",
