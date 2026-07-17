@@ -85,7 +85,18 @@ const Plans = () => {
         </div>
       </section>
 
-      {/* ── Interactive builder (replaces the old static price cards) ── */}
+      {/* ── The plans, builds & add-ons up front — scannable, each links to its detail page ── */}
+      <MenuIndex />
+
+      {/* ── Interactive builder, framed as a pricing tool (not a separate product) ── */}
+      <section className="pt-6 pb-1 px-6">
+        <div className="container mx-auto max-w-5xl text-center">
+          <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-foreground">Build it and see your exact total</h2>
+          <p className="mt-2 text-sm text-muted-foreground max-w-xl mx-auto">
+            Same offerings as above — pick a build, a plan, and any add-ons, and the price updates live as you go.
+          </p>
+        </div>
+      </section>
       <SundaeBuilder />
 
       <section className="pt-8 pb-4 px-6">
@@ -96,9 +107,6 @@ const Plans = () => {
           </p>
         </div>
       </section>
-
-      {/* ── The full menu — deep-dive detail pages per offering ── */}
-      <MenuIndex />
 
       {/* ── The math, spelled out ── */}
       <section className="pb-16 px-6">
