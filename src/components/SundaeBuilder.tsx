@@ -118,6 +118,53 @@ const OptionCard = ({
   </button>
 );
 
+const STAGE_BG = "radial-gradient(120% 90% at 50% 22%, #F7E3D6 0%, #E6C9C2 78%)";
+
+/* The live ice-cream render + its crown-anchored / side topping overlays. Rendered at two
+   sizes: the full desktop stage and the compact pinned mobile preview. Overlays are
+   percent-positioned so they scale with whatever width the container is given. */
+const StageArt = ({
+  hero, heroKey, tops, coneName, scoopName,
+}: {
+  hero: Hero; heroKey: string; tops: Record<TopId, boolean>; coneName: string; scoopName: string;
+}) => (
+  <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: "560 / 780", background: STAGE_BG }}>
+    <AnimatePresence>
+      <motion.img
+        key={heroKey}
+        src={hero.src}
+        alt={`${coneName} with ${scoopName.toLowerCase()} scoop`}
+        className="absolute inset-0 h-full w-full object-contain"
+        style={{ filter: "drop-shadow(0 12px 10px rgba(90,20,40,.22))" }}
+        initial={{ opacity: 0, y: -16, scale: 0.92 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.42, ease: [0.24, 0.9, 0.34, 1.05] }}
+      />
+    </AnimatePresence>
+
+    {/* crown-anchored overlays */}
+    {/* chocolate coating — drawn first so sprinkles & cherry sit on top of the dip. */}
+    <div className="pointer-events-none absolute" style={{ left: `${hero.cx}%`, top: `${hero.cy}%`, width: "56%", transform: "translate(-50%, -14%)", transition: "left .38s cubic-bezier(.34,1.3,.64,1), top .38s cubic-bezier(.34,1.3,.64,1)" }}>
+      <img src={topChocDip} alt="" className={`w-full origin-top transition-all duration-300 ${tops.chocdip ? "scale-100 opacity-100" : "scale-75 opacity-0"}`} />
+    </div>
+    <div className="pointer-events-none absolute" style={{ left: `${hero.cx}%`, top: `${hero.cy}%`, width: "34%", transform: "translate(-50%, -16%)", transition: "left .38s cubic-bezier(.34,1.3,.64,1), top .38s cubic-bezier(.34,1.3,.64,1)" }}>
+      <img src={topSprinkles} alt="" className={`w-full origin-top transition-all duration-300 ${tops.sprinkles ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} />
+    </div>
+    <div className="pointer-events-none absolute" style={{ left: `${hero.cx}%`, top: `${hero.cy}%`, width: "20%", transform: "translate(-50%, -86%)", transition: "left .38s cubic-bezier(.34,1.3,.64,1), top .38s cubic-bezier(.34,1.3,.64,1)" }}>
+      <img src={topCherry} alt="" className={`w-full origin-bottom transition-all duration-300 ${tops.cherry ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} />
+    </div>
+
+    {/* side overlays */}
+    <div className="pointer-events-none absolute bottom-[5%] right-[1%] w-[25%]">
+      <img src={topExtra} alt="" className={`w-full origin-bottom transition-all duration-300 ${tops.extra ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} />
+    </div>
+    <div className="pointer-events-none absolute bottom-[3%] left-[1%] w-[25%]">
+      <img src={topPint} alt="" className={`w-full origin-bottom transition-all duration-300 ${tops.pint ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} />
+    </div>
+  </div>
+);
+
 const SundaeBuilder = () => {
   const [cone, setCone] = useState<ConeId>("cup");
   const [scoop, setScoop] = useState<ScoopId>("single");
@@ -193,61 +240,36 @@ const SundaeBuilder = () => {
       <div className="px-6">
         <div className="container mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-[minmax(0,380px)_1fr] gap-8 items-start pb-6">
 
-          {/* Stage */}
-          <div className="md:sticky md:top-20 rounded-3xl border border-border bg-card p-4 shadow-md">
-            <div
-              className="relative mx-auto w-full max-w-[360px] overflow-hidden rounded-2xl"
-              style={{ aspectRatio: "560 / 780", background: "radial-gradient(120% 90% at 50% 22%, #F7E3D6 0%, #E6C9C2 78%)" }}
-            >
-              <AnimatePresence>
-                <motion.img
-                  key={heroKey}
-                  src={hero.src}
-                  alt={`${coneObj.name} with ${scoopObj.name.toLowerCase()} scoop`}
-                  className="absolute inset-0 h-full w-full object-contain"
-                  style={{ filter: "drop-shadow(0 12px 10px rgba(90,20,40,.22))" }}
-                  initial={{ opacity: 0, y: -16, scale: 0.92 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.42, ease: [0.24, 0.9, 0.34, 1.05] }}
-                />
-              </AnimatePresence>
-
-              {/* crown-anchored overlays */}
-              {/* chocolate coating — drawn first so sprinkles & cherry sit on top of the dip.
-                  Anchor may need a small nudge once eyeballed on prod (localhost/preview aren't reachable here). */}
-              <div
-                className="pointer-events-none absolute"
-                style={{ left: `${hero.cx}%`, top: `${hero.cy}%`, width: "56%", transform: "translate(-50%, -14%)", transition: "left .38s cubic-bezier(.34,1.3,.64,1), top .38s cubic-bezier(.34,1.3,.64,1)" }}
-              >
-                <img src={topChocDip} alt="" className={`w-full origin-top transition-all duration-300 ${tops.chocdip ? "scale-100 opacity-100" : "scale-75 opacity-0"}`} />
+          {/* Stage — a live preview that stays pinned while you build.
+              Desktop: the full vertical card in the left column.
+              Mobile: a compact bar pinned under the navbar (top-16 = the 64px navbar) so the
+              ice cream AND the running price never scroll out of view while the steps below
+              scroll under it. */}
+          <div className="sticky top-16 z-30 self-start md:top-20">
+            {/* desktop */}
+            <div className="hidden rounded-3xl border border-border bg-card p-4 shadow-md md:block">
+              <div className="mx-auto w-full max-w-[360px]">
+                <StageArt hero={hero} heroKey={heroKey} tops={tops} coneName={coneObj.name} scoopName={scoopObj.name} />
               </div>
-              <div
-                className="pointer-events-none absolute"
-                style={{ left: `${hero.cx}%`, top: `${hero.cy}%`, width: "34%", transform: "translate(-50%, -16%)", transition: "left .38s cubic-bezier(.34,1.3,.64,1), top .38s cubic-bezier(.34,1.3,.64,1)" }}
-              >
-                <img src={topSprinkles} alt="" className={`w-full origin-top transition-all duration-300 ${tops.sprinkles ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} />
+              <p className="mt-3 text-center text-sm text-muted-foreground">
+                <strong className="text-foreground">{order}</strong>
+                <br />
+                {todayText} today · then {moText}
+              </p>
+            </div>
+            {/* mobile: compact pinned preview */}
+            <div className="flex items-center gap-3 rounded-2xl border border-border bg-card/95 p-2.5 shadow-md backdrop-blur-sm md:hidden">
+              <div className="w-[84px] shrink-0">
+                <StageArt hero={hero} heroKey={heroKey} tops={tops} coneName={coneObj.name} scoopName={scoopObj.name} />
               </div>
-              <div
-                className="pointer-events-none absolute"
-                style={{ left: `${hero.cx}%`, top: `${hero.cy}%`, width: "20%", transform: "translate(-50%, -86%)", transition: "left .38s cubic-bezier(.34,1.3,.64,1), top .38s cubic-bezier(.34,1.3,.64,1)" }}
-              >
-                <img src={topCherry} alt="" className={`w-full origin-bottom transition-all duration-300 ${tops.cherry ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} />
-              </div>
-
-              {/* side overlays */}
-              <div className="pointer-events-none absolute bottom-[5%] right-[1%] w-[25%]">
-                <img src={topExtra} alt="" className={`w-full origin-bottom transition-all duration-300 ${tops.extra ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} />
-              </div>
-              <div className="pointer-events-none absolute bottom-[3%] left-[1%] w-[25%]">
-                <img src={topPint} alt="" className={`w-full origin-bottom transition-all duration-300 ${tops.pint ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} />
+              <div className="min-w-0 flex-1">
+                <p className="font-heading text-sm font-extrabold leading-tight text-foreground">{order}</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  <span className="font-bold tabular-nums text-primary">{todayText}</span> today · then{" "}
+                  <span className="font-bold tabular-nums text-primary">{moText}</span>
+                </p>
               </div>
             </div>
-            <p className="mt-3 text-center text-sm text-muted-foreground">
-              <strong className="text-foreground">{order}</strong>
-              <br />
-              {todayText} today · then {moText}
-            </p>
           </div>
 
           {/* Steps */}
