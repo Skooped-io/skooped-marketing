@@ -63,6 +63,12 @@ export interface MenuItem {
   payLink?: string;
   payCta?: string; // pay-button label — set whenever payLink is set
   payNote?: string; // one-liner under the pay button: who this checkout is for
+  /** Annual (By the Pint) variant — 10× monthly, 2 months free. Setting these renders the
+   *  Monthly/Annual toggle on the detail page; the pay button + price swap accordingly. */
+  payLinkAnnual?: string;
+  payCtaAnnual?: string;
+  priceLabelAnnual?: string; // "$490"
+  priceUnitAnnual?: string; // "/yr"
   offer: MenuOffer;
   disclaimer?: string;
   seo: { title: string; description: string };
@@ -253,6 +259,10 @@ export const menuItems: Record<string, MenuItem> = {
     payLink: "https://buy.stripe.com/5kQbJ082B0qg2VL5288Ra09",
     payCta: "Start Single — $49/mo",
     payNote: "For a site we built or already manage.",
+    payLinkAnnual: "https://buy.stripe.com/aFa4gy4Qp5KA7c11PW8Ra0c",
+    payCtaAnnual: "Start Single — $490/yr",
+    priceLabelAnnual: "$490",
+    priceUnitAnnual: "/yr — 2 months free",
     offer: { kind: "recurring", price: 49, unit: "MONTH" },
     seo: {
       title: "Single Plan — $49/mo Hosting, Security & SMS Lead Alerts | Skooped Franklin TN",
@@ -301,6 +311,10 @@ export const menuItems: Record<string, MenuItem> = {
     payLink: "https://buy.stripe.com/dRmcN4eqZ0qg67X8ek8Ra0a",
     payCta: "Start Double — $149/mo",
     payNote: "For a site we built or already manage.",
+    payLinkAnnual: "https://buy.stripe.com/6oU28q0A9eh6fIx1PW8Ra0d",
+    payCtaAnnual: "Start Double — $1,490/yr",
+    priceLabelAnnual: "$1,490",
+    priceUnitAnnual: "/yr — 2 months free",
     offer: { kind: "recurring", price: 149, unit: "MONTH" },
     seo: {
       title: "Double Plan — $149/mo Local SEO, Reviews & Content | Skooped Franklin TN",
@@ -347,6 +361,10 @@ export const menuItems: Record<string, MenuItem> = {
     payLink: "https://buy.stripe.com/fZu9AS0A9b4U53T66c8Ra0b",
     payCta: "Start Triple — $299/mo",
     payNote: "For a site we built or already manage.",
+    payLinkAnnual: "https://buy.stripe.com/28EbJ0eqZdd27c1gKQ8Ra0e",
+    payCtaAnnual: "Start Triple — $2,990/yr",
+    priceLabelAnnual: "$2,990",
+    priceUnitAnnual: "/yr — 2 months free",
     offer: { kind: "recurring", price: 299, unit: "MONTH" },
     seo: {
       title: "Triple Plan — $299/mo Ads Management & Social Media | Skooped Franklin TN",
