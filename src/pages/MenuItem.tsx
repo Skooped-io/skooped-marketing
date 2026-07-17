@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 import usePageSeo from "@/hooks/use-page-seo";
+import { track } from "@/lib/analytics";
 import { PHONE_DISPLAY } from "@/components/CallTextButton";
 import { menuItems, categoryLabels, type MenuItem as MItem } from "@/data/menuItems";
 
@@ -188,11 +189,25 @@ const MenuItem = () => {
               <ScrollReveal delay={0.3}>
                 <div className="flex flex-wrap gap-3">
                   <Link to={contactHref}><Button variant="hero" size="lg">{item.cta.label}</Button></Link>
+                  {item.payLink && (
+                    <a href={item.payLink} onClick={() => track("pay_link_click", { item: item.slug, source: "hero" })}>
+                      <Button variant="outline" size="lg">{item.payCta}</Button>
+                    </a>
+                  )}
                   <Link to="/plans"><Button variant="outline" size="lg">Build your sundae</Button></Link>
                 </div>
                 <p className="mt-3 text-xs text-muted-foreground">
-                  Or call/text{" "}
-                  <a href={`tel:${PHONE}`} className="font-semibold text-primary hover:underline">{PHONE_DISPLAY}</a>. Nothing is charged here.
+                  {item.payLink ? (
+                    <>
+                      "{item.payCta}" checks out securely through Stripe. Prefer to talk first? Call/text{" "}
+                      <a href={`tel:${PHONE}`} className="font-semibold text-primary hover:underline">{PHONE_DISPLAY}</a> — the form and the phone never charge anything.
+                    </>
+                  ) : (
+                    <>
+                      Or call/text{" "}
+                      <a href={`tel:${PHONE}`} className="font-semibold text-primary hover:underline">{PHONE_DISPLAY}</a>. Nothing is charged here.
+                    </>
+                  )}
                 </p>
               </ScrollReveal>
             </div>
@@ -327,6 +342,17 @@ const MenuItem = () => {
               Takes you to our contact form with your order pre-filled. Nothing is charged there.
             </p>
             <Link to={contactHref}><Button variant="hero" size="xl">{item.cta.label}</Button></Link>
+            {item.payLink && (
+              <p className="mt-5">
+                <a
+                  href={item.payLink}
+                  onClick={() => track("pay_link_click", { item: item.slug, source: "footer" })}
+                  className="font-heading font-bold text-primary-foreground underline underline-offset-4 hover:text-primary transition-colors"
+                >
+                  Or skip the form — pay online now
+                </a>
+              </p>
+            )}
             <div className="mt-6">
               <a href={`tel:${PHONE}`} className="inline-flex items-center gap-2 font-heading font-bold text-primary-foreground/80 hover:text-primary transition-colors">
                 <Phone size={18} /> Or call/text: {PHONE_DISPLAY}
