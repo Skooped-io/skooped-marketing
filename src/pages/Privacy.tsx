@@ -34,11 +34,6 @@ const Privacy = () => {
                 email, billing details, and card — <strong>your card details never touch our servers</strong>. We
                 receive your contact info, the plan you chose, and the website address your plan will manage.
               </li>
-              <li>
-                <strong>Analytics:</strong> we use Plausible, a privacy-first, cookieless analytics tool. It counts
-                visits and anonymous usage events (like which plan combinations visitors explore) in aggregate — no
-                cookies, no cross-site tracking, no personal profiles, nothing sold to anyone.
-              </li>
             </ul>
           </section>
 
@@ -82,7 +77,6 @@ const Privacy = () => {
             <ul className="list-disc pl-5 space-y-1">
               <li>Stripe: payment processing and billing (stripe.com/privacy)</li>
               <li>Vercel: website hosting (vercel.com/legal/privacy-policy)</li>
-              <li>Plausible: cookieless, privacy-first analytics (plausible.io/privacy)</li>
               <li>Supabase: authentication and data storage for the client platform (supabase.com/privacy)</li>
               <li>Resend: transactional email delivery (resend.com/legal/privacy-policy)</li>
               <li>Twilio: text-message delivery for lead alerts (twilio.com/legal/privacy)</li>
