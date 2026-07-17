@@ -126,6 +126,14 @@ const MenuItem = () => {
   const { slug } = useParams<{ slug: string }>();
   const item = slug ? menuItems[slug] : undefined;
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [annual, setAnnual] = useState(false);
+
+  const hasAnnual = !!item?.payLinkAnnual;
+  const showAnnual = hasAnnual && annual;
+  const payHref = showAnnual ? item!.payLinkAnnual : item?.payLink;
+  const payLabel = showAnnual ? item!.payCtaAnnual : item?.payCta;
+  const priceLabel = showAnnual ? item!.priceLabelAnnual : item?.priceLabel;
+  const priceUnit = showAnnual ? item!.priceUnitAnnual : item?.priceUnit;
 
   usePageSeo(item?.seo ?? { title: "Plans | Skooped", description: "" });
   useJsonLd(item);
@@ -181,16 +189,34 @@ const MenuItem = () => {
                 <p className="text-muted-foreground leading-relaxed mb-6 max-w-xl">{item.tagline}</p>
               </ScrollReveal>
               <ScrollReveal delay={0.25}>
+                {hasAnnual && (
+                  <div className="mb-4 inline-flex rounded-full border border-border bg-card p-1 text-sm font-semibold" role="group" aria-label="Billing period">
+                    <button
+                      type="button"
+                      onClick={() => setAnnual(false)}
+                      className={`rounded-full px-4 py-1.5 transition-colors ${!annual ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                    >
+                      Monthly
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setAnnual(true)}
+                      className={`rounded-full px-4 py-1.5 transition-colors ${annual ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                    >
+                      Annual — 2 months free
+                    </button>
+                  </div>
+                )}
                 <div className="mb-6 flex items-baseline gap-2">
-                  <span className="font-heading text-4xl font-extrabold text-primary tabular-nums">{item.priceLabel}</span>
-                  <span className="text-sm text-muted-foreground">{item.priceUnit}</span>
+                  <span className="font-heading text-4xl font-extrabold text-primary tabular-nums">{priceLabel}</span>
+                  <span className="text-sm text-muted-foreground">{priceUnit}</span>
                 </div>
               </ScrollReveal>
               <ScrollReveal delay={0.3}>
                 <div className="flex flex-wrap gap-3">
                   {item.payLink ? (
-                    <a href={item.payLink} onClick={() => track("pay_link_click", { item: item.slug, source: "hero" })}>
-                      <Button variant="hero" size="lg">{item.payCta}</Button>
+                    <a href={payHref} onClick={() => track("pay_link_click", { item: item.slug, source: "hero", billing: showAnnual ? "annual" : "monthly" })}>
+                      <Button variant="hero" size="lg">{payLabel}</Button>
                     </a>
                   ) : (
                     <Link to={contactHref}><Button variant="hero" size="lg">{item.cta.label}</Button></Link>
@@ -354,8 +380,8 @@ const MenuItem = () => {
             {item.payLink && (
               <p className="mt-5">
                 <a
-                  href={item.payLink}
-                  onClick={() => track("pay_link_click", { item: item.slug, source: "footer" })}
+                  href={payHref}
+                  onClick={() => track("pay_link_click", { item: item.slug, source: "footer", billing: showAnnual ? "annual" : "monthly" })}
                   className="font-heading font-bold text-primary-foreground underline underline-offset-4 hover:text-primary transition-colors"
                 >
                   Or skip the form — pay online now
