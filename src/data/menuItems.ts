@@ -15,7 +15,8 @@ import coupe3 from "@/assets/sundae/coupe-3.png";
 import topCherry from "@/assets/sundae/topping-cherry.png";
 import topSprinkles from "@/assets/sundae/topping-sprinkles.png";
 import topExtra from "@/assets/sundae/topping-extra.png";
-import topPint from "@/assets/sundae/topping-pint.png";
+import topChocDip from "@/assets/sundae/topping-chocdip.png";
+import pintHero from "@/assets/sundae/pint-hero.png";
 
 export type MenuCategory = "build" | "plan" | "topping";
 
@@ -126,14 +127,13 @@ export const menuItems: Record<string, MenuItem> = {
     popular: true,
     tagline: "Everything in the Cup — plus we get you found on Google.",
     intro:
-      "The Waffle Cone is the Cup plus the local-search machinery that puts you on the map — literally. We build and optimize your Google Business Profile, put a live reviews widget on your site, add service-area pages so you rank for the towns you cover, and tidy up your brand. It's the build for owners who want to be found, not just online.",
+      "The Waffle Cone is the Cup plus the local-search machinery that puts you on the map — literally. We build and optimize your Google Business Profile, put a live reviews widget on your site, add service-area pages so you rank for the towns you cover. It's the build for owners who want to be found, not just online.",
     includesHeading: "What your $1,000 gets you",
     includes: [
       { label: "Everything in the Cup", note: "The full 5-page site, on-page SEO, lead alerts, domain, and launch report" },
       { label: "Google Business Profile", note: "Created, verified, and optimized so you show up in Maps and the local 3-pack" },
       { label: "Google reviews widget", note: "Your real reviews, live on your site, building trust the moment visitors land" },
       { label: "Local SEO", note: "Service-area pages and citation building so you rank in the towns you serve" },
-      { label: "Light brand cleanup", note: "A tidy pass on your logo and colors so everything looks consistent" },
       { label: "30-day post-launch tweak window", note: "We fine-tune after you've seen it live" },
     ],
     bestFor: [
@@ -412,6 +412,46 @@ export const menuItems: Record<string, MenuItem> = {
     },
   },
 
+  "chocolate-dipped": {
+    slug: "chocolate-dipped",
+    category: "topping",
+    name: "Chocolate Dipped",
+    subtitle: "One-round brand refresh — +$200 one-time",
+    hero: topChocDip,
+    priceLabel: "+$200",
+    priceUnit: "one-time",
+    tagline: "One clean coat over your whole brand — a tidy logo and consistent colors across your site.",
+    intro:
+      "Chocolate Dipped is a single, focused brand-refresh pass. We tidy up your existing logo and lock in one consistent color palette, then apply it across your whole site so every page looks like it belongs together — the same coat of polish from top to bottom. It's one bounded round of cleanup, not a ground-up rebrand: fast, predictable, and priced flat at $200.",
+    includesHeading: "What +$200 adds",
+    includes: [
+      { label: "Logo tidy-up", note: "We clean up and standardize the logo you already have so it's crisp at every size — not a brand-new logo from scratch" },
+      { label: "Consistent color palette", note: "One coherent set of brand colors, chosen and locked in so nothing clashes" },
+      { label: "Applied across your site", note: "The refreshed logo and colors are rolled out on every page in one pass" },
+      { label: "One round, flat price", note: "A single bounded cleanup — no open-ended rebrand meter, no surprise hours" },
+    ],
+    bestFor: [
+      "Cup clients who want a more polished, coordinated look",
+      "Businesses whose logo and colors have drifted inconsistent over time",
+      "Owners who want everything looking sharp before they start driving traffic",
+    ],
+    fits:
+      "Chocolate Dipped is a one-time topping that works with any build or plan. It's most popular on the Cup — the quickest way to add a coat of brand polish without stepping up to a full custom project.",
+    faq: [
+      { q: "Is this a full rebrand?", a: "No — it's one bounded round: a tidy pass on your existing logo plus a consistent color palette applied across your site. A ground-up rebrand — new logo concepts, a full identity system — is a bigger custom project, and that's a Sundae." },
+      { q: "Do I get a brand-new logo?", a: "Not a new logo from scratch. We clean up and standardize the one you have so it's sharp and consistent everywhere. If you want a completely new identity, we can scope that separately as a custom Sundae." },
+      { q: "How is this different from the Waffle Cone?", a: "The Waffle Cone build is about getting you found on Google — Business Profile, reviews, and local SEO. Chocolate Dipped is the standalone brand-refresh pass, so any client — including a plain Cup build — can add the same coat of polish for a flat $200." },
+    ],
+    related: ["cup", "waffle-cone", "single"],
+    cta: { label: "Add Chocolate Dipped — +$200", message: "Hey Skooped — I'd like to add Chocolate Dipped (the one-round brand refresh, +$200) to tidy up my logo and colors across the site." },
+    offer: { kind: "fixed", price: 200 },
+    seo: {
+      title: "Brand Refresh Add-On — Logo Tidy + Consistent Colors, $200 | Skooped Franklin TN",
+      description:
+        "Chocolate Dipped: a one-round brand refresh — we tidy your logo and apply one consistent color palette across your whole site. Flat +$200 one-time, not a full rebrand. Franklin, TN.",
+    },
+  },
+
   "extra-scoop": {
     slug: "extra-scoop",
     category: "topping",
@@ -457,7 +497,7 @@ export const menuItems: Record<string, MenuItem> = {
     category: "topping",
     name: "By the Pint",
     subtitle: "Annual prepay — pay yearly, get 2 months free",
-    hero: topPint,
+    hero: pintHero,
     priceLabel: "10×",
     priceUnit: "once a year",
     tagline: "Pay for the year up front and get two months free.",
@@ -503,6 +543,7 @@ export const menuOrder: string[] = [
   "triple",
   "sprinkles",
   "cherry-on-top",
+  "chocolate-dipped",
   "extra-scoop",
   "by-the-pint",
 ];

@@ -33,6 +33,7 @@ const Terms = () => {
               <li>Waffle Cone: $1,000 one-time — website plus Google Business Profile and local SEO (requires an active monthly plan)</li>
               <li>Custom builds and integrations ("The Sundae"): from $2,000, quoted through a Discovery session and billed in milestones (50% to start, 50% at launch)</li>
               <li>Business Launch Pack add-on ("Cherry on Top"): +$500 (LLC filing assistance in your state with the state filing fee passed through at cost, EIN, starter operating agreement, Google Business Profile verification support — filing assistance, not legal advice)</li>
+              <li>Brand refresh add-on ("Chocolate Dipped"): +$200 one-time (one bounded round — a tidy pass on your existing logo and one consistent color palette applied across your site; not a full rebrand)</li>
             </ul>
             <p className="mt-3 mb-2">Monthly plans and add-ons:</p>
             <ul className="list-disc pl-5 space-y-1">
