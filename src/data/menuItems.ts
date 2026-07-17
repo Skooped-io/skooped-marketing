@@ -258,7 +258,9 @@ export const menuItems: Record<string, MenuItem> = {
     includesHeading: "What $149/mo covers",
     includes: [
       { label: "Everything in the Single plan", note: "Hosting, security, domain, lead alerts, and your monthly report" },
-      { label: "Ongoing local SEO", note: "Google Business Profile posts, review responses, and content refreshes every month" },
+      { label: "Google Business Profile posts", note: "We publish posts to your Google Business Profile every month, so your Google listing stays active and shows up fresh in Maps and local search" },
+      { label: "Google review responses", note: "Every review gets a prompt, on-brand reply written in your voice — the follow-up that customers notice and Google rewards" },
+      { label: "Ongoing local SEO", note: "Content refreshes and citation building on top of the Google work, so you keep climbing the local results" },
       { label: "1 hour of edits per month", note: "Bigger changes, new pages, seasonal updates — just text us (Triple doubles this to 2 hours)" },
       { label: "Priority response", note: "Your requests move to the front of the line" },
       { label: "Support without the meetings", note: "The monthly report keeps you posted and we're a call or text away when you need us — no standing meeting to sit through" },
