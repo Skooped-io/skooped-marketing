@@ -13,10 +13,13 @@ const Terms = () => {
       <Navbar />
       <main className="container mx-auto max-w-3xl px-6 pt-32 pb-20">
         <h1 className="font-heading text-4xl font-extrabold text-foreground mb-2">Terms of Service</h1>
-        <p className="text-sm text-muted-foreground mb-10">Last updated: July 14, 2026</p>
+        <p className="text-sm text-muted-foreground mb-10">Last updated: July 17, 2026</p>
 
         <div className="prose prose-neutral max-w-none space-y-8 text-foreground/90 text-base leading-relaxed">
-          <p>By using Skooped.io, you agree to these terms.</p>
+          <p>
+            Skooped.io is operated by SKOOPED LLC, a Tennessee limited liability company ("Skooped", "we").
+            By using Skooped.io or purchasing our services, you agree to these terms.
+          </p>
 
           <section>
             <h2 className="font-heading text-xl font-bold text-foreground mt-0">The Service</h2>
@@ -111,7 +114,7 @@ const Terms = () => {
             <p>
               Questions? Call or text 615-315-1541, or email cooper@skooped.io.
             </p>
-            <p>Skooped.io<br />Franklin, Tennessee</p>
+            <p>SKOOPED LLC<br />Franklin, Tennessee</p>
           </section>
         </div>
       </main>

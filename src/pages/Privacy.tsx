@@ -13,77 +13,107 @@ const Privacy = () => {
       <Navbar />
       <main className="container mx-auto max-w-3xl px-6 pt-32 pb-20">
         <h1 className="font-heading text-4xl font-extrabold text-foreground mb-2">Privacy Policy</h1>
-        <p className="text-sm text-muted-foreground mb-10">Last updated: March 22, 2026</p>
+        <p className="text-sm text-muted-foreground mb-10">Last updated: July 17, 2026</p>
 
         <div className="prose prose-neutral max-w-none space-y-8 text-foreground/90 text-base leading-relaxed">
           <p>
-            Skooped.io ("we", "our", "us") operates the skooped.io website and app.skooped.io platform. This page informs you of our policies regarding the collection, use, and disclosure of personal information.
+            Skooped.io is operated by SKOOPED LLC ("Skooped", "we", "our", "us"), a Tennessee limited liability
+            company in Franklin, Tennessee. This page explains what information we collect on skooped.io and the
+            app.skooped.io client platform, how we use it, and the choices you have.
           </p>
 
           <section>
-            <h2 className="font-heading text-xl font-bold text-foreground mt-0">Information We Collect</h2>
-            <p>When you sign up for Skooped, we collect:</p>
+            <h2 className="font-heading text-xl font-bold text-foreground mt-0">What we collect on this website</h2>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Your name and email address</li>
-              <li>Your business name, address, phone number, and industry</li>
-              <li>Your selected plan and service preferences</li>
-              <li>Payment information (processed securely by Stripe — we never store your card details)</li>
-            </ul>
-            <p className="mt-4">When you connect your Google account, we request access to:</p>
-            <ul className="list-disc pl-5 space-y-1">
-              <li>Google Business Profile (to manage your business listing)</li>
-              <li>Google Search Console (to monitor your search rankings)</li>
-              <li>Google Analytics (to track your website traffic)</li>
-            </ul>
-            <p className="mt-4">
-              We only access the specific Google services listed above. We never access your Gmail, Google Drive, personal files, or any other Google service.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="font-heading text-xl font-bold text-foreground">How We Use Your Information</h2>
-            <ul className="list-disc pl-5 space-y-1">
-              <li>To build and maintain your website</li>
-              <li>To run your SEO, social media, and advertising campaigns</li>
-              <li>To send you reports and updates about your marketing performance</li>
-              <li>To communicate with you about your account and services</li>
-              <li>To process payments through Stripe</li>
+              <li>
+                <strong>Contact and text-us forms:</strong> your name, phone number, email, and message — delivered to
+                us by text and email so we can respond. That's their only job.
+              </li>
+              <li>
+                <strong>Checkout:</strong> payments run on Stripe's secure hosted checkout. Stripe collects your name,
+                email, billing details, and card — <strong>your card details never touch our servers</strong>. We
+                receive your contact info, the plan you chose, and the website address your plan will manage.
+              </li>
+              <li>
+                <strong>Analytics:</strong> we use Plausible, a privacy-first, cookieless analytics tool. It counts
+                visits and anonymous usage events (like which plan combinations visitors explore) in aggregate — no
+                cookies, no cross-site tracking, no personal profiles, nothing sold to anyone.
+              </li>
             </ul>
           </section>
 
           <section>
-            <h2 className="font-heading text-xl font-bold text-foreground">Third-Party Services</h2>
+            <h2 className="font-heading text-xl font-bold text-foreground">Client accounts (app.skooped.io)</h2>
+            <p>If you're a Skooped client with a portal account, we additionally store:</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Stripe: Payment processing (stripe.com/privacy)</li>
-              <li>Supabase: Authentication and data storage (supabase.com/privacy)</li>
-              <li>Vercel: Website hosting (vercel.com/legal/privacy-policy)</li>
-              <li>Resend: Transactional emails (resend.com/legal/privacy-policy)</li>
-              <li>Google: Business Profile, Search Console, Analytics APIs</li>
+              <li>Your name, email, and business details; passwords are encrypted</li>
+              <li>
+                Optional Google connections you authorize — Google Business Profile (to manage your listing), Search
+                Console (to monitor rankings), and Google Analytics (to track your traffic). We only access those
+                specific services — never your Gmail, Drive, personal files, or anything else — and you can disconnect
+                them at any time.
+              </li>
             </ul>
           </section>
 
           <section>
-            <h2 className="font-heading text-xl font-bold text-foreground">Data Security</h2>
+            <h2 className="font-heading text-xl font-bold text-foreground">Lead alerts on websites we build</h2>
             <p>
-              We use industry-standard security measures to protect your data. Your passwords are encrypted. Your Google tokens are stored securely. Payment information is handled entirely by Stripe and never touches our servers.
+              Websites we build for clients include a lead-capture form. When a visitor submits one, their name,
+              contact details, and message go to the business that owns that website — by text and email — and we
+              store the submission to power that business's monthly report. We process this information on our
+              client's behalf, and we never sell it or use it for advertising.
             </p>
           </section>
 
           <section>
-            <h2 className="font-heading text-xl font-bold text-foreground">Your Rights</h2>
+            <h2 className="font-heading text-xl font-bold text-foreground">How we use your information</h2>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>To respond when you contact us</li>
+              <li>To build and maintain your website and run the services on your plan</li>
+              <li>To send you reports, lead alerts, and updates about your services</li>
+              <li>To process payments and subscriptions through Stripe</li>
+              <li>To meet legal and tax obligations</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-xl font-bold text-foreground">Third-party services</h2>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Stripe: payment processing and billing (stripe.com/privacy)</li>
+              <li>Vercel: website hosting (vercel.com/legal/privacy-policy)</li>
+              <li>Plausible: cookieless, privacy-first analytics (plausible.io/privacy)</li>
+              <li>Supabase: authentication and data storage for the client platform (supabase.com/privacy)</li>
+              <li>Resend: transactional email delivery (resend.com/legal/privacy-policy)</li>
+              <li>Twilio: text-message delivery for lead alerts (twilio.com/legal/privacy)</li>
+              <li>Google: Business Profile, Search Console, and Analytics APIs — only for accounts you connect</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-xl font-bold text-foreground">Data security</h2>
+            <p>
+              We use industry-standard security measures to protect your data. Payment information is handled entirely
+              by Stripe and never touches our servers. Google tokens and client data are stored securely and accessed
+              only to deliver the services you're paying for.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-xl font-bold text-foreground">Your rights</h2>
             <p>You can request to:</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Access your personal data</li>
-              <li>Update or correct your data</li>
-              <li>Delete your account and all associated data</li>
+              <li>Access, update, or correct your personal data</li>
+              <li>Delete your data (and your portal account, if you have one)</li>
               <li>Disconnect your Google account at any time</li>
+              <li>Stop text messages from us — reply STOP to any text</li>
             </ul>
             <p className="mt-4">Contact us at cooper@skooped.io or call/text 615-315-1541.</p>
           </section>
 
           <section>
             <h2 className="font-heading text-xl font-bold text-foreground">Contact</h2>
-            <p>Skooped.io<br />Franklin, Tennessee<br />cooper@skooped.io · 615-315-1541</p>
+            <p>SKOOPED LLC<br />Franklin, Tennessee<br />cooper@skooped.io · 615-315-1541</p>
           </section>
         </div>
       </main>
