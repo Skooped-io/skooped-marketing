@@ -15,7 +15,8 @@ import coupe3 from "@/assets/sundae/coupe-3.png";
 import topCherry from "@/assets/sundae/topping-cherry.png";
 import topSprinkles from "@/assets/sundae/topping-sprinkles.png";
 import topExtra from "@/assets/sundae/topping-extra.png";
-import topPint from "@/assets/sundae/topping-pint.png";
+import topChocDip from "@/assets/sundae/topping-chocdip.png";
+import pintHero from "@/assets/sundae/pint-hero.png";
 
 export type MenuCategory = "build" | "plan" | "topping";
 
@@ -42,7 +43,7 @@ export interface MenuItem {
   slug: string;
   category: MenuCategory;
   name: string; // theme name — "Cup"
-  subtitle: string; // plain-English — "The Launch build"
+  subtitle: string; // plain-English — "A 5-page website"
   hero: string;
   priceLabel: string; // "$500", "$49", "from $2,000", "+$350", "10×"
   priceUnit: string; // "one-time", "/mo", "quoted", "once a year"
@@ -76,7 +77,7 @@ export const menuItems: Record<string, MenuItem> = {
     slug: "cup",
     category: "build",
     name: "Cup",
-    subtitle: "The Launch build — $500 one-time",
+    subtitle: "A 5-page website — $500 one-time",
     hero: cup1,
     priceLabel: "$500",
     priceUnit: "one-time",
@@ -106,10 +107,10 @@ export const menuItems: Record<string, MenuItem> = {
       { q: "How fast will I be online?", a: "About a week from payment to launch. We build from a proven library and customize it, so you're not waiting on an agency timeline." },
     ],
     related: ["waffle-cone", "single", "cherry-on-top"],
-    cta: { label: "Get the Cup build — $500", message: "Hey Skooped — I want the Cup (Launch) build for $500, plus a monthly plan. Let's get started." },
+    cta: { label: "Get the Cup build — $500", message: "Hey Skooped — I want the Cup build for $500, plus a monthly plan. Let's get started." },
     offer: { kind: "fixed", price: 500 },
     seo: {
-      title: "Launch Website — $500 Flat, 5-Page Site Live in a Week | Skooped Franklin TN",
+      title: "5-Page Website — $500 Flat, Live in a Week | Skooped Franklin TN",
       description:
         "The Cup: a $500 flat-rate 5-page website for local service businesses in Franklin, TN. Mobile-ready, on-page SEO, domain handled, and every lead texted to your phone. Live in about a week.",
     },
@@ -119,21 +120,20 @@ export const menuItems: Record<string, MenuItem> = {
     slug: "waffle-cone",
     category: "build",
     name: "Waffle Cone",
-    subtitle: "The Establish build — $1,000 one-time",
+    subtitle: "Website + Google presence — $1,000 one-time",
     hero: waffle2,
     priceLabel: "$1,000",
     priceUnit: "one-time",
     popular: true,
-    tagline: "Everything in the Launch build — plus we get you found on Google.",
+    tagline: "Everything in the Cup — plus we get you found on Google.",
     intro:
-      "The Waffle Cone is the Cup plus the local-search machinery that puts you on the map — literally. We build and optimize your Google Business Profile, put a live reviews widget on your site, add service-area pages so you rank for the towns you cover, and tidy up your brand. It's the build for owners who want to be found, not just online.",
+      "The Waffle Cone is the Cup plus the local-search machinery that puts you on the map — literally. We build and optimize your Google Business Profile, put a live reviews widget on your site, add service-area pages so you rank for the towns you cover. It's the build for owners who want to be found, not just online.",
     includesHeading: "What your $1,000 gets you",
     includes: [
-      { label: "Everything in the Cup (Launch)", note: "The full 5-page site, on-page SEO, lead alerts, domain, and launch report" },
+      { label: "Everything in the Cup", note: "The full 5-page site, on-page SEO, lead alerts, domain, and launch report" },
       { label: "Google Business Profile", note: "Created, verified, and optimized so you show up in Maps and the local 3-pack" },
       { label: "Google reviews widget", note: "Your real reviews, live on your site, building trust the moment visitors land" },
       { label: "Local SEO", note: "Service-area pages and citation building so you rank in the towns you serve" },
-      { label: "Light brand cleanup", note: "A tidy pass on your logo and colors so everything looks consistent" },
       { label: "30-day post-launch tweak window", note: "We fine-tune after you've seen it live" },
     ],
     bestFor: [
@@ -149,10 +149,10 @@ export const menuItems: Record<string, MenuItem> = {
       { q: "Is this a one-time cost too?", a: "Yes — $1,000 once, never billed again. Like every build, it runs on a monthly plan (Double is the common pairing) that keeps the SEO work going." },
     ],
     related: ["cup", "double", "sundae"],
-    cta: { label: "Get the Waffle Cone build — $1,000", message: "Hey Skooped — I want the Waffle Cone (Establish) build for $1,000, plus a monthly plan. Let's talk." },
+    cta: { label: "Get the Waffle Cone build — $1,000", message: "Hey Skooped — I want the Waffle Cone build for $1,000, plus a monthly plan. Let's talk." },
     offer: { kind: "fixed", price: 1000 },
     seo: {
-      title: "Establish Website — $1,000 Site + Google Business Profile & Local SEO | Skooped",
+      title: "$1,000 Website + Google Business Profile & Local SEO | Skooped Franklin TN",
       description:
         "The Waffle Cone: a $1,000 website for local businesses that includes a Google Business Profile, a live reviews widget, and local SEO service-area pages. Get found in Google Maps in Franklin, TN.",
     },
@@ -258,7 +258,9 @@ export const menuItems: Record<string, MenuItem> = {
     includesHeading: "What $149/mo covers",
     includes: [
       { label: "Everything in the Single plan", note: "Hosting, security, domain, lead alerts, and your monthly report" },
-      { label: "Ongoing local SEO", note: "Google Business Profile posts, review responses, and content refreshes every month" },
+      { label: "Google Business Profile posts", note: "We publish posts to your Google Business Profile every month, so your Google listing stays active and shows up fresh in Maps and local search" },
+      { label: "Google review responses", note: "Every review gets a prompt, on-brand reply written in your voice — the follow-up that customers notice and Google rewards" },
+      { label: "Ongoing local SEO", note: "Content refreshes and citation building on top of the Google work, so you keep climbing the local results" },
       { label: "1 hour of edits per month", note: "Bigger changes, new pages, seasonal updates — just text us (Triple doubles this to 2 hours)" },
       { label: "Priority response", note: "Your requests move to the front of the line" },
       { label: "Support without the meetings", note: "The monthly report keeps you posted and we're a call or text away when you need us — no standing meeting to sit through" },
@@ -412,6 +414,46 @@ export const menuItems: Record<string, MenuItem> = {
     },
   },
 
+  "chocolate-dipped": {
+    slug: "chocolate-dipped",
+    category: "topping",
+    name: "Chocolate Dipped",
+    subtitle: "One-round brand refresh — +$200 one-time",
+    hero: topChocDip,
+    priceLabel: "+$200",
+    priceUnit: "one-time",
+    tagline: "One clean coat over your whole brand — a tidy logo and consistent colors across your site.",
+    intro:
+      "Chocolate Dipped is a single, focused brand-refresh pass. We tidy up your existing logo and lock in one consistent color palette, then apply it across your whole site so every page looks like it belongs together — the same coat of polish from top to bottom. It's one bounded round of cleanup, not a ground-up rebrand: fast, predictable, and priced flat at $200.",
+    includesHeading: "What +$200 adds",
+    includes: [
+      { label: "Logo tidy-up", note: "We clean up and standardize the logo you already have so it's crisp at every size — not a brand-new logo from scratch" },
+      { label: "Consistent color palette", note: "One coherent set of brand colors, chosen and locked in so nothing clashes" },
+      { label: "Applied across your site", note: "The refreshed logo and colors are rolled out on every page in one pass" },
+      { label: "One round, flat price", note: "A single bounded cleanup — no open-ended rebrand meter, no surprise hours" },
+    ],
+    bestFor: [
+      "Cup clients who want a more polished, coordinated look",
+      "Businesses whose logo and colors have drifted inconsistent over time",
+      "Owners who want everything looking sharp before they start driving traffic",
+    ],
+    fits:
+      "Chocolate Dipped is a one-time topping that works with any build or plan. It's most popular on the Cup — the quickest way to add a coat of brand polish without stepping up to a full custom project.",
+    faq: [
+      { q: "Is this a full rebrand?", a: "No — it's one bounded round: a tidy pass on your existing logo plus a consistent color palette applied across your site. A ground-up rebrand — new logo concepts, a full identity system — is a bigger custom project, and that's a Sundae." },
+      { q: "Do I get a brand-new logo?", a: "Not a new logo from scratch. We clean up and standardize the one you have so it's sharp and consistent everywhere. If you want a completely new identity, we can scope that separately as a custom Sundae." },
+      { q: "How is this different from the Waffle Cone?", a: "The Waffle Cone build is about getting you found on Google — Business Profile, reviews, and local SEO. Chocolate Dipped is the standalone brand-refresh pass, so any client — including a plain Cup build — can add the same coat of polish for a flat $200." },
+    ],
+    related: ["cup", "waffle-cone", "single"],
+    cta: { label: "Add Chocolate Dipped — +$200", message: "Hey Skooped — I'd like to add Chocolate Dipped (the one-round brand refresh, +$200) to tidy up my logo and colors across the site." },
+    offer: { kind: "fixed", price: 200 },
+    seo: {
+      title: "Brand Refresh Add-On — Logo Tidy + Consistent Colors, $200 | Skooped Franklin TN",
+      description:
+        "Chocolate Dipped: a one-round brand refresh — we tidy your logo and apply one consistent color palette across your whole site. Flat +$200 one-time, not a full rebrand. Franklin, TN.",
+    },
+  },
+
   "extra-scoop": {
     slug: "extra-scoop",
     category: "topping",
@@ -457,7 +499,7 @@ export const menuItems: Record<string, MenuItem> = {
     category: "topping",
     name: "By the Pint",
     subtitle: "Annual prepay — pay yearly, get 2 months free",
-    hero: topPint,
+    hero: pintHero,
     priceLabel: "10×",
     priceUnit: "once a year",
     tagline: "Pay for the year up front and get two months free.",
@@ -503,6 +545,7 @@ export const menuOrder: string[] = [
   "triple",
   "sprinkles",
   "cherry-on-top",
+  "chocolate-dipped",
   "extra-scoop",
   "by-the-pint",
 ];

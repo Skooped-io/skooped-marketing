@@ -18,6 +18,7 @@ import topCherry from "@/assets/sundae/topping-cherry.png";
 import topSprinkles from "@/assets/sundae/topping-sprinkles.png";
 import topExtra from "@/assets/sundae/topping-extra.png";
 import topPint from "@/assets/sundae/topping-pint.png";
+import topChocDip from "@/assets/sundae/topping-chocdip.png";
 
 /* ── Hero renders + measured crown points (percent of the 560×780 stage) ── */
 type Hero = { src: string; cx: number; cy: number };
@@ -35,25 +36,29 @@ const HEROES: Record<string, Hero> = {
 
 type ConeId = "cup" | "waffle" | "sundae";
 type ScoopId = "single" | "double" | "triple";
-type TopId = "sprinkles" | "cherry" | "extra" | "pint";
+type TopId = "sprinkles" | "cherry" | "chocdip" | "extra" | "pint";
 
 const CONE_PREFIX: Record<ConeId, string> = { cup: "cup", waffle: "waffle", sundae: "coupe" };
 
+// Step-1 thumbs all show a single scoop on purpose: the cards differ ONLY by vessel
+// (the one-time build). Scoop count means the monthly plan, and that's shown in Step 2 —
+// never let a build card imply "bigger build = more scoops."
 const CONES: { id: ConeId; name: string; price: string; per: string; thumb: string; blurb: string; popular?: boolean }[] = [
-  { id: "cup", name: "Cup", price: "$500", per: "one-time", thumb: "cup-1", blurb: "The Launch build — 5-page site, on-page SEO, lead form wired to your phone." },
-  { id: "waffle", name: "Waffle Cone", price: "$1,000", per: "one-time", thumb: "waffle-2", blurb: "The Establish build — Cup + Google Business Profile, reviews & local SEO.", popular: true },
-  { id: "sundae", name: "The Sundae", price: "from $2,000", per: "quoted", thumb: "coupe-3", blurb: "Custom — fixed quote via a $300 Sample Spoon session, credited to your build." },
+  { id: "cup", name: "Cup", price: "$500", per: "one-time", thumb: "cup-1", blurb: "5-page site, on-page SEO, lead form wired to your phone." },
+  { id: "waffle", name: "Waffle Cone", price: "$1,000", per: "one-time", thumb: "waffle-1", blurb: "Everything in the Cup + Google Business Profile, reviews & local SEO.", popular: true },
+  { id: "sundae", name: "The Sundae", price: "from $2,000", per: "quoted", thumb: "coupe-1", blurb: "Custom — fixed quote via a $300 Sample Spoon session, credited to your build." },
 ];
 
 const SCOOPS: { id: ScoopId; n: number; name: string; mo: number; thumb: string; blurb: string; popular?: boolean }[] = [
   { id: "single", n: 1, name: "Single", mo: 49, thumb: "waffle-1", blurb: "Hosting, security, every lead texted to you, monthly report." },
-  { id: "double", n: 2, name: "Double", mo: 149, thumb: "waffle-2", blurb: "Single + ongoing local SEO, reviews & content.", popular: true },
+  { id: "double", n: 2, name: "Double", mo: 149, thumb: "waffle-2", blurb: "Single + Google posts, review replies & ongoing local SEO.", popular: true },
   { id: "triple", n: 3, name: "Triple", mo: 299, thumb: "waffle-3", blurb: "Double + ads management & social media." },
 ];
 
 const TOPS: { id: TopId; name: string; price: string; per: string; thumb: string; blurb: string }[] = [
   { id: "sprinkles", name: "Sprinkles", price: "+$350", per: "/mo", thumb: topSprinkles, blurb: "Dedicated content specialist — on-site content day, 12 produced posts a month. Rides on the Triple plan." },
   { id: "cherry", name: "Cherry on Top", price: "+$500", per: "one-time", thumb: topCherry, blurb: "Business Launch Pack — LLC filing, EIN, starter operating agreement." },
+  { id: "chocdip", name: "Chocolate Dipped", price: "+$200", per: "one-time", thumb: topChocDip, blurb: "One-round brand refresh — logo tidy + consistent colors across your whole site." },
   { id: "extra", name: "Extra Scoop", price: "+$25", per: "/mo", thumb: topExtra, blurb: "Another website on the same plan — same alerts, same report." },
   { id: "pint", name: "By the Pint", price: "10×", per: "once a year", thumb: topPint, blurb: "Prepay the year at 10× monthly — 2 months free." },
 ];
@@ -107,7 +112,7 @@ const OptionCard = ({
 const SundaeBuilder = () => {
   const [cone, setCone] = useState<ConeId>("cup");
   const [scoop, setScoop] = useState<ScoopId>("single");
-  const [tops, setTops] = useState<Record<TopId, boolean>>({ sprinkles: false, cherry: false, extra: false, pint: false });
+  const [tops, setTops] = useState<Record<TopId, boolean>>({ sprinkles: false, cherry: false, chocdip: false, extra: false, pint: false });
 
   const scoopObj = SCOOPS.find((s) => s.id === scoop)!;
   const coneObj = CONES.find((c) => c.id === cone)!;
@@ -122,6 +127,7 @@ const SundaeBuilder = () => {
     const todayVal =
       (custom ? 2000 : cone === "cup" ? 500 : 1000) +
       (tops.cherry ? 500 : 0) +
+      (tops.chocdip ? 200 : 0) +
       (pint ? scoopObj.mo * 10 : 0);
     const monthlyVal = (pint ? 0 : scoopObj.mo) + (tops.sprinkles ? 350 : 0) + (tops.extra ? 25 : 0);
     const names = [coneObj.name, scoopObj.name];
@@ -199,6 +205,14 @@ const SundaeBuilder = () => {
               </AnimatePresence>
 
               {/* crown-anchored overlays */}
+              {/* chocolate coating — drawn first so sprinkles & cherry sit on top of the dip.
+                  Anchor may need a small nudge once eyeballed on prod (localhost/preview aren't reachable here). */}
+              <div
+                className="pointer-events-none absolute"
+                style={{ left: `${hero.cx}%`, top: `${hero.cy}%`, width: "56%", transform: "translate(-50%, -14%)", transition: "left .38s cubic-bezier(.34,1.3,.64,1), top .38s cubic-bezier(.34,1.3,.64,1)" }}
+              >
+                <img src={topChocDip} alt="" className={`w-full origin-top transition-all duration-300 ${tops.chocdip ? "scale-100 opacity-100" : "scale-75 opacity-0"}`} />
+              </div>
               <div
                 className="pointer-events-none absolute"
                 style={{ left: `${hero.cx}%`, top: `${hero.cy}%`, width: "34%", transform: "translate(-50%, -16%)", transition: "left .38s cubic-bezier(.34,1.3,.64,1), top .38s cubic-bezier(.34,1.3,.64,1)" }}
@@ -231,7 +245,7 @@ const SundaeBuilder = () => {
           <div className="flex flex-col gap-8">
             <div role="radiogroup" aria-label="One-time build">
               <h2 className="mb-0.5 flex items-baseline gap-2.5 font-heading text-xl font-extrabold text-foreground">
-                <span className="text-[0.8rem] uppercase tracking-widest text-primary">Step 1</span> Pick your cup
+                <span className="text-[0.8rem] uppercase tracking-widest text-primary">Step 1 · One-time</span> Pick your cup
               </h2>
               <p className="mb-3 text-sm text-muted-foreground">The one-time build everything sits on. Pay it once, own the site — never billed again.</p>
               <div className="flex flex-col gap-2">
@@ -254,9 +268,9 @@ const SundaeBuilder = () => {
 
             <div role="radiogroup" aria-label="Monthly plan">
               <h2 className="mb-0.5 flex items-baseline gap-2.5 font-heading text-xl font-extrabold text-foreground">
-                <span className="text-[0.8rem] uppercase tracking-widest text-primary">Step 2</span> Pick your scoops
+                <span className="text-[0.8rem] uppercase tracking-widest text-primary">Step 2 · Every month</span> Pick your scoops
               </h2>
-              <p className="mb-3 text-sm text-muted-foreground">The monthly plan that keeps it hosted, secure, and texting you every lead.</p>
+              <p className="mb-3 text-sm text-muted-foreground">The monthly plan that keeps it hosted, secure, and texting you every lead — billed every month.</p>
               <div className="flex flex-col gap-2">
                 {SCOOPS.map((s) => (
                   <OptionCard
@@ -277,7 +291,7 @@ const SundaeBuilder = () => {
 
             <div>
               <h2 className="mb-0.5 flex items-baseline gap-2.5 font-heading text-xl font-extrabold text-foreground">
-                <span className="text-[0.8rem] uppercase tracking-widest text-primary">Step 3</span> Add your toppings
+                <span className="text-[0.8rem] uppercase tracking-widest text-primary">Step 3 · Add-ons</span> Add your toppings
                 <span className="text-sm font-normal text-muted-foreground">(optional — tap to toggle)</span>
               </h2>
               <p className="mb-3 text-sm text-muted-foreground">Add them at signup or whenever you're ready. Sprinkles rides on the Triple plan — pick it and we'll bump you up.</p>

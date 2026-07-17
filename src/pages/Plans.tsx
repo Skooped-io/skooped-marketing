@@ -16,7 +16,7 @@ const faqGroups = [
   {
     title: "Getting Started",
     items: [
-      { q: "How much does a website cost?", a: "The Cup (our Launch build) is $500 flat. The Waffle Cone (Establish) is $1,000 flat. Anything custom is a Sundae — a fixed quote through a $300 Sample Spoon session, and the $300 is credited to your build if you sign within 30 days. No estimates on a napkin, no surprise invoices." },
+      { q: "How much does a website cost?", a: "The Cup is $500 flat — a 5-page website. The Waffle Cone is $1,000 flat — the website plus your Google presence. Anything custom is a Sundae — a fixed quote through a $300 Sample Spoon session, and the $300 is credited to your build if you sign within 30 days. No estimates on a napkin, no surprise invoices." },
       { q: "How fast will I be online?", a: "About a week from payment to launch. We build from a proven industry library and customize it to your business, so you're not waiting on an agency timeline." },
       { q: "What's the Sample Spoon?", a: "Our Discovery session — a taste before you order. A one-hour sit-down about your business; within 7 days you get a written roadmap and a fixed cost estimate. It's $300, and 100% of it is credited toward your build if you sign within 30 days." },
     ],
@@ -28,7 +28,7 @@ const faqGroups = [
       { q: "Do I own my website?", a: "Yes. Your website, your content, your data. Always." },
       { q: "How is this different from Wix or Squarespace?", a: "Those platforms give you a template and say 'good luck.' We build your site, handle your domain and SEO, and text you every lead. You get a marketing team — not a DIY tool." },
       { q: "Do you run my ad budget?", a: "Ads bill directly to your own card — we never front spend or mark it up. On Triple, we manage the campaigns and you see every dollar." },
-      { q: "What are toppings?", a: "Optional add-ons. Sprinkles ($350/mo) is a dedicated content specialist shooting real photo and video at your job sites — it rides on the Triple plan, where the ads amplify the content (limited availability). Cherry on Top ($500) files your LLC if your business is brand new, and Extra Scoop adds another website for +$25/mo — those two work with any scoop. Sprinkles is the one that needs Triple." },
+      { q: "What are toppings?", a: "Optional add-ons. Sprinkles ($350/mo) is a dedicated content specialist shooting real photo and video at your job sites — it rides on the Triple plan, where the ads amplify the content (limited availability). Cherry on Top ($500) files your LLC if your business is brand new, Chocolate Dipped (+$200) is a one-round brand refresh — a logo tidy and consistent colors across your site — and Extra Scoop adds another website for +$25/mo. Those three work with any scoop; Sprinkles is the one that needs Triple." },
     ],
   },
   {

@@ -5,8 +5,8 @@ import { CallTextLink } from "@/components/CallTextButton";
 import ScrollReveal from "./ScrollReveal";
 
 const buildOptions = [
-  { name: "Cup", price: "$500", blurb: "The Launch build — 5-page custom site, on-page SEO, lead form wired to your phone" },
-  { name: "Waffle Cone", price: "$1,000", blurb: "The Establish build — Cup + Google Business Profile, reviews & local SEO" },
+  { name: "Cup", price: "$500", blurb: "5-page custom site, on-page SEO, lead form wired to your phone" },
+  { name: "Waffle Cone", price: "$1,000", blurb: "Everything in the Cup + Google Business Profile, reviews & local SEO" },
   { name: "The Sundae", price: "from $2,000", blurb: "Custom — fixed quote via a $300 Sample Spoon session, credited to your build" },
 ];
 
