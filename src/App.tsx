@@ -12,6 +12,7 @@ import Contact from "./pages/Contact.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Templates from "./pages/Templates.tsx";
 import IndustryTemplate from "./pages/IndustryTemplate.tsx";
+import NPI from "./pages/NPI.tsx";
 import Privacy from "./pages/Privacy.tsx";
 import Terms from "./pages/Terms.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/build" element={<Build />} />
           <Route path="/templates" element={<Templates />} />
           <Route path="/templates/:slug" element={<IndustryTemplate />} />
+          <Route path="/npi" element={<NPI />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/signup" element={<Navigate to="/contact" replace />} />

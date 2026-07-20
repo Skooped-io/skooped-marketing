@@ -16,6 +16,7 @@
   <url><loc>https://skooped.io/templates</loc><priority>0.8</priority></url>
   <url><loc>https://skooped.io/contact</loc><priority>0.8</priority></url>
   <url><loc>https://skooped.io/about</loc><priority>0.6</priority></url>
+  <url><loc>https://skooped.io/npi</loc><priority>0.6</priority></url>
   <url><loc>https://skooped.io/templates/roofing</loc><priority>0.7</priority></url>
   <url><loc>https://skooped.io/templates/landscaping</loc><priority>0.7</priority></url>
   <url><loc>https://skooped.io/templates/fencing</loc><priority>0.7</priority></url>
