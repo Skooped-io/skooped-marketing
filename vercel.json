@@ -1,6 +1,6 @@
 {
   "redirects": [
-    { "source": "/hi", "destination": "/?utm_source=merch&utm_medium=qr&utm_campaign=coaster-2026-07", "permanent": false }
+    { "source": "/hi", "destination": "/?utm_source=coaster&utm_medium=qr&utm_campaign=merch-2026-07", "permanent": false }
   ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
