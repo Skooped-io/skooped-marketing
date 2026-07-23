@@ -15,10 +15,10 @@ const MenuIndex = () => (
     <div className="container mx-auto max-w-5xl">
       <ScrollReveal>
         <h2 className="font-heading text-3xl font-extrabold text-foreground text-center mb-2">
-          The full menu, explained
+          Every item, explained
         </h2>
         <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
-          Every scoop and topping, with exactly what's included and what it costs. Tap any item for the details.
+          Exactly what's included in every build, plan, and topping — tap any item for its full page.
         </p>
       </ScrollReveal>
 

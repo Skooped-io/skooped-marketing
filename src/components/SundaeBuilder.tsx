@@ -254,7 +254,7 @@ const SundaeBuilder = () => {
           <div className="flex flex-col gap-8">
             <div role="radiogroup" aria-label="One-time build">
               <h2 className="mb-0.5 flex items-baseline gap-2.5 font-heading text-xl font-extrabold text-foreground">
-                <span className="text-[0.8rem] uppercase tracking-widest text-primary">Step 1 · One-time</span> Pick your cup
+                <span className="text-[0.8rem] uppercase tracking-widest text-primary">Step 1 · One-time</span> Pick your build
               </h2>
               <p className="mb-3 text-sm text-muted-foreground">The one-time build everything sits on. Pay it once, own the site — never billed again.</p>
               <div className="flex flex-col gap-2">

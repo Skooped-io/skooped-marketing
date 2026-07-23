@@ -125,7 +125,7 @@ const Contact = () => {
                         <a href={`sms:6153151541?&body=${encodeURIComponent(composed)}`}>
                           <Button variant="hero" size="lg" className="w-full">Text It to Us</Button>
                         </a>
-                        <a href={`mailto:cooper@skooped.io?subject=${encodeURIComponent("New inquiry from skooped.io")}&body=${encodeURIComponent(composed)}`}>
+                        <a href={`mailto:joseph@skooped.io?subject=${encodeURIComponent("New inquiry from skooped.io")}&body=${encodeURIComponent(composed)}`}>
                           <Button variant="hero-outline" size="lg" className="w-full">Email It Instead</Button>
                         </a>
                       </div>

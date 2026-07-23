@@ -102,12 +102,12 @@ const Privacy = () => {
               <li>Disconnect your Google account at any time</li>
               <li>Stop text messages from us — reply STOP to any text</li>
             </ul>
-            <p className="mt-4">Contact us at cooper@skooped.io or call/text 615-315-1541.</p>
+            <p className="mt-4">Contact us at joseph@skooped.io or call/text 615-315-1541.</p>
           </section>
 
           <section>
             <h2 className="font-heading text-xl font-bold text-foreground">Contact</h2>
-            <p>SKOOPED LLC<br />Franklin, Tennessee<br />cooper@skooped.io · 615-315-1541</p>
+            <p>SKOOPED LLC<br />Franklin, Tennessee<br />joseph@skooped.io · 615-315-1541</p>
           </section>
         </div>
       </main>
