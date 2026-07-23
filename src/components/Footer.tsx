@@ -42,6 +42,7 @@ const Footer = () => (
             <li><a href="tel:6153151541" className="hover:text-primary transition-colors">615-315-1541</a></li>
             <li>Franklin, TN</li>
             <li><a href="https://instagram.com/skooped.io" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">@skooped.io</a></li>
+            <li><a href="https://app.skooped.io" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Client Login</a></li>
           </ul>
         </div>
       </div>

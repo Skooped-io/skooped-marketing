@@ -31,3 +31,6 @@ label is now "Industries", URLs unchanged (`/templates/*` — no 301s needed).
 - UI polish of any kind — the site is live and selling; cosmetic work only when a Now
   item requires it. (Named time sink — see kit PREFERENCES.md focus guardrails.)
 - New sections/pages not tied to a promised deliverable
+- Loading animation via Lovable MCP (Joseph's idea 2026-07-22 — "fun, park for later").
+  Note: skooped.io is direct-to-repo, not a Lovable project; building it here costs no
+  credits — Lovable only relevant if prototyping the animation there first.

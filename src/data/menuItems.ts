@@ -83,7 +83,7 @@ const REPORT_BASE =
   "It's a short, plain-English email once a month — no dashboard to log into and no jargon. It covers your website traffic, the leads that came in and where they came from, exactly what we worked on or changed that month, and confirmation your site stayed online (we monitor uptime around the clock). Your leads still reach your phone by text in real time the moment each one lands — the monthly report is the big-picture recap.";
 
 export const menuItems: Record<string, MenuItem> = {
-  /* ═══════════════════ BUILDS (one-time — the cones) ═══════════════════ */
+  /* ═══════════════════ BUILDS (one-time) ═══════════════════ */
 
   cup: {
     slug: "cup",
@@ -111,7 +111,7 @@ export const menuItems: Record<string, MenuItem> = {
       "Solo operators and small crews who just need the phone to ring",
     ],
     fits:
-      "The Cup is the entry cone. Every build runs on a monthly plan — that's what keeps it hosted, secure, and texting you leads. Most clients start with the Cup + the Single plan: $500 today, then $49/mo from launch.",
+      "The Cup is the entry build. Every build runs on a monthly plan — that's what keeps it hosted, secure, and texting you leads. Most clients start with the Cup + the Single plan: $500 today, then $49/mo from launch.",
     faq: [
       { q: "Is the $500 a one-time payment or a subscription?", a: "One-time. Once the build is paid, it's never billed again. The only ongoing cost is the monthly plan (from $49/mo) that keeps your site running and texting you leads." },
       { q: "Why does a build require a monthly plan?", a: "A website isn't done when it launches — it has to be hosted, secured, updated, and actually working for you. The plan covers all of that plus the part that makes you money: every lead texted to your phone and a monthly report in plain English." },
@@ -157,7 +157,7 @@ export const menuItems: Record<string, MenuItem> = {
       "Anyone serving multiple towns or a wide service area",
     ],
     fits:
-      "The Waffle Cone is the middle cone — the most popular build. It pairs naturally with the Double plan, which keeps working your local SEO every month after launch.",
+      "The Waffle Cone is the middle build — the most popular one. It pairs naturally with the Double plan, which keeps working your local SEO every month after launch.",
     faq: [
       { q: "What's the difference between the Cup and the Waffle Cone?", a: "The Cup ($500) gets you a professional website. The Waffle Cone ($1,000) adds the Google side — your Business Profile, reviews widget, and local SEO — so you actually get found in local search, not just online." },
       { q: "Do you handle my Google Business Profile?", a: "Yes. We create it (or claim it if it exists), verify it, and optimize it so you show up in Maps and the local 3-pack for the services you offer." },
@@ -200,7 +200,7 @@ export const menuItems: Record<string, MenuItem> = {
       "Multi-location or franchise operations",
     ],
     fits:
-      "The Sundae is the custom cone. It always starts with the Sample Spoon ($300 Discovery, credited), then runs on the monthly plan that fits — usually Double or Triple.",
+      "The Sundae is the custom build. It always starts with the Sample Spoon ($300 Discovery, credited), then runs on the monthly plan that fits — usually Double or Triple.",
     faq: [
       { q: "Why can't you just quote it now?", a: "Custom work has too many moving parts to price on a napkin — and a wrong guess helps no one. The Sample Spoon is a paid hour that produces a written roadmap and a fixed cost within 7 days. It filters tire-kickers and protects you from surprise invoices." },
       { q: "What's the Sample Spoon?", a: "Our Discovery session: a one-hour, recorded sit-down about your business. Within 7 days you get a written roadmap and a fixed quote. It's $300, and 100% of it is credited toward your build if you sign within 30 days." },
