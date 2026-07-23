@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 import usePageSeo from "@/hooks/use-page-seo";
+import { getAttributionLine } from "@/lib/attribution";
 
 const serviceOptions = ["Website", "SEO", "Social Media", "Google Ads", "Everything", "Not Sure"];
 
@@ -60,6 +61,7 @@ const Contact = () => {
       data.get("website") ? `Current website: ${data.get("website")}` : "",
       service ? `Interested in: ${service}` : "",
       message ? `About my business: ${message}` : "",
+      getAttributionLine() ?? "",
     ].filter(Boolean);
     setComposed(lines.join("\n"));
   };
