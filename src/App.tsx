@@ -15,6 +15,9 @@ import IndustryTemplate from "./pages/IndustryTemplate.tsx";
 import NPI from "./pages/NPI.tsx";
 import Privacy from "./pages/Privacy.tsx";
 import Terms from "./pages/Terms.tsx";
+import Blog from "./pages/Blog.tsx";
+import BlogPost from "./pages/BlogPost.tsx";
+import CityPage from "./pages/CityPage.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
 
 const queryClient = new QueryClient();
@@ -39,6 +42,9 @@ const App = () => (
           <Route path="/signup" element={<Navigate to="/contact" replace />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/local/:slug" element={<CityPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
