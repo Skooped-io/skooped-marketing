@@ -16,11 +16,13 @@ Now item gets an OFF-FOCUS callout (kit focus hook). Update in the same session 
 
 ## Next
 
-- Swap the form component in the 13 industry templates → every new build ships with
+- Swap the form component in the 12 industry templates → every new build ships with
   lead alerts by default
 - NAP phone reconciliation (615-315-1541 vs legacy 615-856-3871) once the number's
   carrier is known
-- Templates-section fate (Joseph deciding)
+
+Decided 2026-07-22: Templates section STAYS (best ad-landing + SEO surface); nav/footer
+label is now "Industries", URLs unchanged (`/templates/*` — no 301s needed).
 
 ## Parked (explicitly not now — needs a reason to reopen)
 

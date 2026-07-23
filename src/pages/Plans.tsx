@@ -77,7 +77,7 @@ const Plans = () => {
           </ScrollReveal>
           <ScrollReveal delay={0.15}>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Two numbers, that's it: a <strong className="text-foreground">one-time build</strong> (the cone) to get online, plus a{" "}
+              Two numbers, that's it: a <strong className="text-foreground">one-time build</strong> to get online, plus a{" "}
               <strong className="text-foreground">monthly plan</strong> (the scoops) that keeps it running. Optional toppings go on any plan.
               Most clients start at $500 + $49/mo.
             </p>
@@ -85,15 +85,12 @@ const Plans = () => {
         </div>
       </section>
 
-      {/* ── The plans, builds & add-ons up front — scannable, each links to its detail page ── */}
-      <MenuIndex />
-
-      {/* ── Interactive builder, framed as a pricing tool (not a separate product) ── */}
+      {/* ── Interactive builder first — the pricing tool IS the page ── */}
       <section className="pt-6 pb-1 px-6">
         <div className="container mx-auto max-w-5xl text-center">
           <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-foreground">Build it and see your exact total</h2>
           <p className="mt-2 text-sm text-muted-foreground max-w-xl mx-auto">
-            Same offerings as above — pick a build, a plan, and any add-ons, and the price updates live as you go.
+            Pick a build, a plan, and any add-ons — the price updates live as you go. Full details on every item are just below.
           </p>
         </div>
       </section>
@@ -117,7 +114,7 @@ const Plans = () => {
                 So what do I actually pay?
               </p>
               <p className="font-heading text-xl md:text-2xl font-extrabold text-foreground mb-2">
-                Cone once + scoops monthly. Example: Cup + Single ={" "}
+                Build once + scoops monthly. Example: Cup + Single ={" "}
                 <span className="text-primary">$500 today, then $49/mo</span> from launch.
               </p>
               <p className="text-sm text-muted-foreground">
@@ -127,6 +124,9 @@ const Plans = () => {
           </ScrollReveal>
         </div>
       </section>
+
+      {/* ── The detail layer — every build, plan & topping links to its own page ── */}
+      <MenuIndex />
 
       {/* ── Discovery callout ── */}
       <section className="pb-16 px-6">

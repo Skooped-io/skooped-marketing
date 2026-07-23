@@ -21,6 +21,7 @@ const Footer = () => (
           <h4 className="font-heading font-bold text-sm text-foreground mb-3">Pages</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li><Link to="/" className="hover:text-primary transition-colors">Home</Link></li>
+            <li><Link to="/templates" className="hover:text-primary transition-colors">Industries</Link></li>
             <li><Link to="/plans" className="hover:text-primary transition-colors">Plans</Link></li>
             <li><Link to="/about" className="hover:text-primary transition-colors">About</Link></li>
             <li><Link to="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
@@ -47,7 +48,7 @@ const Footer = () => (
 
       <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
         <p className="mb-1">© 2026 Skooped. All rights reserved.</p>
-        <p>An AI-first marketing platform built for local businesses.</p>
+        <p>Websites &amp; marketing for local businesses — Franklin, TN.</p>
       </div>
     </div>
   </footer>

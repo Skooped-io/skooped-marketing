@@ -136,7 +136,7 @@ const Templates = () => {
                   <div className="w-12 h-12 rounded-xl bg-primary-foreground/15 flex items-center justify-center mb-4">
                     <Puzzle size={24} className="text-primary-foreground" />
                   </div>
-                  <h3 className="font-heading text-xl font-extrabold mb-1">Custom Builds & Integrations</h3>
+                  <h3 className="font-heading text-xl font-extrabold mb-1">The Sundae — Custom Builds & Integrations</h3>
                   <p className="text-3xl font-extrabold mb-2">from $2,000</p>
                   <p className="text-primary-foreground/80 text-sm leading-relaxed mb-4">
                     Booking systems, quoting tools, online stores, dashboards, AI integrations, multi-location businesses.
@@ -144,12 +144,12 @@ const Templates = () => {
                   <ul className="space-y-2 mb-6 text-sm text-primary-foreground/80">
                     <li className="flex items-start gap-2"><Check size={16} className="text-primary-foreground mt-0.5 shrink-0" /> Fixed quote — never estimated on the spot</li>
                     <li className="flex items-start gap-2"><Check size={16} className="text-primary-foreground mt-0.5 shrink-0" /> Milestone billing: 50% start, 50% launch</li>
-                    <li className="flex items-start gap-2"><Check size={16} className="text-primary-foreground mt-0.5 shrink-0" /> Scoped through a Discovery session</li>
+                    <li className="flex items-start gap-2"><Check size={16} className="text-primary-foreground mt-0.5 shrink-0" /> Scoped through a Sample Spoon session</li>
                   </ul>
                   <div className="mt-auto">
                     <Link to="/contact">
                       <Button variant="secondary" size="lg" className="w-full bg-primary-foreground text-foreground hover:bg-primary-foreground/90 font-extrabold">
-                        Book My Discovery Session
+                        Book a Sample Spoon Session
                       </Button>
                     </Link>
                   </div>
@@ -163,7 +163,7 @@ const Templates = () => {
                 <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
                   <Check size={24} className="text-accent" />
                 </div>
-                <h3 className="font-heading text-xl font-extrabold text-foreground mb-1">The Discovery Session</h3>
+                <h3 className="font-heading text-xl font-extrabold text-foreground mb-1">The Sample Spoon — Discovery Session</h3>
                 <p className="text-3xl font-extrabold text-foreground mb-2">$300 <span className="text-sm font-semibold text-muted-foreground">credited to your build</span></p>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-4">
                   How custom work starts. One hour on your business, then a written roadmap and fixed quote within 7 days.

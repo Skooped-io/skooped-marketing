@@ -593,7 +593,7 @@ export const menuOrder: string[] = [
 ];
 
 export const categoryLabels: Record<MenuCategory, { title: string; blurb: string }> = {
-  build: { title: "The cones — one-time builds", blurb: "Pay once, own the site. Every build runs on a monthly plan." },
+  build: { title: "The builds — one-time", blurb: "Pay once, own the site. Every build runs on a monthly plan." },
   plan: { title: "The scoops — monthly plans", blurb: "What keeps your site hosted, secure, and texting you leads." },
   topping: { title: "The toppings — add-ons", blurb: "Optional extras. Add them at signup or whenever you're ready." },
 };

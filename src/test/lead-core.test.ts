@@ -49,7 +49,7 @@ describe("validateLead", () => {
 describe("resolveRoute", () => {
   const table: RouteTable = {
     "gunns-fencing": { sms: "+16155550001", label: "Gunn's Fencing" },
-    default: { sms: "+16153151541", email: "cooper@skooped.io", label: "Skooped" },
+    default: { sms: "+16153151541", email: "joseph@skooped.io", label: "Skooped" },
   };
 
   it("routes a known site_id to its owner", () => {
@@ -57,7 +57,7 @@ describe("resolveRoute", () => {
   });
 
   it("falls back to the default route", () => {
-    expect(resolveRoute(table, "unknown-site")?.email).toBe("cooper@skooped.io");
+    expect(resolveRoute(table, "unknown-site")?.email).toBe("joseph@skooped.io");
   });
 
   it("returns undefined with an empty table", () => {

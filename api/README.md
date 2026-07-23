@@ -31,7 +31,7 @@ come alive purely through Vercel env config. No code changes needed at go-live.
 
 | Var | Purpose |
 |---|---|
-| `LEAD_ROUTES` | JSON routing table: `{"<site_id>": {"sms": "+1615...", "email": "...", "label": "Gunn's Fencing"}, "default": {"sms": "+16153151541", "email": "cooper@skooped.io", "label": "Skooped"}}` |
+| `LEAD_ROUTES` | JSON routing table: `{"<site_id>": {"sms": "+1615...", "email": "...", "label": "Gunn's Fencing"}, "default": {"sms": "+16153151541", "email": "joseph@skooped.io", "label": "Skooped"}}` |
 | `TWILIO_ACCOUNT_SID` / `TWILIO_AUTH_TOKEN` / `TWILIO_FROM_NUMBER` | SMS alerts. **A2P 10DLC registration needs the LLC's EIN — sequence after the LLC.** |
 | `RESEND_API_KEY` / `LEAD_FROM_EMAIL` | Email alerts. From-address must be on the verified skooped.io Resend domain. |
 | `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` | Lead storage, table `leads` (schema below). Optional — until set, Vercel function logs are the ledger. |

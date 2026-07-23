@@ -61,9 +61,9 @@ const baseStats: IndustryStat[] = [
 ];
 
 const baseFaq = (industry: string): IndustryFaq[] => [
-  { q: `How is this different from other ${industry.toLowerCase()} marketing companies?`, a: `Traditional agencies charge thousands and lock you in contracts. Skooped gives you an entire AI marketing team for a fraction of the price — and you own everything.` },
+  { q: `How is this different from other ${industry.toLowerCase()} marketing companies?`, a: `Traditional agencies charge thousands and lock you in contracts. Skooped gives you a full marketing operation — automation doing the around-the-clock work, a real person running it — for a fraction of the price. And you own everything.` },
   { q: "I already have a website. Can you work with it?", a: "Absolutely. Call or text us and we'll take an honest look — sometimes the answer is a $500 rebuild, sometimes a monthly plan that keeps what you have alive and texting you leads." },
-  { q: `Do you work with ${industry.toLowerCase()} businesses outside of Tennessee?`, a: "Yes. Our AI team works nationwide. We target the specific cities and services you cover." },
+  { q: `Do you work with ${industry.toLowerCase()} businesses outside of Tennessee?`, a: "Yes. We work nationwide. We target the specific cities and services you cover." },
   { q: "How quickly will I see results?", a: "Your website goes live within a week. SEO movement starts in 30-60 days. Ad leads can start the same week your campaigns launch." },
   { q: "What if I need something changed on my site?", a: "Just text us the change. Single includes 30 minutes of edits a month; Double includes 1 hour; Triple includes 2. No editor to learn, no coding." },
 ];
@@ -77,7 +77,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     emoji: "🏠",
     badge: "Built for Roofers",
     headline: "A website that gets your phone ringing.",
-    subtext: "Built specifically for roofing contractors. Custom design, SEO that targets homeowners in your area, Google Ads, social media — all managed by your AI team. Be online in under a week.",
+    subtext: "Built specifically for roofing contractors. Custom design, SEO that targets homeowners in your area, Google Ads, social media — all managed for you. Be online in under a week.",
     mockupCompany: "Your Roofing Company",
     mockupHeadline: "Your Trusted\nRoofing Experts",
     mockupLocation: "Serving Nashville & Middle Tennessee",
@@ -90,7 +90,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     faq: [
       { q: "How is this different from HomeAdvisor or Angi?", a: "Those platforms own your leads and charge you per click. With Skooped, you own your website, your SEO, and your customers. No middleman taking a cut." },
       { q: "I already have a website. Can you work with it?", a: "Absolutely. Call or text us and we'll take an honest look — sometimes the answer is a $500 rebuild, sometimes a monthly plan that keeps what you have alive and texting you leads." },
-      { q: "Do you work with roofing companies outside of Tennessee?", a: "Yes. Our AI team works nationwide. We target the specific cities and services you cover." },
+      { q: "Do you work with roofing companies outside of Tennessee?", a: "Yes. We work nationwide. We target the specific cities and services you cover." },
       { q: "How quickly will I see results?", a: "Your website goes live within a week. SEO movement starts in 30-60 days. Ad leads can start the same week your campaigns launch." },
       { q: "What if I need something changed on my site?", a: "Just text us the change. Single includes 30 minutes of edits a month; Double includes 1 hour; Triple includes 2. No editor to learn, no coding." },
     ],
@@ -98,7 +98,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find you.",
     seo: {
       title: "Roofing Contractor Website & Marketing | Built for Roofers | Skooped",
-      description: "Get a custom roofing website with SEO, Google Ads, and social media — all managed by AI. Built specifically for roofing contractors. Sites from $500, plans from $49/mo — every lead texted to your phone.",
+      description: "Get a custom roofing website with SEO, Google Ads, and social media — all managed for you. Built specifically for roofing contractors. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -108,7 +108,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     emoji: "🌿",
     badge: "Built for Landscapers",
     headline: "Grow your business like you grow lawns.",
-    subtext: "A website built for landscaping professionals. Showcase your work, rank for local searches, and let your AI team handle the marketing while you handle the yards.",
+    subtext: "A website built for landscaping professionals. Showcase your work, rank for local searches, and let us handle the marketing while you handle the yards.",
     mockupCompany: "Your Landscaping Company",
     mockupHeadline: "Beautiful Yards,\nHappy Clients",
     mockupLocation: "Serving Your Local Area",
@@ -123,7 +123,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find you.",
     seo: {
       title: "Landscaping Website & Marketing | Built for Landscapers | Skooped",
-      description: "Custom landscaping website with SEO, social media, and Google Ads — all managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
+      description: "Custom landscaping website with SEO, social media, and Google Ads — all managed for you. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -133,7 +133,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     emoji: "🏗️",
     badge: "Built for Fence Companies",
     headline: "Build your fence business a stronger online presence.",
-    subtext: "Custom website designed for fencing contractors. Show off your work, rank locally, and let AI handle your digital marketing around the clock.",
+    subtext: "Custom website designed for fencing contractors. Show off your work, rank locally, and let us handle your digital marketing around the clock.",
     mockupCompany: "Your Fencing Company",
     mockupHeadline: "Quality Fences,\nBuilt to Last",
     mockupLocation: "Serving Your Local Area",
@@ -148,7 +148,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find you.",
     seo: {
       title: "Fencing Contractor Website & Marketing | Skooped",
-      description: "Custom fencing website with SEO, Google Ads, and social media — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
+      description: "Custom fencing website with SEO, Google Ads, and social media — managed for you. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -173,7 +173,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find your company.",
     seo: {
       title: "Construction Company Website & Marketing | Skooped",
-      description: "Custom construction website with SEO, Google Ads, and social media — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
+      description: "Custom construction website with SEO, Google Ads, and social media — managed for you. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -183,7 +183,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     emoji: "💙",
     badge: "Built for Therapists",
     headline: "Help more people find the support they need.",
-    subtext: "A calming, professional website built for therapists and counselors. Attract new clients, rank in local search, and let your AI team handle the marketing.",
+    subtext: "A calming, professional website built for therapists and counselors. Attract new clients, rank in local search, and let us handle the marketing.",
     mockupCompany: "Your Therapy Practice",
     mockupHeadline: "A Safe Space\nto Heal & Grow",
     mockupLocation: "Serving Your Local Area",
@@ -198,7 +198,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find your practice.",
     seo: {
       title: "Therapist Website & Marketing | Built for Counselors | Skooped",
-      description: "Custom therapy website with SEO, social media, and online booking — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
+      description: "Custom therapy website with SEO, social media, and online booking — managed for you. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -208,7 +208,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     emoji: "🧭",
     badge: "Built for Coaches",
     headline: "Guide more people — starting with your website.",
-    subtext: "A bold, inspiring website for life coaches. Build credibility, attract high-value clients, and let AI amplify your message across every channel.",
+    subtext: "A bold, inspiring website for life coaches. Build credibility, attract high-value clients, and let us amplify your message across every channel.",
     mockupCompany: "Your Coaching Practice",
     mockupHeadline: "Transform Your Life,\nStarting Today",
     mockupLocation: "Serving Clients Worldwide",
@@ -223,7 +223,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find you.",
     seo: {
       title: "Life Coach Website & Marketing | Skooped",
-      description: "Custom life coaching website with SEO, social media, and booking — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
+      description: "Custom life coaching website with SEO, social media, and booking — managed for you. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -248,7 +248,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find your shop.",
     seo: {
       title: "Auto Repair Website & Marketing | Built for Mechanics | Skooped",
-      description: "Custom auto repair website with SEO, Google Ads, and social media — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
+      description: "Custom auto repair website with SEO, Google Ads, and social media — managed for you. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -258,7 +258,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     emoji: "🏡",
     badge: "Built for Real Estate Pros",
     headline: "List your business, not just properties.",
-    subtext: "A polished website for real estate agents and property managers. Stand out in your market, generate leads, and let AI keep your marketing running 24/7.",
+    subtext: "A polished website for real estate agents and property managers. Stand out in your market, generate leads, and let us keep your marketing running 24/7.",
     mockupCompany: "Your Real Estate Business",
     mockupHeadline: "Find Your\nDream Home",
     mockupLocation: "Serving Your Local Market",
@@ -273,7 +273,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find you first.",
     seo: {
       title: "Real Estate Website & Marketing | Skooped",
-      description: "Custom real estate website with SEO, social media, and lead gen — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
+      description: "Custom real estate website with SEO, social media, and lead gen — managed for you. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -283,7 +283,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     emoji: "💪",
     badge: "Built for Trainers",
     headline: "Flex your online presence.",
-    subtext: "A high-energy website for personal trainers and fitness coaches. Showcase transformations, book clients online, and let AI handle your marketing while you train.",
+    subtext: "A high-energy website for personal trainers and fitness coaches. Showcase transformations, book clients online, and let us handle your marketing while you train.",
     mockupCompany: "Your Fitness Business",
     mockupHeadline: "Transform Your\nBody & Mind",
     mockupLocation: "Serving Your Local Area",
@@ -298,7 +298,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find your gym.",
     seo: {
       title: "Personal Trainer Website & Marketing | Skooped",
-      description: "Custom personal training website with SEO, social media, and booking — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
+      description: "Custom personal training website with SEO, social media, and booking — managed for you. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -323,7 +323,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they book with you.",
     seo: {
       title: "Salon & Barbershop Website & Marketing | Skooped",
-      description: "Custom salon website with SEO, booking, and social media — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
+      description: "Custom salon website with SEO, booking, and social media — managed for you. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -348,7 +348,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they call you.",
     seo: {
       title: "Plumbing Website & Marketing | Built for Plumbers | Skooped",
-      description: "Custom plumbing website with SEO, Google Ads, and social media — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
+      description: "Custom plumbing website with SEO, Google Ads, and social media — managed for you. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 
@@ -358,7 +358,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     emoji: "⚡",
     badge: "Built for Electricians",
     headline: "Power up your marketing.",
-    subtext: "A professional website for electricians and electrical contractors. Rank for local searches, showcase your expertise, and let AI bring the leads to you.",
+    subtext: "A professional website for electricians and electrical contractors. Rank for local searches, showcase your expertise, and let us bring the leads to you.",
     mockupCompany: "Your Electrical Company",
     mockupHeadline: "Licensed & Trusted\nElectrical Experts",
     mockupLocation: "Serving Your Local Area",
@@ -373,7 +373,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find you.",
     seo: {
       title: "Electrician Website & Marketing | Skooped",
-      description: "Custom electrical contractor website with SEO, Google Ads, and social media — managed by AI. Sites from $500, plans from $49/mo — every lead texted to your phone.",
+      description: "Custom electrical contractor website with SEO, Google Ads, and social media — managed for you. Sites from $500, plans from $49/mo — every lead texted to your phone.",
     },
   },
 };
