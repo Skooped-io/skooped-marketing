@@ -29,6 +29,11 @@
   <url><loc>https://skooped.io/templates/salon-barbershop</loc><priority>0.7</priority></url>
   <url><loc>https://skooped.io/templates/plumbing</loc><priority>0.7</priority></url>
   <url><loc>https://skooped.io/templates/electrical</loc><priority>0.7</priority></url>
+  <url><loc>https://skooped.io/blog</loc><priority>0.7</priority></url>
+  <url><loc>https://skooped.io/blog/how-local-businesses-get-found-on-google-2026</loc><priority>0.6</priority></url>
+  <url><loc>https://skooped.io/blog/google-reviews-guide-local-business</loc><priority>0.6</priority></url>
+  <url><loc>https://skooped.io/local/brentwood-tn</loc><priority>0.7</priority></url>
+  <url><loc>https://skooped.io/local/spring-hill-tn</loc><priority>0.7</priority></url>
   <url><loc>https://skooped.io/privacy</loc><priority>0.3</priority></url>
   <url><loc>https://skooped.io/terms</loc><priority>0.3</priority></url>
 </urlset>

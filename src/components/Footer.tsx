@@ -24,12 +24,19 @@ const Footer = () => (
             <li><Link to="/templates" className="hover:text-primary transition-colors">Industries</Link></li>
             <li><Link to="/plans" className="hover:text-primary transition-colors">Plans</Link></li>
             <li><Link to="/about" className="hover:text-primary transition-colors">About</Link></li>
+            <li><Link to="/blog" className="hover:text-primary transition-colors">Blog</Link></li>
             <li><Link to="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
           </ul>
         </div>
 
         <div>
-          <h4 className="font-heading font-bold text-sm text-foreground mb-3">Legal</h4>
+          <h4 className="font-heading font-bold text-sm text-foreground mb-3">Service areas</h4>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li>Franklin, TN</li>
+            <li><Link to="/local/brentwood-tn" className="hover:text-primary transition-colors">Brentwood, TN</Link></li>
+            <li><Link to="/local/spring-hill-tn" className="hover:text-primary transition-colors">Spring Hill, TN</Link></li>
+          </ul>
+          <h4 className="font-heading font-bold text-sm text-foreground mb-3 mt-6">Legal</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li><Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
             <li><Link to="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li>
