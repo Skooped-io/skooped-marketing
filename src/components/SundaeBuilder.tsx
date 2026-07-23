@@ -118,6 +118,63 @@ const OptionCard = ({
   </button>
 );
 
+/* One live render of the sundae — full size in the desktop card, mini in the mobile strip.
+   Overlay anchors are percentage-based, so the same markup scales to any width. */
+const StageArt = ({ heroKey, hero, coneObj, scoopObj, tops }: {
+  heroKey: string; hero: Hero;
+  coneObj: (typeof CONES)[number]; scoopObj: (typeof SCOOPS)[number];
+  tops: Record<TopId, boolean>;
+}) => (
+  <div
+    className="relative w-full overflow-hidden rounded-2xl"
+    style={{ aspectRatio: "560 / 780", background: "radial-gradient(120% 90% at 50% 22%, #F7E3D6 0%, #E6C9C2 78%)" }}
+  >
+    <AnimatePresence>
+      <motion.img
+        key={heroKey}
+        src={hero.src}
+        alt={`${coneObj.name} with ${scoopObj.name.toLowerCase()} scoop`}
+        className="absolute inset-0 h-full w-full object-contain"
+        style={{ filter: "drop-shadow(0 12px 10px rgba(90,20,40,.22))" }}
+        initial={{ opacity: 0, y: -16, scale: 0.92 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.42, ease: [0.24, 0.9, 0.34, 1.05] }}
+      />
+    </AnimatePresence>
+
+    {/* crown-anchored overlays */}
+    {/* chocolate coating — drawn first so sprinkles & cherry sit on top of the dip.
+        Anchor may need a small nudge once eyeballed on prod (localhost/preview aren't reachable here). */}
+    <div
+      className="pointer-events-none absolute"
+      style={{ left: `${hero.cx}%`, top: `${hero.cy}%`, width: "56%", transform: "translate(-50%, -14%)", transition: "left .38s cubic-bezier(.34,1.3,.64,1), top .38s cubic-bezier(.34,1.3,.64,1)" }}
+    >
+      <img src={topChocDip} alt="" className={`w-full origin-top transition-all duration-300 ${tops.chocdip ? "scale-100 opacity-100" : "scale-75 opacity-0"}`} />
+    </div>
+    <div
+      className="pointer-events-none absolute"
+      style={{ left: `${hero.cx}%`, top: `${hero.cy}%`, width: "34%", transform: "translate(-50%, -16%)", transition: "left .38s cubic-bezier(.34,1.3,.64,1), top .38s cubic-bezier(.34,1.3,.64,1)" }}
+    >
+      <img src={topSprinkles} alt="" className={`w-full origin-top transition-all duration-300 ${tops.sprinkles ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} />
+    </div>
+    <div
+      className="pointer-events-none absolute"
+      style={{ left: `${hero.cx}%`, top: `${hero.cy}%`, width: "20%", transform: "translate(-50%, -86%)", transition: "left .38s cubic-bezier(.34,1.3,.64,1), top .38s cubic-bezier(.34,1.3,.64,1)" }}
+    >
+      <img src={topCherry} alt="" className={`w-full origin-bottom transition-all duration-300 ${tops.cherry ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} />
+    </div>
+
+    {/* side overlays */}
+    <div className="pointer-events-none absolute bottom-[5%] right-[1%] w-[25%]">
+      <img src={topExtra} alt="" className={`w-full origin-bottom transition-all duration-300 ${tops.extra ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} />
+    </div>
+    <div className="pointer-events-none absolute bottom-[3%] left-[1%] w-[25%]">
+      <img src={topPint} alt="" className={`w-full origin-bottom transition-all duration-300 ${tops.pint ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} />
+    </div>
+  </div>
+);
+
 const SundaeBuilder = () => {
   const [cone, setCone] = useState<ConeId>("cup");
   const [scoop, setScoop] = useState<ScoopId>("single");
@@ -188,60 +245,57 @@ const SundaeBuilder = () => {
       custom,
     });
 
+  // Rendered in the desktop receipt bar and as static copy under the steps on mobile.
+  const finePrint = (
+    <>
+      Takes you to our contact form with the order pre-filled — or call/text{" "}
+      <a href={`tel:${PHONE}`} className="text-primary font-semibold hover:underline">{PHONE_DISPLAY}</a>. Nothing is charged here.{" "}
+      Ready right now?{" "}
+      <a
+        href={custom ? PAY_LINKS.sampleSpoon : cone === "cup" ? PAY_LINKS.cup : PAY_LINKS.waffle}
+        onClick={() => {
+          fireSundaeBuilt();
+          track("pay_link_click", { item: custom ? "sample-spoon" : cone, source: "builder" });
+        }}
+        className="text-primary font-semibold hover:underline"
+      >
+        Pay online
+      </a>
+      {custom
+        ? " — book your Sample Spoon ($300, credited to your build)."
+        : ` — your ${coneObj.name} build (${cone === "cup" ? "$500" : "$1,000"}) checks out now; the plan starts at launch.`}
+    </>
+  );
+
   return (
     <div className="relative">
       <div className="px-6">
-        <div className="container mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-[minmax(0,380px)_1fr] gap-8 items-start pb-6">
+        {/* Mobile: the sundae stays pinned while you build — toppings land on it live.
+            Price is one compact line; the bulky receipt bar below is desktop-only. */}
+        <div className="md:hidden sticky top-16 z-40 -mx-6 border-b-2 border-border bg-card/95 px-4 py-2.5 backdrop-blur-sm shadow-[0_8px_24px_-14px_rgba(110,31,44,0.3)]">
+          <div className="mx-auto flex max-w-md items-center gap-3">
+            <div className="w-24 shrink-0">
+              <StageArt heroKey={heroKey} hero={hero} coneObj={coneObj} scoopObj={scoopObj} tops={tops} />
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="truncate font-heading text-sm font-extrabold text-foreground">{order}</p>
+              <p className="text-sm text-muted-foreground">
+                <strong className="text-primary tabular-nums">{todayText}</strong> today · then{" "}
+                <strong className="text-primary tabular-nums">{moText}</strong>
+              </p>
+              <Link to={contactHref} onClick={fireSundaeBuilt} className="mt-1.5 inline-block">
+                <Button variant="hero" size="sm">{custom ? "Get my quote →" : "Get this build →"}</Button>
+              </Link>
+            </div>
+          </div>
+        </div>
 
-          {/* Stage */}
-          <div className="md:sticky md:top-20 rounded-3xl border border-border bg-card p-4 shadow-md">
-            <div
-              className="relative mx-auto w-full max-w-[360px] overflow-hidden rounded-2xl"
-              style={{ aspectRatio: "560 / 780", background: "radial-gradient(120% 90% at 50% 22%, #F7E3D6 0%, #E6C9C2 78%)" }}
-            >
-              <AnimatePresence>
-                <motion.img
-                  key={heroKey}
-                  src={hero.src}
-                  alt={`${coneObj.name} with ${scoopObj.name.toLowerCase()} scoop`}
-                  className="absolute inset-0 h-full w-full object-contain"
-                  style={{ filter: "drop-shadow(0 12px 10px rgba(90,20,40,.22))" }}
-                  initial={{ opacity: 0, y: -16, scale: 0.92 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.42, ease: [0.24, 0.9, 0.34, 1.05] }}
-                />
-              </AnimatePresence>
+        <div className="container mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-[minmax(0,380px)_1fr] gap-8 items-start pb-6 pt-4 md:pt-0">
 
-              {/* crown-anchored overlays */}
-              {/* chocolate coating — drawn first so sprinkles & cherry sit on top of the dip.
-                  Anchor may need a small nudge once eyeballed on prod (localhost/preview aren't reachable here). */}
-              <div
-                className="pointer-events-none absolute"
-                style={{ left: `${hero.cx}%`, top: `${hero.cy}%`, width: "56%", transform: "translate(-50%, -14%)", transition: "left .38s cubic-bezier(.34,1.3,.64,1), top .38s cubic-bezier(.34,1.3,.64,1)" }}
-              >
-                <img src={topChocDip} alt="" className={`w-full origin-top transition-all duration-300 ${tops.chocdip ? "scale-100 opacity-100" : "scale-75 opacity-0"}`} />
-              </div>
-              <div
-                className="pointer-events-none absolute"
-                style={{ left: `${hero.cx}%`, top: `${hero.cy}%`, width: "34%", transform: "translate(-50%, -16%)", transition: "left .38s cubic-bezier(.34,1.3,.64,1), top .38s cubic-bezier(.34,1.3,.64,1)" }}
-              >
-                <img src={topSprinkles} alt="" className={`w-full origin-top transition-all duration-300 ${tops.sprinkles ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} />
-              </div>
-              <div
-                className="pointer-events-none absolute"
-                style={{ left: `${hero.cx}%`, top: `${hero.cy}%`, width: "20%", transform: "translate(-50%, -86%)", transition: "left .38s cubic-bezier(.34,1.3,.64,1), top .38s cubic-bezier(.34,1.3,.64,1)" }}
-              >
-                <img src={topCherry} alt="" className={`w-full origin-bottom transition-all duration-300 ${tops.cherry ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} />
-              </div>
-
-              {/* side overlays */}
-              <div className="pointer-events-none absolute bottom-[5%] right-[1%] w-[25%]">
-                <img src={topExtra} alt="" className={`w-full origin-bottom transition-all duration-300 ${tops.extra ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} />
-              </div>
-              <div className="pointer-events-none absolute bottom-[3%] left-[1%] w-[25%]">
-                <img src={topPint} alt="" className={`w-full origin-bottom transition-all duration-300 ${tops.pint ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} />
-              </div>
+          {/* Stage (desktop card) */}
+          <div className="hidden md:block md:sticky md:top-20 rounded-3xl border border-border bg-card p-4 shadow-md">
+            <div className="mx-auto w-full max-w-[360px]">
+              <StageArt heroKey={heroKey} hero={hero} coneObj={coneObj} scoopObj={scoopObj} tops={tops} />
             </div>
             <p className="mt-3 text-center text-sm text-muted-foreground">
               <strong className="text-foreground">{order}</strong>
@@ -320,12 +374,14 @@ const SundaeBuilder = () => {
                 ))}
               </div>
             </div>
+
+            <p className="md:hidden text-[0.72rem] text-muted-foreground">{finePrint}</p>
           </div>
         </div>
       </div>
 
-      {/* Sticky receipt — pins while the builder is in view, releases into the content below */}
-      <div className="sticky bottom-0 z-40 border-t-2 border-border bg-card/95 backdrop-blur-sm shadow-[0_-8px_24px_-14px_rgba(110,31,44,0.3)]">
+      {/* Sticky receipt — desktop only; on mobile the top strip carries price + CTA */}
+      <div className="hidden md:block sticky bottom-0 z-40 border-t-2 border-border bg-card/95 backdrop-blur-sm shadow-[0_-8px_24px_-14px_rgba(110,31,44,0.3)]">
         <div className="container mx-auto max-w-5xl px-6 py-3">
           <div className="flex flex-wrap items-center gap-4">
             <div className="min-w-0 flex-1 basis-56 text-sm text-muted-foreground leading-snug">
@@ -352,24 +408,7 @@ const SundaeBuilder = () => {
               </Button>
             </Link>
           </div>
-          <p className="mt-1.5 text-[0.72rem] text-muted-foreground">
-            Takes you to our contact form with the order pre-filled — or call/text{" "}
-            <a href={`tel:${PHONE}`} className="text-primary font-semibold hover:underline">{PHONE_DISPLAY}</a>. Nothing is charged here.{" "}
-            Ready right now?{" "}
-            <a
-              href={custom ? PAY_LINKS.sampleSpoon : cone === "cup" ? PAY_LINKS.cup : PAY_LINKS.waffle}
-              onClick={() => {
-                fireSundaeBuilt();
-                track("pay_link_click", { item: custom ? "sample-spoon" : cone, source: "builder" });
-              }}
-              className="text-primary font-semibold hover:underline"
-            >
-              Pay online
-            </a>
-            {custom
-              ? " — book your Sample Spoon ($300, credited to your build)."
-              : ` — your ${coneObj.name} build (${cone === "cup" ? "$500" : "$1,000"}) checks out now; the plan starts at launch.`}
-          </p>
+          <p className="mt-1.5 text-[0.72rem] text-muted-foreground">{finePrint}</p>
         </div>
       </div>
     </div>

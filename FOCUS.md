@@ -10,6 +10,8 @@ Now item gets an OFF-FOCUS callout (kit focus hook). Update in the same session 
    text/email lead alerts and is deployed dormant (503). The moment env keys exist
    (Resend first — email leg needs no A2P; Twilio + Supabase after), set them in Vercel
    and verify live with a real POST. Blocked on the Vercel account handoff.
+   ⚠ The live `LEAD_ROUTES` env value still says cooper@skooped.io — set the default
+   email to joseph@ when wiring (site + docs already swept 2026-07-22).
 2. **Analytics decision for skooped.io** — Plausible script is installed but records
    nothing until the account/goal exists (or the decision flips to Vercel Analytics).
    Needed before the coaster-QR order.
