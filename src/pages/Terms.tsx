@@ -13,7 +13,7 @@ const Terms = () => {
       <Navbar />
       <main className="container mx-auto max-w-3xl px-6 pt-32 pb-20">
         <h1 className="font-heading text-4xl font-extrabold text-foreground mb-2">Terms of Service</h1>
-        <p className="text-sm text-muted-foreground mb-10">Last updated: July 17, 2026</p>
+        <p className="text-sm text-muted-foreground mb-10">Last updated: July 28, 2026</p>
 
         <div className="prose prose-neutral max-w-none space-y-8 text-foreground/90 text-base leading-relaxed">
           <p>
@@ -46,6 +46,17 @@ const Terms = () => {
               <li>Dedicated content specialist add-on ("Sprinkles"): +$350/month, requires the Triple plan, subject to availability</li>
               <li>Additional website on the same plan ("Extra Scoop"): +$25/month</li>
               <li>Annual prepay ("By the Pint"): 10× the monthly price (equivalent to 2 months free)</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-xl font-bold text-foreground">Website Edits &amp; Turnaround</h2>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Single includes 30 minutes of small edits per month. Requests are queued and shipped together in one monthly batch, timed with your monthly report.</li>
+              <li>Double includes 1 hour of edits per month and Triple includes 2 hours, both with same-week turnaround (no batching).</li>
+              <li>Need a Single edit sooner than the monthly batch? Rush service is a flat $75 per request.</li>
+              <li>Included edit time does not roll over month to month. Work beyond your included time is quoted and approved before we start.</li>
+              <li>If your website is down or broken, we fix it immediately at no charge on every plan.</li>
             </ul>
           </section>
 
