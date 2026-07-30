@@ -13,7 +13,7 @@ const Terms = () => {
       <Navbar />
       <main className="container mx-auto max-w-3xl px-6 pt-32 pb-20">
         <h1 className="font-heading text-4xl font-extrabold text-foreground mb-2">Terms of Service</h1>
-        <p className="text-sm text-muted-foreground mb-10">Last updated: July 28, 2026</p>
+        <p className="text-sm text-muted-foreground mb-10">Last updated: July 30, 2026</p>
 
         <div className="prose prose-neutral max-w-none space-y-8 text-foreground/90 text-base leading-relaxed">
           <p>
@@ -87,6 +87,7 @@ const Terms = () => {
               <li>You own your business content (text, images, logos you provide)</li>
               <li>Website designs and templates remain the property of Skooped.io</li>
               <li>We host your website on our infrastructure for the duration of your subscription</li>
+              <li>Websites we build and host include a small "Built by Skooped" credit link in the footer</li>
             </ul>
           </section>
 
