@@ -55,6 +55,14 @@
     @apply border-border;
   }
 
+  /* Any stray horizontal overflow (decorative absolutes, rotated cards, long CTAs)
+     widens the mobile layout viewport and the whole page renders zoomed-out/off-center.
+     clip (not hidden) so position:sticky keeps working. */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
   body {
     @apply bg-background text-foreground font-body antialiased;
     background-image:
