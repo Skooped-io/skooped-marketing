@@ -216,13 +216,13 @@ const MenuItem = () => {
                 <div className="flex flex-wrap gap-3">
                   {item.payLink ? (
                     <a href={payHref} onClick={() => track("pay_link_click", { item: item.slug, source: "hero", billing: showAnnual ? "annual" : "monthly" })}>
-                      <Button variant="hero" size="lg">{payLabel}</Button>
+                      <Button variant="hero" size="lg" className="h-auto min-h-12 whitespace-normal py-2 text-center">{payLabel}</Button>
                     </a>
                   ) : (
-                    <Link to={contactHref}><Button variant="hero" size="lg">{item.cta.label}</Button></Link>
+                    <Link to={contactHref}><Button variant="hero" size="lg" className="h-auto min-h-12 whitespace-normal py-2 text-center">{item.cta.label}</Button></Link>
                   )}
                   <Link to="/plans">
-                    <Button variant="outline" size="lg">
+                    <Button variant="outline" size="lg" className="h-auto min-h-12 whitespace-normal py-2 text-center">
                       {item.category === "plan" ? "Need a website first? Build your sundae" : "Build your sundae"}
                     </Button>
                   </Link>
@@ -376,7 +376,7 @@ const MenuItem = () => {
             <p className="text-primary-foreground/70 text-lg mb-8">
               Takes you to our contact form with your order pre-filled. Nothing is charged there.
             </p>
-            <Link to={contactHref}><Button variant="hero" size="xl">{item.cta.label}</Button></Link>
+            <Link to={contactHref}><Button variant="hero" size="xl" className="h-auto min-h-14 whitespace-normal py-2 text-center">{item.cta.label}</Button></Link>
             {item.payLink && (
               <p className="mt-5">
                 <a
