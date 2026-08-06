@@ -60,7 +60,10 @@ const PricingFlow = () => (
       <ScrollReveal delay={0.2}>
         <div className="text-center mt-8">
           <Link to="/plans">
-            <Button variant="hero" size="lg">Build your sundae — see full pricing &rarr;</Button>
+            <Button variant="hero" size="lg">
+              <span className="sm:hidden">Build your sundae &rarr;</span>
+              <span className="hidden sm:inline">Build your sundae — see full pricing &rarr;</span>
+            </Button>
           </Link>
           <p className="text-sm text-muted-foreground mt-3">
             Not sure which fits?{" "}

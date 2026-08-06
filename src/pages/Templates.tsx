@@ -105,7 +105,7 @@ const Templates = () => {
                           href={previewUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-xs font-semibold text-primary hover:underline opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0 flex items-center gap-1"
+                          className="text-xs font-semibold text-primary hover:underline p-2 -m-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200 shrink-0 flex items-center gap-1"
                         >
                           Demo <ExternalLink size={11} />
                         </a>
