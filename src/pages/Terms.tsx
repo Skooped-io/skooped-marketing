@@ -13,7 +13,7 @@ const Terms = () => {
       <Navbar />
       <main className="container mx-auto max-w-3xl px-6 pt-32 pb-20">
         <h1 className="font-heading text-4xl font-extrabold text-foreground mb-2">Terms of Service</h1>
-        <p className="text-sm text-muted-foreground mb-10">Last updated: July 30, 2026</p>
+        <p className="text-sm text-muted-foreground mb-10">Last updated: August 7, 2026</p>
 
         <div className="prose prose-neutral max-w-none space-y-8 text-foreground/90 text-base leading-relaxed">
           <p>
@@ -26,6 +26,29 @@ const Terms = () => {
             <p>
               Skooped.io provides AI-powered website creation, SEO, social media management, and digital marketing services for local businesses. We build and manage your online presence so you can focus on running your business.
             </p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-xl font-bold text-foreground">SMS Lead Alert Terms</h2>
+            <p>
+              Program: Skooped website inquiry alerts, operated by SKOOPED LLC. We send contracted clients one SMS
+              each time a visitor submits the contact form on the client's own website, so the client can respond
+              quickly. Message frequency varies with your website's inquiry volume. Message and data rates may apply.
+            </p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>
+                Reply <strong>STOP</strong> to any alert to opt out at any time; your inquiry alerts continue by
+                email instead. Reply START to resume texts.
+              </li>
+              <li>
+                Reply <strong>HELP</strong> for help at any time, or contact us at joseph@skooped.io or 615-315-1541.
+              </li>
+              <li>
+                Consent is collected in writing on your signed service agreement. Mobile numbers and SMS consent
+                data are never shared with or sold to third parties or affiliates for marketing or promotional
+                purposes.
+              </li>
+            </ul>
           </section>
 
           <section>
