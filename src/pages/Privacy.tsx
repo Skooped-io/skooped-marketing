@@ -13,7 +13,7 @@ const Privacy = () => {
       <Navbar />
       <main className="container mx-auto max-w-3xl px-6 pt-32 pb-20">
         <h1 className="font-heading text-4xl font-extrabold text-foreground mb-2">Privacy Policy</h1>
-        <p className="text-sm text-muted-foreground mb-10">Last updated: July 17, 2026</p>
+        <p className="text-sm text-muted-foreground mb-10">Last updated: August 7, 2026</p>
 
         <div className="prose prose-neutral max-w-none space-y-8 text-foreground/90 text-base leading-relaxed">
           <p>
@@ -59,6 +59,25 @@ const Privacy = () => {
               store the submission to power that business's monthly report. We process this information on our
               client's behalf, and we never sell it or use it for advertising.
             </p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-xl font-bold text-foreground">SMS text alerts (our messaging program)</h2>
+            <p>
+              Skooped sends SMS website inquiry alerts to our own contracted clients only. Clients give express
+              written consent at onboarding by providing, in their signed service agreement, the mobile number that
+              should receive alerts. Message frequency varies with your website's inquiry volume. Message and data
+              rates may apply.
+            </p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Reply STOP to any alert to opt out; your inquiry alerts continue by email instead</li>
+              <li>Reply START to resume texts, and HELP for assistance at any time</li>
+              <li>
+                We do not share or sell mobile numbers, SMS consent, or opt-in data with third parties or affiliates
+                for marketing or promotional purposes
+              </li>
+            </ul>
+            <p>Questions about text alerts: joseph@skooped.io or call/text 615-315-1541.</p>
           </section>
 
           <section>
