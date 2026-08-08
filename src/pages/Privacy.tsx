@@ -64,10 +64,11 @@ const Privacy = () => {
           <section>
             <h2 className="font-heading text-xl font-bold text-foreground">SMS text alerts (our messaging program)</h2>
             <p>
-              Skooped sends SMS website inquiry alerts to our own contracted clients only. Clients give express
-              written consent at onboarding by providing, in their signed service agreement, the mobile number that
-              should receive alerts. Message frequency varies with your website's inquiry volume. Message and data
-              rates may apply.
+              Skooped sends SMS website inquiry alerts to our own contracted clients only. Text alerts are optional
+              and are not a condition of purchasing or using any Skooped service; clients who decline receive the
+              same alerts by email. Clients give express written consent at onboarding through a separate, voluntary
+              checkbox on their signed service agreement, writing in the mobile number that should receive alerts.
+              Message frequency varies with your website's inquiry volume. Message and data rates may apply.
             </p>
             <ul className="list-disc pl-5 space-y-1">
               <li>Reply STOP to any alert to opt out; your inquiry alerts continue by email instead</li>

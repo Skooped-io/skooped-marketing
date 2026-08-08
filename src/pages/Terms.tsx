@@ -44,9 +44,10 @@ const Terms = () => {
                 Reply <strong>HELP</strong> for help at any time, or contact us at joseph@skooped.io or 615-315-1541.
               </li>
               <li>
-                Consent is collected in writing on your signed service agreement. Mobile numbers and SMS consent
-                data are never shared with or sold to third parties or affiliates for marketing or promotional
-                purposes.
+                Text alerts are optional. Consent is collected in writing on your signed service agreement as a
+                separate, voluntary election and is not a condition of purchasing or using any Skooped service;
+                clients who decline receive the same alerts by email. Mobile numbers and SMS consent data are
+                never shared with or sold to third parties or affiliates for marketing or promotional purposes.
               </li>
             </ul>
           </section>
