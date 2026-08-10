@@ -21,6 +21,24 @@ does **not** fix this — only the 301 carries the equity.
 
 Whenever you rename or delete a slug/route, say so explicitly and add the redirect in the same PR.
 
+## Post-deploy smoke check — mandatory, the deploying session owns it
+
+After every push to `main` (Vercel deploys in ~1-2 min), curl this matrix before calling the work
+done. Direct navigation is how visitors, Google, and vendor reviewers arrive; a broken rewrite is
+invisible from inside the SPA and from the homepage:
+
+- `/` and at least one deep route you did NOT touch (`/plans/single-scoop`, `/contact`) → 200 with
+  the React shell (`/assets/index-` in the body)
+- `/terms`, `/privacy`, `/sms-opt-in` → 200 static (NO `/assets/index-` in the body); these are the
+  A2P compliance evidence URLs and must stay static mirrors
+- any route you added or renamed → 200 (plus its 301 if a slug moved)
+
+**Routing landmine (2026-08-10 incident):** never add `cleanUrls` to `vercel.json` — it breaks the
+SPA catch-all rewrite to `/index.html` and 404s every React route on direct navigation (took the
+whole site's deep links down for ~2.5 h). Static pages get explicit per-path `rewrites` entries
+above the catch-all instead. The hq daily triage routine curls this same matrix as a next-morning
+backstop, but the backstop is not the check.
+
 ## Where things live
 - **Pricing / menu content:** `src/data/menuItems.ts` (the 10 `/plans/:slug` detail pages) and
   `src/data/industryTemplates.ts` (the `/templates/:slug` pages). Both mirror the price grid in the HQ repo's
