@@ -66,8 +66,10 @@ const Privacy = () => {
             <p>
               Skooped sends SMS website inquiry alerts to our own contracted clients only. Text alerts are optional
               and are not a condition of purchasing or using any Skooped service; clients who decline receive the
-              same alerts by email. Clients give express written consent at onboarding through a separate, voluntary
-              checkbox on their signed service agreement, writing in the mobile number that should receive alerts.
+              same alerts by email. Consent is a standalone, voluntary written election (unchecked by default, and
+              the client agreement is complete and fully valid with it left blank): the client personally checks the
+              box and writes in the mobile number that should receive alerts. The full opt-in experience is
+              documented at <a href="/sms-opt-in" className="text-primary hover:underline">skooped.io/sms-opt-in</a>.
               Message frequency varies with your website's inquiry volume. Message and data rates may apply.
             </p>
             <ul className="list-disc pl-5 space-y-1">

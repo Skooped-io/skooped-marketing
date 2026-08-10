@@ -81,7 +81,7 @@ const tiers = [
 const steps = [
   { num: "1", title: "Call, Text, or Send the Form", desc: "Tell us about your business. We'll confirm the scope and price on one page of paper." },
   { num: "2", title: "We Build It", desc: "Your company name, logo, services, and service area — customized onto this design by our team." },
-  { num: "3", title: "Live in About a Week", desc: "We launch it with you on the phone — and from day one, every lead is texted straight to you." },
+  { num: "3", title: "Live in About a Week", desc: "We launch it with you on the phone — and from day one, every lead lands straight in your inbox (texted too if you opt in)." },
 ];
 
 const previewSlugs: Record<string, string> = {
@@ -143,7 +143,7 @@ const IndustryTemplate = () => {
                   </a>
                 )}
               </div>
-              <p className="text-xs text-muted-foreground">$500 flat, live in about a week. Every lead texted to your phone.</p>
+              <p className="text-xs text-muted-foreground">$500 flat, live in about a week. Every lead sent straight to you.</p>
             </ScrollReveal>
           </div>
           <ScrollReveal delay={0.2}>
@@ -287,7 +287,7 @@ const IndustryTemplate = () => {
             <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-primary-foreground mb-4">{data.ctaHeadline}</h2>
             <p className="text-primary-foreground/70 text-lg mb-8">{data.ctaSub}</p>
             <Link to="/contact"><Button variant="hero" size="xl">Start My Build — $500</Button></Link>
-            <p className="text-sm text-primary-foreground/60 mt-3">Live in about a week. Every lead texted to your phone.</p>
+            <p className="text-sm text-primary-foreground/60 mt-3">Live in about a week. Every lead sent straight to you.</p>
             <div className="mt-6">
               <a href="tel:6153151541" className="inline-flex items-center gap-2 text-primary-foreground/80 hover:text-primary transition-colors font-heading font-bold">
                 <Phone size={18} /> Or call us: 615-315-1541

@@ -28,7 +28,7 @@ const features = [
   },
   {
     icon: Bell,
-    title: "Every inquiry texted to you",
+    title: "Every inquiry sent to you instantly",
     desc: "New-client inquiries hit your phone the moment they land. No portal to check, no lead left waiting.",
   },
   {
@@ -54,7 +54,7 @@ const tiers = [
 const steps = [
   { num: "1", title: "Book a Call", desc: "Tell us about your practice — your specialties, your area, and how clients find you today." },
   { num: "2", title: "We Build It", desc: "We stand up your website and Google presence, tuned to how people actually search for care." },
-  { num: "3", title: "Live in About a Week", desc: "We launch with you on the phone — and from day one, every inquiry is texted straight to you." },
+  { num: "3", title: "Live in About a Week", desc: "We launch with you on the phone — and from day one, every inquiry lands straight in your inbox (texted too if you opt in)." },
 ];
 
 /* ═══════════════════ PAGE ═══════════════════ */
@@ -62,7 +62,7 @@ const NPI = () => {
   usePageSeo({
     title: "Skooped × Nashville Psychotherapy Institute — Community Partner",
     description:
-      "Skooped is the Nashville Psychotherapy Institute's Community Partner for marketing — websites, Google, reviews, and every new-client inquiry texted to your phone. Built for Nashville practices.",
+      "Skooped is the Nashville Psychotherapy Institute's Community Partner for marketing — websites, Google, reviews, and every new-client inquiry sent to you instantly. Built for Nashville practices.",
   });
 
   useEffect(() => {

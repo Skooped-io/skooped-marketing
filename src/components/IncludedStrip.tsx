@@ -2,7 +2,7 @@ import { MessageSquareText, FileBarChart, MapPin } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
 const items = [
-  { icon: MessageSquareText, text: "Every lead texted to your phone" },
+  { icon: MessageSquareText, text: "Every lead sent to you instantly" },
   { icon: FileBarChart, text: "A monthly report in plain English" },
   { icon: MapPin, text: "A real human + AI team in Franklin, TN" },
 ];

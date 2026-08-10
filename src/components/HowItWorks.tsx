@@ -26,7 +26,7 @@ const steps = [
     num: "04",
     icon: MessageSquareText,
     heading: "You answer the phone.",
-    text: "Every lead from your site is texted to you the moment it lands. A plain-English report hits your inbox monthly.",
+    text: "Every lead from your site reaches you the moment it lands, by email always and by text if you opt in. A plain-English report hits your inbox monthly.",
   },
 ];
 

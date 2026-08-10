@@ -71,7 +71,7 @@ const HeroSection = () => {
           transition={{ delay: 0.6, duration: 0.5 }}
           className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          A custom website from $500, plus a monthly plan from $49 that keeps it running. Every lead texted to your phone.
+          A custom website from $500, plus a monthly plan from $49 that keeps it running. Every lead sent to you the moment it lands.
         </motion.p>
 
         <motion.div

@@ -37,7 +37,7 @@ const industries: Industry[] = [
 const Templates = () => {
   usePageSeo({
     title: "Website Examples by Industry | Skooped — Franklin TN",
-    description: "See the websites Skooped builds for roofers, landscapers, contractors, therapists, coaches & more. Custom builds from $500 — every lead texted to your phone.",
+    description: "See the websites Skooped builds for roofers, landscapers, contractors, therapists, coaches & more. Custom builds from $500 — every lead sent straight to you.",
   });
 
   return (

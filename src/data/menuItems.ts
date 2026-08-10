@@ -77,7 +77,7 @@ export interface MenuItem {
 
 /* Shared lead-alert line — the promise on every plan & build. */
 const LEAD_ALERTS =
-  "Every lead from your site is texted straight to your phone the moment it lands — plus an email, so nothing slips through.";
+  "Every lead from your site is emailed to you the moment it lands — and texted too if you opt in, so nothing slips through.";
 
 /* Shared monthly-report answer — every plan includes the report; higher tiers append a line. */
 const REPORT_BASE =
@@ -115,7 +115,7 @@ export const menuItems: Record<string, MenuItem> = {
       "The Cup is the entry build. Every build runs on a monthly plan — that's what keeps it hosted, secure, and texting you leads. Most clients start with the Cup + the Single plan: $500 today, then $49/mo from launch.",
     faq: [
       { q: "Is the $500 a one-time payment or a subscription?", a: "One-time. Once the build is paid, it's never billed again. The only ongoing cost is the monthly plan (from $49/mo) that keeps your site running and texting you leads." },
-      { q: "Why does a build require a monthly plan?", a: "A website isn't done when it launches — it has to be hosted, secured, updated, and actually working for you. The plan covers all of that plus the part that makes you money: every lead texted to your phone and a monthly report in plain English." },
+      { q: "Why does a build require a monthly plan?", a: "A website isn't done when it launches — it has to be hosted, secured, updated, and actually working for you. The plan covers all of that plus the part that makes you money: every lead delivered to you instantly and a monthly report in plain English." },
       { q: "Do I own the website?", a: "Yes. Your website, your content, your domain, your data — always." },
       { q: "How fast will I be online?", a: "About a week from payment to launch. We build from a proven library and customize it, so you're not waiting on an agency timeline." },
     ],
@@ -128,7 +128,7 @@ export const menuItems: Record<string, MenuItem> = {
     seo: {
       title: "5-Page Website — $500 Flat, Live in a Week | Skooped Franklin TN",
       description:
-        "The Cup: a $500 flat-rate 5-page website for local service businesses in Franklin, TN. Mobile-ready, on-page SEO, domain handled, and every lead texted to your phone. Live in about a week.",
+        "The Cup: a $500 flat-rate 5-page website for local service businesses in Franklin, TN. Mobile-ready, on-page SEO, domain handled, and every lead sent straight to you. Live in about a week.",
     },
   },
 
@@ -232,7 +232,7 @@ export const menuItems: Record<string, MenuItem> = {
     priceUnit: "/mo",
     tagline: "Keeps your site alive, secure, and texting you every lead.",
     intro:
-      "The Single scoop is the plan every site needs. It handles the unglamorous-but-essential work — hosting, security, updates, your domain — and delivers the part that pays for itself: every lead texted to your phone, and a monthly report in plain English so you always know what's working.",
+      "The Single scoop is the plan every site needs. It handles the unglamorous-but-essential work — hosting, security, updates, your domain — and delivers the part that pays for itself: every lead delivered to you instantly, and a monthly report in plain English so you always know what's working.",
     includesHeading: "What $49/mo covers",
     includes: [
       { label: "Hosting", note: "Fast, reliable, and handled — you never think about a server" },
@@ -269,7 +269,7 @@ export const menuItems: Record<string, MenuItem> = {
     seo: {
       title: "Single Plan — $49/mo Hosting, Security & SMS Lead Alerts | Skooped Franklin TN",
       description:
-        "The Single scoop: $49/mo covers hosting, SSL, security, updates, 30 minutes of edits, a monthly report, and every website lead texted to your phone. The base plan behind every Skooped site.",
+        "The Single scoop: $49/mo covers hosting, SSL, security, updates, 30 minutes of edits, a monthly report, and every website lead delivered to you instantly. The base plan behind every Skooped site.",
     },
   },
 

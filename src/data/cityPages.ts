@@ -25,11 +25,11 @@ export const CITY_PAGES: CityPage[] = [
     cityShort: "Brentwood",
     title: "Websites & Local SEO for Brentwood, TN Businesses | Skooped",
     description:
-      "Skooped builds websites and runs local SEO for Brentwood, TN businesses — $500 builds, plans from $49/mo, and every lead texted to your phone. Based next door in Franklin.",
+      "Skooped builds websites and runs local SEO for Brentwood, TN businesses — $500 builds, plans from $49/mo, and every lead emailed to you instantly (texts optional). Based next door in Franklin.",
     headline: "Websites & local marketing for Brentwood businesses",
     intro: [
       "Brentwood might be the most competitive place in Middle Tennessee to be a local business. Between Maryland Farms, the Cool Springs edge, and some of the highest household spending in the state, the customers are here — and so is everyone competing for them.",
-      "Skooped is based ten minutes down the road in Franklin. We build fast, professional websites for a flat $500, then run the monthly work that decides who Brentwood customers actually find: your Google Business Profile, your reviews, and real pages about your services. Every lead your site captures is texted straight to your phone.",
+      "Skooped is based ten minutes down the road in Franklin. We build fast, professional websites for a flat $500, then run the monthly work that decides who Brentwood customers actually find: your Google Business Profile, your reviews, and real pages about your services. Every lead your site captures reaches you the moment it lands, by email always and by text if you opt in.",
     ],
     whyLocal: [
       "Google shows different results on Concord Road than it does in Cool Springs — local search is a map, not a leaderboard. Winning Brentwood means looking active and trusted to Google specifically in the neighborhoods you serve.",
@@ -56,11 +56,11 @@ export const CITY_PAGES: CityPage[] = [
     cityShort: "Spring Hill",
     title: "Websites & Local SEO for Spring Hill, TN Businesses | Skooped",
     description:
-      "Skooped builds websites and runs local SEO for Spring Hill, TN businesses — $500 builds, plans from $49/mo, and every lead texted to your phone. Based in Franklin.",
+      "Skooped builds websites and runs local SEO for Spring Hill, TN businesses — $500 builds, plans from $49/mo, and every lead emailed to you instantly (texts optional). Based in Franklin.",
     headline: "Websites & local marketing for Spring Hill businesses",
     intro: [
       "Spring Hill is one of the fastest-growing cities in Tennessee — thousands of new households a year, whole subdivisions appearing between visits. Every one of those new residents needs a plumber, a landscaper, a gym, a salon — and none of them know who to call yet. They all start with Google.",
-      "Skooped builds fast, professional websites for a flat $500, then runs the monthly work that decides who those new neighbors find first: your Google Business Profile, your reviews, and real pages about your services. Every lead your site captures is texted straight to your phone.",
+      "Skooped builds fast, professional websites for a flat $500, then runs the monthly work that decides who those new neighbors find first: your Google Business Profile, your reviews, and real pages about your services. Every lead your site captures reaches you the moment it lands, by email always and by text if you opt in.",
     ],
     whyLocal: [
       "In a town growing this fast, the map is up for grabs — the businesses that look active on Google this year become the default choices for the next wave of new residents. Search results in the new subdivisions off Buckner Lane look different than they do near the crossroads; winning Spring Hill means winning the whole map.",

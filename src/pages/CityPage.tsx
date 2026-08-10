@@ -47,7 +47,7 @@ const services = [
   { name: "Website build — flat $500", desc: "Professional, fast, built for local search. Live in about a week." },
   { name: "Plans from $49/mo", desc: "Hosting, edits, monitoring — up to full local SEO and ads management." },
   { name: "Ongoing local SEO", desc: "Google Business Profile posts, review management, and one real page of content every month." },
-  { name: "Every lead texted to you", desc: "Form fills hit your phone the moment they land — name, number, what they need." },
+  { name: "Every lead sent to you instantly", desc: "Form fills hit your email the moment they land — name, number, what they need. Texted too if you opt in." },
 ];
 
 const CityPage = () => {

@@ -24,7 +24,7 @@ const faqGroups = [
   {
     title: "What's Included",
     items: [
-      { q: "Why do builds require a monthly plan?", a: "Because a website isn't done when it launches. The Single plan covers hosting, security, domain management, small edits — and the part that makes you money: every lead from your site texted straight to your phone, plus a monthly report in plain English." },
+      { q: "Why do builds require a monthly plan?", a: "Because a website isn't done when it launches. The Single plan covers hosting, security, domain management, small edits — and the part that makes you money: every lead from your site delivered to you the moment it lands (email always, text if you opt in), plus a monthly report in plain English." },
       { q: "Do I own my website?", a: "Yes. Your website, your content, your data. Always." },
       { q: "How is this different from Wix or Squarespace?", a: "Those platforms give you a template and say 'good luck.' We build your site, handle your domain and SEO, and text you every lead. You get a marketing team — not a DIY tool." },
       { q: "Do you run my ad budget?", a: "Ads bill directly to your own card — we never front spend or mark it up. On Triple, we manage the campaigns and you see every dollar." },
@@ -47,7 +47,7 @@ const compRows = [
   { label: "Setup fee", trad: "$3,000 – $8,000", skoop: "$500 flat" },
   { label: "Website delivery", trad: "4-8 weeks", skoop: "About a week" },
   { label: "Monthly cost", trad: "$100 – $800/mo", skoop: "$49 – $299/mo" },
-  { label: "Every lead texted to your phone", trad: false, skoop: true },
+  { label: "Every lead sent to you instantly", trad: false, skoop: true },
   { label: "Plain-English monthly report", trad: false, skoop: true },
   { label: "Ad spend markup", trad: "10 – 20% of spend", skoop: "$0 — bills to your card" },
   { label: "Contracts", trad: "6–12 months", skoop: "One page. No lock-in." },
@@ -57,7 +57,7 @@ const compRows = [
 const Plans = () => {
   usePageSeo({
     title: "Pricing | Websites from $500, Plans from $49/mo | Skooped Franklin TN",
-    description: "One price list: builds from $500, custom quoted via a $300 Discovery session (credited). Single $49, Double $149, Triple $299 monthly. Toppings: dedicated content specialist +$350/mo, LLC filing +$500. Every lead texted to your phone.",
+    description: "One price list: builds from $500, custom quoted via a $300 Discovery session (credited). Single $49, Double $149, Triple $299 monthly. Toppings: dedicated content specialist +$350/mo, LLC filing +$500. Every lead sent straight to you.",
   });
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 

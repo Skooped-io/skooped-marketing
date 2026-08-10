@@ -12,7 +12,7 @@ const systems = [
   {
     icon: MessageSquareText,
     name: "Lead capture & routing",
-    desc: "Every form fill on your site is texted to your phone the moment it lands — name, number, and what they asked for.",
+    desc: "Every form fill on your site reaches you the moment it lands — name, number, and what they asked for. Emailed always, texted if you opt in.",
   },
   {
     icon: Search,
@@ -64,7 +64,7 @@ const Marquee = () => (
 );
 
 const About = () => {
-  usePageSeo({ title: "About Skooped | Websites & Marketing for Local Businesses | Franklin, Tennessee", description: "Skooped pairs a real person in Franklin, TN with automation that works 24/7 — SEO monitoring, site health, security, and every lead texted to your phone." });
+  usePageSeo({ title: "About Skooped | Websites & Marketing for Local Businesses | Franklin, Tennessee", description: "Skooped pairs a real person in Franklin, TN with automation that works 24/7 — SEO monitoring, site health, security, and every lead sent to you the moment it lands." });
 
   return (
     <>
@@ -113,7 +113,7 @@ const About = () => {
             {/* Summary stats */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
               {[
-                { value: "Every lead", label: "texted to your phone" },
+                { value: "Every lead", label: "sent to you instantly" },
                 { value: "24/7/365", label: "monitoring & automation" },
                 { value: "1 real human", label: "answers every call" },
               ].map((s) => (
@@ -152,7 +152,7 @@ const About = () => {
                 <p className="font-heading text-xl font-extrabold text-foreground mb-2">
                   Every business is different. That's why we build custom.
                 </p>
-                <p className="text-muted-foreground text-sm mb-5">Build from $500 + plan from $49/mo — and every lead texted to your phone.</p>
+                <p className="text-muted-foreground text-sm mb-5">Build from $500 + plan from $49/mo — and every lead sent to you the moment it lands.</p>
                 <CallTextButton />
               </div>
             </ScrollReveal>

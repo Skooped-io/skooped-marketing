@@ -109,7 +109,7 @@ const BlogPost = () => {
               </p>
               <p className="text-muted-foreground text-sm mb-5">
                 Build from $500 + plans from $49/mo — profile, reviews, and SEO run monthly,
-                with every lead texted to your phone.{" "}
+                with every lead sent straight to you.{" "}
                 <Link to="/plans" className="text-primary hover:underline">
                   See the plans
                 </Link>

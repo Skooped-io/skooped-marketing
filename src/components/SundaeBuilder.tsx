@@ -50,7 +50,7 @@ const CONES: { id: ConeId; name: string; price: string; per: string; thumb: stri
 ];
 
 const SCOOPS: { id: ScoopId; n: number; name: string; mo: number; thumb: string; blurb: string; popular?: boolean }[] = [
-  { id: "single", n: 1, name: "Single", mo: 49, thumb: "waffle-1", blurb: "Hosting, security, every lead texted to you, monthly report." },
+  { id: "single", n: 1, name: "Single", mo: 49, thumb: "waffle-1", blurb: "Hosting, security, instant lead alerts, monthly report." },
   { id: "double", n: 2, name: "Double", mo: 149, thumb: "waffle-2", blurb: "Single + Google posts, review replies & ongoing local SEO.", popular: true },
   { id: "triple", n: 3, name: "Triple", mo: 299, thumb: "waffle-3", blurb: "Double + ads management & social media." },
 ];
