@@ -11,6 +11,7 @@ import cup1 from "@/assets/sundae/cup-1.png";
 import waffle1 from "@/assets/sundae/waffle-1.png";
 import waffle2 from "@/assets/sundae/waffle-2.png";
 import waffle3 from "@/assets/sundae/waffle-3.png";
+import coupe1 from "@/assets/sundae/coupe-1.png";
 import coupe3 from "@/assets/sundae/coupe-3.png";
 import topCherry from "@/assets/sundae/topping-cherry.png";
 import topSprinkles from "@/assets/sundae/topping-sprinkles.png";
@@ -371,6 +372,56 @@ export const menuItems: Record<string, MenuItem> = {
       title: "Triple Plan — $299/mo Ads Management & Social Media | Skooped Franklin TN",
       description:
         "The Triple scoop: $299/mo adds Google & Meta ads management and social coordination to everything in Double. Ad spend stays on your card — never marked up. Full-service local marketing in Franklin, TN.",
+    },
+  },
+
+  "local-scoop": {
+    slug: "local-scoop",
+    category: "plan",
+    name: "The Local Scoop",
+    subtitle: "We run your Google listing. Your website stays put. $100/mo",
+    hero: coupe1,
+    priceLabel: "$100",
+    priceUnit: "/mo",
+    tagline: "Your Google Business Profile, actually run, without moving your website.",
+    intro:
+      "Most local businesses get found through their Google listing, not their website. The Local Scoop keeps that listing worked: every review answered, fresh posts every week, your info accurate, and a plain-English report every month. Your website stays wherever it is, with whoever built it. We never touch it.",
+    includesHeading: "What your $100 gets you",
+    includes: [
+      { label: "Every review answered", note: "Fast, specific, and in your voice. Anything 3 stars or under gets personal attention before a reply is posted." },
+      { label: "Fresh posts every week", note: "Published to your profile weekly, using your real photos when you share them." },
+      { label: "Your info kept accurate", note: "Hours, phone, address, and services stay right, holiday hours included." },
+      { label: "Customer questions answered", note: "Questions on your listing get a real answer instead of sitting there in public." },
+      { label: "A plain-English monthly report", note: "Calls, direction requests, and clicks, straight from Google's own numbers." },
+    ],
+    bestFor: [
+      "Businesses that already have a website they're happy with",
+      "Owners who never get around to responding to reviews",
+      "Anyone whose listing still shows last year's hours",
+    ],
+    fits:
+      "The Local Scoop exists for businesses whose site Skooped does not host. If Skooped hosts your site, all of this is already inside the Double Scoop ($149/mo, which adds hosting, security, and an hour of same-week edits). If you later want a Skooped website, a build starts at $500 and this plan rolls into the Double.",
+    faq: [
+      { q: "Do I have to move my website?", a: "No, never. That is the point of this plan: your website stays exactly where it is, with whoever hosts it. We only run your Google Business Profile." },
+      { q: "How do you get access to my listing?", a: "You add us as a manager on your Google Business Profile. It takes about ten minutes, and we send step-by-step instructions right after checkout." },
+      { q: "What happens with bad reviews?", a: "Anything 3 stars or under is never answered on autopilot. It gets personal attention before any reply posts, so the response fits the situation instead of making it worse." },
+      { q: "Is there a contract?", a: "Month to month, cancel anytime." },
+      { q: "I have a Skooped website already. Can I buy this?", a: "You do not need it: the Double Scoop already includes everything here. If we host your site, your Google Business Profile work is part of that plan." },
+    ],
+    related: ["double", "cup"],
+    cta: { label: "Get The Local Scoop: $100/mo", message: "Hey Skooped, I want The Local Scoop for my business ($100/mo). My website stays where it is." },
+    payLink: "https://buy.stripe.com/00w8wOaaJa0Q9k93Y48Ra0h",
+    payCta: "Start The Local Scoop: $100/mo",
+    payNote: "For businesses whose website is not hosted by Skooped. If we host your site, this is already part of the Double Scoop.",
+    payLinkAnnual: "https://buy.stripe.com/3cI6oGgz7gpe9k9fGM8Ra0i",
+    payCtaAnnual: "Start The Local Scoop: $1,000/yr",
+    priceLabelAnnual: "$1,000",
+    priceUnitAnnual: "/yr, 2 months free",
+    offer: { kind: "recurring", price: 100, unit: "MONTH" },
+    seo: {
+      title: "Google Business Profile Management, $100/mo | Skooped Franklin TN",
+      description:
+        "Done-for-you Google Business Profile management, $100/mo: every review answered, weekly posts, accurate info, and a plain-English monthly report. Serving Franklin, Williamson County, and the Nashville area. Your website stays put.",
     },
   },
 

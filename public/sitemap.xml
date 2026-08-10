@@ -8,6 +8,7 @@
   <url><loc>https://skooped.io/plans/single</loc><priority>0.8</priority></url>
   <url><loc>https://skooped.io/plans/double</loc><priority>0.8</priority></url>
   <url><loc>https://skooped.io/plans/triple</loc><priority>0.8</priority></url>
+  <url><loc>https://skooped.io/plans/local-scoop</loc><priority>0.8</priority></url>
   <url><loc>https://skooped.io/plans/sprinkles</loc><priority>0.7</priority></url>
   <url><loc>https://skooped.io/plans/cherry-on-top</loc><priority>0.7</priority></url>
   <url><loc>https://skooped.io/plans/chocolate-dipped</loc><priority>0.7</priority></url>

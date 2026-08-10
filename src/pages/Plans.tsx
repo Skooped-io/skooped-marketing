@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Check, X, ChevronDown, Phone } from "lucide-react";
+import { Check, X, ChevronDown, Phone, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -127,6 +127,56 @@ const Plans = () => {
 
       {/* ── The detail layer — every build, plan & topping links to its own page ── */}
       <MenuIndex />
+
+      {/* ── The Local Scoop: standalone GBP plan for sites we don't host ── */}
+      <section className="pb-16 px-6">
+        <div className="container mx-auto max-w-5xl">
+          <ScrollReveal>
+            <div className="mb-5 text-center">
+              <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-foreground">Already have a website? Keep it.</h2>
+              <p className="mt-2 text-sm text-muted-foreground max-w-xl mx-auto">
+                The Local Scoop runs your Google Business Profile while your website stays wherever it is.
+              </p>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal>
+            <Link
+              to="/plans/local-scoop"
+              className="group block rounded-2xl border-2 border-primary/30 bg-card p-6 md:p-8 transition-all hover:border-primary hover:-translate-y-0.5 hover:shadow-md"
+            >
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <p className="font-heading text-xl font-extrabold text-foreground group-hover:text-primary transition-colors">The Local Scoop</p>
+                  <p className="mt-1 text-sm text-muted-foreground">We run your Google listing. Your website stays put.</p>
+                </div>
+                <div className="flex items-baseline gap-1">
+                  <span className="font-heading text-3xl font-extrabold text-primary tabular-nums">$100</span>
+                  <span className="text-sm text-muted-foreground">/mo</span>
+                </div>
+              </div>
+              <ul className="mt-5 grid sm:grid-cols-2 gap-x-6 gap-y-2.5 text-sm text-muted-foreground">
+                {[
+                  "Every review answered, in your voice",
+                  "Fresh posts on your profile every week",
+                  "Hours, phone, and services kept accurate",
+                  "A plain-English monthly report",
+                ].map((b) => (
+                  <li key={b} className="flex items-start gap-2">
+                    <Check size={16} className="mt-0.5 shrink-0 text-primary" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+              <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary">
+                See The Local Scoop <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </Link>
+          </ScrollReveal>
+          <p className="mt-3 text-center text-xs text-muted-foreground">
+            Skooped-hosted sites don't need this: it's already inside the Double Scoop ($149/mo).
+          </p>
+        </div>
+      </section>
 
       {/* ── Discovery callout ── */}
       <section className="pb-16 px-6">
