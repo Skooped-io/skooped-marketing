@@ -1,9 +1,11 @@
 {
-  "cleanUrls": true,
   "redirects": [
     { "source": "/hi", "destination": "/?utm_source=coaster&utm_medium=qr&utm_campaign=merch-2026-07", "permanent": false }
   ],
   "rewrites": [
+    { "source": "/terms", "destination": "/terms.html" },
+    { "source": "/privacy", "destination": "/privacy.html" },
+    { "source": "/sms-opt-in", "destination": "/sms-opt-in.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
