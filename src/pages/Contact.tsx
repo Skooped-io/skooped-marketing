@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, MapPin, Instagram, Clock, Lock, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -51,6 +51,7 @@ const Contact = () => {
   const [service, setService] = useState(prefill ? "Website" : "");
   const [message, setMessage] = useState(prefill);
   const [msgFocused, setMsgFocused] = useState(false);
+  const [smsOk, setSmsOk] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -61,6 +62,7 @@ const Contact = () => {
       data.get("website") ? `Current website: ${data.get("website")}` : "",
       service ? `Interested in: ${service}` : "",
       message ? `About my business: ${message}` : "",
+      smsOk ? "OK to text me updates about my request." : "",
       getAttributionLine() ?? "",
     ].filter(Boolean);
     setComposed(lines.join("\n"));
@@ -186,6 +188,25 @@ const Contact = () => {
                           className="w-full bg-background border border-border rounded-xl pt-6 pb-3 px-4 text-foreground text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
                         />
                       </div>
+
+                      {/* A2P compliance: must stay optional and unchecked by default (campaign registration cites it) */}
+                      <label htmlFor="smsOk" className="flex items-start gap-2.5 cursor-pointer select-none">
+                        <input
+                          id="smsOk"
+                          name="smsOk"
+                          type="checkbox"
+                          checked={smsOk}
+                          onChange={(e) => setSmsOk(e.target.checked)}
+                          className="mt-0.5 h-4 w-4 shrink-0 accent-primary"
+                        />
+                        <span className="text-xs text-muted-foreground leading-relaxed">
+                          Text me updates about my request. Texting is optional and consent is not a
+                          condition of purchase. Message frequency varies; msg &amp; data rates may apply.
+                          Reply STOP to opt out, HELP for help. See our{" "}
+                          <Link to="/privacy" className="text-primary hover:underline">Privacy Policy</Link> and{" "}
+                          <Link to="/terms" className="text-primary hover:underline">Terms</Link>.
+                        </span>
+                      </label>
 
                       <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.15 }}>
                         <Button variant="hero" size="xl" type="submit" className="w-full">
