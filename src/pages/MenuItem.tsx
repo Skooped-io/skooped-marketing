@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 import usePageSeo from "@/hooks/use-page-seo";
 import { track } from "@/lib/analytics";
+import { pixel } from "@/lib/meta-pixel";
 import { PHONE_DISPLAY } from "@/components/CallTextButton";
 import { menuItems, categoryLabels, type MenuItem as MItem } from "@/data/menuItems";
 
@@ -138,6 +139,10 @@ const MenuItem = () => {
   usePageSeo(item?.seo ?? { title: "Plans | Skooped", description: "" });
   useJsonLd(item);
 
+  useEffect(() => {
+    if (item) pixel("ViewContent", { content_name: item.slug, content_category: item.category });
+  }, [item]);
+
   if (!item) return <Navigate to="/plans" replace />;
 
   const contactHref = `/contact?build=${encodeURIComponent(item.cta.message)}`;
@@ -215,7 +220,7 @@ const MenuItem = () => {
               <ScrollReveal delay={0.3}>
                 <div className="flex flex-wrap gap-3">
                   {item.payLink ? (
-                    <a href={payHref} onClick={() => track("pay_link_click", { item: item.slug, source: "hero", billing: showAnnual ? "annual" : "monthly" })}>
+                    <a href={payHref} onClick={() => { track("pay_link_click", { item: item.slug, source: "hero", billing: showAnnual ? "annual" : "monthly" }); pixel("InitiateCheckout", { content_name: item.slug, source: "hero" }); }}>
                       <Button variant="hero" size="lg" className="h-auto min-h-12 whitespace-normal py-2 text-center">{payLabel}</Button>
                     </a>
                   ) : (
@@ -381,7 +386,7 @@ const MenuItem = () => {
               <p className="mt-5">
                 <a
                   href={payHref}
-                  onClick={() => track("pay_link_click", { item: item.slug, source: "footer", billing: showAnnual ? "annual" : "monthly" })}
+                  onClick={() => { track("pay_link_click", { item: item.slug, source: "footer", billing: showAnnual ? "annual" : "monthly" }); pixel("InitiateCheckout", { content_name: item.slug, source: "footer" }); }}
                   className="font-heading font-bold text-primary-foreground underline underline-offset-4 hover:text-primary transition-colors"
                 >
                   Or skip the form — pay online now

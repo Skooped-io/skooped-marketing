@@ -103,7 +103,17 @@ const Privacy = () => {
               <li>Resend: transactional email delivery (resend.com/legal/privacy-policy)</li>
               <li>Twilio: text-message delivery for lead alerts (twilio.com/legal/privacy)</li>
               <li>Google: Business Profile, Search Console, and Analytics APIs — only for accounts you connect</li>
+              <li>
+                Meta (Facebook/Instagram): a measurement pixel on skooped.io tells us whether visitors arrived from
+                one of our ads and which pages they viewed. It runs on our marketing pages only, never on client
+                websites, and we do not use it to build advertising audiences from your personal data
+                (facebook.com/privacy/policy)
+              </li>
             </ul>
+            <p className="mt-4">
+              You can block this measurement with any standard browser tracking protection or ad blocker, and nothing
+              on this site stops working if you do.
+            </p>
           </section>
 
           <section>
