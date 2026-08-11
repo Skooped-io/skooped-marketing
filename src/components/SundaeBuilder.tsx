@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { PHONE_DISPLAY } from "@/components/CallTextButton";
 import { track } from "@/lib/analytics";
+import { pixel } from "@/lib/meta-pixel";
+import { withCheckoutRef } from "@/lib/attribution";
 
 import cup1 from "@/assets/sundae/cup-1.png";
 import cup2 from "@/assets/sundae/cup-2.png";
@@ -252,10 +254,11 @@ const SundaeBuilder = () => {
       <a href={`tel:${PHONE}`} className="text-primary font-semibold hover:underline">{PHONE_DISPLAY}</a>. Nothing is charged here.{" "}
       Ready right now?{" "}
       <a
-        href={custom ? PAY_LINKS.sampleSpoon : cone === "cup" ? PAY_LINKS.cup : PAY_LINKS.waffle}
+        href={withCheckoutRef(custom ? PAY_LINKS.sampleSpoon : cone === "cup" ? PAY_LINKS.cup : PAY_LINKS.waffle)}
         onClick={() => {
           fireSundaeBuilt();
           track("pay_link_click", { item: custom ? "sample-spoon" : cone, source: "builder" });
+          pixel("InitiateCheckout", { content_name: custom ? "sample-spoon" : cone, source: "builder" });
         }}
         className="text-primary font-semibold hover:underline"
       >
