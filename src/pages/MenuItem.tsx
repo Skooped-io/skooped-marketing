@@ -9,6 +9,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import usePageSeo from "@/hooks/use-page-seo";
 import { track } from "@/lib/analytics";
 import { pixel } from "@/lib/meta-pixel";
+import { withCheckoutRef } from "@/lib/attribution";
 import { PHONE_DISPLAY } from "@/components/CallTextButton";
 import { menuItems, categoryLabels, type MenuItem as MItem } from "@/data/menuItems";
 
@@ -131,7 +132,8 @@ const MenuItem = () => {
 
   const hasAnnual = !!item?.payLinkAnnual;
   const showAnnual = hasAnnual && annual;
-  const payHref = showAnnual ? item!.payLinkAnnual : item?.payLink;
+  const payLinkRaw = showAnnual ? item!.payLinkAnnual : item?.payLink;
+  const payHref = payLinkRaw ? withCheckoutRef(payLinkRaw) : undefined;
   const payLabel = showAnnual ? item!.payCtaAnnual : item?.payCta;
   const priceLabel = showAnnual ? item!.priceLabelAnnual : item?.priceLabel;
   const priceUnit = showAnnual ? item!.priceUnitAnnual : item?.priceUnit;

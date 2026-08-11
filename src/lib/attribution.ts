@@ -50,6 +50,34 @@ export function getAttribution(): Attribution | null {
   }
 }
 
+/**
+ * Stamp the stored ad source onto a Stripe Payment Link as `client_reference_id`, so a
+ * paid signup is identifiable in Stripe (it lands on the Checkout Session and shows in
+ * the Dashboard). Without this the sale is invisible: checkout happens off-site, so no
+ * pixel, UTM, or analytics event follows the customer to Stripe.
+ *
+ * Stripe accepts alphanumerics, dashes, and underscores only, max 200 chars, so every
+ * part is sanitized and the whole string is truncated. Untagged visits still get a
+ * value ("src-direct") so a blank field always means something is broken rather than
+ * merely unattributed.
+ */
+export function withCheckoutRef(url: string): string {
+  try {
+    const a = getAttribution();
+    const clean = (s: string) => s.replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 40);
+    const day = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+    const parts = a?.source
+      ? [`src-${clean(a.source)}`, a.medium && `med-${clean(a.medium)}`, a.campaign && `cmp-${clean(a.campaign)}`]
+      : ["src-direct"];
+    const ref = [...parts.filter(Boolean), `d-${day}`].join("_").slice(0, 200);
+    const u = new URL(url);
+    u.searchParams.set("client_reference_id", ref);
+    return u.toString();
+  } catch {
+    return url; // a broken ref must never block a sale
+  }
+}
+
 /** One line for composed leads, e.g. "Ad source: facebook / paid-social / roofing-july → /templates/roofing" */
 export function getAttributionLine(): string | null {
   const a = getAttribution();
