@@ -6,7 +6,9 @@
  * ships dormant and comes alive purely through Vercel env config.
  *
  * Env vars (all optional until go-live):
- *   LEAD_ROUTES        JSON: {"<site_id>": {"sms":"+1615...","email":"...","label":"..."}, "default": {...}}
+ *   LEAD_ROUTES        JSON: {"<site_id>": {"sms":"+1615...","sms_consent_on":"2026-08-12","email":"...","label":"..."}, "default": {...}}
+ *                      sms_consent_on is the date the client's written opt-in was
+ *                      recorded; without it the number is ignored and only email goes out.
  *   TWILIO_ACCOUNT_SID / TWILIO_AUTH_TOKEN / TWILIO_FROM_NUMBER
  *   RESEND_API_KEY / LEAD_FROM_EMAIL   (from-address on a verified skooped.io domain)
  *   SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY   (table: leads)
@@ -16,6 +18,7 @@ import {
   formatSms,
   parseRouteTable,
   resolveRoute,
+  smsAllowed,
   validateLead,
   type LeadPayload,
   type LeadRoute,
@@ -31,15 +34,25 @@ async function sendSms(lead: LeadPayload, route: LeadRoute): Promise<boolean> {
   const sid = process.env.TWILIO_ACCOUNT_SID;
   const token = process.env.TWILIO_AUTH_TOKEN;
   const from = process.env.TWILIO_FROM_NUMBER;
-  if (!sid || !token || !from || !route.sms) return false;
+  // No consent record, no text — regardless of what the route table holds.
+  if (!sid || !token || !from || !smsAllowed(route)) return false;
   const res = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`, {
     method: "POST",
     headers: {
       Authorization: `Basic ${Buffer.from(`${sid}:${token}`).toString("base64")}`,
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: new URLSearchParams({ To: route.sms, From: from, Body: formatSms(lead, route) }),
+    body: new URLSearchParams({ To: route.sms as string, From: from, Body: formatSms(lead, route) }),
   });
+  if (!res.ok) {
+    // 21610 = this number replied STOP. Twilio blocks it for us; the route's
+    // sms_consent_on must be cleared so the record matches reality.
+    const detail = await res.text().catch(() => "");
+    console.log(
+      "lead-router: sms failed",
+      JSON.stringify({ site_id: lead.site_id, status: res.status, opted_out: detail.includes("21610") })
+    );
+  }
   return res.ok;
 }
 

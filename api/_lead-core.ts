@@ -18,10 +18,25 @@ export interface LeadPayload {
 export interface LeadRoute {
   /** E.164 number the SMS alert goes to, e.g. "+16153151541" */
   sms?: string;
+  /**
+   * ISO date the client's written SMS opt-in was recorded, e.g. "2026-08-12".
+   * A number alone never sends: see smsAllowed().
+   */
+  sms_consent_on?: string;
   /** email address the alert goes to */
   email?: string;
   /** human label used in the alert text, e.g. "Gunn's Fencing" */
   label?: string;
+}
+
+/**
+ * SMS only goes out when a written consent record exists for that route.
+ * Adding a phone number is deliberately not enough: a client is texted only
+ * after their opt-in is recorded, which is the consent model registered on
+ * A2P campaign CMb671be31c1701980e7487f845f247a4b.
+ */
+export function smsAllowed(route: LeadRoute): boolean {
+  return Boolean(route.sms && route.sms_consent_on);
 }
 
 export type RouteTable = Record<string, LeadRoute>;
@@ -73,16 +88,27 @@ export function resolveRoute(table: RouteTable, siteId: string): LeadRoute | und
   return table[siteId] ?? table["default"];
 }
 
-/** The SMS every client gets — short, plain, forwardable. */
+/** Links are barred from message bodies: the campaign attested embedded links = NO. */
+const stripUrls = (v: string): string => v.replace(/\b(?:https?:\/\/|www\.)\S+/gi, "[link]");
+
+/**
+ * The SMS an opted-in client gets. This must keep the shape of the sample
+ * messages registered on A2P campaign CMb671be31c1701980e7487f845f247a4b:
+ * leads with "Skooped", says "inquiry" not "lead", carries the opt-out line,
+ * and contains no emoji and no URLs. Production bodies that drift from the
+ * registered samples put the campaign at risk, so change the samples in the
+ * Twilio console first, then this function.
+ */
 export function formatSms(lead: LeadPayload, route: LeadRoute): string {
-  const who = [lead.name, lead.phone, lead.email].filter(Boolean).join(" · ");
-  const lines = [
-    `New lead${route.label ? ` for ${route.label}` : ""} 🔔`,
-    who,
-    lead.service ? `Wants: ${lead.service}` : "",
-    lead.message ? `"${lead.message.slice(0, 300)}"` : "",
-  ].filter(Boolean);
-  return lines.join("\n");
+  const who = [lead.name, lead.phone, lead.email].filter(Boolean).join(", ");
+  return [
+    `Skooped alert for ${route.label ?? "your business"}: new website inquiry${who ? ` from ${who}` : ""}.`,
+    lead.service ? `Requested: ${stripUrls(lead.service)}.` : "",
+    lead.message ? `"${stripUrls(lead.message).slice(0, 200)}"` : "",
+    "Reply STOP to opt out.",
+  ]
+    .filter(Boolean)
+    .join(" ");
 }
 
 export function formatEmail(lead: LeadPayload, route: LeadRoute): { subject: string; text: string } {
