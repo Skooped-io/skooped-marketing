@@ -208,3 +208,39 @@ describe("parseRouteTable (bad shapes a person can paste)", () => {
     expect(smsAllowed(table.a, "2026-08-12")).toBe(true);
   });
 });
+
+describe("formatSms (no email addresses in the body, per the registration)", () => {
+  const route = { label: "Affordable Elegance", sms: "+16155550001", sms_consent_on: "2026-08-11" };
+
+  it("names the inquirer and their phone, never their email address", () => {
+    const body = formatSms(
+      { site_id: "affordable-elegance", name: "Jane Doe", phone: "6155550142", email: "jane@example.com" },
+      route
+    );
+    expect(body).not.toContain("@");
+    expect(body).toBe(
+      "Skooped alert for Affordable Elegance: new website inquiry from Jane Doe, 6155550142. Reply STOP to opt out."
+    );
+  });
+
+  it("says the address is on file when the lead left no phone", () => {
+    const body = formatSms({ site_id: "x", name: "Jane Doe", email: "jane@example.com" }, route);
+    expect(body).not.toContain("@");
+    expect(body).toContain("Email on file.");
+  });
+
+  it("redacts an email address typed inside the free-text message", () => {
+    const body = formatSms(
+      { site_id: "x", phone: "6155550142", message: "reach me at jane.doe@example.com any time" },
+      route
+    );
+    expect(body).not.toContain("@");
+    expect(body).toContain("[email]");
+  });
+
+  it("leaves ordinary prose alone when a period has no space after it", () => {
+    const body = formatSms({ site_id: "x", phone: "6155550142", message: "Thanks.Please call me" }, route);
+    expect(body).toContain("Thanks.Please call me");
+    expect(body).not.toContain("[link]");
+  });
+});

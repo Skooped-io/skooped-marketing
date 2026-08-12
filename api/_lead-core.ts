@@ -104,15 +104,28 @@ export function resolveRoute(table: RouteTable, siteId: string): LeadRoute | und
 }
 
 /**
- * Links are barred from message bodies: the campaign attested embedded links = NO.
- * Bare domains count (2026-08-12): "visit skooped.io" and "bit.ly/x" are links to
- * a carrier even without a scheme, and the prefix-only version of this let them
- * through. Matches scheme, www., or host.tld[/path] on a real-looking TLD.
+ * The registration attested "Embedded links = NO (no URLs or email addresses in
+ * message bodies)", so both get redacted, not just schemed URLs:
+ *  - email addresses first, otherwise the domain half of one would survive as
+ *    "jane@[link]";
+ *  - then schemed and www. URLs;
+ *  - then bare domains, because "visit skooped.io" and "bit.ly/x" are links to a
+ *    carrier with or without a scheme.
+ *
+ * The bare-domain pass is limited to TLDs people actually type. A generic
+ * "word.word" pattern ate ordinary prose with a missing space after a period
+ * ("Thanks.Please call") and turned it into "[link]".
  */
+const TLDS =
+  "com|net|org|io|co|us|uk|ca|gov|edu|info|biz|dev|app|ly|me|tv|shop|site|online|store|xyz|link|page";
 const stripUrls = (v: string): string =>
   v
+    .replace(/\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\b/gi, "[email]")
     .replace(/\b(?:https?:\/\/|www\.)\S+/gi, "[link]")
-    .replace(/\b[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\.[a-z0-9-]+)*\.[a-z]{2,}(?:\/\S*)?/gi, "[link]");
+    .replace(
+      new RegExp(`\\b[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\\.[a-z0-9-]+)*\\.(?:${TLDS})(?:\\/\\S*)?\\b`, "gi"),
+      "[link]"
+    );
 
 /**
  * Hard ceiling on the outbound body. Two GSM-7 segments; keeps per-message cost
@@ -131,10 +144,14 @@ const OPT_OUT = "Reply STOP to opt out.";
  * Twilio console first, then this function.
  */
 export function formatSms(lead: LeadPayload, route: LeadRoute): string {
-  const who = [lead.name, lead.phone, lead.email].filter(Boolean).join(", ");
+  // Name and phone only. All three registered samples carry phone-only contact
+  // details, and the campaign's own form toggles say no email addresses in
+  // message bodies, so an inquirer's address is named but never printed.
+  const who = [lead.name, lead.phone].filter(Boolean).join(", ");
   const head = `Skooped alert for ${route.label ?? "your business"}: new website inquiry${who ? ` from ${who}` : ""}.`;
   const parts = [
     head,
+    !lead.phone && lead.email ? "Email on file." : "",
     lead.service ? `Requested: ${stripUrls(lead.service).slice(0, 80)}.` : "",
     lead.message ? `"${stripUrls(lead.message).slice(0, 200)}"` : "",
   ].filter(Boolean);
