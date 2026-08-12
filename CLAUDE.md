@@ -49,5 +49,7 @@ backstop, but the backstop is not the check.
   Product/FAQPage/BreadcrumbList JSON-LD.
 
 ## Conventions
-- Typecheck + build before shipping: `npx tsc --noEmit -p tsconfig.app.json && npm run build`.
+- Typecheck + build before shipping: `npm run typecheck && npm run build`. `typecheck` covers
+  BOTH `src` (tsconfig.app.json) and `api` (tsconfig.api.json). Before 2026-08-12 the serverless
+  functions in `api/` were in no tsconfig at all, so the lead router shipped unchecked.
 - Commit messages end with: `Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>`.

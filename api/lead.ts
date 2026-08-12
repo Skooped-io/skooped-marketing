@@ -48,7 +48,7 @@ async function sendSms(lead: LeadPayload, route: LeadRoute): Promise<boolean> {
     // 21610 = this number replied STOP. Twilio blocks it for us; the route's
     // sms_consent_on must be cleared so the record matches reality.
     const detail = await res.text().catch(() => "");
-    console.log(
+    console.error(
       "lead-router: sms failed",
       JSON.stringify({ site_id: lead.site_id, status: res.status, opted_out: detail.includes("21610") })
     );
@@ -66,6 +66,12 @@ async function sendEmail(lead: LeadPayload, route: LeadRoute): Promise<boolean> 
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
     body: JSON.stringify({ from, to: [route.email], subject, text }),
   });
+  if (!res.ok) {
+    console.error(
+      "lead-router: email failed",
+      JSON.stringify({ site_id: lead.site_id, status: res.status })
+    );
+  }
   return res.ok;
 }
 
@@ -93,6 +99,12 @@ async function storeLead(lead: LeadPayload, delivered: { sms: boolean; email: bo
       email_sent: delivered.email,
     }),
   });
+  if (!res.ok) {
+    console.error(
+      "lead-router: store failed",
+      JSON.stringify({ site_id: lead.site_id, status: res.status })
+    );
+  }
   return res.ok;
 }
 
@@ -101,6 +113,20 @@ export default async function handler(req: any, res: any) {
   Object.entries(CORS_HEADERS).forEach(([k, v]) => res.setHeader(k, v));
   if (req.method === "OPTIONS") return res.status(204).end();
   if (req.method !== "POST") return res.status(405).json({ ok: false, error: "POST only" });
+
+  // Shared-secret gate, opt-in by env. The endpoint is otherwise open to the
+  // internet with a wildcard CORS header, so once SMS is live anyone who guesses
+  // a site_id could text a client's personal phone in a loop. Client sites post
+  // from a server function, so they can hold the header. While
+  // LEAD_ROUTER_SECRET is unset nothing changes for existing callers.
+  const requiredSecret = process.env.LEAD_ROUTER_SECRET;
+  if (requiredSecret) {
+    const provided = req.headers?.["x-skooped-secret"];
+    if (provided !== requiredSecret) {
+      console.error("lead-router: rejected unauthenticated post");
+      return res.status(401).json({ ok: false, error: "unauthorized" });
+    }
+  }
 
   const validation = validateLead(req.body);
   if (!validation.ok || !validation.lead) {
@@ -115,8 +141,12 @@ export default async function handler(req: any, res: any) {
   const routes = parseRouteTable(process.env.LEAD_ROUTES);
   const route = resolveRoute(routes, lead.site_id);
 
+  // Each sender counts as configured only when EVERY var it needs is present.
+  // The Twilio triple used to omit AUTH_TOKEN, so the half-finished state of a
+  // session that stopped to fetch the token flipped the router out of dormancy:
+  // it answered 200 ok and texted nobody.
   const anySenderConfigured =
-    (process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_FROM_NUMBER) ||
+    (process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN && process.env.TWILIO_FROM_NUMBER) ||
     (process.env.RESEND_API_KEY && process.env.LEAD_FROM_EMAIL) ||
     (process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
   if (!route || !anySenderConfigured) {
@@ -130,11 +160,20 @@ export default async function handler(req: any, res: any) {
   ]);
   const stored = await storeLead(lead, { sms, email }).catch(() => false);
 
-  // structured log line = poor-man's ledger in Vercel logs until Supabase is wired
+  // structured log line = ledger in Vercel logs alongside the leads table
   console.log(
     "lead-router: delivered",
     JSON.stringify({ site_id: lead.site_id, sms, email, stored, has_phone: !!lead.phone, has_email: !!lead.email })
   );
+
+  // A lead that reached nobody and was stored nowhere must not read as success:
+  // the client-side snippet branches on res.ok, so a 200 here told the visitor
+  // "you'll hear from us shortly" for a lead that evaporated. 502 makes the loss
+  // visible in the caller's logs and in Vercel's error rate.
+  if (!sms && !email && !stored) {
+    console.error("lead-router: total delivery failure", JSON.stringify({ site_id: lead.site_id }));
+    return res.status(502).json({ ok: false, error: "lead accepted by nothing", delivered: { sms, email, stored } });
+  }
 
   return res.status(200).json({ ok: true, delivered: { sms, email, stored } });
 }

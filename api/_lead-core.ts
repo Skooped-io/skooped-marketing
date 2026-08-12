@@ -29,14 +29,29 @@ export interface LeadRoute {
   label?: string;
 }
 
+/** E.164, the only shape Twilio accepts as a To value. */
+const E164 = /^\+[1-9]\d{7,14}$/;
+/** ISO calendar date, the shape the consent record is written in. */
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+
 /**
  * SMS only goes out when a written consent record exists for that route.
  * Adding a phone number is deliberately not enough: a client is texted only
  * after their opt-in is recorded, which is the consent model registered on
  * A2P campaign CMb671be31c1701980e7487f845f247a4b.
+ *
+ * Both fields are also validated, not just truthy-checked (2026-08-12): the
+ * consent date is the compliance record, so a placeholder typed into env config
+ * while wiring ("TBD", "asked him", "yesterday") must NOT open the send path,
+ * and a non-E.164 number would only fail at Twilio with a 400 nobody reads.
+ * A future-dated consent is refused too: nobody has consented yet.
  */
-export function smsAllowed(route: LeadRoute): boolean {
-  return Boolean(route.sms && route.sms_consent_on);
+export function smsAllowed(route: LeadRoute, today: string = new Date().toISOString().slice(0, 10)): boolean {
+  if (!route.sms || !E164.test(route.sms)) return false;
+  const consent = route.sms_consent_on;
+  if (!consent || !ISO_DATE.test(consent)) return false;
+  if (Number.isNaN(Date.parse(consent))) return false;
+  return consent <= today;
 }
 
 export type RouteTable = Record<string, LeadRoute>;
@@ -88,8 +103,24 @@ export function resolveRoute(table: RouteTable, siteId: string): LeadRoute | und
   return table[siteId] ?? table["default"];
 }
 
-/** Links are barred from message bodies: the campaign attested embedded links = NO. */
-const stripUrls = (v: string): string => v.replace(/\b(?:https?:\/\/|www\.)\S+/gi, "[link]");
+/**
+ * Links are barred from message bodies: the campaign attested embedded links = NO.
+ * Bare domains count (2026-08-12): "visit skooped.io" and "bit.ly/x" are links to
+ * a carrier even without a scheme, and the prefix-only version of this let them
+ * through. Matches scheme, www., or host.tld[/path] on a real-looking TLD.
+ */
+const stripUrls = (v: string): string =>
+  v
+    .replace(/\b(?:https?:\/\/|www\.)\S+/gi, "[link]")
+    .replace(/\b[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\.[a-z0-9-]+)*\.[a-z]{2,}(?:\/\S*)?/gi, "[link]");
+
+/**
+ * Hard ceiling on the outbound body. Two GSM-7 segments; keeps per-message cost
+ * predictable and keeps long pasted messages from turning one lead into a
+ * ten-segment bill. The opt-out sentence is never what gets cut.
+ */
+const SMS_MAX = 320;
+const OPT_OUT = "Reply STOP to opt out.";
 
 /**
  * The SMS an opted-in client gets. This must keep the shape of the sample
@@ -101,14 +132,25 @@ const stripUrls = (v: string): string => v.replace(/\b(?:https?:\/\/|www\.)\S+/g
  */
 export function formatSms(lead: LeadPayload, route: LeadRoute): string {
   const who = [lead.name, lead.phone, lead.email].filter(Boolean).join(", ");
-  return [
-    `Skooped alert for ${route.label ?? "your business"}: new website inquiry${who ? ` from ${who}` : ""}.`,
-    lead.service ? `Requested: ${stripUrls(lead.service)}.` : "",
+  const head = `Skooped alert for ${route.label ?? "your business"}: new website inquiry${who ? ` from ${who}` : ""}.`;
+  const parts = [
+    head,
+    lead.service ? `Requested: ${stripUrls(lead.service).slice(0, 80)}.` : "",
     lead.message ? `"${stripUrls(lead.message).slice(0, 200)}"` : "",
-    "Reply STOP to opt out.",
-  ]
-    .filter(Boolean)
-    .join(" ");
+  ].filter(Boolean);
+
+  // Trim the detail, never the opt-out line: dropping it would break the
+  // registered sample shape (and the attestation).
+  let body = [...parts, OPT_OUT].join(" ");
+  while (body.length > SMS_MAX && parts.length > 1) {
+    parts.pop();
+    body = [...parts, OPT_OUT].join(" ");
+  }
+  if (body.length > SMS_MAX) {
+    const room = SMS_MAX - OPT_OUT.length - 2;
+    body = `${head.slice(0, Math.max(0, room))} ${OPT_OUT}`;
+  }
+  return body;
 }
 
 export function formatEmail(lead: LeadPayload, route: LeadRoute): { subject: string; text: string } {
@@ -130,12 +172,32 @@ export function formatEmail(lead: LeadPayload, route: LeadRoute): { subject: str
   return { subject, text };
 }
 
+/**
+ * LEAD_ROUTES comes from hand-edited Vercel env config, so every bad shape a
+ * person can paste has to land somewhere safe rather than half-working:
+ * an array (a copy-pasted `[{...}]`) used to pass the object check and produce a
+ * table matching nothing, and per-entry junk (a string instead of an object)
+ * would have crashed on property access at send time.
+ */
 export function parseRouteTable(raw: string | undefined): RouteTable {
   if (!raw) return {};
+  let parsed: unknown;
   try {
-    const parsed = JSON.parse(raw);
-    return typeof parsed === "object" && parsed !== null ? (parsed as RouteTable) : {};
+    parsed = JSON.parse(raw);
   } catch {
     return {};
   }
+  if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed)) return {};
+  const table: RouteTable = {};
+  for (const [siteId, entry] of Object.entries(parsed as Record<string, unknown>)) {
+    if (typeof entry !== "object" || entry === null || Array.isArray(entry)) continue;
+    const e = entry as Record<string, unknown>;
+    const route: LeadRoute = {};
+    if (typeof e.sms === "string") route.sms = e.sms.trim();
+    if (typeof e.sms_consent_on === "string") route.sms_consent_on = e.sms_consent_on.trim();
+    if (typeof e.email === "string") route.email = e.email.trim();
+    if (typeof e.label === "string") route.label = e.label.trim();
+    table[siteId] = route;
+  }
+  return table;
 }

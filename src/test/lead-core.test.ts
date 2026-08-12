@@ -138,3 +138,73 @@ describe("parseRouteTable", () => {
     expect(parseRouteTable('"a string"')).toEqual({});
   });
 });
+
+// ─── Hardening added 2026-08-12, ahead of the Twilio session ─────────────────
+
+describe("smsAllowed (validation, not just truthiness)", () => {
+  it("refuses a placeholder consent value typed while wiring", () => {
+    for (const junk of ["TBD", "asked him", "yesterday", "true", " "]) {
+      expect(smsAllowed({ sms: "+16155550001", sms_consent_on: junk })).toBe(false);
+    }
+  });
+
+  it("refuses a consent date in the future: nobody has consented yet", () => {
+    expect(smsAllowed({ sms: "+16155550001", sms_consent_on: "2099-01-01" }, "2026-08-12")).toBe(false);
+  });
+
+  it("refuses a destination number Twilio would reject", () => {
+    for (const bad of ["6155550001", "(615) 555-0001", "+1 615 555 0001", "+1615555000A", "615-555-0001 ext 12"]) {
+      expect(smsAllowed({ sms: bad, sms_consent_on: "2026-08-12" })).toBe(false);
+    }
+  });
+
+  it("still allows a valid E.164 number with a real past consent date", () => {
+    expect(smsAllowed({ sms: "+16155550001", sms_consent_on: "2026-08-11" }, "2026-08-12")).toBe(true);
+  });
+});
+
+describe("formatSms (A2P attestations)", () => {
+  const route = { label: "Gunn's Fencing", sms: "+16155550001", sms_consent_on: "2026-08-12" };
+
+  it("strips bare domains, not just prefixed URLs", () => {
+    const body = formatSms({ site_id: "x", phone: "6155550001", message: "check skooped.io and bit.ly/abc first" }, route);
+    expect(body).not.toMatch(/skooped\.io/);
+    expect(body).not.toMatch(/bit\.ly/);
+    expect(body).toContain("[link]");
+  });
+
+  it("never exceeds two segments, and keeps the opt-out line when it truncates", () => {
+    const body = formatSms(
+      { site_id: "x", phone: "6155550001", name: "A".repeat(200), service: "B".repeat(300), message: "C".repeat(900) },
+      route
+    );
+    expect(body.length).toBeLessThanOrEqual(320);
+    expect(body.endsWith("Reply STOP to opt out.")).toBe(true);
+  });
+
+  it("keeps the registered sample shape for an ordinary lead", () => {
+    const body = formatSms({ site_id: "x", name: "Erin", phone: "6155739394", service: "chain link repair" }, route);
+    expect(body).toBe(
+      "Skooped alert for Gunn's Fencing: new website inquiry from Erin, 6155739394. Requested: chain link repair. Reply STOP to opt out."
+    );
+    expect(body).not.toMatch(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u);
+  });
+});
+
+describe("parseRouteTable (bad shapes a person can paste)", () => {
+  it("rejects an array, which used to pass as a table matching nothing", () => {
+    expect(parseRouteTable('[{"sms":"+16155550001"}]')).toEqual({});
+  });
+
+  it("drops junk entries instead of crashing at send time", () => {
+    const table = parseRouteTable('{"a":"nope","b":["x"],"c":{"sms":"+16155550001","label":"C"}}');
+    expect(table.a).toBeUndefined();
+    expect(table.b).toBeUndefined();
+    expect(table.c.sms).toBe("+16155550001");
+  });
+
+  it("trims whitespace a copy-paste leaves behind", () => {
+    const table = parseRouteTable('{"a":{"sms":" +16155550001 ","sms_consent_on":" 2026-08-12 "}}');
+    expect(smsAllowed(table.a, "2026-08-12")).toBe(true);
+  });
+});

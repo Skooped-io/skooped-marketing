@@ -1,0 +1,16 @@
+{
+  "//": "Vercel serverless functions in api/. They were outside every tsconfig (app = src only, node = vite.config.ts), so the mandated pre-ship typecheck never saw the lead router and type errors could ship unseen. Added 2026-08-12.",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "types": ["node"]
+  },
+  "include": ["api"]
+}
