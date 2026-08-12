@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Check, Copy, Phone, AlertTriangle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -23,6 +24,19 @@ import { PHONE_DISPLAY } from "@/components/CallTextButton";
 const PHONE = "6153151541";
 const MANAGER_EMAIL = "joseph@skooped.io";
 const PURCHASE_FIRED_KEY = "skooped_purchase_fired";
+const INTAKE_ENDPOINT = "https://app.skooped.io/api/local-scoop/intake";
+
+/* The persona fields, asked while the buyer is still sitting here. Every one of these would
+   otherwise be a phone call, and the first review reply cannot be written without them. */
+const INTAKE_FIELDS: { key: string; label: string; hint?: string; type?: "text" | "tel" | "textarea" }[] = [
+  { key: "contact_name", label: "Your name", type: "text" },
+  { key: "phone", label: "Best number to reach you", hint: "For calls only. We never text this number.", type: "tel" },
+  { key: "services", label: "Services you want to lead with", hint: "The two or three jobs you most want more of.", type: "textarea" },
+  { key: "towns", label: "Towns you actually serve", type: "textarea" },
+  { key: "escalation", label: "Who should I call about an unhappy customer, and at what number?", type: "textarea" },
+  { key: "voice", label: 'Do you say "we" or "I" when you talk about the business?', type: "text" },
+  { key: "never_say", label: "Anything I should never say on your behalf?", hint: "Prices, guarantees, a service you no longer offer.", type: "textarea" },
+];
 
 /** Meta dedupes on eventID, but a refresh with a stale pixel would still double count. */
 function firePurchaseOnce(sessionId: string | null, plan: string) {
@@ -58,6 +72,25 @@ const WelcomeLocalScoop = () => {
   const plan = params.get("plan") === "annual" ? "annual" : "monthly";
   const sessionId = params.get("session_id");
   const [copied, setCopied] = useState(false);
+  const [intake, setIntake] = useState<Record<string, string>>({});
+  const [intakeState, setIntakeState] = useState<"idle" | "sending" | "done">("idle");
+
+  const submitIntake = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (intakeState === "sending") return;
+    setIntakeState("sending");
+    try {
+      await fetch(INTAKE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...intake, session_id: sessionId ?? "", plan }),
+      });
+    } catch {
+      /* Their answers are a convenience, not a gate. Never show a paying customer an error
+         they cannot act on: the manager invite is the step that actually matters. */
+    }
+    setIntakeState("done");
+  };
 
   usePageSeo({
     title: "You're in | The Local Scoop | Skooped",
@@ -214,6 +247,71 @@ const WelcomeLocalScoop = () => {
               </div>
             </ScrollReveal>
           </div>
+        </div>
+      </section>
+
+      {/* ── Intake: the persona questions, asked once, here ── */}
+      <section className="pb-14 px-6">
+        <div className="container mx-auto max-w-3xl">
+          <ScrollReveal>
+            <div className="rounded-2xl border border-border bg-card p-6 md:p-8">
+              <h2 className="font-heading text-2xl font-extrabold text-foreground mb-2">
+                While you're here: seven questions
+              </h2>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                This is what makes your review replies and posts sound like you instead of like
+                software. Takes two minutes, and it saves us a phone call. Skip anything you would
+                rather talk through.
+              </p>
+
+              {intakeState === "done" ? (
+                <div className="rounded-xl bg-primary/10 p-5">
+                  <p className="font-heading font-bold text-foreground mb-1">Got it, thank you.</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    That is everything I need on my end. The manager invite above is the only thing
+                    still waiting on you.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={submitIntake} className="space-y-5">
+                  {INTAKE_FIELDS.map((f) => (
+                    <div key={f.key}>
+                      <label htmlFor={f.key} className="block font-heading text-sm font-bold text-foreground mb-1">
+                        {f.label}
+                      </label>
+                      {f.hint && <p className="mb-1.5 text-xs text-muted-foreground">{f.hint}</p>}
+                      {f.type === "textarea" ? (
+                        <textarea
+                          id={f.key}
+                          name={f.key}
+                          rows={2}
+                          value={intake[f.key] ?? ""}
+                          onChange={(e) => setIntake((p) => ({ ...p, [f.key]: e.target.value }))}
+                          className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground outline-none transition-colors focus:border-primary"
+                        />
+                      ) : (
+                        <input
+                          id={f.key}
+                          name={f.key}
+                          type={f.type ?? "text"}
+                          value={intake[f.key] ?? ""}
+                          onChange={(e) => setIntake((p) => ({ ...p, [f.key]: e.target.value }))}
+                          className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground outline-none transition-colors focus:border-primary"
+                        />
+                      )}
+                    </div>
+                  ))}
+                  <Button type="submit" variant="hero" size="lg" disabled={intakeState === "sending"}>
+                    {intakeState === "sending" ? "Sending..." : "Send this to Joseph"}
+                  </Button>
+                  <p className="text-xs text-muted-foreground">
+                    Nothing here is required. You can also just call me at {PHONE_DISPLAY} and we'll
+                    do it out loud.
+                  </p>
+                </form>
+              )}
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
