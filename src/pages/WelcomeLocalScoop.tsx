@@ -257,7 +257,7 @@ const WelcomeLocalScoop = () => {
           <ScrollReveal>
             <div className="rounded-2xl border border-border bg-card p-6 md:p-8">
               <h2 className="font-heading text-2xl font-extrabold text-foreground mb-2">
-                While you're here: seven questions
+                While you're here: a few quick questions
               </h2>
               <p className="text-sm text-muted-foreground leading-relaxed mb-6">
                 This is what makes your review replies and posts sound like you instead of like
