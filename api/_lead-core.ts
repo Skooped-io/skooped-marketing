@@ -112,7 +112,7 @@ export function formatSms(lead: LeadPayload, route: LeadRoute): string {
 }
 
 export function formatEmail(lead: LeadPayload, route: LeadRoute): { subject: string; text: string } {
-  const subject = `New lead${route.label ? ` — ${route.label}` : ""}${lead.name ? `: ${lead.name}` : ""}`;
+  const subject = `New lead${route.label ? ` for ${route.label}` : ""}${lead.name ? `: ${lead.name}` : ""}`;
   const text = [
     `A new lead just came in${route.label ? ` for ${route.label}` : ""}.`,
     "",
@@ -123,7 +123,7 @@ export function formatEmail(lead: LeadPayload, route: LeadRoute): { subject: str
     lead.message ? `Message:\n${lead.message}` : "",
     lead.source_url ? `From: ${lead.source_url}` : "",
     "",
-    "— Skooped lead alerts",
+    "Skooped lead alerts",
   ]
     .filter((l) => l !== "")
     .join("\n");

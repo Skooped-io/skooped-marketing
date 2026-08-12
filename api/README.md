@@ -73,8 +73,8 @@ create table leads (
       body: JSON.stringify(data),
     });
     e.target.innerHTML = res.ok
-      ? "<p>Got it — you'll hear from us shortly.</p>"
-      : "<p>Something went wrong — call us instead!</p>";
+      ? "<p>Got it, you'll hear from us shortly.</p>"
+      : "<p>Something went wrong, please call us instead.</p>";
   }
 </script>
 ```
