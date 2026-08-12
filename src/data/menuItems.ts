@@ -412,7 +412,7 @@ export const menuItems: Record<string, MenuItem> = {
     cta: { label: "Get The Local Scoop: $100/mo", message: "Hey Skooped, I want The Local Scoop for my business ($100/mo). My website stays where it is." },
     payLink: "https://buy.stripe.com/00w8wOaaJa0Q9k93Y48Ra0h",
     payCta: "Start The Local Scoop: $100/mo",
-    payNote: "For businesses whose website is not hosted by Skooped. If we host your site, this is already part of the Double Scoop.",
+    payNote: "After checkout you add us as a manager on your Google Business Profile, about ten minutes, and we take it from there. For businesses whose website is not hosted by Skooped: if we host your site, this is already part of the Double Scoop.",
     payLinkAnnual: "https://buy.stripe.com/3cI6oGgz7gpe9k9fGM8Ra0i",
     payCtaAnnual: "Start The Local Scoop: $1,000/yr",
     priceLabelAnnual: "$1,000",

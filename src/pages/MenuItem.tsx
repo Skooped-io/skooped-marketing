@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Check, ChevronDown, ChevronRight, Phone, ArrowRight } from "lucide-react";
@@ -14,6 +14,10 @@ import { PHONE_DISPLAY } from "@/components/CallTextButton";
 import { menuItems, categoryLabels, type MenuItem as MItem } from "@/data/menuItems";
 
 const PHONE = "6153151541";
+
+/* Names that already carry their own article ("The Sundae", "By the Pint") must not get a
+   second one, or headings read "Ready to add the The Local Scoop?". */
+const withArticle = (name: string) => (/^(the|by)\b/i.test(name) ? name : `the ${name}`);
 
 /* ───── schema.org JSON-LD (Product + FAQPage + BreadcrumbList) ───── */
 const buildJsonLd = (item: MItem) => {
@@ -145,6 +149,18 @@ const MenuItem = () => {
     if (item) pixel("ViewContent", { content_name: item.slug, content_category: item.category });
   }, [item]);
 
+  /* These pages run past 6000px on a phone, and the only other buy control is at the very
+     bottom. Once the hero CTA scrolls away, a sticky bar keeps checkout one tap away. */
+  const heroCtaRef = useRef<HTMLDivElement>(null);
+  const [showStickyBuy, setShowStickyBuy] = useState(false);
+  useEffect(() => {
+    const el = heroCtaRef.current;
+    if (!el || !payHref) return;
+    const io = new IntersectionObserver(([entry]) => setShowStickyBuy(!entry.isIntersecting));
+    io.observe(el);
+    return () => io.disconnect();
+  }, [payHref]);
+
   if (!item) return <Navigate to="/plans" replace />;
 
   const contactHref = `/contact?build=${encodeURIComponent(item.cta.message)}`;
@@ -220,7 +236,7 @@ const MenuItem = () => {
                 </div>
               </ScrollReveal>
               <ScrollReveal delay={0.3}>
-                <div className="flex flex-wrap gap-3">
+                <div ref={heroCtaRef} className="flex flex-wrap gap-3">
                   {item.payLink ? (
                     <a href={payHref} onClick={() => { track("pay_link_click", { item: item.slug, source: "hero", billing: showAnnual ? "annual" : "monthly" }); pixel("InitiateCheckout", { content_name: item.slug, source: "hero" }); }}>
                       <Button variant="hero" size="lg" className="h-auto min-h-12 whitespace-normal py-2 text-center">{payLabel}</Button>
@@ -364,7 +380,7 @@ const MenuItem = () => {
         <section className="py-16 px-6 bg-card/50">
           <div className="container mx-auto max-w-2xl">
             <ScrollReveal>
-              <h2 className="font-heading text-3xl font-extrabold text-foreground text-center mb-8">Questions about the {item.name}</h2>
+              <h2 className="font-heading text-3xl font-extrabold text-foreground text-center mb-8">Questions about {withArticle(item.name)}</h2>
             </ScrollReveal>
             {item.faq.map((f, i) => (
               <FaqItem key={i} q={f.q} a={f.a} open={openFaq === i} toggle={() => setOpenFaq(openFaq === i ? null : i)} />
@@ -378,22 +394,35 @@ const MenuItem = () => {
         <div className="container mx-auto max-w-3xl text-center">
           <ScrollReveal>
             <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-primary-foreground mb-4">
-              Ready to add the {item.name}?
+              Ready to add {withArticle(item.name)}?
             </h2>
-            <p className="text-primary-foreground/70 text-lg mb-8">
-              Takes you to our contact form with your order pre-filled. Nothing is charged there.
-            </p>
-            <Link to={contactHref}><Button variant="hero" size="xl" className="h-auto min-h-14 whitespace-normal py-2 text-center">{item.cta.label}</Button></Link>
-            {item.payLink && (
-              <p className="mt-5">
+            {item.payLink ? (
+              <>
+                <p className="text-primary-foreground/70 text-lg mb-8">
+                  Checkout is a secure Stripe page. You are set up the moment it goes through.
+                </p>
                 <a
                   href={payHref}
                   onClick={() => { track("pay_link_click", { item: item.slug, source: "footer", billing: showAnnual ? "annual" : "monthly" }); pixel("InitiateCheckout", { content_name: item.slug, source: "footer" }); }}
-                  className="font-heading font-bold text-primary-foreground underline underline-offset-4 hover:text-primary transition-colors"
                 >
-                  Or skip the form — pay online now
+                  <Button variant="hero" size="xl" className="h-auto min-h-14 whitespace-normal py-2 text-center">{payLabel}</Button>
                 </a>
-              </p>
+                <p className="mt-5">
+                  <Link
+                    to={contactHref}
+                    className="font-heading font-bold text-primary-foreground underline underline-offset-4 hover:text-primary transition-colors"
+                  >
+                    Rather talk first? Send the form instead, nothing is charged there.
+                  </Link>
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="text-primary-foreground/70 text-lg mb-8">
+                  Takes you to our contact form with your order pre-filled. Nothing is charged there.
+                </p>
+                <Link to={contactHref}><Button variant="hero" size="xl" className="h-auto min-h-14 whitespace-normal py-2 text-center">{item.cta.label}</Button></Link>
+              </>
             )}
             <div className="mt-6">
               <a href={`tel:${PHONE}`} className="inline-flex items-center gap-2 font-heading font-bold text-primary-foreground/80 hover:text-primary transition-colors">
@@ -403,6 +432,37 @@ const MenuItem = () => {
           </ScrollReveal>
         </div>
       </section>
+
+      {/* Keeps the sticky bar from sitting on top of the footer's last line */}
+      {payHref && <div className="h-20 md:hidden" aria-hidden />}
+
+      {/* ── Mobile sticky buy bar ── */}
+      {payHref && (
+        <div
+          className={`fixed inset-x-0 bottom-0 z-40 border-t border-border bg-card/95 backdrop-blur-sm px-4 py-3 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] transition-transform duration-300 md:hidden ${
+            showStickyBuy ? "translate-y-0" : "translate-y-full"
+          }`}
+          style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}
+          aria-hidden={!showStickyBuy}
+        >
+          <div className="flex items-center gap-3">
+            <div className="shrink-0">
+              <span className="font-heading text-xl font-extrabold text-primary tabular-nums">{priceLabel}</span>
+              <span className="text-xs text-muted-foreground">{priceUnit}</span>
+            </div>
+            <a
+              href={payHref}
+              tabIndex={showStickyBuy ? 0 : -1}
+              onClick={() => { track("pay_link_click", { item: item.slug, source: "sticky", billing: showAnnual ? "annual" : "monthly" }); pixel("InitiateCheckout", { content_name: item.slug, source: "sticky" }); }}
+              className="flex-1"
+            >
+              <Button variant="hero" size="lg" className="h-auto min-h-12 w-full whitespace-normal py-2 text-center text-sm">
+                {payLabel}
+              </Button>
+            </a>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </>
