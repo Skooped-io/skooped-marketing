@@ -28,8 +28,9 @@ const INTAKE_ENDPOINT = "https://app.skooped.io/api/local-scoop/intake";
 
 /* The persona fields, asked while the buyer is still sitting here. Every one of these would
    otherwise be a phone call, and the first review reply cannot be written without them. */
-const INTAKE_FIELDS: { key: string; label: string; hint?: string; type?: "text" | "tel" | "textarea" }[] = [
+const INTAKE_FIELDS: { key: string; label: string; hint?: string; type?: "text" | "tel" | "email" | "textarea" }[] = [
   { key: "contact_name", label: "Your name", type: "text" },
+  { key: "email", label: "Your email", hint: "I send your copy of these steps here.", type: "email" },
   { key: "phone", label: "Best number to reach you", hint: "For calls only. We never text this number.", type: "tel" },
   { key: "services", label: "Services you want to lead with", hint: "The two or three jobs you most want more of.", type: "textarea" },
   { key: "towns", label: "Towns you actually serve", type: "textarea" },
@@ -343,10 +344,10 @@ const WelcomeLocalScoop = () => {
         <div className="container mx-auto max-w-3xl">
           <ScrollReveal>
             <div className="rounded-2xl bg-maroon p-8 md:p-10 text-center">
-              <h2 className="font-heading text-2xl font-extrabold text-primary-foreground mb-3">Check your email</h2>
+              <h2 className="font-heading text-2xl font-extrabold text-primary-foreground mb-3">Want these steps in writing?</h2>
               <p className="text-primary-foreground/80 leading-relaxed mb-6 max-w-xl mx-auto">
-                A copy of these steps is already on the way to the address you used at checkout. If it is not there in a
-                few minutes, look in spam, then tell me.
+                Put your email in the questions above and I'll send you a copy of all of this. If it does not turn up in
+                a few minutes, look in spam, then tell me.
               </p>
               <p className="text-primary-foreground/80 mb-4">
                 Questions, or want to do this with me on the phone?
