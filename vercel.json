@@ -1,6 +1,8 @@
 {
   "redirects": [
-    { "source": "/hi", "destination": "/?utm_source=coaster&utm_medium=qr&utm_campaign=merch-2026-07", "permanent": false }
+    { "source": "/hi", "destination": "/?utm_source=coaster&utm_medium=qr&utm_campaign=merch-2026-07", "permanent": false },
+    { "source": "/who-the-hell-is-this", "destination": "/?utm_source=car&utm_medium=sticker&utm_campaign=merch-2026-07", "permanent": false },
+    { "source": "/stop-reading-my-shirt", "destination": "/?utm_source=shirt&utm_medium=apparel&utm_campaign=merch-2026-07", "permanent": false }
   ],
   "rewrites": [
     { "source": "/terms", "destination": "/terms.html" },
