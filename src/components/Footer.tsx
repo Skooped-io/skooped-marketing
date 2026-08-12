@@ -6,7 +6,7 @@ const Footer = () => (
       {/* Contact banner */}
       <div className="text-center mb-10">
         <a href="tel:6153151541" className="inline-block text-sm font-heading font-bold text-primary hover:underline transition-colors">
-          Call or text 615-315-1541 — we'll tell you straight what fits →
+          Call or text 615-315-1541. We'll tell you straight what fits →
         </a>
       </div>
 
@@ -55,7 +55,7 @@ const Footer = () => (
 
       <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
         <p className="mb-1">© 2026 Skooped. All rights reserved.</p>
-        <p>Websites &amp; marketing for local businesses — Franklin, TN.</p>
+        <p>Websites &amp; marketing for local businesses in Franklin, TN.</p>
       </div>
     </div>
   </footer>
