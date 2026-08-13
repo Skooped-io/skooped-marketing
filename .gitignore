@@ -26,3 +26,5 @@ dist-ssr
 
 # TS incremental build info
 *.tsbuildinfo
+.vercel
+.env*

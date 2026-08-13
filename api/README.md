@@ -79,8 +79,11 @@ create table leads (
 </script>
 ```
 
-The skooped.io contact form still uses the SMS/email composer on purpose; swap it to
-POST here once the env vars are live.
+The skooped.io contact form does NOT post here — a browser cannot hold the shared
+secret. It posts to **`POST /api/contact`** (2026-08-12), which forces
+`site_id: "skooped"`, skips the secret, and reuses the same senders
+(`api/_lead-senders.ts`). If the router is unconfigured or down, the form falls back
+to the old SMS/mailto composer so no lead is lost.
 
 ## Smoke test
 

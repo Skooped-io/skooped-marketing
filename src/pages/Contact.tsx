@@ -48,11 +48,13 @@ const Contact = () => {
   const [searchParams] = useSearchParams();
   const prefill = searchParams.get("build") ?? "";
   const [composed, setComposed] = useState<string | null>(null);
+  const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
   const [service, setService] = useState(prefill ? "Website" : "");
   const [message, setMessage] = useState(prefill);
   const [msgFocused, setMsgFocused] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const lines = [
@@ -63,7 +65,40 @@ const Contact = () => {
       message ? `About my business: ${message}` : "",
       getAttributionLine() ?? "",
     ].filter(Boolean);
-    setComposed(lines.join("\n"));
+
+    // The lead router is the happy path (text + email + stored for the monthly
+    // report). The composed SMS/mailto card is the fallback: if the router is
+    // down or unconfigured, the visitor still has a one-tap way to reach us.
+    setSending(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: String(data.get("name") || "") || undefined,
+          phone: String(data.get("phone") || "") || undefined,
+          email: String(data.get("email") || "") || undefined,
+          service: service || undefined,
+          message:
+            [
+              data.get("business") ? `Business: ${data.get("business")}.` : "",
+              message,
+              data.get("website") ? `Current website: ${data.get("website")}` : "",
+              getAttributionLine() ?? "",
+            ]
+              .filter(Boolean)
+              .join("\n") || undefined,
+          source_url: window.location.href,
+          company_website: String(data.get("company_website") || "") || undefined,
+        }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      setSent(true);
+    } catch {
+      setComposed(lines.join("\n"));
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -101,7 +136,30 @@ const Contact = () => {
             <div className="md:col-span-3">
               <ScrollReveal>
                 <AnimatePresence mode="wait">
-                  {composed ? (
+                  {sent ? (
+                    <motion.div
+                      key="sent"
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="bg-card rounded-2xl p-8 text-center"
+                    >
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ type: "spring", delay: 0.15 }}
+                        className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4"
+                      >
+                        <Check size={32} className="text-primary" />
+                      </motion.div>
+                      <h3 className="font-heading text-2xl font-extrabold text-foreground mb-2">Got it. It just hit our phone.</h3>
+                      <p className="text-muted-foreground text-sm mb-5">
+                        No contact-form black hole here. A real person reads every message, and we typically reply within a few hours.
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        Can't wait? Call <a href="tel:6153151541" className="text-primary font-semibold hover:underline">615-315-1541</a>
+                      </p>
+                    </motion.div>
+                  ) : composed ? (
                     <motion.div
                       key="success"
                       initial={{ opacity: 0, scale: 0.95 }}
@@ -190,9 +248,13 @@ const Contact = () => {
                       {/* Prospect SMS checkbox removed 2026-08-10 during A2P campaign review: it is a
                           separate, unregistered program and confused campaign reviewers. Do not re-add
                           until a campaign covering prospect texts is registered and approved. */}
+
+                      {/* Honeypot: humans never see or fill this; the router discards any submission that does */}
+                      <input name="company_website" defaultValue="" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+
                       <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.15 }}>
-                        <Button variant="hero" size="xl" type="submit" className="w-full">
-                          Let's Talk
+                        <Button variant="hero" size="xl" type="submit" disabled={sending} className="w-full">
+                          {sending ? "Sending..." : "Let's Talk"}
                         </Button>
                       </motion.div>
                       <p className="text-xs text-muted-foreground text-center">
