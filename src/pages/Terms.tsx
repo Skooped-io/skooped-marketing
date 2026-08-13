@@ -105,8 +105,9 @@ const Terms = () => {
             <h2 className="font-heading text-xl font-bold text-foreground">Billing &amp; Cancellation</h2>
             <ul className="list-disc pl-5 space-y-1">
               <li>Build fees are due before work begins; monthly plans bill to a card on file</li>
-              <li>Your scope and plan are confirmed on a one-page agreement — no long-term lock-in, no cancellation fees</li>
-              <li>You can cancel your monthly plan anytime by contacting us; your website remains active through the end of your current billing period</li>
+              <li>Your scope and plan are confirmed on a one-page agreement. No long-term lock-in and no cancellation fees.</li>
+              <li>You can cancel your monthly plan anytime with 30 days' notice by contacting us; your website remains active through the end of that notice period</li>
+              <li>Annual prepay ("By the Pint") is refundable in full within 14 days of payment. After that you can cancel anytime and we refund the unused whole months at the annual rate; a partial month is not refunded.</li>
               <li>After cancellation, your website will be taken offline. You can request an export of your content before cancellation.</li>
             </ul>
           </section>
