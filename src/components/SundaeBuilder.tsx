@@ -192,8 +192,10 @@ const SundaeBuilder = () => {
   const pint = tops.pint;
 
   const { today, monthly, todayText, moText, order } = useMemo(() => {
+    // Custom builds charge the $300 Sample Spoon today, NOT the build price: the pay button
+    // below fires PAY_LINKS.sampleSpoon. Anything else here shows a total we do not charge.
     const todayVal =
-      (custom ? 2000 : cone === "cup" ? 500 : 1000) +
+      (custom ? 300 : cone === "cup" ? 500 : 1000) +
       (tops.cherry ? 500 : 0) +
       (tops.chocdip ? 200 : 0) +
       (pint ? scoopObj.mo * 10 : 0);
@@ -203,7 +205,7 @@ const SundaeBuilder = () => {
     return {
       today: todayVal,
       monthly: monthlyVal,
-      todayText: (custom ? "from " : "") + fmt(todayVal),
+      todayText: fmt(todayVal),
       moText: fmt(monthlyVal) + "/mo",
       order: names.join(" + "),
     };
