@@ -33,7 +33,7 @@ export const CITY_PAGES: CityPage[] = [
     ],
     whyLocal: [
       "Google shows different results on Concord Road than it does in Cool Springs — local search is a map, not a leaderboard. Winning Brentwood means looking active and trusted to Google specifically in the neighborhoods you serve.",
-      "That's monthly work, not a one-time fix: profile posts, review replies, and a steady drip of real content. It's exactly what our plans automate — with a real person in Franklin running it.",
+      "That's monthly work, not a one-time fix: profile posts, review replies, and a steady drip of real content. It's exactly what the Double plan ($149/mo) runs for you, with a real person in Franklin doing it.",
     ],
     faqs: [
       {
@@ -64,7 +64,7 @@ export const CITY_PAGES: CityPage[] = [
     ],
     whyLocal: [
       "In a town growing this fast, the map is up for grabs — the businesses that look active on Google this year become the default choices for the next wave of new residents. Search results in the new subdivisions off Buckner Lane look different than they do near the crossroads; winning Spring Hill means winning the whole map.",
-      "That's steady monthly work — profile posts, review replies, real content — which is exactly what our plans automate, with a real person in Franklin running it.",
+      "That's steady monthly work — profile posts, review replies, real content — which is exactly what the Double plan ($149/mo) runs for you, with a real person in Franklin doing it.",
     ],
     faqs: [
       {

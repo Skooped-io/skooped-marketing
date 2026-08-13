@@ -16,8 +16,8 @@ const PricingFlow = () => (
           One build. One monthly plan. <span className="swoosh-underline">Every client, both.</span>
         </h2>
         <p className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto">
-          The one-time build gets you online; the monthly plan keeps it running,
-          ranking, and texting you every lead. That's the whole model.
+          The one-time build gets you online; the monthly plan keeps it live, secure,
+          and texting you every lead. That's the whole model.
         </p>
       </ScrollReveal>
 

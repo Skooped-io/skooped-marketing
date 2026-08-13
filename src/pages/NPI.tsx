@@ -47,7 +47,7 @@ const features = [
 const tiers = [
   { name: "Single", price: "$49", desc: "Hosting, updates, lead alerts, monthly report" },
   { name: "Double", price: "$149", desc: "Single + ongoing local SEO & content", popular: true },
-  { name: "Triple", price: "$299", desc: "Double + ads management & social" },
+  { name: "Triple", price: "$299", desc: "Double + Google and Meta ads, and 4 posts a month" },
 ];
 
 /* ───── How it works ───── */
