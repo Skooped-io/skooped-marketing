@@ -152,7 +152,7 @@ const About = () => {
                 <p className="font-heading text-xl font-extrabold text-foreground mb-2">
                   Every business is different. That's why we build custom.
                 </p>
-                <p className="text-muted-foreground text-sm mb-5">Build from $500 + plan from $49/mo — and every lead sent to you the moment it lands.</p>
+                <p className="text-muted-foreground text-sm mb-5">Build from $500 + plan from $49/mo, and every lead sent to you the moment it lands.</p>
                 <CallTextButton />
               </div>
             </ScrollReveal>

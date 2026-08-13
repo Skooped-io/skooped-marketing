@@ -108,7 +108,7 @@ const BlogPost = () => {
                 Want this handled for you?
               </p>
               <p className="text-muted-foreground text-sm mb-5">
-                Build from $500 + plans from $49/mo — profile, reviews, and SEO run monthly,
+                Build from $500 + plans from $49/mo. Profile, reviews and SEO run monthly on the Double plan ($149),
                 with every lead sent straight to you.{" "}
                 <Link to="/plans" className="text-primary hover:underline">
                   See the plans

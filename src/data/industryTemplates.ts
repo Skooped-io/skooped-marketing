@@ -7,7 +7,11 @@ export interface IndustryFeature {
   icon: LucideIcon;
   title: string;
   desc: string;
-  premium?: boolean;
+  /** Plan badge shown next to the feature. Omit for anything included in the $49 Single.
+   *  A boolean cannot express three tiers: local SEO and Google Business Profile start on
+   *  Double ($149), ads and social start on Triple ($299). Labelling both "Triple plan"
+   *  would be a different false promise, not a fix. */
+  tier?: "Double plan" | "Triple plan";
 }
 
 export interface IndustryStat {
@@ -45,11 +49,11 @@ export interface IndustryTemplate {
 /* ───── Shared features builder ───── */
 const baseFeatures = (industry: string, searchTerms: string, socialContent: string): IndustryFeature[] => [
   { icon: Globe, title: `Custom ${industry} Website`, desc: `Not a generic template. Built specifically for ${industry.toLowerCase()} businesses with service pages, galleries, and quote request forms.` },
-  { icon: Search, title: "Local SEO That Works", desc: `We target the searches that matter: ${searchTerms}. Your competitors are ranking. You should be too.` },
-  { icon: MapPin, title: "Google Business Profile", desc: "We set up and optimize your Google Business Profile so you show up in Maps, local search, and the 3-pack." },
+  { icon: Search, title: "Local SEO That Works", desc: `We target the searches that matter: ${searchTerms}. Your competitors are ranking. You should be too.`, tier: "Double plan" },
+  { icon: MapPin, title: "Google Business Profile", desc: "We set up and optimize your Google Business Profile so you show up in Maps, local search, and the 3-pack.", tier: "Double plan" },
   { icon: PhoneIncoming, title: "Instant Lead Alerts", desc: "Every lead from your website reaches you the moment it lands, emailed always and texted if you opt in. No lost jobs." },
-  { icon: Instagram, title: "Social Media Coordination", desc: `${socialContent} — planned and posted for you on the Triple plan.`, premium: true },
-  { icon: Megaphone, title: "Google Local Service Ads", desc: "Pay-per-lead ads that put you at the very top of Google. Ad spend bills to your own card — we manage, never mark up.", premium: true },
+  { icon: Instagram, title: "Social Media Coordination", desc: `${socialContent}, four posts a month planned and published to both Facebook and Instagram for you.`, tier: "Triple plan" },
+  { icon: Megaphone, title: "Google and Meta Ads", desc: "Google Local Services and Search, plus Facebook and Instagram. Ad spend bills to your own card. We manage, never mark up.", tier: "Triple plan" },
   { icon: Star, title: "Reviews Front & Center", desc: "A live Google reviews widget on your site, plus a simple playbook for asking every happy customer." },
   { icon: BarChart3, title: "Monthly Plain-English Report", desc: "Visits, leads, and what we changed — one email a month you'll actually read." },
 ];
@@ -98,7 +102,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find you.",
     seo: {
       title: "Roofing Contractor Website & Marketing | Built for Roofers | Skooped",
-      description: "Get a custom roofing website with SEO, Google Ads, and social media — all managed for you. Built specifically for roofing contractors. Sites from $500, plans from $49/mo — every lead sent straight to you.",
+      description: "Get a custom roofing website with SEO, Google Ads, and social media — all managed for you. Built specifically for roofing contractors. Sites from $500, plans from $49/mo. Local SEO and Google Business Profile on Double ($149); ads and 4 posts a month on Triple ($299). Every lead sent straight to you.",
     },
   },
 
@@ -123,7 +127,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find you.",
     seo: {
       title: "Landscaping Website & Marketing | Built for Landscapers | Skooped",
-      description: "Custom landscaping website with SEO, social media, and Google Ads — all managed for you. Sites from $500, plans from $49/mo — every lead sent straight to you.",
+      description: "Custom landscaping website with SEO, social media, and Google Ads — all managed for you. Sites from $500, plans from $49/mo. Local SEO and Google Business Profile on Double ($149); ads and 4 posts a month on Triple ($299). Every lead sent straight to you.",
     },
   },
 
@@ -148,7 +152,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find you.",
     seo: {
       title: "Fencing Contractor Website & Marketing | Skooped",
-      description: "Custom fencing website with SEO, Google Ads, and social media — managed for you. Sites from $500, plans from $49/mo — every lead sent straight to you.",
+      description: "Custom fencing website with SEO, Google Ads, and social media — managed for you. Sites from $500, plans from $49/mo. Local SEO and Google Business Profile on Double ($149); ads and 4 posts a month on Triple ($299). Every lead sent straight to you.",
     },
   },
 
@@ -173,7 +177,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find your company.",
     seo: {
       title: "Construction Company Website & Marketing | Skooped",
-      description: "Custom construction website with SEO, Google Ads, and social media — managed for you. Sites from $500, plans from $49/mo — every lead sent straight to you.",
+      description: "Custom construction website with SEO, Google Ads, and social media — managed for you. Sites from $500, plans from $49/mo. Local SEO and Google Business Profile on Double ($149); ads and 4 posts a month on Triple ($299). Every lead sent straight to you.",
     },
   },
 
@@ -198,7 +202,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find your practice.",
     seo: {
       title: "Therapist Website & Marketing | Built for Counselors | Skooped",
-      description: "Custom therapy website with SEO, social media, and online booking — managed for you. Sites from $500, plans from $49/mo — every lead sent straight to you.",
+      description: "Custom therapy website with SEO, social media, and online booking — managed for you. Sites from $500, plans from $49/mo. Local SEO and Google Business Profile on Double ($149); ads and 4 posts a month on Triple ($299). Every lead sent straight to you.",
     },
   },
 
@@ -223,7 +227,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find you.",
     seo: {
       title: "Life Coach Website & Marketing | Skooped",
-      description: "Custom life coaching website with SEO, social media, and booking — managed for you. Sites from $500, plans from $49/mo — every lead sent straight to you.",
+      description: "Custom life coaching website with SEO, social media, and booking — managed for you. Sites from $500, plans from $49/mo. Local SEO and Google Business Profile on Double ($149); ads and 4 posts a month on Triple ($299). Every lead sent straight to you.",
     },
   },
 
@@ -248,7 +252,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find your shop.",
     seo: {
       title: "Auto Repair Website & Marketing | Built for Mechanics | Skooped",
-      description: "Custom auto repair website with SEO, Google Ads, and social media — managed for you. Sites from $500, plans from $49/mo — every lead sent straight to you.",
+      description: "Custom auto repair website with SEO, Google Ads, and social media — managed for you. Sites from $500, plans from $49/mo. Local SEO and Google Business Profile on Double ($149); ads and 4 posts a month on Triple ($299). Every lead sent straight to you.",
     },
   },
 
@@ -273,7 +277,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find you first.",
     seo: {
       title: "Real Estate Website & Marketing | Skooped",
-      description: "Custom real estate website with SEO, social media, and lead gen — managed for you. Sites from $500, plans from $49/mo — every lead sent straight to you.",
+      description: "Custom real estate website with SEO, social media, and lead gen — managed for you. Sites from $500, plans from $49/mo. Local SEO and Google Business Profile on Double ($149); ads and 4 posts a month on Triple ($299). Every lead sent straight to you.",
     },
   },
 
@@ -298,7 +302,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find your gym.",
     seo: {
       title: "Personal Trainer Website & Marketing | Skooped",
-      description: "Custom personal training website with SEO, social media, and booking — managed for you. Sites from $500, plans from $49/mo — every lead sent straight to you.",
+      description: "Custom personal training website with SEO, social media, and booking — managed for you. Sites from $500, plans from $49/mo. Local SEO and Google Business Profile on Double ($149); ads and 4 posts a month on Triple ($299). Every lead sent straight to you.",
     },
   },
 
@@ -323,7 +327,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they book with you.",
     seo: {
       title: "Salon & Barbershop Website & Marketing | Skooped",
-      description: "Custom salon website with SEO, booking, and social media — managed for you. Sites from $500, plans from $49/mo — every lead sent straight to you.",
+      description: "Custom salon website with SEO, booking, and social media — managed for you. Sites from $500, plans from $49/mo. Local SEO and Google Business Profile on Double ($149); ads and 4 posts a month on Triple ($299). Every lead sent straight to you.",
     },
   },
 
@@ -348,7 +352,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they call you.",
     seo: {
       title: "Plumbing Website & Marketing | Built for Plumbers | Skooped",
-      description: "Custom plumbing website with SEO, Google Ads, and social media — managed for you. Sites from $500, plans from $49/mo — every lead sent straight to you.",
+      description: "Custom plumbing website with SEO, Google Ads, and social media — managed for you. Sites from $500, plans from $49/mo. Local SEO and Google Business Profile on Double ($149); ads and 4 posts a month on Triple ($299). Every lead sent straight to you.",
     },
   },
 
@@ -373,7 +377,7 @@ export const industryTemplates: Record<string, IndustryTemplate> = {
     ctaSub: "Make sure they find you.",
     seo: {
       title: "Electrician Website & Marketing | Skooped",
-      description: "Custom electrical contractor website with SEO, Google Ads, and social media — managed for you. Sites from $500, plans from $49/mo — every lead sent straight to you.",
+      description: "Custom electrical contractor website with SEO, Google Ads, and social media — managed for you. Sites from $500, plans from $49/mo. Local SEO and Google Business Profile on Double ($149); ads and 4 posts a month on Triple ($299). Every lead sent straight to you.",
     },
   },
 };

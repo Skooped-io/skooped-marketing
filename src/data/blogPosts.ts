@@ -77,7 +77,7 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         h2: "The takeaway",
         paragraphs: [
-          "Profile, reviews, and real pages — done consistently — beat any trick. If you'd rather run your business while someone runs that loop for you, that's literally what our monthly plans do: profile posts, review management, and one real page of SEO work every month, with a plain-English report of what changed.",
+          "Profile, reviews, and real pages — done consistently — beat any trick. If you'd rather run your business while someone runs that loop for you, that is exactly what the Double plan ($149/mo) does: profile posts, review management, and one real page of SEO work every month, with a plain-English report of what changed.",
         ],
       },
     ],
@@ -133,7 +133,7 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         h2: "The takeaway",
         paragraphs: [
-          "A review system is a habit plus a link. If you'd rather not think about it, our monthly plans handle the whole loop — the asks go out automatically, every review gets a drafted reply, and anything three stars or under waits for a human before a word is posted.",
+          "A review system is a habit plus a link. If you'd rather not think about it, the Double plan ($149/mo) handles the whole loop — the asks go out automatically, every review gets a drafted reply, and anything three stars or under waits for a human before a word is posted.",
         ],
       },
     ],

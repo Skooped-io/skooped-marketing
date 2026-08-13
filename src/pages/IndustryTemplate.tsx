@@ -171,7 +171,7 @@ const IndustryTemplate = () => {
                       <div>
                         <h3 className="font-heading font-bold text-foreground mb-1 flex items-center gap-2">
                           {f.title}
-                          {f.premium && <span className="text-[10px] font-bold bg-accent/15 text-accent px-2 py-0.5 rounded-full">Triple plan</span>}
+                          {f.tier && <span className="text-[10px] font-bold bg-accent/15 text-accent px-2 py-0.5 rounded-full">{f.tier}</span>}
                         </h3>
                         <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
                       </div>
