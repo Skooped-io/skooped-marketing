@@ -58,7 +58,7 @@ const SCOOPS: { id: ScoopId; n: number; name: string; mo: number; thumb: string;
 ];
 
 const TOPS: { id: TopId; name: string; price: string; per: string; thumb: string; blurb: string }[] = [
-  { id: "sprinkles", name: "Sprinkles", price: "+$350", per: "/mo", thumb: topSprinkles, blurb: "Dedicated content specialist — on-site content day, 12 produced posts a month. Rides on the Triple plan." },
+  { id: "sprinkles", name: "Sprinkles", price: "+$350", per: "/mo", thumb: topSprinkles, blurb: "Your 4 posts a month become 12, edited and curated from your job photos and clips, with real video. Rides on the Triple plan." },
   { id: "cherry", name: "Cherry on Top", price: "+$500", per: "one-time", thumb: topCherry, blurb: "Business Launch Pack — LLC filing, EIN, starter operating agreement." },
   { id: "chocdip", name: "Chocolate Dipped", price: "+$200", per: "one-time", thumb: topChocDip, blurb: "One-round brand refresh — logo tidy + consistent colors across your whole site." },
   { id: "extra", name: "Extra Scoop", price: "+$25", per: "/mo", thumb: topExtra, blurb: "Another website on the same plan — same alerts, same report." },

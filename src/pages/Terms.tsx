@@ -73,8 +73,9 @@ const Terms = () => {
             <ul className="list-disc pl-5 space-y-1">
               <li>Single: $49/month</li>
               <li>Double: $149/month</li>
-              <li>Triple: $299/month (ad spend bills directly to your own payment method; we do not mark up ad spend)</li>
-              <li>Dedicated content specialist add-on ("Sprinkles"): +$350/month, requires the Triple plan, subject to availability</li>
+              <li>Local Scoop: $100/month (Google Business Profile management only; your website stays with whoever hosts it)</li>
+              <li>Triple: $299/month. Includes management of your Google ads (Local Services and Search) and Meta ads (Facebook and Instagram), plus 4 social posts per month, each published to both Facebook and Instagram. Ad spend bills directly to your own payment method and we do not mark up ad spend. Which ad platforms run, and at what budget, is agreed with you before anything launches.</li>
+              <li>Content add-on ("Sprinkles"): +$350/month, requires the Triple plan, subject to availability. Increases social posts from 4 to 12 per month, curated and edited from photos and video you and your team provide, including at least 4 video posts per month. On-site visits by Skooped are available on request at no additional charge and are not a scheduled or guaranteed deliverable. Engaging an outside professional videographer is quoted and approved separately before any shoot.</li>
               <li>Additional website on the same plan ("Extra Scoop"): +$25/month</li>
               <li>Annual prepay ("By the Pint"): 10× the monthly price (equivalent to 2 months free)</li>
             </ul>

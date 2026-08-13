@@ -27,8 +27,8 @@ const faqGroups = [
       { q: "Why do builds require a monthly plan?", a: "Because a website isn't done when it launches. The Single plan covers hosting, security, domain management, small edits — and the part that makes you money: every lead from your site delivered to you the moment it lands (email always, text if you opt in), plus a monthly report in plain English." },
       { q: "Do I own my website?", a: "Yes. Your website, your content, your data. Always." },
       { q: "How is this different from Wix or Squarespace?", a: "Those platforms give you a template and say 'good luck.' We build your site, handle your domain and SEO, and text you every lead. You get a marketing team — not a DIY tool." },
-      { q: "Do you run my ad budget?", a: "Ads bill directly to your own card — we never front spend or mark it up. On Triple, we manage the campaigns and you see every dollar." },
-      { q: "What are toppings?", a: "Optional add-ons. Sprinkles ($350/mo) is a dedicated content specialist shooting real photo and video at your job sites — it rides on the Triple plan, where the ads amplify the content (limited availability). Cherry on Top ($500) files your LLC if your business is brand new, Chocolate Dipped (+$200) is a one-round brand refresh — a logo tidy and consistent colors across your site — and Extra Scoop adds another website for +$25/mo. Those three work with any scoop; Sprinkles is the one that needs Triple." },
+      { q: "Do you run my ad budget?", a: "Ads bill directly to your own card. We never front spend and we never mark it up. On Triple we manage the campaigns on Google (Local Services and Search) and Meta (Facebook and Instagram), and you see every dollar." },
+      { q: "What are toppings?", a: "Optional add-ons. Sprinkles ($350/mo) takes Triple's 4 posts a month up to 12, edited and curated from the photos and clips you and your crew send in, with at least 4 real videos, and it rides on the Triple plan where the ads amplify them (limited availability). Cherry on Top ($500) files your LLC if your business is brand new, Chocolate Dipped (+$200) is a one-round brand refresh (a logo tidy and consistent colors across your site), and Extra Scoop adds another website for +$25/mo. Those three work with any scoop. Sprinkles is the one that needs Triple." },
     ],
   },
   {
@@ -57,7 +57,7 @@ const compRows = [
 const Plans = () => {
   usePageSeo({
     title: "Pricing | Websites from $500, Plans from $49/mo | Skooped Franklin TN",
-    description: "One price list: builds from $500, custom quoted via a $300 Discovery session (credited). Single $49, Double $149, Triple $299 monthly. Toppings: dedicated content specialist +$350/mo, LLC filing +$500. Every lead sent straight to you.",
+    description: "One price list: builds from $500, custom quoted via a $300 Discovery session (credited). Single $49, Double $149, Triple $299 monthly. Toppings: 12 posts a month with real video +$350/mo, LLC filing +$500. Every lead sent straight to you.",
   });
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
