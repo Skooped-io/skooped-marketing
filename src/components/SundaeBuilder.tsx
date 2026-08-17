@@ -199,7 +199,9 @@ const SundaeBuilder = () => {
     const launchMonthlyVal = (tops.sprinkles ? 350 : 0) + (tops.extra ? 25 : 0);
     const names = [coneObj.name, scoopObj.name];
     TOPS.forEach((t) => tops[t.id] && names.push(t.name));
-    const launchNames = TOPS.filter((t) => tops[t.id]).map((t) => t.name);
+    // Pint is a cadence, not a launch add-on: its money is already in due-today via the
+    // annual link, so it must never appear in the "not charged at checkout" note.
+    const launchNames = TOPS.filter((t) => t.id !== "pint" && tops[t.id]).map((t) => t.name);
     const launchParts = [
       launchOnceVal ? `+${fmt(launchOnceVal)} once` : "",
       launchMonthlyVal ? `+${fmt(launchMonthlyVal)}/mo` : "",
@@ -225,7 +227,7 @@ const SundaeBuilder = () => {
     ? `Build + your prepaid year (${fmt(scoopObj.mo * 10)}, 2 months free) check out together.`
     : cone === "cup" && scoop === "single" && monthly === 49
     ? "Most clients start exactly here."
-    : `Build checks out now. Plan billing starts in ${BUILD_TRIAL_DAYS} days, at launch.`;
+    : `Build checks out now. Plan billing starts in ${BUILD_TRIAL_DAYS} days (your build window).`;
 
   const smsBody = custom
     ? `Hey Skooped, I built my sundae on your site: ${order}. I'd like to book the $300 Sample Spoon to get my quote.`
@@ -284,7 +286,7 @@ const SundaeBuilder = () => {
     <>
       Checkout charges <strong className="text-foreground">{todayText}</strong> today
       {pint ? " (build + your prepaid year)" : ""}; your {scoopObj.name} plan{" "}
-      {pint ? "renews yearly" : `($${scoopObj.mo}/mo) starts in ${BUILD_TRIAL_DAYS} days, at launch`}.
+      {pint ? "renews yearly" : `($${scoopObj.mo}/mo) starts in ${BUILD_TRIAL_DAYS} days, your build window`}.
       {launchNote ? ` ${launchNote}` : ""} Prefer to talk first?{" "}
       <Link to={contactHref} onClick={fireSundaeBuilt} className="text-primary font-semibold hover:underline">
         Send us your build

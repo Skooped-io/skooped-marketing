@@ -137,7 +137,8 @@ const WelcomeBuild = () => {
                         <strong>
                           Your {plan.name} plan ({fmt(plan.mo)}/mo) starts in {BUILD_TRIAL_DAYS} days,
                         </strong>{" "}
-                        which is your build window. You are never paying for hosting on a site that is not live yet.
+                        which is your build window. If your build ever needs longer than that, tell me and I push the
+                        start date back. Nothing else is charged today.
                       </>
                     )}
                   </span>
