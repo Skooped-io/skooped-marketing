@@ -82,6 +82,9 @@ const WelcomeBuild = () => {
   }, []);
 
   useEffect(() => {
+    // Only a Stripe redirect carries a session_id. A direct or shared visit must not
+    // fabricate a Purchase event: without the id there is no sale and no dedupe key.
+    if (!sessionId) return;
     firePurchaseOnce(sessionId, contentName, chargedToday);
   }, [sessionId, contentName, chargedToday]);
 
