@@ -6,6 +6,7 @@ import { PHONE_DISPLAY } from "@/components/CallTextButton";
 import { track } from "@/lib/analytics";
 import { pixel } from "@/lib/meta-pixel";
 import { withCheckoutRef } from "@/lib/attribution";
+import { BUILD_TRIAL_DAYS, comboPayLink } from "@/data/comboPayLinks";
 
 import cup1 from "@/assets/sundae/cup-1.png";
 import cup2 from "@/assets/sundae/cup-2.png";
@@ -68,14 +69,10 @@ const TOPS: { id: TopId; name: string; price: string; per: string; thumb: string
 const fmt = (n: number) => "$" + n.toLocaleString("en-US");
 const PHONE = "6153151541";
 
-/* Live Stripe Payment Links (v2, terms-consent required) — STRIPE-CATALOG-2026-07.md in the
-   HQ repo is canonical. Only the build (or the Sample Spoon, on custom) is payable up front:
-   the monthly plan and toppings get set up at launch, so no links for those here. */
-const PAY_LINKS: Record<"cup" | "waffle" | "sampleSpoon", string> = {
-  cup: "https://buy.stripe.com/3cI28q82B0qg3ZPdyE8Ra06",
-  waffle: "https://buy.stripe.com/00weVc1Ed2yo53T0LS8Ra07",
-  sampleSpoon: "https://buy.stripe.com/4gM7sKbeN7SIcwl9io8Ra08",
-};
+/* The Sample Spoon link (v2, terms-consent required) stays for custom builds; standard
+   builds now check out through the combined build + plan links in comboPayLinks.ts.
+   STRIPE-CATALOG-2026-07.md in the HQ repo is canonical. */
+const SAMPLE_SPOON_LINK = "https://buy.stripe.com/4gM7sKbeN7SIcwl9io8Ra08";
 
 /* ── Option card ── */
 const OptionCard = ({
@@ -191,20 +188,31 @@ const SundaeBuilder = () => {
   const custom = cone === "sundae";
   const pint = tops.pint;
 
-  const { today, monthly, todayText, moText, order } = useMemo(() => {
-    // Custom builds charge the $300 Sample Spoon today, NOT the build price: the pay button
-    // below fires PAY_LINKS.sampleSpoon. Anything else here shows a total we do not charge.
-    const todayVal =
-      (custom ? 300 : cone === "cup" ? 500 : 1000) +
-      (tops.cherry ? 500 : 0) +
-      (tops.chocdip ? 200 : 0) +
-      (pint ? scoopObj.mo * 10 : 0);
+  const { today, monthly, launchOnce, launchNote, todayText, moText, order } = useMemo(() => {
+    // "Due today" is exactly what Stripe charges when the CTA is clicked: the Sample Spoon on
+    // custom, otherwise the build (+ the prepaid year on pint). Toppings are never in the
+    // checkout links, so their money shows in its own "at launch" line, not in today's total.
+    // Never show a number here that checkout does not charge (the 2026-08-12 money bug).
+    const todayVal = custom ? 300 : (cone === "cup" ? 500 : 1000) + (pint ? scoopObj.mo * 10 : 0);
     const monthlyVal = (pint ? 0 : scoopObj.mo) + (tops.sprinkles ? 350 : 0) + (tops.extra ? 25 : 0);
+    const launchOnceVal = (tops.cherry ? 500 : 0) + (tops.chocdip ? 200 : 0);
+    const launchMonthlyVal = (tops.sprinkles ? 350 : 0) + (tops.extra ? 25 : 0);
     const names = [coneObj.name, scoopObj.name];
     TOPS.forEach((t) => tops[t.id] && names.push(t.name));
+    const launchNames = TOPS.filter((t) => tops[t.id]).map((t) => t.name);
+    const launchParts = [
+      launchOnceVal ? `+${fmt(launchOnceVal)} once` : "",
+      launchMonthlyVal ? `+${fmt(launchMonthlyVal)}/mo` : "",
+    ].filter(Boolean);
     return {
       today: todayVal,
       monthly: monthlyVal,
+      launchOnce: launchOnceVal,
+      launchNote: launchNames.length
+        ? `${launchNames.join(" + ")} (${launchParts.join(", ")}) ${
+            launchNames.length > 1 ? "are" : "is"
+          } set up at launch, nothing extra charged at checkout.`
+        : "",
       todayText: fmt(todayVal),
       moText: fmt(monthlyVal) + "/mo",
       order: names.join(" + "),
@@ -212,17 +220,23 @@ const SundaeBuilder = () => {
   }, [cone, scoop, tops, custom, pint, coneObj.name, scoopObj.mo, scoopObj.name]);
 
   const detail = custom
-    ? "Fixed quote via the $300 Sample Spoon — credited to your build."
+    ? "Fixed quote via the $300 Sample Spoon, credited to your build."
     : pint
-    ? `Plan prepaid for the year (${fmt(scoopObj.mo * 10)} — 2 months free).`
+    ? `Build + your prepaid year (${fmt(scoopObj.mo * 10)}, 2 months free) check out together.`
     : cone === "cup" && scoop === "single" && monthly === 49
     ? "Most clients start exactly here."
-    : "Build billed once. Plan starts at launch.";
+    : `Build checks out now. Plan billing starts in ${BUILD_TRIAL_DAYS} days, at launch.`;
 
   const smsBody = custom
-    ? `Hey Skooped — I built my sundae on your site: ${order}. I'd like to book the $300 Sample Spoon to get my quote.`
-    : `Hey Skooped — I built my sundae on your site: ${order}. ${todayText} today, then ${moText}. Let's do it.`;
+    ? `Hey Skooped, I built my sundae on your site: ${order}. I'd like to book the $300 Sample Spoon to get my quote.`
+    : `Hey Skooped, I built my sundae on your site: ${order}. ${todayText} today, then ${moText}. Let's do it.`;
   const contactHref = `/contact?build=${encodeURIComponent(smsBody)}`;
+
+  // Checkout target for the current selection. Custom builds still buy the Sample Spoon;
+  // everything else buys the build + plan in one combined Stripe checkout.
+  const payHref = withCheckoutRef(
+    cone === "sundae" ? SAMPLE_SPOON_LINK : comboPayLink(cone, scoop, pint ? "annual" : "monthly")
+  );
 
   // Sprinkles rides on the Triple plan: toggling it on bumps the scoop to Triple,
   // and dropping below Triple removes it — keeps the builder honest to the ops rule
@@ -249,26 +263,34 @@ const SundaeBuilder = () => {
       custom,
     });
 
+  const fireCheckout = () => {
+    fireSundaeBuilt();
+    const item = custom ? "sample-spoon" : `${cone}-${scoop}-${pint ? "annual" : "monthly"}`;
+    track("pay_link_click", { item, source: "builder" });
+    pixel("InitiateCheckout", { content_name: item, source: "builder" });
+  };
+
   // Rendered in the desktop receipt bar and as static copy under the steps on mobile.
-  const finePrint = (
+  const finePrint = custom ? (
     <>
-      Takes you to our contact form with the order pre-filled — or call/text{" "}
-      <a href={`tel:${PHONE}`} className="text-primary font-semibold hover:underline">{PHONE_DISPLAY}</a>. Nothing is charged here.{" "}
-      Ready right now?{" "}
-      <a
-        href={withCheckoutRef(custom ? PAY_LINKS.sampleSpoon : cone === "cup" ? PAY_LINKS.cup : PAY_LINKS.waffle)}
-        onClick={() => {
-          fireSundaeBuilt();
-          track("pay_link_click", { item: custom ? "sample-spoon" : cone, source: "builder" });
-          pixel("InitiateCheckout", { content_name: custom ? "sample-spoon" : cone, source: "builder" });
-        }}
-        className="text-primary font-semibold hover:underline"
-      >
+      Custom builds start with the $300 Sample Spoon, credited to your build.{" "}
+      <a href={payHref} onClick={fireCheckout} className="text-primary font-semibold hover:underline">
         Pay online
-      </a>
-      {custom
-        ? " — book your Sample Spoon ($300, credited to your build)."
-        : ` — your ${coneObj.name} build (${cone === "cup" ? "$500" : "$1,000"}) checks out now; the plan starts at launch.`}
+      </a>{" "}
+      to book it now, or the button sends your order to our contact form and we talk it through. Call/text{" "}
+      <a href={`tel:${PHONE}`} className="text-primary font-semibold hover:underline">{PHONE_DISPLAY}</a>.
+    </>
+  ) : (
+    <>
+      Checkout charges <strong className="text-foreground">{todayText}</strong> today
+      {pint ? " (build + your prepaid year)" : ""}; your {scoopObj.name} plan{" "}
+      {pint ? "renews yearly" : `($${scoopObj.mo}/mo) starts in ${BUILD_TRIAL_DAYS} days, at launch`}.
+      {launchNote ? ` ${launchNote}` : ""} Prefer to talk first?{" "}
+      <Link to={contactHref} onClick={fireSundaeBuilt} className="text-primary font-semibold hover:underline">
+        Send us your build
+      </Link>{" "}
+      or call/text{" "}
+      <a href={`tel:${PHONE}`} className="text-primary font-semibold hover:underline">{PHONE_DISPLAY}</a>.
     </>
   );
 
@@ -288,9 +310,15 @@ const SundaeBuilder = () => {
                 <strong className="text-primary tabular-nums">{todayText}</strong> today · then{" "}
                 <strong className="text-primary tabular-nums">{moText}</strong>
               </p>
-              <Link to={contactHref} onClick={fireSundaeBuilt} className="mt-1.5 inline-block">
-                <Button variant="hero" size="sm">{custom ? "Get my quote →" : "Get this build →"}</Button>
-              </Link>
+              {custom ? (
+                <Link to={contactHref} onClick={fireSundaeBuilt} className="mt-1.5 inline-block">
+                  <Button variant="hero" size="sm">Get my quote →</Button>
+                </Link>
+              ) : (
+                <a href={payHref} onClick={fireCheckout} className="mt-1.5 inline-block">
+                  <Button variant="hero" size="sm">Checkout →</Button>
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -406,12 +434,28 @@ const SundaeBuilder = () => {
                   {fmt(monthly)}<small className="text-sm font-semibold text-muted-foreground">/mo</small>
                 </motion.span>
               </div>
+              {launchOnce > 0 && (
+                <div>
+                  <span className="block text-[0.64rem] font-bold uppercase tracking-widest text-muted-foreground">At launch, once</span>
+                  <motion.span key={launchOnce} initial={{ scale: 1.15 }} animate={{ scale: 1 }} className="inline-block font-heading text-xl font-extrabold text-primary tabular-nums">
+                    {fmt(launchOnce)}
+                  </motion.span>
+                </div>
+              )}
             </div>
-            <Link to={contactHref} onClick={fireSundaeBuilt}>
-              <Button variant="hero" size="lg" className="whitespace-nowrap">
-                {custom ? "Get my Sample Spoon quote →" : "Get this build →"}
-              </Button>
-            </Link>
+            {custom ? (
+              <Link to={contactHref} onClick={fireSundaeBuilt}>
+                <Button variant="hero" size="lg" className="whitespace-nowrap">
+                  Get my Sample Spoon quote →
+                </Button>
+              </Link>
+            ) : (
+              <a href={payHref} onClick={fireCheckout}>
+                <Button variant="hero" size="lg" className="whitespace-nowrap">
+                  Checkout now: {todayText} →
+                </Button>
+              </a>
+            )}
           </div>
           <p className="mt-1.5 text-[0.72rem] text-muted-foreground">{finePrint}</p>
         </div>

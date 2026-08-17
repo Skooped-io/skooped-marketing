@@ -19,6 +19,7 @@ import Blog from "./pages/Blog.tsx";
 import BlogPost from "./pages/BlogPost.tsx";
 import CityPage from "./pages/CityPage.tsx";
 import WelcomeLocalScoop from "./pages/WelcomeLocalScoop.tsx";
+import WelcomeBuild from "./pages/WelcomeBuild.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
 
 const queryClient = new QueryClient();
@@ -48,6 +49,7 @@ const App = () => (
           <Route path="/local/:slug" element={<CityPage />} />
           {/* Post-checkout landing for Stripe payment links (noindex, kept out of the sitemap) */}
           <Route path="/welcome/local-scoop" element={<WelcomeLocalScoop />} />
+          <Route path="/welcome/build" element={<WelcomeBuild />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
