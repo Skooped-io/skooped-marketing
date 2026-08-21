@@ -136,6 +136,14 @@ const SMS_MAX = 320;
 const OPT_OUT = "Reply STOP to opt out.";
 
 /**
+ * The one-time enrollment confirmation a client receives after their written
+ * opt-in is recorded (SMS-ROLLOUT step 4). Verbatim what the A2P campaign
+ * registration promises; change the registered sample first, then this.
+ */
+export const ENROLLMENT_CONFIRMATION =
+  "Skooped (SKOOPED LLC): Website inquiry alerts are on for your business. Msg frequency varies. Msg & data rates may apply. Reply HELP for help, STOP to opt out.";
+
+/**
  * The SMS an opted-in client gets. This must keep the shape of the sample
  * messages registered on A2P campaign CMb671be31c1701980e7487f845f247a4b:
  * leads with "Skooped", says "inquiry" not "lead", carries the opt-out line,

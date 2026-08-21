@@ -96,3 +96,13 @@ curl -s -X POST https://skooped.io/api/lead \
 ```
 
 Unit tests for the pure logic: `npm test` (see `src/test/lead-core.test.ts`).
+
+## `POST /api/sms-enroll` (2026-08-20)
+
+One-time enrollment confirmation text (the message the A2P registration promises),
+sent to a route that already carries `sms` + a valid `sms_consent_on`. Body
+`{"site_id":"..."}`, header `x-skooped-secret`. Fails closed: 503 with no secret
+configured, 401 on mismatch, 404 for an unknown site_id (no `default` fallback),
+409 without consent. GET answers 405 with the live commit sha (deploy probe for
+`hq/ops/sms-enroll.ps1`). Exists because every prod env var is write-only, so the
+Twilio token can only be used from the deployment.
