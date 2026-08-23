@@ -6,6 +6,8 @@ import {
   formatEmail,
   parseRouteTable,
   smsAllowed,
+  classifyLead,
+  parseBlocklist,
   type RouteTable,
 } from "../../api/_lead-core";
 
@@ -242,5 +244,197 @@ describe("formatSms (no email addresses in the body, per the registration)", () 
     const body = formatSms({ site_id: "x", phone: "6155550142", message: "Thanks.Please call me" }, route);
     expect(body).toContain("Thanks.Please call me");
     expect(body).not.toContain("[link]");
+  });
+});
+
+/* ── Spam gate (2026-08-23) ────────────────────────────────────────────────
+ * The four spam bodies below are verbatim from the central leads table on
+ * 2026-08-22 (3 client sites); the "must survive" bodies are verbatim real
+ * client leads from the same table. If a change makes one of those trip, the
+ * change is wrong: eating a real lead costs far more than one spam email.
+ */
+
+const REAL_SPAM = [
+  {
+    what: "tonya-mills 8/20, the one the client forwarded",
+    lead: {
+      site_id: "tonya-mills",
+      name: "Benjamin Clarke",
+      phone: "8054002077",
+      email: "benjamin.clarke@jmailservice.com",
+      message:
+        "We drive targeted visitors straight to your website - and your campaign can go live by tomorrow.\nAre you interested?",
+    },
+  },
+  {
+    what: "squishy-clean 8/20, same sender, different client",
+    lead: {
+      site_id: "squishy-clean",
+      name: "Gabrielle Simmons",
+      phone: "8054002077",
+      email: "gabrielle.simmons@jmailservice.com",
+      message:
+        "Most businesses struggle to get noticed online. We solve that by putting your brand above the competition on major search engines. Are you interested?",
+    },
+  },
+  {
+    what: "squishy-clean 8/21, BOL7 platform pitch",
+    lead: {
+      site_id: "squishy-clean",
+      name: "Shashank BOL7 Technologies",
+      phone: "+1 (555) 703-8289",
+      email: "bol7technologies1@gmail.com",
+      message:
+        "Hello, I'm Shashank from BOL7.\n\nWe offer an all-in-one platform for WhatsApp, SMS and email marketing, AI chatbots, CRM, and lead generation.",
+    },
+  },
+  {
+    what: "affordable-elegance 8/18, web redesign pitch",
+    lead: {
+      site_id: "affordable-elegance",
+      name: "Hannah Melotto",
+      phone: "2158218810",
+      email: "hannah.melotto@melottogroup.com",
+      message:
+        "Hi, I'm Hannah from Melotto Group. We help businesses redesign their websites and improve their content so they look more professional.",
+    },
+  },
+];
+
+const REAL_LEADS = [
+  {
+    what: "findi referral",
+    lead: {
+      site_id: "findi-longevity",
+      name: "Quinn Huff",
+      email: "qhuff@pm.me",
+      message:
+        "My sister, Kendra Huff, just started with y'all and recommended me to reach out. I've got some gut health issues that started last year.",
+      service: "Functional Medicine",
+    },
+  },
+  {
+    what: "southside multi-service, opens with 'we use'",
+    lead: {
+      site_id: "southside-grounds",
+      name: "Madeline Foster",
+      phone: "3525401026",
+      message:
+        "Total lawn care. Right now we use different companies for each service in our yard - weed treatment, grass cutting, etc.",
+      service: "other",
+    },
+  },
+  {
+    what: "southside mulch, contains 'we are interested in'",
+    lead: {
+      site_id: "southside-grounds",
+      name: "Emily Newman",
+      phone: "8658066831",
+      message:
+        "We have some existing mulch beds along the front/side of our house that we are interested in cleaning up/adding to.",
+      service: "landscaping-services",
+    },
+  },
+  {
+    what: "limo booking, opens with 'We need'",
+    lead: {
+      site_id: "affordable-elegance",
+      name: "Ana Rogers",
+      phone: "8049377327",
+      message:
+        "We need to be picked up at 2216 Belmont Boulevard at 12:30 and dropped off at Arrington Vineyard.",
+      service: "Distillery / Winery Tour",
+    },
+  },
+  {
+    what: "a Skooped prospect asking for the exact services spam pitches",
+    lead: {
+      site_id: "skooped",
+      name: "Dana Whitfield",
+      phone: "6155550123",
+      email: "dana@whitfieldplumbing.com",
+      message:
+        "I need help with SEO and a new website for my plumbing business. Are you taking on new clients this month?",
+    },
+  },
+];
+
+describe("classifyLead (content score)", () => {
+  for (const c of REAL_SPAM) {
+    it(`flags real spam: ${c.what}`, () => {
+      const v = classifyLead(c.lead);
+      expect(v.spam).toBe(true);
+      expect(v.reason).toContain("content");
+    });
+  }
+
+  for (const c of REAL_LEADS) {
+    it(`lets a real lead through: ${c.what}`, () => {
+      expect(classifyLead(c.lead).spam).toBe(false);
+    });
+  }
+
+  it("never convicts on topic words alone", () => {
+    const v = classifyLead({
+      site_id: "skooped",
+      email: "a@b.com",
+      message: "Do you do SEO, web design and social media marketing? What is the cost?",
+    });
+    expect(v.spam).toBe(false);
+  });
+
+  it("scores nothing when the lead left no free text", () => {
+    const v = classifyLead({ site_id: "gunns-fencing", phone: "6155550100", name: "Erin" });
+    expect(v.spam).toBe(false);
+    expect(v.score).toBe(0);
+  });
+});
+
+describe("classifyLead (blocklist)", () => {
+  const list = parseBlocklist(
+    JSON.stringify({
+      emails: ["Someone@Example.COM"],
+      domains: ["@jmailservice.com"],
+      phones: ["(805) 400-2077"],
+    })
+  );
+
+  it("matches an email case-insensitively", () => {
+    const v = classifyLead({ site_id: "x", email: "SOMEONE@example.com" }, list);
+    expect(v.spam).toBe(true);
+    expect(v.reason).toBe("blocklist:email someone@example.com");
+  });
+
+  it("matches a domain whether or not the @ was pasted", () => {
+    const v = classifyLead({ site_id: "x", email: "brand.new.name@jmailservice.com" }, list);
+    expect(v.spam).toBe(true);
+    expect(v.reason).toBe("blocklist:domain jmailservice.com");
+  });
+
+  it("matches a phone regardless of formatting", () => {
+    const v = classifyLead({ site_id: "x", phone: "805-400-2077" }, list);
+    expect(v.spam).toBe(true);
+    expect(v.reason).toBe("blocklist:phone 8054002077");
+  });
+
+  it("leaves an unlisted sender to the content score", () => {
+    expect(classifyLead({ site_id: "x", email: "jane@gmail.com", message: "Need a quote" }, list).spam).toBe(false);
+  });
+});
+
+describe("parseBlocklist (bad shapes a person can paste)", () => {
+  it("blocks nothing on missing, invalid or wrongly-shaped input", () => {
+    for (const raw of [undefined, "", "not json", "[]", '"a string"', "42"]) {
+      const b = parseBlocklist(raw as string | undefined);
+      expect(b.emails).toEqual([]);
+      expect(b.domains).toEqual([]);
+      expect(b.phones).toEqual([]);
+    }
+  });
+
+  it("drops non-string entries instead of crashing at match time", () => {
+    const b = parseBlocklist(JSON.stringify({ emails: ["a@b.com", 7, null], phones: ["abc"] }));
+    expect(b.emails).toEqual(["a@b.com"]);
+    expect(b.phones).toEqual([]);
   });
 });

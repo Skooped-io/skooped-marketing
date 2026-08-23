@@ -147,3 +147,65 @@ describe("dormancy, honeypot, basics", () => {
     expect(res.statusCode).toBe(502);
   });
 });
+
+/**
+ * The spam gate applies to Skooped's own form too. The risk here is the mirror
+ * image of a client's: our real inbound is people asking for SEO and websites,
+ * so a topical lead must survive while a pitch aimed at us must not.
+ */
+describe("spam gate on the dogfood route", () => {
+  const on = () => {
+    vi.stubEnv("LEAD_ROUTES", ROUTES);
+    vi.stubEnv("TWILIO_ACCOUNT_SID", "AC1");
+    vi.stubEnv("TWILIO_AUTH_TOKEN", "tok");
+    vi.stubEnv("TWILIO_FROM_NUMBER", "+16158809634");
+    vi.stubEnv("RESEND_API_KEY", "re_1");
+    vi.stubEnv("LEAD_FROM_EMAIL", "leads@skooped.io");
+    vi.stubEnv("SUPABASE_URL", "https://db.example.com");
+    vi.stubEnv("SUPABASE_SERVICE_ROLE_KEY", "key");
+  };
+
+  it("suppresses an agency pitch aimed at Skooped and stores it flagged", async () => {
+    on();
+    const res = makeRes();
+    await handler(
+      {
+        method: "POST",
+        body: {
+          name: "Hannah Melotto",
+          email: "hannah@melottogroup.com",
+          message:
+            "Hi, I'm Hannah from Melotto Group. We help businesses redesign their websites and improve their content.",
+        },
+      },
+      res
+    );
+
+    expect(res.statusCode).toBe(200);
+    expect(calls.filter((c) => c.url.includes("api.twilio.com"))).toHaveLength(0);
+    expect(calls.filter((c) => c.url.includes("api.resend.com"))).toHaveLength(0);
+    const stored = JSON.parse(calls.filter((c) => c.url.includes("db.example.com"))[0].init.body as string);
+    expect(stored.site_id).toBe("skooped");
+    expect(stored.spam).toBe(true);
+  });
+
+  it("still alerts on a prospect asking us for the very services spam pitches", async () => {
+    on();
+    const res = makeRes();
+    await handler(
+      {
+        method: "POST",
+        body: {
+          name: "Dana Whitfield",
+          phone: "6155550123",
+          message:
+            "I need help with SEO and a new website for my plumbing business. Are you taking on new clients?",
+        },
+      },
+      res
+    );
+
+    expect(res.statusCode).toBe(200);
+    expect(calls.filter((c) => c.url.includes("api.twilio.com"))).toHaveLength(1);
+  });
+});

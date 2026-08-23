@@ -103,6 +103,175 @@ export function resolveRoute(table: RouteTable, siteId: string): LeadRoute | und
   return table[siteId] ?? table["default"];
 }
 
+/* ────────────────────────────────────────────────────────────────────────────
+ * Spam gate (2026-08-23)
+ *
+ * Tonya forwarded a traffic-selling solicitation her form produced on 8/20 and
+ * asked us to block it. A census of the central leads table the same week found
+ * 5 of 21 stored rows were solicitations across FOUR different client sites, so
+ * this belongs in the router, once, rather than in nine Lovable projects.
+ *
+ * Two stages, cheapest first:
+ *   1. blocklist  — exact sender match (email, email domain, phone). Zero false
+ *      positives, and it is the mechanism behind "block this one" client asks.
+ *   2. content    — a weighted score over the free text.
+ *
+ * A hit never drops the lead: the caller stores the row flagged and skips the
+ * SMS and email legs. A false positive that silently eats a real lead costs far
+ * more than one spam email getting through, so everything stays recoverable and
+ * every verdict carries a human-readable reason.
+ * ──────────────────────────────────────────────────────────────────────────── */
+
+export interface Blocklist {
+  /** whole addresses, lowercased */
+  emails: string[];
+  /** email domains, lowercased, no leading @ */
+  domains: string[];
+  /** digits only, so formatting never decides a match */
+  phones: string[];
+}
+
+const EMPTY_BLOCKLIST: Blocklist = { emails: [], domains: [], phones: [] };
+
+const digits = (v: string): string => v.replace(/\D/g, "");
+
+const strings = (v: unknown): string[] =>
+  Array.isArray(v) ? v.filter((x): x is string => typeof x === "string").map((x) => x.trim().toLowerCase()).filter(Boolean) : [];
+
+/**
+ * LEAD_BLOCKLIST is hand-edited Vercel env config like LEAD_ROUTES, so every bad
+ * shape a person can paste has to land on "block nothing" rather than throw
+ * inside the request path. Tuning it is an env change plus a redeploy, never a
+ * code change.
+ */
+export function parseBlocklist(raw: string | undefined): Blocklist {
+  if (!raw) return EMPTY_BLOCKLIST;
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    return EMPTY_BLOCKLIST;
+  }
+  if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed)) return EMPTY_BLOCKLIST;
+  const p = parsed as Record<string, unknown>;
+  return {
+    emails: strings(p.emails),
+    // "@jmailservice.com" and "jmailservice.com" must both work: people paste both.
+    domains: strings(p.domains).map((d) => d.replace(/^@/, "")),
+    phones: strings(p.phones).map(digits).filter(Boolean),
+  };
+}
+
+export interface SpamVerdict {
+  spam: boolean;
+  /** short, human-readable, stored on the row and logged: "blocklist:domain jmailservice.com" */
+  reason: string;
+  score: number;
+}
+
+/**
+ * Weighted markers. The weights lean on the SHAPE of a sales pitch rather than
+ * its topic, because Skooped's own inbound leads are people asking about SEO and
+ * websites: "I need SEO for my plumbing business" must survive, while "we offer
+ * SEO for your business, are you interested?" must not. Structure (someone
+ * selling), target (your business), and a call to action score high; topic words
+ * alone score low and can never reach the threshold on their own.
+ */
+const PITCH_STRUCTURE: RegExp[] = [
+  /\bwe\s+(?:offer|provide|speciali[sz]e|deliver|drive|solve|handle|build|create|design|develop|help)\b/i,
+  /\bwe\s+(?:can|could|would\s+like\s+to|want\s+to)\s+(?:help|assist|offer|show|get|boost|grow)\b/i,
+  /\b(?:i'?m|i\s+am|this\s+is)\s+[a-z]+(?:\s+[a-z]+)?\s+from\s+[a-z0-9]/i,
+  /\bour\s+(?:team|agency|company|firm|experts?|services?|platform|clients?)\b/i,
+  /\b(?:my|our)\s+(?:company|agency)\s+(?:offers?|provides?|specialis|specializ)/i,
+];
+
+const PITCH_TARGET: RegExp[] = [
+  /\byour\s+(?:website|site|business|brand|company|online\s+presence|search\s+rankings?|google\s+ranking)\b/i,
+  /\b(?:businesses|companies)\s+like\s+yours\b/i,
+];
+
+const PITCH_CTA: RegExp[] = [
+  /\bare\s+you\s+interested\b/i,
+  /\b(?:let\s+me\s+know|reply)\s+(?:if|and|back)\b/i,
+  /\b(?:book|schedule|set\s+up)\s+a\s+(?:quick\s+)?(?:call|demo|meeting)\b/i,
+  /\bwould\s+you\s+(?:be\s+)?(?:open|interested)\s+to\b/i,
+  /\bcan\s+(?:go|be)\s+live\s+(?:by|within|in)\b/i,
+  /\bno\s+obligation\b/i,
+];
+
+const PITCH_TOPIC: RegExp[] = [
+  /\btargeted\s+(?:visitors|traffic|leads?)\b/i,
+  /\b(?:seo|search\s+engine\s+optimi[sz]ation)\b/i,
+  /\b(?:rank|ranking|ranked)\s+(?:higher\s+)?(?:on|in)\s+google\b/i,
+  /\bfirst\s+page\s+of\s+google\b/i,
+  /\b(?:web|website)\s+(?:design|redesign|development)\b/i,
+  /\bredesign\s+(?:your|their)\s+websites?\b/i,
+  /\b(?:digital|social\s+media|email|whatsapp|bulk\s+sms)\s+marketing\b/i,
+  /\b(?:backlinks?|domain\s+authority|guest\s+posts?)\b/i,
+  /\b(?:ai\s+)?chat\s?bots?\b/i,
+  /\bcrm\b/i,
+  /\blead\s+generation\b/i,
+  /\ball[-\s]in[-\s]one\s+platform\b/i,
+];
+
+const SCORE = { structure: 2, target: 1, cta: 1.5, topic: 1, link: 1 } as const;
+/** Two independent signals are never enough; a pitch reliably clears this. */
+const SPAM_THRESHOLD = 4;
+/** Topic words alone must not convict: a real lead can name SEO twice. */
+const MAX_TOPIC_SCORE = 2;
+
+const countHits = (patterns: RegExp[], text: string): number =>
+  patterns.reduce((n, re) => (re.test(text) ? n + 1 : n), 0);
+
+/**
+ * Verdict for one validated lead. Runs after validateLead (so the honeypot has
+ * already had its say) and before any sender.
+ */
+export function classifyLead(lead: LeadPayload, blocklist: Blocklist = EMPTY_BLOCKLIST): SpamVerdict {
+  const email = (lead.email ?? "").toLowerCase().trim();
+  const phone = digits(lead.phone ?? "");
+
+  if (email && blocklist.emails.includes(email)) {
+    return { spam: true, reason: `blocklist:email ${email}`, score: Infinity };
+  }
+  const domain = email.includes("@") ? email.slice(email.lastIndexOf("@") + 1) : "";
+  if (domain && blocklist.domains.includes(domain)) {
+    return { spam: true, reason: `blocklist:domain ${domain}`, score: Infinity };
+  }
+  if (phone && blocklist.phones.includes(phone)) {
+    return { spam: true, reason: `blocklist:phone ${phone}`, score: Infinity };
+  }
+
+  // Free text only. Names and addresses are matched by the blocklist, not scored:
+  // a real person can be called anything.
+  const text = [lead.message, lead.service].filter(Boolean).join("\n");
+  if (!text) return { spam: false, reason: "", score: 0 };
+
+  const structure = countHits(PITCH_STRUCTURE, text);
+  const target = countHits(PITCH_TARGET, text);
+  const cta = countHits(PITCH_CTA, text);
+  const topic = Math.min(countHits(PITCH_TOPIC, text), MAX_TOPIC_SCORE);
+  // A visitor asking for help rarely pastes their own URL; a vendor selling one does.
+  const links = (text.match(/\b(?:https?:\/\/|www\.)\S+/gi) ?? []).length > 0 ? 1 : 0;
+
+  const score =
+    structure * SCORE.structure +
+    target * SCORE.target +
+    cta * SCORE.cta +
+    topic * SCORE.topic +
+    links * SCORE.link;
+
+  if (score < SPAM_THRESHOLD) return { spam: false, reason: "", score };
+  const parts = [
+    structure ? `structure x${structure}` : "",
+    target ? `target x${target}` : "",
+    cta ? `cta x${cta}` : "",
+    topic ? `topic x${topic}` : "",
+    links ? "link" : "",
+  ].filter(Boolean);
+  return { spam: true, reason: `content ${score.toFixed(1)}: ${parts.join(", ")}`, score };
+}
+
 /**
  * The registration attested "Embedded links = NO (no URLs or email addresses in
  * message bodies)", so both get redacted, not just schemed URLs:

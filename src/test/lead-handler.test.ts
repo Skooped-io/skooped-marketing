@@ -189,3 +189,129 @@ describe("basics", () => {
     expect(calls).toHaveLength(0);
   });
 });
+
+/* ── Spam gate on the real send path (2026-08-23) ──────────────────────────
+ * The pure classifier is covered in lead-core.test.ts. What matters here is
+ * that a spam verdict actually reaches the senders: no Twilio call, no Resend
+ * call, and the row still lands in Supabase carrying the flag.
+ */
+describe("spam gate on the real send path", () => {
+  const SPAM = {
+    site_id: "gunns-fencing",
+    name: "Benjamin Clarke",
+    phone: "8054002077",
+    email: "benjamin.clarke@jmailservice.com",
+    message:
+      "We drive targeted visitors straight to your website - and your campaign can go live by tomorrow. Are you interested?",
+  };
+
+  const allSendersOn = () => {
+    vi.stubEnv("LEAD_ROUTES", CONSENTED);
+    vi.stubEnv("TWILIO_ACCOUNT_SID", "AC1");
+    vi.stubEnv("TWILIO_AUTH_TOKEN", "tok");
+    vi.stubEnv("TWILIO_FROM_NUMBER", "+16158809634");
+    vi.stubEnv("RESEND_API_KEY", "re_1");
+    vi.stubEnv("LEAD_FROM_EMAIL", "leads@skooped.io");
+    vi.stubEnv("SUPABASE_URL", "https://db.example.com");
+    vi.stubEnv("SUPABASE_SERVICE_ROLE_KEY", "key");
+  };
+
+  const supabaseCalls = () => calls.filter((c) => c.url.includes("db.example.com"));
+  const resendCalls = () => calls.filter((c) => c.url.includes("api.resend.com"));
+
+  it("texts and emails nobody about a solicitation, but still stores it flagged", async () => {
+    allSendersOn();
+    const res = makeRes();
+    await handler({ method: "POST", body: SPAM, headers: {} }, res);
+
+    expect(res.statusCode).toBe(200);
+    expect(twilioCalls()).toHaveLength(0);
+    expect(resendCalls()).toHaveLength(0);
+    expect(supabaseCalls()).toHaveLength(1);
+
+    const stored = JSON.parse(supabaseCalls()[0].init.body as string);
+    expect(stored.spam).toBe(true);
+    expect(stored.spam_reason).toContain("content");
+    expect(stored.message).toBe(SPAM.message);
+  });
+
+  it("suppresses a blocklisted sender even when the message reads clean", async () => {
+    allSendersOn();
+    vi.stubEnv("LEAD_BLOCKLIST", JSON.stringify({ phones: ["805-400-2077"] }));
+    const res = makeRes();
+    await handler(
+      { method: "POST", body: { ...SPAM, message: "Can you quote a fence?" }, headers: {} },
+      res
+    );
+
+    expect(res.statusCode).toBe(200);
+    expect(twilioCalls()).toHaveLength(0);
+    const stored = JSON.parse(supabaseCalls()[0].init.body as string);
+    expect(stored.spam_reason).toBe("blocklist:phone 8054002077");
+  });
+
+  it("still texts and emails a real lead with the gate live", async () => {
+    allSendersOn();
+    // CONSENTED carries no email address, and this case has to prove BOTH legs
+    // still fire, so give the route one.
+    vi.stubEnv(
+      "LEAD_ROUTES",
+      JSON.stringify({
+        "gunns-fencing": {
+          sms: "+16155550001",
+          sms_consent_on: "2026-08-11",
+          email: "andy@gunnsfencingco.com",
+          label: "Gunn's Fencing",
+        },
+      })
+    );
+    vi.stubEnv("LEAD_BLOCKLIST", JSON.stringify({ domains: ["jmailservice.com"] }));
+    const res = makeRes();
+    await handler({ method: "POST", body: LEAD, headers: {} }, res);
+
+    expect(res.statusCode).toBe(200);
+    expect(twilioCalls()).toHaveLength(1);
+    expect(resendCalls()).toHaveLength(1);
+    const stored = JSON.parse(supabaseCalls()[0].init.body as string);
+    expect(stored.spam).toBe(false);
+    expect(stored.spam_reason).toBeNull();
+  });
+
+  it("does not 502 a suppressed lead when storage is unavailable", async () => {
+    // Nothing delivered and nothing stored would normally read as total failure.
+    // For spam that is the correct outcome, not an error the client site should
+    // retry — the Vercel log line carries the lead.
+    vi.stubEnv("LEAD_ROUTES", CONSENTED);
+    vi.stubEnv("RESEND_API_KEY", "re_1");
+    vi.stubEnv("LEAD_FROM_EMAIL", "leads@skooped.io");
+    const res = makeRes();
+    await handler({ method: "POST", body: SPAM, headers: {} }, res);
+    expect(res.statusCode).toBe(200);
+    expect(calls).toHaveLength(0);
+  });
+
+  it("falls back to a store without the spam columns if the database lacks them", async () => {
+    allSendersOn();
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: string, init: RequestInit) => {
+        calls.push({ url, init });
+        const body = JSON.parse((init.body as string) ?? "{}");
+        const unknownColumn = url.includes("db.example.com") && "spam" in body;
+        return {
+          ok: !unknownColumn,
+          status: unknownColumn ? 400 : 200,
+          text: async () => "",
+        } as unknown as Response;
+      })
+    );
+    const res = makeRes();
+    await handler({ method: "POST", body: SPAM, headers: {} }, res);
+
+    expect(res.statusCode).toBe(200);
+    expect(supabaseCalls()).toHaveLength(2);
+    const retried = JSON.parse(supabaseCalls()[1].init.body as string);
+    expect("spam" in retried).toBe(false);
+    expect(retried.message).toBe(SPAM.message);
+  });
+});

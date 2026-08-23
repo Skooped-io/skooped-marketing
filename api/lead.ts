@@ -18,7 +18,7 @@
  *   RESEND_API_KEY / LEAD_FROM_EMAIL   (from-address on a verified skooped.io domain)
  *   SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY   (table: leads)
  */
-import { parseRouteTable, resolveRoute, validateLead } from "./_lead-core.js";
+import { classifyLead, parseBlocklist, parseRouteTable, resolveRoute, validateLead } from "./_lead-core.js";
 import { anySenderConfigured, deliver } from "./_lead-senders.js";
 
 const CORS_HEADERS: Record<string, string> = {
@@ -65,7 +65,31 @@ export default async function handler(req: any, res: any) {
     return res.status(503).json({ ok: false, error: "lead router not configured yet" });
   }
 
-  const delivered = await deliver(lead, route);
+  // Spam gate: blocklist, then content score. A hit is stored and flagged but
+  // never texted or emailed (api/_lead-core.ts).
+  const verdict = classifyLead(lead, parseBlocklist(process.env.LEAD_BLOCKLIST));
+  const delivered = await deliver(lead, route, verdict);
+
+  if (verdict.spam) {
+    // The whole lead goes in the log line, not just a flag: this is the audit
+    // trail for "did the filter eat something real", and it survives even when
+    // storage is unconfigured or down.
+    console.log(
+      "lead-router: spam suppressed",
+      JSON.stringify({
+        site_id: lead.site_id,
+        reason: verdict.reason,
+        stored: delivered.stored,
+        name: lead.name ?? null,
+        email: lead.email ?? null,
+        phone: lead.phone ?? null,
+        message: lead.message?.slice(0, 200) ?? null,
+      })
+    );
+    // 200 on purpose: a spammer must not learn they were filtered, and the
+    // client site must not retry or show the visitor an error.
+    return res.status(200).json({ ok: true });
+  }
 
   // structured log line = ledger in Vercel logs alongside the leads table
   console.log(

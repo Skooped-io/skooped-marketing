@@ -106,3 +106,31 @@ configured, 401 on mismatch, 404 for an unknown site_id (no `default` fallback),
 409 without consent. GET answers 405 with the live commit sha (deploy probe for
 `hq/ops/sms-enroll.ps1`). Exists because every prod env var is write-only, so the
 Twilio token can only be used from the deployment.
+
+## Spam gate (2026-08-23)
+
+Every lead is scored before any sender fires. Two stages, cheapest first:
+
+1. **Blocklist** — exact sender match on email, email domain, or phone (digits
+   only, so formatting never decides it). Env var `LEAD_BLOCKLIST`:
+   ```json
+   {"emails":["someone@example.com"],"domains":["jmailservice.com"],"phones":["8054002077"]}
+   ```
+   This is the mechanism behind a client asking "block this one". Tuning it is an
+   env change plus a redeploy, never a code change.
+2. **Content score** — weighted markers over `message` + `service`. The weights
+   key on the *shape* of a pitch (someone selling: "we offer", "I'm X from Y",
+   "your website", "are you interested") rather than its topic, because Skooped's
+   own inbound is people asking about SEO and websites. Topic words alone are
+   capped and can never reach the threshold by themselves.
+
+On a hit the row is **stored and flagged** (`spam`, `spam_reason`) and the SMS and
+email legs are skipped; the endpoint still answers 200 so a spammer learns
+nothing and the client site does not retry. Nothing is ever dropped: a false
+positive that silently eats a real lead costs far more than one spam email, so
+flagged rows stay queryable and the full lead is written to the Vercel log line
+`lead-router: spam suppressed` as the audit trail.
+
+The portal's monthly report cron excludes flagged rows from the lead count
+(`countCentralLeads`), so a client's proof-of-value number is never inflated by
+junk. Schema: `client-portal/supabase/migrations/20260823000000_leads_spam_flag.sql`.

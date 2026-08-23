@@ -7,7 +7,7 @@
  * Same senders, same env gating, same honeypot as /api/lead. No CORS headers
  * on purpose — the only legitimate caller is the skooped.io page itself.
  */
-import { parseRouteTable, resolveRoute, validateLead } from "./_lead-core.js";
+import { classifyLead, parseBlocklist, parseRouteTable, resolveRoute, validateLead } from "./_lead-core.js";
 import { anySenderConfigured, deliver } from "./_lead-senders.js";
 
 const SITE_ID = "skooped";
@@ -31,7 +31,27 @@ export default async function handler(req: any, res: any) {
     return res.status(503).json({ ok: false, error: "lead router not configured yet" });
   }
 
-  const delivered = await deliver(validation.lead, route);
+  // Same spam gate as /api/lead. Skooped's own inbound is people asking about
+  // SEO and websites, so the score deliberately keys on the shape of a pitch
+  // (someone selling to you) rather than on those topic words.
+  const verdict = classifyLead(validation.lead, parseBlocklist(process.env.LEAD_BLOCKLIST));
+  const delivered = await deliver(validation.lead, route, verdict);
+
+  if (verdict.spam) {
+    console.log(
+      "contact: spam suppressed",
+      JSON.stringify({
+        reason: verdict.reason,
+        stored: delivered.stored,
+        name: validation.lead.name ?? null,
+        email: validation.lead.email ?? null,
+        phone: validation.lead.phone ?? null,
+        message: validation.lead.message?.slice(0, 200) ?? null,
+      })
+    );
+    return res.status(200).json({ ok: true });
+  }
+
   console.log("contact: delivered", JSON.stringify(delivered));
 
   // Same honesty rule as /api/lead: the form falls back to the SMS/mailto

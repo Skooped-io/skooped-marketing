@@ -5,7 +5,14 @@
  * exact same senders without holding the shared secret that gates /api/lead.
  * Every sender is env-gated: with nothing configured, nothing sends.
  */
-import { formatEmail, formatSms, smsAllowed, type LeadPayload, type LeadRoute } from "./_lead-core.js";
+import {
+  formatEmail,
+  formatSms,
+  smsAllowed,
+  type LeadPayload,
+  type LeadRoute,
+  type SpamVerdict,
+} from "./_lead-core.js";
 
 export interface Delivery {
   sms: boolean;
@@ -73,30 +80,46 @@ async function sendEmail(lead: LeadPayload, route: LeadRoute): Promise<boolean> 
   return res.ok;
 }
 
-async function storeLead(lead: LeadPayload, delivered: { sms: boolean; email: boolean }): Promise<boolean> {
+async function storeLead(
+  lead: LeadPayload,
+  delivered: { sms: boolean; email: boolean },
+  verdict?: SpamVerdict
+): Promise<boolean> {
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) return false;
-  const res = await fetch(`${url}/rest/v1/leads`, {
-    method: "POST",
-    headers: {
-      apikey: key,
-      Authorization: `Bearer ${key}`,
-      "Content-Type": "application/json",
-      Prefer: "return=minimal",
-    },
-    body: JSON.stringify({
-      site_id: lead.site_id,
-      name: lead.name ?? null,
-      phone: lead.phone ?? null,
-      email: lead.email ?? null,
-      message: lead.message ?? null,
-      service: lead.service ?? null,
-      source_url: lead.source_url ?? null,
-      sms_sent: delivered.sms,
-      email_sent: delivered.email,
-    }),
-  });
+  const base = {
+    site_id: lead.site_id,
+    name: lead.name ?? null,
+    phone: lead.phone ?? null,
+    email: lead.email ?? null,
+    message: lead.message ?? null,
+    service: lead.service ?? null,
+    source_url: lead.source_url ?? null,
+    sms_sent: delivered.sms,
+    email_sent: delivered.email,
+  };
+  const post = (body: unknown) =>
+    fetch(`${url}/rest/v1/leads`, {
+      method: "POST",
+      headers: {
+        apikey: key,
+        Authorization: `Bearer ${key}`,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify(body),
+    });
+
+  let res = await post({ ...base, spam: !!verdict?.spam, spam_reason: verdict?.reason || null });
+  // The spam columns arrive by migration. If the code is ever ahead of the
+  // database (deploy before migrate, or a rollback), PostgREST answers 400 on
+  // the unknown column and every lead would be stored nowhere — worse than
+  // losing the flag. Retry once without them so the row still lands.
+  if (res.status === 400) {
+    console.error("lead-router: store retry without spam columns", JSON.stringify({ site_id: lead.site_id }));
+    res = await post(base);
+  }
   if (!res.ok) {
     console.error(
       "lead-router: store failed",
@@ -106,12 +129,20 @@ async function storeLead(lead: LeadPayload, delivered: { sms: boolean; email: bo
   return res.ok;
 }
 
-/** Text, email, and store one validated lead. A sender that throws counts as failed. */
-export async function deliver(lead: LeadPayload, route: LeadRoute): Promise<Delivery> {
-  const [sms, email] = await Promise.all([
-    sendSms(lead, route).catch(() => false),
-    sendEmail(lead, route).catch(() => false),
-  ]);
-  const stored = await storeLead(lead, { sms, email }).catch(() => false);
+/**
+ * Text, email, and store one validated lead. A sender that throws counts as failed.
+ *
+ * A spam verdict suppresses both alert legs and stores the row flagged: the
+ * client's phone and inbox stay quiet, the ledger stays complete for reporting,
+ * and a false positive is recoverable because nothing is ever dropped.
+ */
+export async function deliver(lead: LeadPayload, route: LeadRoute, verdict?: SpamVerdict): Promise<Delivery> {
+  const [sms, email] = verdict?.spam
+    ? [false, false]
+    : await Promise.all([
+        sendSms(lead, route).catch(() => false),
+        sendEmail(lead, route).catch(() => false),
+      ]);
+  const stored = await storeLead(lead, { sms, email }, verdict).catch(() => false);
   return { sms, email, stored };
 }
