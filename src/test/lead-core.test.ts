@@ -438,3 +438,72 @@ describe("parseBlocklist (bad shapes a person can paste)", () => {
     expect(b.phones).toEqual([]);
   });
 });
+
+/* ── Escapes from the first version, fixed 2026-08-26 ──────────────────────
+ * Both are verbatim from the leads table. They reached clients on 8/25 because
+ * the v1 score only understood a hard pitch ("we offer X for your website, are
+ * you interested?"). These open soft: they explain why they are writing, ask
+ * permission to pitch, and never ask for anything. That is now its own signal
+ * class, balanced by REAL_INTENT so a lead that actually asks for something
+ * loses points before it is compared.
+ */
+describe("classifyLead (soft-open cold outreach, the 8/25 escapes)", () => {
+  it("flags the Top Talent VAs pitch that reached Tonya", () => {
+    const v = classifyLead({
+      site_id: "tonya-mills",
+      name: "Bianca Foster",
+      phone: "(650) 887-7769",
+      email: "bianca@toptalentvas.com",
+      message:
+        "I tried emailing you, but it seems it didn't go through, so I'm reaching out here instead.\n\nI'm Bianca, from Top Talent VAs.\n\nI'm reaching out because we offer Virtual Assistants powered by our custom-built AI tools. We literally can take over your entire marketing, administrative tasks, graphic design, video animations, accounting, and even all your prospecting with our system.\n\nAre you interested in learning more?",
+    });
+    expect(v.spam).toBe(true);
+  });
+
+  it("flags the permission-ask AI-search pitch that reached Rochelle", () => {
+    const v = classifyLead({
+      site_id: "rochelle-inc",
+      name: "Gloria Mueller",
+      email: "muellergloriamkt@gmail.com",
+      message:
+        "Hello rochelleinc\nI was wondering if you'd be interested in seeing a few things I noticed about your website and its visibility in AI-powered search.\nI put together a few simple suggestions specifically for your business. They're completely free to review.\nWould it be okay if I sent them over?\nThank you!\nGloria Mueller",
+    });
+    expect(v.spam).toBe(true);
+  });
+
+  it("flags the pain-then-pitch opener", () => {
+    const v = classifyLead({
+      site_id: "squishy-clean",
+      email: "x@example.net",
+      message:
+        "Most businesses struggle to get noticed online. We solve that by putting your brand above the competition on major search engines.",
+    });
+    expect(v.spam).toBe(true);
+  });
+
+  it("does not hand a spammer free credit for a form's appended Event date", () => {
+    // A limo-form blast filled it with "51201-02-02". A real year still earns
+    // the real-intent discount; nonsense does not.
+    const pitch =
+      "We place your business right where people are already searching for your services - setup usually takes less than 24 hours.\nAre you interested?";
+    expect(classifyLead({ site_id: "affordable-elegance", email: "a@b.co", message: `${pitch}\nEvent date: 51201-02-02` }).spam).toBe(true);
+  });
+});
+
+describe("classifyLead (real leads keep their benefit of the doubt)", () => {
+  const MUST_PASS = [
+    ["a booking with a real event date", "Need just a point to point transfer to BNA Hilton from Brentwood Country Club\nEvent date: 2026-09-19"],
+    ["a long, polite price request", "I'm looking for transportation for 7 passengers on Saturday, February 27, 2027. Could you give me the hourly rate and estimated all-in total for each vehicle, including any gratuity, service/fuel fees, or other charges?"],
+    ["a referral", "My sister just started with y'all and recommended me to reach out. I've got some gut health issues."],
+    ["a homeowner describing their yard", "We have some existing mulch beds along the front/side of our house that we are interested in cleaning up/adding to."],
+    ["someone who says 'we use' and 'we need'", "Total lawn care. Right now we use different companies for each service in our yard - weed treatment, grass cutting, etc."],
+    ["a prospect asking Skooped for the services spam sells", "I need help with SEO and a new website for my plumbing business. Are you taking on new clients this month?"],
+    ["a prospect who introduces themselves by company", "Hi, I'm Sarah from Brentwood Elementary. We need a quote for about 200 feet of chain link fence around the playground."],
+  ] as const;
+
+  for (const [what, message] of MUST_PASS) {
+    it(`lets through: ${what}`, () => {
+      expect(classifyLead({ site_id: "x", email: "a@b.com", message }).spam).toBe(false);
+    });
+  }
+});

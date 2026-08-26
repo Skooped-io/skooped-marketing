@@ -178,25 +178,91 @@ export interface SpamVerdict {
  * alone score low and can never reach the threshold on their own.
  */
 const PITCH_STRUCTURE: RegExp[] = [
-  /\bwe\s+(?:offer|provide|speciali[sz]e|deliver|drive|solve|handle|build|create|design|develop|help)\b/i,
-  /\bwe\s+(?:can|could|would\s+like\s+to|want\s+to)\s+(?:help|assist|offer|show|get|boost|grow)\b/i,
-  /\b(?:i'?m|i\s+am|this\s+is)\s+[a-z]+(?:\s+[a-z]+)?\s+from\s+[a-z0-9]/i,
-  /\bour\s+(?:team|agency|company|firm|experts?|services?|platform|clients?)\b/i,
+  /\bwe\s+(?:offer|provide|speciali[sz]e|deliver|drive|solve|handle|build|create|design|develop|help|place|take\s+over|work\s+with)\b/i,
+  /\bwe\s+(?:can|could|would\s+like\s+to|want\s+to|literally\s+can)\s+(?:help|assist|offer|show|get|boost|grow|take)\b/i,
+  // Comma after the name is the norm in these blasts ("I'm Bianca, from Top
+  // Talent VAs"), and it slipped the 8/23 version of this pattern.
+  /\b(?:i'?m|i\s+am|this\s+is)\s+[a-z]+(?:\s+[a-z]+)?\s*,?\s+(?:from|with|at)\s+[a-z0-9]/i,
+  /\bour\s+(?:team|agency|company|firm|experts?|services?|platform|clients?|system|software|tools?|solutions?|process)\b/i,
+  /\bour\s+(?:own\s+)?(?:custom[-\s]?built|proprietary|in[-\s]house|ai[-\s]powered|automated)\b/i,
   /\b(?:my|our)\s+(?:company|agency)\s+(?:offers?|provides?|specialis|specializ)/i,
+  // Pain-then-pitch opener. Nobody describes the market's problems to a business
+  // they want to hire; they describe their own problem.
+  /\b(?:most\s+)?(?:businesses|companies|owners|brands)\s+(?:struggle|fail|miss\s+out|are\s+losing)\b/i,
+  /\bget(?:ting)?\s+noticed\s+online\b/i,
 ];
 
 const PITCH_TARGET: RegExp[] = [
-  /\byour\s+(?:website|site|business|brand|company|online\s+presence|search\s+rankings?|google\s+ranking)\b/i,
-  /\b(?:businesses|companies)\s+like\s+yours\b/i,
+  /\byour\s+(?:entire\s+|current\s+)?(?:website|site|business|brand|company|online\s+presence|visibility|search\s+rankings?|search\s+results|google\s+ranking|marketing|prospecting|bookkeeping|accounting|social\s+media)\b/i,
+  /\b(?:businesses|companies|brands)\s+like\s+yours\b/i,
+  /\bwe\s+help\s+(?:businesses|brands|companies|owners)\b/i,
+  /\b(?:above|ahead\s+of)\s+(?:the\s+|your\s+)?competit(?:ion|ors)\b/i,
+  /\bwhere\s+people\s+are\s+(?:already\s+)?searching\b/i,
 ];
 
 const PITCH_CTA: RegExp[] = [
   /\bare\s+you\s+interested\b/i,
   /\b(?:let\s+me\s+know|reply)\s+(?:if|and|back)\b/i,
   /\b(?:book|schedule|set\s+up)\s+a\s+(?:quick\s+)?(?:call|demo|meeting)\b/i,
-  /\bwould\s+you\s+(?:be\s+)?(?:open|interested)\s+to\b/i,
+  /\bwould\s+you\s+(?:be\s+)?(?:open|interested)\b/i,
   /\bcan\s+(?:go|be)\s+live\s+(?:by|within|in)\b/i,
   /\bno\s+obligation\b/i,
+  // Permission-ask closes. The soft-open blasts never ask for a price or a
+  // booking, they ask for permission to pitch — which no real customer does.
+  /\bwould\s+it\s+be\s+(?:ok|okay|alright)\s+if\s+i\b/i,
+  /\b(?:can|could|may)\s+i\s+(?:send|walk\s+you\s+through|share|show\s+you)\b/i,
+  /\binterested\s+in\s+(?:learning|seeing|hearing)\s+more\b/i,
+  /\b(?:if\s+)?you'?d\s+be\s+interested\s+in\s+(?:seeing|hearing|learning)\b/i,
+];
+
+/**
+ * Cold-outreach openers. A stranger who wants to buy something opens with what
+ * they need; a stranger who wants to sell something opens by explaining why they
+ * are contacting you at all. Both leaks on 8/25 (Top Talent VAs to Tonya, an
+ * AI-search pitch to Rochelle) opened exactly this way and scored under the bar
+ * without this class.
+ */
+const PITCH_OPENER: RegExp[] = [
+  /\bi'?m\s+reaching\s+out\b/i,
+  /\bi\s+(?:tried|attempted)\s+(?:emailing|to\s+email|calling)\s+you\b/i,
+  /\b(?:i\s+)?(?:came\s+across|stumbled\s+(?:up)?on|noticed|found)\s+your\s+(?:website|site|business|page|listing)\b/i,
+  /\bi\s+was\s+wondering\s+if\s+you'?d\b/i,
+  /\bhope\s+(?:this|you)\s+(?:email\s+)?(?:finds\s+you\s+well|are\s+doing\s+well)\b/i,
+  /\bi\s+(?:put\s+together|prepared|ran)\s+(?:a\s+few|some|an?)\b/i,
+  /\bquick\s+question\s+for\s+you\b/i,
+];
+
+/**
+ * Free-offer bait. Deliberately narrow: a client of a therapist or a wellness
+ * clinic really does ask "do you offer a free consultation", so that phrase is
+ * NOT here. What is here is the offer of free work product, which is a seller's
+ * move, never a buyer's.
+ */
+const PITCH_BAIT: RegExp[] = [
+  /\b(?:completely\s+|totally\s+|100%\s+)?free\s+to\s+(?:review|look\s+at|try)\b/i,
+  /\bfree\s+(?:audit|report|analysis|assessment|review|sample|trial|demo)\b/i,
+  /\b(?:at\s+)?no\s+(?:cost|charge)\s+to\s+you\b/i,
+  /\bwithin\s+24\s+hours\b/i,
+];
+
+/**
+ * Real-intent markers, scored NEGATIVE. A genuine inquiry names a need, a date,
+ * a place or a price question. This is the safety net that lets the pitch
+ * markers above be broad without eating real leads: a message that asks for
+ * something loses two points before the pitch score is even compared.
+ */
+const REAL_INTENT: RegExp[] = [
+  /\b(?:i|we)\s+(?:need|want|would\s+like|am\s+looking\s+for|are\s+looking\s+for)\b/i,
+  /\bhow\s+much\b|\bwhat\s+(?:would|do|does)\s+(?:it|you|that)\s+(?:cost|charge)\b/i,
+  /\b(?:quote|pricing|price|rate|estimate|hourly)\b/i,
+  /\b(?:appointment|availability|available|schedule\s+(?:me|us|an?)|booking|book\s+(?:a|an|us))\b/i,
+  /\b(?:my|our)\s+(?:house|home|yard|driveway|fence|car|vehicle|wedding|event|party|garage|kitchen|deck|dog|son|daughter|husband|wife|mom|dad)\b/i,
+  // Limo/booking forms append "Event date: YYYY-MM-DD" to the message, so the
+  // words alone are free intent credit a spammer gets just for using that form.
+  // A plausible year is required: one blast filled it with "51201-02-02".
+  /\bevent\s+date:?\s*(?:19|20|21)\d{2}-\d{2}-\d{2}\b/i,
+  /\b(?:pick|picked|picking)\s*[-\s]?up\b|\bdrop\s*[-\s]?off\b/i,
+  /\b(?:recommended|referred)\s+(?:me|us|by)\b/i,
 ];
 
 const PITCH_TOPIC: RegExp[] = [
@@ -214,11 +280,27 @@ const PITCH_TOPIC: RegExp[] = [
   /\ball[-\s]in[-\s]one\s+platform\b/i,
 ];
 
-const SCORE = { structure: 2, target: 1, cta: 1.5, topic: 1, link: 1 } as const;
+const SCORE = {
+  structure: 2,
+  target: 1,
+  cta: 1.5,
+  opener: 1.5,
+  bait: 1,
+  topic: 1,
+  link: 1,
+  /** per real-intent marker, capped — see REAL_INTENT */
+  intent: -2,
+} as const;
 /** Two independent signals are never enough; a pitch reliably clears this. */
 const SPAM_THRESHOLD = 4;
 /** Topic words alone must not convict: a real lead can name SEO twice. */
 const MAX_TOPIC_SCORE = 2;
+/**
+ * One clear "I need / how much / my house" is enough to earn the benefit of the
+ * doubt; stacking them must not turn into an evasion budget a spammer can buy by
+ * sprinkling the words in.
+ */
+const MAX_INTENT_HITS = 2;
 
 const countHits = (patterns: RegExp[], text: string): number =>
   patterns.reduce((n, re) => (re.test(text) ? n + 1 : n), 0);
@@ -250,24 +332,33 @@ export function classifyLead(lead: LeadPayload, blocklist: Blocklist = EMPTY_BLO
   const structure = countHits(PITCH_STRUCTURE, text);
   const target = countHits(PITCH_TARGET, text);
   const cta = countHits(PITCH_CTA, text);
+  const opener = countHits(PITCH_OPENER, text);
+  const bait = countHits(PITCH_BAIT, text);
   const topic = Math.min(countHits(PITCH_TOPIC, text), MAX_TOPIC_SCORE);
   // A visitor asking for help rarely pastes their own URL; a vendor selling one does.
   const links = (text.match(/\b(?:https?:\/\/|www\.)\S+/gi) ?? []).length > 0 ? 1 : 0;
+  const intent = Math.min(countHits(REAL_INTENT, text), MAX_INTENT_HITS);
 
   const score =
     structure * SCORE.structure +
     target * SCORE.target +
     cta * SCORE.cta +
+    opener * SCORE.opener +
+    bait * SCORE.bait +
     topic * SCORE.topic +
-    links * SCORE.link;
+    links * SCORE.link +
+    intent * SCORE.intent;
 
   if (score < SPAM_THRESHOLD) return { spam: false, reason: "", score };
   const parts = [
     structure ? `structure x${structure}` : "",
     target ? `target x${target}` : "",
     cta ? `cta x${cta}` : "",
+    opener ? `opener x${opener}` : "",
+    bait ? `bait x${bait}` : "",
     topic ? `topic x${topic}` : "",
     links ? "link" : "",
+    intent ? `intent -x${intent}` : "",
   ].filter(Boolean);
   return { spam: true, reason: `content ${score.toFixed(1)}: ${parts.join(", ")}`, score };
 }
